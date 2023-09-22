@@ -5,7 +5,7 @@ import Link from 'next/link'
 
 function Footer() {
     return (
-        <footer className="bg-gray-200 rounded-lg shadow light-blue m-4">
+        <footer className="bg-brand rounded-lg w-full mx-autobg-no-repeat shadow-md opacity-100 m-4">
             <div className="w-full max-w-screen-xl mx-auto p-4 md:py-8">
                 <div className="sm:flex sm:items-center sm:justify-between">
                     <Link href="/selfservice" className="flex items-center mb-4 sm:mb-0">

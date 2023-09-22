@@ -19,36 +19,22 @@ const Programs: React.FC<ProgramsProps> = ({ programs }) => {
   }
   return (
     <div>
-      <div className="container w-1180 shadow-md mb-8 pb-10 rounded-lg top-24">
-        <div className="flex justify-between">
-          <p className="h-5 text-left tracking-tight text-[#484848] opacity-100 ml-6 mt-6 font-normal text-base leading-5">My Applications</p>
-          <form className="my-2 my-lg-0" action="/selfservice/home">
-            <div className="w-50 h-10 border opacity-100 flex items-center mr-10 pl-10 rounded-md border-gray-300 bg-white">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="13.6"
-                height="13.6"
-                fill="currentColor"
-                className="bi bi-search search-icon"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"
-                ></path>
-              </svg>
-              <input
-                placeholder="Search by program name"
-                className="search-text"
-                name="q"
-                id="search-input"
-              />
-              <span id="search-clear">
-                <i className="fa fa-times"></i>
-              </span>
+      <div className=" bg-gray-200 container w-1180 shadow-md mb-8 pb-10 rounded-lg top-24">
+        <div className="flex flex-wrap justify-between items-center">
+          <p className="flex items-center text-xl p-2 m-4 ">My Applications</p>
+          <form className="" action="/selfservice/home">
+            <label htmlFor="default-search" className="mb-2 w-full text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+            <div className="relative w-full">
+              <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                <svg className="w-3 h-12 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                  <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                </svg>
+              </div>
+              <input type="search" id="default-search" className="block w-full  p-2 pl-10 text-sm text-black-600 border border-gray-300 rounded-lg bg-white-200 focus:ring-gray-500 focus:border-gray-500 dark:bg-white-400 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black-800 dark:focus:ring-gray-500 dark:focus:border-gray-500 outline-none" placeholder="Search for programs" />
             </div>
           </form>
         </div>
-        <div className="relative overflow-x-auto">
+        <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
           <table className="w-full text-sm text-left text-gray-400 dark:text-gray-900">
             <thead className="text-xs text-gray-900 dark:text-white uppercase bg-gray-900 dark:bg-white-200">
               <tr>
@@ -56,25 +42,60 @@ const Programs: React.FC<ProgramsProps> = ({ programs }) => {
                   No.
                 </th>
                 <th scope="col" className="px-6 py-3">
-                  Program Name
+                  <div className="flex items-center">
+                    Program Name
+                    <a href="#"><svg className="w-3 h-3 ml-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z" />
+                    </svg></a>
+                  </div>
                 </th>
                 <th scope="col" className="px-6 py-3">
-                  Application ID
+                  <div className="flex items-center">
+                    Application Id
+                    <a href="#"><svg className="w-3 h-3 ml-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z" />
+                    </svg></a>
+                  </div>
                 </th>
                 <th scope="col" className="px-6 py-3">
-                  Program Status
+                  <div className="flex items-center">
+                    Program Status
+                    <a href="#"><svg className="w-3 h-3 ml-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z" />
+                    </svg></a>
+                  </div>
                 </th>
                 <th scope="col" className="px-6 py-3">
-                  Application Status
+                  <div className="flex items-center">
+                    Application Status
+                    <a href="#"><svg className="w-3 h-3 ml-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z" />
+                    </svg></a>
+                  </div>
                 </th>
                 <th scope="col" className="px-6 py-3">
-                  Submitted On
+                  <div className="flex items-center">
+                    Submiited On
+                    <a href="#"><svg className="w-3 h-3 ml-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z" />
+                    </svg></a>
+                  </div>
                 </th>
                 <th scope="col" className="px-6 py-3">
-                  Entitlement (in USD)
+                  <div className="flex items-center">
+                    Entitlement (in USD)
+                    <a href="#"><svg className="w-3 h-3 ml-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z" />
+                    </svg></a>
+                  </div>
                 </th>
                 <th scope="col" className="px-6 py-3">
-                  Amount Received (in USD)
+                  <div className="flex items-center">
+                    Amount Receieved
+                    <a href="#"><svg className="w-3 h-3 ml-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z" />
+                    </svg></a>
+                  </div>
                 </th>
               </tr>
             </thead>
