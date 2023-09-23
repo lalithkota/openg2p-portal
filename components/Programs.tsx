@@ -18,11 +18,11 @@ const Programs: React.FC<ProgramsProps> = ({ programs }) => {
     return <div className="text-center "> No programs available please add more programs</div>;
   }
   return (
-    <div>
-      <div className=" bg-gray-200 container w-1180 shadow-md mb-8 pb-10 rounded-lg top-24">
+      <div className="m-6">
+        <div className=" bg-brand container w-1180 shadow-md  pb-10 rounded-lg top-24">
         <div className="flex flex-wrap justify-between items-center">
-          <p className="flex items-center text-xl p-2 m-4 ">My Applications</p>
-          <form className="" action="/selfservice/home">
+          <p className="flex items-center text-gray-700 text-x p-2 font-fontcustom m-2 ">My Applications</p>
+          <form className='border border-gray-400 rounded-lg m-2 ' action="/selfservice/home">
             <label htmlFor="default-search" className="mb-2 w-full text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
             <div className="relative w-full">
               <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -30,13 +30,13 @@ const Programs: React.FC<ProgramsProps> = ({ programs }) => {
                   <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
                 </svg>
               </div>
-              <input type="search" id="default-search" className="block w-full  p-2 pl-10 text-sm text-black-600 border border-gray-300 rounded-lg bg-white-200 focus:ring-gray-500 focus:border-gray-500 dark:bg-white-400 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black-800 dark:focus:ring-gray-500 dark:focus:border-gray-500 outline-none" placeholder="Search for programs" />
+              <input type="search" id="default-search" className="block w-full  p-2 pl-10 text-sm text-black-600  rounded-lg bg-white-200 focus:ring-gray-100 focus:border-transparent-100 dark:bg-white-400 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black-800 dark:focus:ring-gray-500 dark:focus:border-transaparent outline-none" placeholder="Search for programs" />
             </div>
           </form>
         </div>
-        <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-          <table className="w-full text-sm text-left text-gray-400 dark:text-gray-900">
-            <thead className="text-xs text-gray-900 dark:text-white uppercase bg-gray-900 dark:bg-white-200">
+        <div className="relative overflow-x-auto shadow-md ">
+          <table className=" w-full  text-sm text-left text-gray-900 ">
+            <thead className="text-xs  text-gray-600  bg-gray-100">
               <tr>
                 <th scope="col" className="px-6 py-3">
                   No.
@@ -101,11 +101,11 @@ const Programs: React.FC<ProgramsProps> = ({ programs }) => {
             </thead>
             <tbody>
               {programs.map((program, index) => (
-                <tr key={program.id} className="bg-white border-b dark:bg-white-200 dark:border-white-200  hover:bg-gray-50 dark:hover:bg-gray-300">
+                <tr key={program.id} className="bg-white border-b dark:bg-white-200 dark:border-white-200 text-gray-600">
                   <td className="px-6 py-4">{index + 1}</td>
-                  <th scope="row" className="px-6 py-4 font-medium text-white-400 whitespace-nowrap dark:text-black">
+                  <td scope="row" className="px-6 py-4 ">
                     {program.program_name}
-                  </th>
+                  </td>
                   <td className="px-6 py-4">
                     {program.application_id}
                   </td>
@@ -142,8 +142,7 @@ const Programs: React.FC<ProgramsProps> = ({ programs }) => {
           </table>
         </div>
       </div>
-    </div>
-
+      </div>
   );
 };
 

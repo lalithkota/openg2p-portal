@@ -19,7 +19,7 @@ export default function RootLayout({
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </head>
-      <body className={`${inter.className} container bg-bgc mx-auto  p-4`}>
+      <body className={`${inter.className}  bg-bgc  `}>
         <Header />
         {children}
         <Footer />

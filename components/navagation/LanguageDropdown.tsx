@@ -1,4 +1,3 @@
-
 "use client"
 
 import { Fragment } from 'react';
@@ -13,14 +12,14 @@ function classNames(...classes: string[]): string {
 export default function LanguageDropDown(): JSX.Element {
 
   return (
-    <Menu as="div" className="relative inline-block text-left  ">
+    <Menu as="div" className="relative inline-block text-left   ">
       <div>
-        <Menu.Button className="inline-flex justify-between items-center w-full gap-x-1 rounded-md bg-white px-2 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
+        <Menu.Button className="flex justify-between items-center w-full gap-x-2 rounded-md bg-white px-2 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
           <img
             src="/img/flag_en.png" alt="English" loading='lazy'
           />
           <span>English</span>
-          <ChevronDownIcon className="-mr-1 h-5 w-5 text-gray-400" aria-hidden="true" />
+          <ChevronDownIcon className="mr-1 h-5 w-10 text-gray-400 hide" aria-hidden="true" />
         </Menu.Button>
       </div>
 
@@ -33,8 +32,8 @@ export default function LanguageDropDown(): JSX.Element {
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
-        <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-          <div className="py-1">
+        <Menu.Items className="absolute flex-col right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+          <div className="py-1 flex-col items-center">
             <Menu.Item >
               {({ active }) => (
                 <Link
@@ -42,7 +41,7 @@ export default function LanguageDropDown(): JSX.Element {
                   data-url_code="en"
                   className={classNames(
                     active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                    ' px-4 py-2 text-sm inline-flex flex-row gap-2'
+                    ' px-4 py-2 text-sm flex items-center gap-2'
                   )}
                 >
                   <img src="/img/flag_en.png" alt="English" />
@@ -57,7 +56,7 @@ export default function LanguageDropDown(): JSX.Element {
                   data-url_code="fr"
                   className={classNames(
                     active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                    ' px-4 py-2 text-sm inline-flex flex-row gap-2'
+                    'px-4 py-2 text-sm flex items-center gap-2'
                   )}
                 >
                   <img src="/img/FR.png" alt="Français"  />
@@ -72,7 +71,7 @@ export default function LanguageDropDown(): JSX.Element {
                   data-url_code="tl"
                   className={classNames(
                     active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                    ' px-4 py-2 text-sm inline-flex flex-row gap-2'
+                    ' px-4 py-2 text-sm flex items-center gap-2'
                   )}
                 >
                   <img
