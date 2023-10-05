@@ -1,0 +1,47 @@
+{
+  "footer": {
+      "about": "À propos de nous",
+      "contact": "Contactez-nous",
+      "others": "Autres"
+  },
+  "page": {
+      "main": {
+          "title": "Bienvenue sur le portail de libre-service",
+          "description": "Connexion au portail de libre-service"
+      },
+      "about": {
+          "title": "À propos de nous",
+          "description": "Ceci est la page À propos"
+      },
+      "home": {
+          "title": "Mes applications",
+          "number": "N°",
+          "program_name": "Nom du programme",
+          "application_id": "Identifiant de l'application",
+          "program_status": "État du programme",
+          "application_status": "État de l'application",
+          "submiited_on": "Soumis le",
+          "entitlement": "Droit (en USD)",
+          "amount_receieved": "Montant reçu",
+          "error": "Oops, pas de résultats"
+      },
+      "card": {
+          "title_a": "Tous les programmes",
+          "heading_a1": "Santé",
+          "description_a1": "Plus de 30 programmes disponibles",
+          "heading_a2": "Éducation",
+          "description_a2": "Plus de 55 programmes disponibles",
+
+          "title_b": "Autres services",
+          "heading_b1": "Aide",
+          "description_b1": "Appuyez ici pour obtenir de l'aide",
+          "heading_b2": "FAQ",
+          "description_b2": "Appuyez pour en savoir plus",
+
+          "title_c": "Droits",
+          "heading_c": "",
+          "description_c": "",
+          "view_all": "Voir tout"
+      }
+  }
+}

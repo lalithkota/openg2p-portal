@@ -1,0 +1,47 @@
+{
+  "footer": {
+    "about": "About Us",
+    "contact": "Contact Us",
+    "others": "Others"
+  },
+  "page": {
+    "main": {
+      "title": "Welcome to Self service portal",
+      "description": "Self service portal login"
+    },
+    "about": {
+      "title": "About Us",
+      "description": "This is the about page"
+    },
+    "home": {
+      "title": "My Applications",
+      "number": "No.",
+      "program_name": "Program Name",
+      "application_id": " Application Id",
+      "program_status": " Program Status",
+      "application_status": "Application Status",
+      "submiited_on": "Submiited On",
+      "entitlement": "Entitlement (in USD)",
+      "amount_receieved": "Amount Receieved",
+      "error": "Oops no results"
+    },
+    "card": {
+      "title_a": "All Programs",
+      "heading_a1": "Healthcare",
+      "description_a1": "30+ Schemes available",
+      "heading_a2": "Education",
+      "description_a2": "55+ Schemes available",
+
+      "title_b": "Other Services",
+      "heading_b1": "Help",
+      "description_b1": "Tap here for assistance",
+      "heading_b2": "FAQ",
+      "description_b2": "Tap to know more",
+
+      "title_c": "Entitlements",
+      "heading_c": "",
+      "description_c": "",
+      "view_all": "View all"
+    }
+  }
+}

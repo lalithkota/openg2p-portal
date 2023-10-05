@@ -16,6 +16,9 @@ const config: Config = {
       colors:{
         brand:"#ffffff",
         bgc:"#f5f9fc",
+      },
+      fontFamily:{
+        fontcustom:['Inter']
       }
       
     },
