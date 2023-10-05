@@ -1,8 +1,8 @@
 import React from 'react'
-import { Card } from '@app/[lang]/components'; 
+import { Card } from '../components';
 import { HomeProps } from '@types';
 import { fetchPrograms } from '@utils'
-import { SearchBar } from '@app/[lang]/components';
+import { SearchBar } from '../components';
 import { Suspense } from 'react'
 import Loading from '../loading';
 import { getDictionary } from '@/lib/dictionary'

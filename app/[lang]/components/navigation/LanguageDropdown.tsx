@@ -5,7 +5,7 @@ import { Menu, Transition } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/outline';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation'
-
+import Image from 'next/image';
 
 
 function classNames(...classes: string[]): string {
@@ -24,10 +24,10 @@ export default function LanguageDropDown(): JSX.Element {
     <Menu as="div" className="relative inline-block text-left w-[120px]  ">
       <div>
         <Menu.Button className="flex justify-between items-center w-full gap-x-2 rounded-md bg-white px-2 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
-          {/* <img
+          <img
             src="/img/flag_en.png " alt="English" loading='lazy'
             
-          /> */}
+          />
           <span className='flag-icon flag-icon-gb'></span>
           <span>English</span>
           <ChevronDownIcon className="mr-1 h-5 w-10 text-gray-400 hide" aria-hidden="true" />

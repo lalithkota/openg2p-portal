@@ -13,7 +13,7 @@ export default async function Footer({ lang }: { lang: Locale }) {
             <div className="w-full max-w-screen-xl mx-0 p-4 md:py-8">
                 <div className="sm:flex sm:items-center sm:justify-between">
                     <Link href="" className="flex items-center mb-4 sm:mb-0">  
-                        <Image src="/img/person.png" className="h-12 mr-3" alt="main logo" width={100} height={300}/>
+                        {/* <Image src="/img/logo.png" className="h-12 mr-3" alt="main logo" width={100} height={300}/> */}
                     </Link>
                     <ul className="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
                         <li>

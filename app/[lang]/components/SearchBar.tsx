@@ -1,6 +1,6 @@
 'use client'
 import React, { useState } from 'react'
-import {SearchProgram} from '@app/[lang]/components'
+import { SearchProgram } from '.'; 
 import { useRouter } from "next/navigation";
 
 const SearchButton = () => (

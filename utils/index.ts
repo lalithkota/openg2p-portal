@@ -14,6 +14,7 @@ export async function fetchPrograms(filters: FilterProps): Promise<Program[]> {
 
   return res.json()
 }
+
 export async function fetchProfile(filters: ProfileFilter): Promise<Profile[]> {
   const { id } = filters
   const res = await fetch(`http://localhost:8000/profile?id=${id}`)
