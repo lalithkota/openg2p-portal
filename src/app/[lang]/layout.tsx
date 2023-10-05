@@ -1,4 +1,4 @@
-import '@/styles/globals.css'
+import '@/commons/styles/globals.css'
 import type { Metadata } from 'next'
 import { Header } from './components'
 import { Footer } from './components'

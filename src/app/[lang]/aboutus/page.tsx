@@ -8,7 +8,11 @@ export default async function AboutUs({
 }: {
   params: { lang: Locale }
 }) {
-  const {page} =await getDictionary(lang)
+  const dictionary = await getDictionary(lang);
+  if (!dictionary) {
+    return null;
+  }
+  const {page} = dictionary
   return (
     <div className=" rounded-lg border-gray-200 p-4 mx-4 lg:px-4 m-0 mt-2">
       <div className='text-xl '>About Us</div>

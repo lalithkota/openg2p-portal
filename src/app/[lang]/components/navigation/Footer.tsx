@@ -6,7 +6,12 @@ import Image from 'next/image'
 
 
 export default async function Footer({ lang }: { lang: Locale }) {
-  const {footer} = await getDictionary(lang)
+    const dictionary = await getDictionary(lang);
+    if (!dictionary) {
+      return null;
+    }
+    const {footer} = dictionary
+  
 
     return (
         <footer className="bg-brand font-fontcustom rounded-lg w-full opacity-100 ">

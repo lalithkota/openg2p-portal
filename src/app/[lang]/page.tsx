@@ -9,7 +9,11 @@ export default async function page({
   params: { lang: Locale }
 }) {
   //redirect('/en');
-  const { page } = await getDictionary(lang)
+  const dictionary = await getDictionary(lang);
+    if (!dictionary) {
+      return null;
+    }
+  const { page } = dictionary;
 
   return (
     <section className='py-24'>

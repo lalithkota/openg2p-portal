@@ -1,7 +1,7 @@
 import React from 'react'
 import { Card } from '../components';
 import { HomeProps } from '@types';
-import { fetchPrograms } from '@utils'
+import { fetchPrograms } from '@/utils'
 import { SearchBar } from '../components';
 import { Suspense } from 'react'
 import Loading from '../loading';
@@ -18,14 +18,19 @@ export default async function Page({ searchParams , params: { lang } }:{ searchP
     program: searchParams.program || '',
   })
   const isDataEmpty = !Array.isArray(programs) || programs.length < 1 || !programs
-  const {page} =await getDictionary(lang)
+
+  const dictionary = await getDictionary(lang);
+  if (!dictionary) {
+    return null;
+  }
+  const {page} = dictionary;
 
 
 
   return (
-    <div className='p-4'>
+    <div className='p-4 '>
       {!isDataEmpty ? (
-        <div className="m-6">
+        <div className="m-6 flex justify-center items-center">
           <div className=" bg-brand container w-1180 shadow-md  pb-10 rounded-lg top-24">
             <div className="flex flex-wrap justify-between items-center">
               <p className="flex items-center text-gray-700 text-x p-2 font-fontcustom m-2 ">{page.home.title}</p>
@@ -143,7 +148,7 @@ export default async function Page({ searchParams , params: { lang } }:{ searchP
           </div>
         </div>
       ) : (
-        <div className='mt-16 flex justify-center items-center flex-col gap-2'>
+        <div className='mt-16 flex justify-center items-center flex-col gap-2 '>
           <h2 className='tetx-black text-xl font-bold'>
             Oops no results
           </h2>
