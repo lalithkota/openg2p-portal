@@ -1,5 +1,4 @@
-import { Program,Profile, FilterProps ,ProfileFilter } from '@types';
-import { resolve } from 'path';
+import { Program,Profile, FilterProps ,ProfileFilter ,ProgramForm} from '@types';
 
 export async function fetchPrograms(filters: FilterProps): Promise<Program[]> {
   //await new Promise(resolve=>setTimeout(resolve,3000))
@@ -13,6 +12,27 @@ export async function fetchPrograms(filters: FilterProps): Promise<Program[]> {
   }
 
   return res.json()
+}
+
+
+export async function  getProgramData  (formId: string | null) {
+  
+  try {
+    const response = await fetch(`http://localhost:8000/forms?id=${formId}`); // Replace with your API endpoint
+    const data = await response.json();
+    
+    return data;
+  } catch (error) {
+    console.error('Error fetching program data:', error);
+    return null;
+  }
+};
+export async function fetchProgramForms(): Promise<ProgramForm[]> {
+  const res = await fetch('http://localhost:8000/forms');
+  if (!res.ok) {
+    throw new Error('Failed to fetch data');
+  }
+  return res.json();
 }
 
 export async function fetchProfile(filters: ProfileFilter): Promise<Profile[]> {

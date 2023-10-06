@@ -2,7 +2,7 @@
 import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import LanguageDropDown from './LanguageDropdown'
+import Lang from './Lang' 
 import { Search } from '..'
 import ProfileDropDown from './ProfileDropdown'
 
@@ -24,7 +24,7 @@ export default  function Header() {
                     
           <div className="flex items-center gap-2 lg:order-2 mr-6">
             <Search />
-            <LanguageDropDown/>
+            <Lang/>
             <ProfileDropDown />
           </div>
         </div>

@@ -23,7 +23,7 @@ export default function LanguageDropDown(): JSX.Element {
     return segments.join('/')
   }
 
-  //const [selectedLanguage, setSelectedLanguage] = useState(languages[0])
+  // const [selectedLanguage, setSelectedLanguage] = useState(languages[0])
 
 
   return (

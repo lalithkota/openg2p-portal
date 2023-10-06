@@ -156,4 +156,3 @@ export default async function Page({ searchParams , params: { lang } }:{ searchP
     </div>
   );
 };
-
