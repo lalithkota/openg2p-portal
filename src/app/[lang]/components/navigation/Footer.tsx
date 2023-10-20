@@ -23,13 +23,13 @@ export default async function Footer({ lang }: { lang: Locale }) {
                     </Link>
                     <ul className="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
                         <li>
-                            <Link href={`/${lang}/aboutus`} className="mr-4 hover:underline md:mr-6 ">{footer.about}</Link>
+                            <Link href={`/${lang}/aboutus`} className="mr-4 hover:underline text-gray-500 no-underline md:mr-6 ">{footer.about}</Link>
                         </li>
                         <li>
-                            <Link href={`/${lang}/contactus`} className="mr-4 hover:underline md:mr-6">{footer.contact}</Link>
+                            <Link href={`/${lang}/contactus`} className="mr-4 hover:underline text-gray-500 no-underline md:mr-6">{footer.contact}</Link>
                         </li>
                         <li>
-                            <Link href={`/${lang}/otherpage`} className="mr-4 hover:underline md:mr-6 ">{footer.others}</Link>
+                            <Link href={`/${lang}/otherpage`} className="mr-4 hover:underline text-gray-500 no-underline md:mr-6 ">{footer.others}</Link>
                         </li>
                     </ul>
                 </div>

@@ -2,8 +2,6 @@ export interface SearchProgramsProps{
     program:string;
     setProgram :(program :string) => void;
 }
-
-
 export interface Program {
     id: number;
     program_name: string;
@@ -14,7 +12,12 @@ export interface Program {
     entitlement: number;
     amount_received: number;
 }
-
+export interface ProgramForm {
+    id: number;
+    specific_program_name : string;
+    application_status:string;
+    form_json_schema : Record<string, any>;
+}
 export interface FilterProps{
     program :string;
 }
@@ -40,4 +43,9 @@ export interface Profile{
     notification_preferance:string;
     bank_ids:string;
     phone_numbers:string;
+}
+
+
+export interface FormFilterProps{
+    id :number;
 }

@@ -1,9 +1,9 @@
 'use client'
 import React from 'react'
 import { Combobox, Transition } from '@headlessui/react'
-import { SearchProgramsProps } from '@types'
+import { SearchProgramsProps } from '../../../types'
 import { useState, Fragment } from 'react';
-import { programs } from '@constants'
+import { programs } from '../../../constants'
 
 
 const SearchProgram = ({ program, setProgram }: SearchProgramsProps) => {
@@ -19,24 +19,23 @@ const SearchProgram = ({ program, setProgram }: SearchProgramsProps) => {
                     .includes(query.toLowerCase().replace(/\s+/g, ""))
             );
     return (
-        <div className='flex-1 max-sm:w-full flex justify-start items-center '>
+        <div className=' '>
             <Combobox value={program} onChange={setProgram}>
 
-                <div className='relative mt-1'>
+                <div className='relative  mt-1 '>
                     <div className=' w-full' >
                         <div className='absolute  inset-y-0 left-0 flex items-center pl-3 pointer-events-none'>
                             <Combobox.Button className='absolute'>
-                                <svg className="w-3 h-12 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                                <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
                                 </svg>
                             </Combobox.Button>
                         </div>
                         <Combobox.Input
-                            className='block w-full  p-2 pl-10 text-sm text-black-600  rounded-lg bg-white-200 focus:ring-gray-100 focus:border-transparent dark:bg-white-400 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black-800 dark:focus:ring-gray-500 dark:focus:border-transaparent outline-none'
+                            className='ml-7 p-2 text-sm text-black-600  rounded-lg bg-white-200 focus:ring-gray-100 focus:border-transparent dark:bg-white-400 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black-800 dark:focus:ring-gray-500 dark:focus:border-transaparent outline-none'
                             placeholder='Search Programs'
                             displayValue={(program: string) => program}
                             onChange={(e) => setQuery(e.target.value)}>
-
                         </Combobox.Input>
                     </div>
                     <Transition
@@ -74,7 +73,7 @@ const SearchProgram = ({ program, setProgram }: SearchProgramsProps) => {
 
                                                 {/* Show an active blue background color if the option is selected */}
                                                 {selected ? (
-                                                    <span className={`absolute inset-y-0 left-0 flex items-center pl-3 ${active ?  "text-white" : "text-pribg-primary-purple"}`}
+                                                    <span className={`absolute inset-y-0 left-0 flex items-center pl-3 ${active ? "text-white" : "text-pribg-primary-purple"}`}
                                                     ></span>
                                                 ) : null}
                                             </>

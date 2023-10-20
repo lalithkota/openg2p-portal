@@ -1,36 +1,43 @@
+'use client'
+
+import { ProgramForm } from '@types';
+import { fetchProgramForms } from '@utils'
+import { useRouter } from 'next/navigation';
 import React from 'react'
 import Link from 'next/link'
-import { fetchPrograms } from '../../../utils'
-import { HomeProps } from '../../../types';
-import Loading from '../loading';
-import { Locale } from '../../../i18n.config'
-import { getDictionary } from '../../../lib/dictionary'
+import Loading from '../loading'
+import { Locale } from '@i18n.config'
+import { getDictionary } from '@lib/dictionary'
 import { Suspense } from 'react';
-
-
-export default async function ProgrmPage({ searchParams, params: { lang } }: {
-  searchParams: HomeProps,
+import dynamic from 'next/dynamic';
+export default async function ProgramList({ params: { lang } }: {
   params: { lang: Locale }
 }) {
 
-  const programs = await fetchPrograms({
-    program: searchParams.program || '',
-  })
-  const isDataEmpty = !Array.isArray(programs) || programs.length < 1 || !programs
+  const Appl = dynamic(() => import('../apply/page'), {
+    ssr: false, // Disable server-side rendering for this component
+  });
+  
+  
+  const router = useRouter();
+  const handleApplyClick = (form: ProgramForm) => {
+    router.push(`apply?formId=${form.id}`);
+  };
   const dictionary = await getDictionary(lang);
-    if (!dictionary) {
-      return null;
-    }
+  if (!dictionary) {
+    return null;
+  }
   const { page } = dictionary;
-
-
+  const forms = await fetchProgramForms();
+  const isDataEmpty = !Array.isArray(forms) || forms.length < 1 || !forms
+  
   return (
     <div className=" rounded-lg border-gray-200 p-4 mx-4 lg:px-4 m-0 mt-2">
       <div className='text-gray-700 text-xl '>All Programs</div>
       <div className='flex flex-wrap gap-2 mt-6 items-center mx-auto max-w-screen-xl'>
-      <Link href={`/${lang}/home`} className="flex items-center no-underline text-blue-900"> Home </Link>
+        <Link href={`/${lang}/home`} className="flex items-center no-underline text-blue-900"> Home </Link>
         <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512"><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z" /></svg>
-        <p className='m-0'>All Programs</p>
+        <p className='m-0'>Program List</p>
       </div>
       {!isDataEmpty ? (
         <Suspense fallback={<Loading />}>
@@ -57,7 +64,7 @@ export default async function ProgrmPage({ searchParams, params: { lang } }: {
                       </a>
                     </div>
                   </th>
-                  
+
                   <th scope="col" className="px-6 py-3">
                     <div className="flex items-center">
                       {page.programs.status}
@@ -93,14 +100,14 @@ export default async function ProgrmPage({ searchParams, params: { lang } }: {
                 </tr>
               </thead>
               <tbody>
-                {programs.map((program, index) => (
+                {forms.map((form, index) => (
                   <tr
-                    key={program.id}
+                    key={form.id}
                     className="bg-white border-b dark:bg-white-200 dark:border-white-200 text-gray-600"
                   >
                     <td className="px-6 py-4">{index + 1}</td>
                     <td scope="row" className="px-6 py-4 ">
-                      {program.program_name}
+                      {form.specific_program_name}
                     </td>
                     <td className="px-6 py-4">
                       <button
@@ -108,14 +115,11 @@ export default async function ProgrmPage({ searchParams, params: { lang } }: {
                         className="h-5 min-w-[84px] rounded text-center tracking-[0px] opacity-100 border-collapse border-[none] left-[811px] bg-[#c7ebd1] text-[#075e45]"
                         disabled={true}
                       >
-                        {program.program_status}
+                        {form.application_status}
                       </button>
                     </td>
                     <td className="px-6 py-4">
-                      <Link href="/"
-                        className=" top-14 left-11 w-24 h-8 bg-blue-700 rounded-md text-white text-sm font-normal flex items-center justify-center">
-                        Apply
-                      </Link>
+                      <button className=" top-14 left-11 w-24 h-8 bg-blue-700 rounded-md text-white text-sm font-normal flex items-center justify-center" onClick={() => handleApplyClick(form)}>Apply</button>
                     </td>
                   </tr>
                 ))}
@@ -129,8 +133,9 @@ export default async function ProgrmPage({ searchParams, params: { lang } }: {
           <p>Message</p>
         </div>
       )}
-
     </div>
-
   )
 }
+
+
+

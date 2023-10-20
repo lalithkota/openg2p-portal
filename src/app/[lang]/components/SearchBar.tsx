@@ -34,8 +34,8 @@ function SearchBar() {
         router.push(newPathname);
     }
     return (
-        <form className="w-100 border border-gray-400 rounded-lg flex items-center justify-between max-sm:flex-col relative max-sm:gap-4 max-w-3xl m-2" onSubmit={handleSearch}>
-            <div className="relative w-full">
+        <form className=" flex flex-row w-full sm:w-1/2 lg:w-1/4 border border-gray-400 rounded-lg  max-sm:gap-4  m-2" onSubmit={handleSearch}>
+            <div className="relative ">
                 <SearchProgram program={program} setProgram={setProgram}/>
             </div>
             <SearchButton  />

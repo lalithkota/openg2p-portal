@@ -42,6 +42,12 @@
       "heading_c": "",
       "description_c": "",
       "view_all": "View all"
+    },
+    "programs": {
+      "title": "All Programs",
+      "status":"Status",
+      "program_name": "Program Name",
+      "actions":"Actions"
     }
   }
 }
