@@ -2,7 +2,7 @@ import React from 'react'
 
 function Search() {
     return (
-        <form className="w-3/4 gap-3 border border-gray-400 rounded-lg relative">
+        <form className="w-3/4 gap-3 border print:hidden border-gray-400 rounded-lg relative">
             <label htmlFor="default-search" className="mb-2 text-sm font-medium text-gray-900 sr-only">
                 Search
             </label>
