@@ -1,3 +1,5 @@
+import ProgramList from "@app/[lang]/forms/page";
+
 export interface SearchProgramsProps{
     program:string;
     setProgram :(program :string) => void;
@@ -12,6 +14,9 @@ export interface Program {
     entitlement: number;
     amount_received: number;
 }
+
+
+
 export interface ProgramForm {
     id: number;
     specific_program_name : string;
@@ -20,16 +25,14 @@ export interface ProgramForm {
 }
 export interface FilterProps{
     program :string;
+    currentPage:number; 
 }
-export interface HomeProps {
-    program: string;
-    searchParams: FilterProps;
-  }
-  
+
+
+
 export interface ProfileFilter{
     id:number;
 }
-
 export interface Profile{
     id:number;
     given_name: string;

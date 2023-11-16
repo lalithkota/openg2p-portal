@@ -14,7 +14,7 @@ function classNames(...classes: string[]): string {
 export default function ProfileDropDown(): JSX.Element {
 
   return (
-    <Menu as="div" className=" relative inline-block text-left border-none">
+    <Menu as="div" className="print:hidden relative inline-block text-left border-none">
       <div >
         <Menu.Button className="inline-flex w-full justify-center gap-x-1.5 px-3 py-2 text-sm font-semibold text-gray-900  border-transparent  ">
           <Image

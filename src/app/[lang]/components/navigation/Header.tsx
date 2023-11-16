@@ -10,8 +10,8 @@ import ProfileDropDown from './ProfileDropdown'
 export default  function Header() {
   
   return (
-    <header >
-      <nav className="w-full font-fontcustom bg-no-repeat shadow-md opacity-100   bg-brand border-gray-200 p-1 lg:px-4  ">
+    <header>
+      <nav className="w-full font-fontcustom bg-no-repeat shadow-md opacity-100  bg-brand border-gray-200 p-1 lg:px-4  ">
         <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl ">
           <Link href="/" className=" m-3 flex items-center">
             <Image

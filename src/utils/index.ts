@@ -1,17 +1,19 @@
 import { Program,Profile, FilterProps ,ProfileFilter ,ProgramForm} from '@types';
+// import { unstable_noStore as noStore } from 'next/cache';
+
+
 
 export async function fetchPrograms(filters: FilterProps): Promise<Program[]> {
   //await new Promise(resolve=>setTimeout(resolve,3000))
-  
-  
-  const { program } = filters
-  const res = await fetch(`http://localhost:8000/programs?program_name=${program}`)
+  const { program ,currentPage} = filters
+  const res = await fetch(`http://localhost:8000/programs?program_name=${program}&page=${currentPage}`);
   if (!res.ok) {
 
     throw new Error('Failed to fetch data')
   }
 
   return res.json()
+  // noStore();
 }
 
 
@@ -25,6 +27,7 @@ export async function  getProgramData  (formId: string | null) {
     console.error('Error fetching program data:', error);
     return null;
   }
+  // noStore();
 };
 export async function fetchProgramForms(): Promise<ProgramForm[]> {
   const res = await fetch('http://localhost:8000/forms');
@@ -32,6 +35,7 @@ export async function fetchProgramForms(): Promise<ProgramForm[]> {
     throw new Error('Failed to fetch data');
   }
   return res.json();
+  // noStore();
 }
 
 export async function fetchProfile(filters: ProfileFilter): Promise<Profile[]> {
@@ -43,4 +47,5 @@ export async function fetchProfile(filters: ProfileFilter): Promise<Profile[]> {
   }
 
   return res.json()
+  // noStore();
 }
