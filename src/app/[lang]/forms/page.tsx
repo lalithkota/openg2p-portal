@@ -1,6 +1,6 @@
 'use client'
 import { ProgramForm } from '@types';
-import { fetchProgramForms } from '@utils'
+import { getProgramForm } from '@utils'
 import { useRouter } from 'next/navigation';
 import React, { useState,useEffect} from 'react';
 import Link from 'next/link'
@@ -15,10 +15,10 @@ export default  function ProgramList({ params: { lang } }: {
   const [formState, setFormState] = useState(false);
   const router = useRouter();
   const handleApplyClick = (form: ProgramForm) => {
-    router.push(`apply?formId=${form.id}`);
+    router.push(`apply?formId=${form.program_id}`);
   };
   const handleViewClick = (form: ProgramForm) => {
-    router.push(`submission?formId=${form.id}`);
+    router.push(`submission?formId=${form.program_id}`);
     
   };
   
@@ -33,7 +33,7 @@ export default  function ProgramList({ params: { lang } }: {
       }
       const { page } = dictionary;
       setPage(page);
-      const fetchedForms = await fetchProgramForms();
+      const fetchedForms = await getProgramForm();
       setForms(fetchedForms);
       setIsDataEmpty(!Array.isArray(fetchedForms) || fetchedForms.length < 1 || !forms);
       const storedFormState = localStorage.getItem('formState');
@@ -124,7 +124,7 @@ export default  function ProgramList({ params: { lang } }: {
                   >
                     <td className="px-6 py-4">{index + 1}</td>
                     <td scope="row" className="px-6 py-4 ">
-                      {form.specific_program_name}
+                      {form.program_name}
                     </td>
                     <td className="px-6 py-4">
                       <button
@@ -132,7 +132,7 @@ export default  function ProgramList({ params: { lang } }: {
                         className="h-5 min-w-[84px] rounded text-center tracking-[0px] opacity-100 border-collapse border-[none] left-[811px] bg-[#c7ebd1] text-[#075e45]"
                         disabled={true}
                       >
-                        {form.application_status}
+                        {form.program_description}
                       </button>
                     </td>
                     <td className="px-6 py-4">

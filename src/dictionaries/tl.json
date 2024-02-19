@@ -13,17 +13,15 @@
           "title": "Tungkol sa Amin",
           "description": "Ito ay tungkol sa pahina"
       },
-      "home": {
-          "title": "Aking Mga Aplikasyon",
-          "number": "Blg.",
-          "program_name": "Pangalan ng Programa",
-          "application_id": "Id ng Aplikasyon",
-          "program_status": "Kalagayan ng Programa",
-          "application_status": "Kalagayan ng Aplikasyon",
-          "submiited_on": "Nai-pasa noong",
-          "entitlement": "Karapatan (sa USD)",
-          "amount_receieved": "Halaga na Natanggap",
-          "error": "Ay, walang resulta"
+      "programs": {
+        "name": "Pangalan ng Programa", 
+        "description": "Deskripsyon", 
+        "state": "Katayuan ng Programa", 
+        "has_applied": "Katayuan ng Aplikasyon", 
+        "is_portal_form_mapped": "Nakamapa sa Portal", 
+        "is_multiple_form_submission": "Maramihang Pagsusumite ng Form", 
+        "last_application_status": "Katayuan ng Huling Aplikasyon", 
+        "error": "Ay, wala mga resulta" 
       },
       "card": {
           "title_a": "Lahat ng Programa",
@@ -43,11 +41,16 @@
           "description_c": "",
           "view_all": "Tingnan ang Lahat"
       },
-      "programs": {
-        "title": "All Programs",
-        "status":"Status",
-        "program_name": "Program Name",
-        "actions":"Actions"
+      "home": {
+        "title": "Aking Mga Aplikasyon",
+        "number": "Hindi.",
+        "enrollment_status": "katayuan sa pag-eenroll",
+        "program_name": "Pangalan ng Programa",
+        "total_funds_awaited": "Kabuuang Inaasahang Pondo",
+        "total_funds_received": "Kabuuang Natanggap na Pondo"
+      },
+      "lang": {
+        "language": "Filipino"
       }
   }
 }

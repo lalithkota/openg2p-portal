@@ -19,7 +19,8 @@ export default async function Footer({ lang }: { lang: Locale }) {
                 <div className="flex flex-wrap justify-between items-center  mx-auto  max-w-screen-xl ">
                     <Link href="/" className=" m-3 flex items-center">
                         <Image
-                            src="/img/logo@2x.png"
+                            src="http://spar.openg2p.my/spar/img/logo@2x.png"
+                            priority={true}
                             alt="Logo"
                             width={300}
                             height={300}

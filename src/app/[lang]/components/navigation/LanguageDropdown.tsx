@@ -1,49 +1,60 @@
 "use client"
-import { Fragment, useState, useEffect } from 'react';
+import { Fragment, useState ,useEffect} from 'react';
 import { Menu, Transition } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/outline';
 import Link from 'next/link';
-
 import { usePathname } from 'next/navigation';
 
 function classNames(...classes: string[]): string {
   return classes.filter(Boolean).join(' ');
 }
 
-export default function LanguageDropDown(): JSX.Element {
+export default function LanguageDropDown() {
   const pathName = usePathname();
-  const [selectedLanguage, setSelectedLanguage] = useState(() => {
+  const [selectedLanguage, setSelectedLanguage] = useState<'en' | 'fr' | 'tl'>(() => {
     if (typeof window !== 'undefined') {
-      return localStorage.getItem('selectedLanguage') || 'en';
+      const storedLanguage = localStorage.getItem('selectedLanguage');
+      return storedLanguage && ['en', 'fr', 'tl'].includes(storedLanguage)
+        ? (storedLanguage as 'en' | 'fr' | 'tl')
+        : 'en';
     } else {
-      return localStorage.getItem('selectedLanguage') || 'en';
+      return 'en';
     }
   });
   
-
-  const handleLanguageChange = (locale: string) => {
+  const handleLanguageChange = (locale: 'en' | 'fr' | 'tl') => {
     setSelectedLanguage(locale);
   };
 
-  const redirectedPathName = (locale: string) => {
+
+  useEffect(() => {
+    const storedLanguage = localStorage.getItem('selectedLanguage');
+    if (storedLanguage && ['en', 'fr', 'tl'].includes(storedLanguage)) {
+      setSelectedLanguage(storedLanguage as 'en' | 'fr' | 'tl');
+    }
+  }, []);
+  
+  const redirectedPathName = (locale: 'en' | 'fr' | 'tl') => {
     if (!pathName) return '/';
     const segments = pathName.split('/');
     segments[1] = locale;
     return segments.join('/');
+  }; 
+  const getFlagImage = (locale: 'en' | 'fr' | 'tl') => {
+    const flagImages = {
+      en: 'http://spar.openg2p.my/spar/img/flag_en.png',
+      fr: 'http://spar.openg2p.my/spar/img/flag_fr.png',
+      tl: 'http://spar.openg2p.my/spar/img/flag_tl.png',
+    };
+
+    return flagImages[locale];
   };
-
-  useEffect(() => {
-    localStorage.setItem('selectedLanguage', selectedLanguage);
-  }, [selectedLanguage]);
-
   return (
     <Menu as="div" className="relative inline-block text-left w-[120px]  print:hidden">
       <div>
         <Menu.Button className="flex  border border-gray-400  justify-between items-center w-full gap-x-2 rounded-md bg-white px-2 py-2 text-sm font-semibold text-gray-900 hover:bg-gray-50">
-          {selectedLanguage === 'en' && <img src="/img/flag_en.png" alt="English" />}
-          {selectedLanguage === 'fr' && <img src="/img/flag_fr.png" alt="Français" />}
-          {selectedLanguage === 'tl' && <img src="/img/flag_tl.png" alt="Filipino" />}
-          <span>{selectedLanguage === 'en' ? 'English' : selectedLanguage === 'fr' ? 'Français' : 'Filipino'}</span>
+        <img src={getFlagImage(selectedLanguage || 'en')} alt={selectedLanguage} className="w-4 h-4 mr-2" />
+          <span>{selectedLanguage === 'en' ? 'English' : selectedLanguage === 'fr' ? 'Français' : 'Language'}</span>
           <ChevronDownIcon className="mr-1 h-5 w-10 text-gray-400 hide" aria-hidden="true" />
         </Menu.Button>
       </div>
@@ -70,7 +81,7 @@ export default function LanguageDropDown(): JSX.Element {
                     'px-4 py-2 text-sm flex items-center gap-2'
                   )}
                 >
-                  <img src="/img/flag_en.png" alt="English" />
+                  <img src="http://spar.openg2p.my/spar/img/flag_en.png" alt="English" />
                   <span>English</span>
                 </Link>
               )}
@@ -86,7 +97,7 @@ export default function LanguageDropDown(): JSX.Element {
                     'px-4 py-2 text-sm flex items-center gap-2'
                   )}
                 >
-                  <img src="/img/flag_fr.png" alt="Français" />
+                  <img src="http://spar.openg2p.my/spar/img/flag_fr.png" alt="Français" />
                   <span>Français</span>
                 </Link>
               )}
@@ -102,7 +113,7 @@ export default function LanguageDropDown(): JSX.Element {
                     'px-4 py-2 text-sm flex items-center gap-2'
                   )}
                 >
-                  <img src="/img/flag_tl.png" alt="Filipino" />
+                  <img src="http://spar.openg2p.my/spar/img/flag_tl.png" alt="Filipino" />
                   <span>Filipino</span>
                 </Link>
               )}

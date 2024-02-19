@@ -25,7 +25,7 @@ export default function RootLayout({
       </head>
       <body className="bg-bgc font-fontcustom flex flex-col min-h-screen" >
       <GlobalContextProvider>
-          <Header />
+          <Header lang={params.lang} />
           {children}
           <Footer lang={params.lang} />
       </GlobalContextProvider>

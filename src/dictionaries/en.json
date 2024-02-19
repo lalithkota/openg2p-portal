@@ -13,16 +13,14 @@
       "title": "About Us",
       "description": "This is the about page"
     },
-    "home": {
-      "title": "My Applications",
-      "number": "No.",
-      "program_name": "Program Name",
-      "application_id": " Application Id",
-      "program_status": " Program Status",
-      "application_status": "Application Status",
-      "submiited_on": "Submiited On",
-      "entitlement": "Entitlement (in USD)",
-      "amount_receieved": "Amount Receieved",
+    "programs": {
+      "name": "Program Name",
+      "description": " Description ",
+      "state": " Program Status",
+      "has_applied": "Status",
+      "is_portal_form_mapped": "Portal Mapped",
+      "is_multiple_form_submission": "Multiple Form Submission",
+      "last_application_status": "Application Status",
       "error": "Oops no results"
     },
     "card": {
@@ -43,11 +41,16 @@
       "description_c": "",
       "view_all": "View all"
     },
-    "programs": {
-      "title": "All Programs",
-      "status":"Status",
+    "home": {
+      "title": "My Applications",
+      "number": "No.",
+      "enrollment_status":"Status",
       "program_name": "Program Name",
-      "actions":"Actions"
+      "total_funds_awaited":"Total Funds Awaited",
+      "total_funds_received": "Total Funds Received"
+    },
+    "lang": {
+      "language": "English"
     }
   }
 }

@@ -21,8 +21,3 @@ html,body{
     width: 100%;
   }
 } */
-
-
-.sort-reverse {
-  transform: rotate(180deg);
-}

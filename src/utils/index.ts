@@ -1,51 +1,60 @@
-import { Program,Profile, FilterProps ,ProfileFilter ,ProgramForm} from '@types';
+import { Program,ProgramForm, FilterProps ,ProfileFilter ,ProgramDetails} from '@types';
+import { prefixBaseApiPath } from './path';
 // import { unstable_noStore as noStore } from 'next/cache';
 
 
+  // const res = await fetch(`http://localhost:8000/programs?program_id=${program}&page=${currentPage}`);
 
-export async function fetchPrograms(filters: FilterProps): Promise<Program[]> {
-  //await new Promise(resolve=>setTimeout(resolve,3000))
+  
+export async function fetchProgramDetails(filters: FilterProps): Promise<ProgramDetails[]> {
   const { program ,currentPage} = filters
-  const res = await fetch(`http://localhost:8000/programs?program_name=${program}&page=${currentPage}`);
+  const res = await fetch(prefixBaseApiPath("/programdetails"));
   if (!res.ok) {
 
     throw new Error('Failed to fetch data')
   }
-
+  
   return res.json()
-  // noStore();
+ 
 }
 
 
-export async function  getProgramData  (formId: string | null) {
-  
+export async function fetchPrograms(filters: FilterProps): Promise<Program[]> {
+  const { program ,currentPage} = filters
   try {
-    const response = await fetch(`http://localhost:8000/forms?id=${formId}`); // Replace with your API endpoint
+    const response = await fetch(
+      prefixBaseApiPath(`/program`)
+    );
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error('Error fetching program data:', error);
-    return null;
+    console.error("Error fetching form data:", error);
+    return [];
   }
-  // noStore();
-};
-export async function fetchProgramForms(): Promise<ProgramForm[]> {
-  const res = await fetch('http://localhost:8000/forms');
-  if (!res.ok) {
-    throw new Error('Failed to fetch data');
-  }
-  return res.json();
   // noStore();
 }
-
-export async function fetchProfile(filters: ProfileFilter): Promise<Profile[]> {
-  const { id } = filters
-  const res = await fetch(`http://localhost:8000/profile?id=${id}`)
-  if (!res.ok) {
-
-    throw new Error('Failed to fetch data')
+export async function fetchProgramForm(programId: number): Promise<ProgramForm | null> {
+  try {
+    const response = await fetch(
+      prefixBaseApiPath(`/form/${programId}`)
+    );
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching program data:", error);
+    return null;
   }
+}
 
-  return res.json()
-  // noStore();
+export async function SubmitForm(programId: number): Promise<ProgramForm | null> {
+  try {
+    const response = await fetch(
+      prefixBaseApiPath(`/forms/programid=${programId}/submit`)
+    );
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching form data:", error);
+    return null;
+  }
 }

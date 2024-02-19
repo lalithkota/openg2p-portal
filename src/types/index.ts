@@ -6,27 +6,40 @@ export interface SearchProgramsProps{
 }
 export interface Program {
     id: number;
+    name: string;
+    description: number;
+    state: string;
+    has_applied: string;
+    is_portal_form_mapped: string;
+    is_multiple_form_submission: number;
+    last_application_status: number;
+}
+export interface ProgramDetails {
     program_name: string;
-    application_id: number;
-    program_status: string;
-    application_status: string;
-    submitted_on: string;
-    entitlement: number;
-    amount_received: number;
+    enrollment_status: string;
+    total_funds_awaited: 0;
+    total_funds_received: 0;
 }
 
 
 
 export interface ProgramForm {
+    program_id:number;
     id: number;
-    specific_program_name : string;
-    application_status:string;
-    form_json_schema : Record<string, any>;
+    schema: {
+    components: Record<string, any>[];
+  };
+    submission_data:{},
+    program_name : string;
+    program_description:string;
 }
+
+
 export interface FilterProps{
     program :string;
     currentPage:number; 
 }
+
 
 
 
