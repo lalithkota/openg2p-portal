@@ -13,6 +13,6 @@ export const getDictionary = async (locale: Locale) => {
   } else if (locale === 'fr') {
     return dictionaries.fr();
   } else if (locale === 'tl') {
-    return dictionaries.tl(); 
+    return dictionaries.tl();
   }
 };

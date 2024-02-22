@@ -23,7 +23,7 @@ export default async function ProgrmPage({ searchParams, params: { lang } }: {
   // const [sortOrder, setSortOrder] = useState<SortOrder>("ascn");
   // type SortKeys = keyof Program;
   // type SortOrder = "ascn" | "desc";
-  
+
   // function sortData({
   //   tableData,
   //   sortKey,
@@ -56,7 +56,7 @@ export default async function ProgrmPage({ searchParams, params: { lang } }: {
   });
 
 
-  
+
   const handleApplyClick = (program: Program) => {
     router.push(`apply?programid=${program.id}`);
   };
@@ -76,8 +76,8 @@ export default async function ProgrmPage({ searchParams, params: { lang } }: {
 
   // useEffect(() => {
   //   const fetchData = async () => {
-    
-     
+
+
   //     const storedFormState = localStorage.getItem('formState');
   //     if (storedFormState === 'true') {
   //       setFormState(true);

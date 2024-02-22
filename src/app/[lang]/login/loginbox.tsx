@@ -55,7 +55,7 @@ export default function LoginBox() {
               <div className="text-blue-600">
                 <Link href="/web/reset_password">Reset Password</Link>
               </div>
-              
+
             </div>
             <input type="password" placeholder="Enter password" name="password" id="password" className="w-full border border-solid border-white-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-300" />
           </div>

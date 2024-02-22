@@ -7,16 +7,16 @@ import { createContext, useContext, Dispatch, SetStateAction, useState } from "r
 interface ContextProps {
   formState: boolean,
   setFormState: Dispatch<SetStateAction<boolean>>,
-  
+
 }
 
 const GlobalContext = createContext<ContextProps>({
   formState: false,
-  setFormState: () => {}, 
+  setFormState: () => {},
 })
 export const GlobalContextProvider = ({children }: {children: React.ReactNode}) => {
   const [formState, setFormState] = useState(false);
-  
+
   return (
     <GlobalContext.Provider value={{ formState, setFormState }}>
       {children}

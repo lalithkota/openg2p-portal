@@ -21,7 +21,7 @@ export default function Submission() {
         setIsToastVisible(false);
     };
     return (
-        
+
         <div className=' rounded-lg border-gray-200 m-6 p-4 '>
             <div className='print:hidden'>
                 <div className='text-gray-700 text-xl '>Program Submission</div>
@@ -33,7 +33,7 @@ export default function Submission() {
                     <p className='m-0'>Program Submission</p>
                 </div>
             </div>
-            
+
             <div className={`fixed top-110 right-5 md:right-5 w-full md:w-1/4 z-50 bg-green-600 text-white py-2 px-4 rounded-lg font-semibold text-sm leading-5 ${isToastVisible ? 'block' : 'hidden'}`}>
                 <div className="relative">
                     Thank you. Your application has been submitted successfully.
@@ -90,10 +90,3 @@ export default function Submission() {
         </div>
     );
 };
-
-
-
-
-
-
-

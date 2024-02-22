@@ -39,15 +39,33 @@
       "title_c": "Entitlements",
       "heading_c": "",
       "description_c": "",
-      "view_all": "View all"
+      "view_all": "View all",
+      "application": "Application"
     },
     "home": {
-      "title": "My Applications",
+      "title": "My Dashboard",
       "number": "No.",
       "enrollment_status":"Status",
       "program_name": "Program Name",
       "total_funds_awaited":"Total Funds Awaited",
       "total_funds_received": "Total Funds Received"
+    },
+    "application": {
+      "title": "My Application",
+      "number": "No.",
+      "program_name": "Program Name",
+      "application_id": "Application ID",
+      "date_applied": "Date Applied",
+      "application_status": "Application Status"
+    },
+    "benefit": {
+      "title": "My Benefits",
+      "number": "No.",
+      "program_name": "Program Name",
+      "enrollment_status": "Enrollment Status",
+      "funds_awaited": "Funds Awaited",
+      "funds_received": "Funds Received",
+      "entitlement_reference_number": "Entitlement Reference Number"
     },
     "lang": {
       "language": "English"

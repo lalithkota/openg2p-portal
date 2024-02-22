@@ -21,6 +21,19 @@ export interface ProgramDetails {
     total_funds_received: 0;
 }
 
+export interface ApplicationDetails {
+    program_name: string;
+    application_id: number;
+    date_applied: string;
+    application_status: string;
+}
+export interface BenefitDetails {
+    program_name: string;
+    enrollment_status: string;
+    funds_awaited: number;
+    funds_received: number;
+    entitlement_reference_number: number;
+}
 
 
 export interface ProgramForm {
@@ -37,10 +50,18 @@ export interface ProgramForm {
 
 export interface FilterProps{
     program :string;
-    currentPage:number; 
+    currentPage:number;
 }
 
+export interface ApplFilterProps{
+    application : string;
+    currentPage: number;
+}
 
+export interface BenefFilterProps{
+    benefit : string;
+    currentPage: number;
+}
 
 
 export interface ProfileFilter{
@@ -49,7 +70,7 @@ export interface ProfileFilter{
 export interface Profile{
     id:number;
     given_name: string;
-    family_name: string; 
+    family_name: string;
     addl_name: string;
     date_of_birth: string;
     email: string;

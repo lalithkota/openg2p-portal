@@ -13,10 +13,10 @@ function SearchBar() {
     const searchParams = useSearchParams();
     const pathname = usePathname();
     const { replace } = useRouter();
-    
+
     const [program, setProgram] = useState('');
 
-    
+
     const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (program === '') {

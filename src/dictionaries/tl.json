@@ -14,14 +14,14 @@
           "description": "Ito ay tungkol sa pahina"
       },
       "programs": {
-        "name": "Pangalan ng Programa", 
-        "description": "Deskripsyon", 
-        "state": "Katayuan ng Programa", 
-        "has_applied": "Katayuan ng Aplikasyon", 
-        "is_portal_form_mapped": "Nakamapa sa Portal", 
-        "is_multiple_form_submission": "Maramihang Pagsusumite ng Form", 
-        "last_application_status": "Katayuan ng Huling Aplikasyon", 
-        "error": "Ay, wala mga resulta" 
+        "name": "Pangalan ng Programa",
+        "description": "Deskripsyon",
+        "state": "Katayuan ng Programa",
+        "has_applied": "Katayuan ng Aplikasyon",
+        "is_portal_form_mapped": "Nakamapa sa Portal",
+        "is_multiple_form_submission": "Maramihang Pagsusumite ng Form",
+        "last_application_status": "Katayuan ng Huling Aplikasyon",
+        "error": "Ay, wala mga resulta"
       },
       "card": {
           "title_a": "Lahat ng Programa",
@@ -39,15 +39,33 @@
           "title_c": "Karapatan",
           "heading_c": "",
           "description_c": "",
-          "view_all": "Tingnan ang Lahat"
+          "view_all": "Tingnan ang Lahat",
+          "application": "Application"
       },
       "home": {
-        "title": "Aking Mga Aplikasyon",
-        "number": "Hindi.",
+        "title": "Aking Dashboard",
+        "number": "Blg.",
         "enrollment_status": "katayuan sa pag-eenroll",
         "program_name": "Pangalan ng Programa",
         "total_funds_awaited": "Kabuuang Inaasahang Pondo",
         "total_funds_received": "Kabuuang Natanggap na Pondo"
+      },
+      "application": {
+        "title": "Aking Aplikasyon",
+        "number": "Blg.",
+        "program_name": "Pangalan ng Programa",
+        "application_id": "ID ng Aplikasyon",
+        "date_applied": "Petsa ng Aplikasyon",
+        "application_status": "Katayuan ng Aplikasyon"
+      },
+      "benefit": {
+        "title": "Aking Mga Benepisyo",
+        "number": "Blg.",
+        "program_name": "Pangalan ng Programa",
+        "enrollment_status": "Katayuan ng Pagpaparehistro",
+        "funds_awaited": "Mga Pondong Hinihintay",
+        "funds_received": "Mga Pondong Natanggap",
+        "entitlement_reference_number": "Numero ng Sanggunian sa Karapatan"
       },
       "lang": {
         "language": "Filipino"

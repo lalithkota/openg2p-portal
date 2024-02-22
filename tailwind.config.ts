@@ -162,7 +162,7 @@ const config: Config = {
       white: ["2px dotted white", "2px"],
       black: ["2px dotted black", "2px"]
     }
-    
+
   },
   plugins: [],
 }

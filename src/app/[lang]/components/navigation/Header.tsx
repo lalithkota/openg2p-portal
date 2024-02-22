@@ -20,14 +20,14 @@ export default async function Header({ lang }: { lang: Locale }) {
         <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl ">
           <Link href="/" className=" m-3 flex items-center">
             <Image
-              src="http://spar.openg2p.my/spar/img/logo@2x.png" 
-              priority={true} 
+              src="http://spar.openg2p.my/spar/img/logo@2x.png"
+              priority={true}
               alt="Logo"
               width={300}
               height={300}
             />
           </Link>
-                    
+
           <div className="flex items-center gap-2 lg:order-2 mr-6">
             <Search />
             <LanguageDropDown/>

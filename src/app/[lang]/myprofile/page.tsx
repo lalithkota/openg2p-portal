@@ -19,9 +19,9 @@ export default async function Profile({
   Formio.use(tailwind);
   Templates.framework = "tailwind";
   let currentId = 72;
-  
 
-  
+
+
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -48,19 +48,19 @@ export default async function Profile({
       </div>
       <div className="m-6 p-6 md:space-x-4 mx-auto max-w-screen-xl flex justify-center items-center bg-brand container w-1180 shadow-md  pb-0 rounded-lg top-24">
         <div className="grid grid-rows-3 grid-flow-col gap-10 m-0">
-          <div>Name</div> 
+          <div>Name</div>
           {authContext.profile ? authContext.profile.name : ""}
-          <div>Last Name</div> 
+          <div>Last Name</div>
           {authContext.profile ? authContext.profile.middle_name : ""}
           <div>Gender:</div>
           {authContext.profile ? authContext.profile.gender : ""}
-          <div>Birthdate:</div> 
+          <div>Birthdate:</div>
           {authContext.profile ? authContext.profile.birthdate : ""}
           <div>Email:</div>
           {authContext.profile ? authContext.profile.email : ""}
-          <div>Phone:</div> 
+          <div>Phone:</div>
           {authContext.profile ? authContext.profile.phone_number : ""}
-        </div>    
+        </div>
       </div>
     </div>
   )

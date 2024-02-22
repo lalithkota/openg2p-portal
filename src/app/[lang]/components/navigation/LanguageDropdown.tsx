@@ -21,7 +21,7 @@ export default function LanguageDropDown() {
       return 'en';
     }
   });
-  
+
   const handleLanguageChange = (locale: 'en' | 'fr' | 'tl') => {
     setSelectedLanguage(locale);
   };
@@ -33,13 +33,13 @@ export default function LanguageDropDown() {
       setSelectedLanguage(storedLanguage as 'en' | 'fr' | 'tl');
     }
   }, []);
-  
+
   const redirectedPathName = (locale: 'en' | 'fr' | 'tl') => {
     if (!pathName) return '/';
     const segments = pathName.split('/');
     segments[1] = locale;
     return segments.join('/');
-  }; 
+  };
   const getFlagImage = (locale: 'en' | 'fr' | 'tl') => {
     const flagImages = {
       en: 'http://spar.openg2p.my/spar/img/flag_en.png',

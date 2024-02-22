@@ -19,9 +19,9 @@ export default  function ProgramList({ params: { lang } }: {
   };
   const handleViewClick = (form: ProgramForm) => {
     router.push(`submission?formId=${form.program_id}`);
-    
+
   };
-  
+
   const [isDataEmpty, setIsDataEmpty] = useState(true);
   const [page, setPage] =  useState<any>(null);
   const [forms ,setForms] =useState<ProgramForm[]>([])
@@ -41,12 +41,12 @@ export default  function ProgramList({ params: { lang } }: {
           setFormState(true);
       }
     };
-    
-    fetchData(); 
+
+    fetchData();
 
   }, [lang]);
   return (
-    
+
     <div className=" rounded-lg border-gray-200 p-4 mx-4 lg:px-4 m-0 mt-2">
       <div className='mx-auto max-w-screen-xl'>
         <div className='text-gray-700 text-xl '>All Programs</div>
@@ -165,9 +165,6 @@ export default  function ProgramList({ params: { lang } }: {
         </div>
       )}
     </div>
-    
+
   )
 }
-
-
-

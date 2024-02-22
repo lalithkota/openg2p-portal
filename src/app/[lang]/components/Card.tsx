@@ -109,7 +109,7 @@ export default async function Card ({
                         <Link href={`/${lang}/forms`}className="text-sm font-medium text-blue-600 hover:underline no-underline  dark:text-blue-500">
                             {page.card.view_all}
                         </Link>
-                        
+
                     </div>
                 </div>
                 <div className=" flex flex-col w-full bg-brand border border-gray-200 square-lg shadow dark:bg-brand rounded-lg">

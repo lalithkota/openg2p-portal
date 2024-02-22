@@ -86,7 +86,7 @@ export default async function Page({ searchParams, params: { lang } }: {
 
   //   setSortKey(key);
   // }
-  
+
   const query = searchParams?.query || '';
   const currentPage = Number(searchParams?.page) || 1;
 
@@ -94,8 +94,8 @@ export default async function Page({ searchParams, params: { lang } }: {
     program: query || "",
     currentPage: currentPage,
   });
-  
-  
+
+
   const isDataEmpty = !Array.isArray(programs) || programs.length < 1 || !programs
   const dictionary = await getDictionary(lang);
   if (!dictionary) {
@@ -233,6 +233,3 @@ export default async function Page({ searchParams, params: { lang } }: {
     </div>
   );
 };
-
-
-

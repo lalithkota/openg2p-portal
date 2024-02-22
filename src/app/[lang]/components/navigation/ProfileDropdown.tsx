@@ -59,7 +59,7 @@ export default function ProfileDropDown({ lang }: { lang: Locale }): JSX.Element
           <div className="py-1">
             <Menu.Item >
               {({ active }) => (
-                <Link 
+                <Link
                   href={`/${lang}/myprofile`}
                   onClick={handleClick}
                   className={classNames(
@@ -90,4 +90,3 @@ export default function ProfileDropDown({ lang }: { lang: Locale }): JSX.Element
     </Menu>
   );
 }
-

@@ -44,7 +44,7 @@
 //           };
 //         const fetchData = async () => {
 //             var formData = await getProgramForm(formId);
-//             Formio.createForm(document.getElementById('formio'), 
+//             Formio.createForm(document.getElementById('formio'),
 //               formData[0].schema
 //             ).then( function (form)  {
 //                 const customSubmitButton = document.getElementById('custom-submit-button');
@@ -52,7 +52,7 @@
 //                 customSubmitButton?.addEventListener('click', () => {
 //                     form.submit().then((submission:any)  =>{
 //                         const submissionData = {
-//                           id: currentId, 
+//                           id: currentId,
 //                           form_data: submission,
 //                         };
 //                           console.log('submission', submission.state)
@@ -99,7 +99,7 @@
 
 //               });
 //             setForm(formData);
-//             //localStorage.setItem('formState', 'true');       
+//             //localStorage.setItem('formState', 'true');
 //         };
 //         fetchData();
 //     },[currentId] );
@@ -224,4 +224,3 @@ export default function Apply() {
     </div>
   );
 };
-

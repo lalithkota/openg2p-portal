@@ -37,7 +37,7 @@ export default async function Footer({ lang }: { lang: Locale }) {
                             <Link href={`/${lang}/otherpage`} className="mr-4 hover:underline text-gray-500 no-underline md:mr-6 ">{footer.others}</Link>
                         </li>
                     </ul>
-                    
+
                 </div>
                 <hr className="my-6 border-gray-200 sm:mx-auto dark:border-gray-200 lg:my-8" />
                 <span className="block text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023 National Social Benefits Portal. All rights reserved.</span>
