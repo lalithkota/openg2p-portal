@@ -112,13 +112,62 @@ export default async function Card ({
 
                     </div>
                 </div>
-                <div className=" flex flex-col w-full bg-brand border border-gray-200 square-lg shadow dark:bg-brand rounded-lg">
+
+                <div className=" flex flex-col w-full bg-brand border border-gray-200 square-lg shadow  dark:bg-brand rounded-lg">
                     <div className="flex items-center justify-between pt-4 pl-4 mb-2 ">
                         <h5 className="text-xl font-bol d leading-none text-gray-600">{page.card.title_c}</h5>
 
                     </div>
-                    <hr className="border-t mx-0 border-gray-400" />
+                    <hr className="border-t mx-0 border-gray-400 " />
+                    <div className="flow-root">
+                        <ul role="list" className="flex-col p-0 m-2 justify-center">
+                            <li className="p-1 ml-0 sm:py-4">
+                                <div className="h-16 bg-opacity-10 bg-white bg-no-repeat border border-gray-300 rounded-lg opacity-100 flex items-start space-x-4 ">
+                                    <div className="bg-opacity-10 bg-gray-600 bg-no-repeat bg-0 rounded-lg opacity-100 w-12 h-12 m-2 flex-shrink-0 ">
+                                        <Image className="w-1/2 h-1/2 square-full m-3 max-w-[40%] max-h-[40%]" src="http://spar.openg2p.my/spar/img/applications.png" alt="medical" width={100} height={300} />
+                                    </div>
+                                    <div className="flex-1 min-w-0 mt-2 ">
+                                        <Link href={`/${lang}/applications`} className="text-sm font-medium no-underline  text-gray-600 truncate">
+                                            {page.card.heading_c1}
+                                        </Link>
+                                        <p className="text-sm text-gray-500  truncate dark:text-gray-400">
+                                            {page.card.description_c1}
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li className="py-3 p-2 ml-0 sm:py-4">
+                                <div className="h-16 bg-opacity-10 bg-white bg-no-repeat border border-gray-300 rounded-lg opacity-100 flex items-center space-x-4">
+                                    <div className="bg-opacity-10 bg-gray-600 bg-no-repeat bg-0 rounded-lg opacity-100 w-12 h-12 m-2 flex-shrink-0">
+                                        <Image className="w-1/2 h-1/2  square-full m-3 max-w-[40%] max-h-[40%]" src="http://spar.openg2p.my/spar/img/benefits.png" alt="school" width={100} height={300} />
+                                    </div>
+                                    <div className="flex-1 min-w-0 mt-2">
+                                        <Link href={`/${lang}/benefits`} className="text-sm  no-underline  font-medium text-gray-600 truncate">
+                                            {page.card.heading_c2}
+                                        </Link>
+                                        <p className="text-sm text-gray-500 truncate dark:text-gray-400">
+                                            {page.card.description_c2}
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
+
+                {/* <div className=" flex flex-col w-full bg-brand border border-gray-200 square-lg shadow dark:bg-brand rounded-lg">
+                    <div className="flex items-center justify-between pt-4 pl-4 mb-2 ">
+                        <h5 className="text-xl font-bol d leading-none text-gray-600">{page.card.title_c}</h5>
+
+                    </div>
+                    <hr className="border-t mx-0 border-gray-400" /> */}
+                    {/* <Link href={`/${lang}/applications`} className="text-sm font-medium text-blue-600 dark:text-blue-500 no-underline hover:underline">
+                            {page.card.applications}
+                    </Link>
+                    <Link href={`/${lang}/benefits`} className="text-sm font-medium text-blue-600 dark:text-blue-500 no-underline hover:underline">
+                            {page.card.benefits}
+                    </Link> */}
+                {/* </div> */}
             </div>
         </>
     )

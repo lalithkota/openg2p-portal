@@ -36,11 +36,13 @@
           "heading_b2": "Mga Katanungan (FAQ)",
           "description_b2": "Pindutin upang malaman pa ang higit",
 
-          "title_c": "Karapatan",
-          "heading_c": "",
-          "description_c": "",
-          "view_all": "Tingnan ang Lahat",
-          "application": "Application"
+          "title_c": "Entitlements",
+          "heading_c1": "Applications",
+          "description_c1": "Tap to view your Applications",
+          "heading_c2": "Benefits",
+          "description_c2": "Tap to view your Benefits",
+
+          "view_all": "View all"
       },
       "home": {
         "title": "Aking Dashboard",
