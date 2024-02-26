@@ -16,8 +16,8 @@
       "programs": {
         "name": "Pangalan ng Programa",
         "description": "Deskripsyon",
-        "state": "Katayuan ng Programa",
-        "has_applied": "Katayuan ng Aplikasyon",
+        "state": "Katayuan ng Aplikasyon",
+        "has_applied": "Katayuan ng Programa",
         "is_portal_form_mapped": "Nakamapa sa Portal",
         "is_multiple_form_submission": "Maramihang Pagsusumite ng Form",
         "last_application_status": "Katayuan ng Huling Aplikasyon",

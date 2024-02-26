@@ -249,28 +249,25 @@ export default async function ProgrmPage({ searchParams, params: { lang } }: {
 
                         </td>
                         <td className="px-6 py-4">
-                          <div className="top-14 left-11">
-                            {program.state === 'submitted' ? (
-                              <button
-                                type="button"
-                                className="w-24 h-8 bg-white border border-blue-700 rounded-md text-blue-700 text-sm font-normal flex items-center justify-center"
-                                onClick={() => {
-                                  handleViewClick(program)
-                                }}
-                              >
-                                View
-                              </button>
-                            ) : (
-                              <button
+                          <div className="flex space-x-2">
+                            {program.is_portal_form_mapped && !program.has_applied && (
+                                <button
                                 type="button"
                                 className="w-24 h-8 bg-blue-700 rounded-md text-white text-sm font-normal flex items-center justify-center"
-                                onClick={() => {
-                                  handleApplyClick(program)
-                                }}
-                              >
-                                Apply
-                              </button>
-                            )}
+                                onClick={() => handleApplyClick(program)}>Apply</button>
+                              )}
+                              {program.has_applied && program.state === 'enrolled' && (
+                                <button
+                                type="button"
+                                className="w-24 h-8 bg-blue-700 rounded-md text-white text-sm font-normal flex items-center justify-center"
+                                onClick={() => handleViewClick(program)}>View</button>
+                              )}
+                              {program.has_applied && program.is_multiple_form_submission && (
+                                <button
+                                type="button"
+                                className="w-24 h-8 bg-blue-700 rounded-md text-white text-sm font-normal flex items-center justify-center"
+                                onClick={() => handleApplyClick(program)}>Reapply</button>
+                              )}
                           </div>
                         </td>
                       </tr>

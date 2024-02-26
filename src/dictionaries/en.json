@@ -16,8 +16,8 @@
     "programs": {
       "name": "Program Name",
       "description": " Description ",
-      "state": " Program Status",
-      "has_applied": "Status",
+      "state": "Action",
+      "has_applied": "Program Status",
       "is_portal_form_mapped": "Portal Mapped",
       "is_multiple_form_submission": "Multiple Form Submission",
       "last_application_status": "Application Status",
@@ -50,8 +50,8 @@
       "number": "No.",
       "enrollment_status":"Status",
       "program_name": "Program Name",
-      "total_funds_awaited":"Total Funds Awaited",
-      "total_funds_received": "Total Funds Received"
+      "total_funds_awaited":"Total Funds Awaited ($)",
+      "total_funds_received": "Total Funds Received ($)"
     },
     "application": {
       "title": "My Application",
@@ -66,8 +66,8 @@
       "number": "No.",
       "program_name": "Program Name",
       "enrollment_status": "Enrollment Status",
-      "funds_awaited": "Funds Awaited",
-      "funds_received": "Funds Received",
+      "funds_awaited": "Funds Awaited ($)",
+      "funds_received": "Funds Received ($)",
       "entitlement_reference_number": "Entitlement Reference Number"
     },
     "lang": {

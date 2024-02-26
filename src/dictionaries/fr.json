@@ -16,8 +16,8 @@
     "programs": {
       "name": "Nom du Programme",
       "description": "Description",
-      "state": "État du Programme",
-      "has_applied": "Statut de Candidature",
+      "state": "Statut de Candidature",
+      "has_applied": "État du Programme",
       "is_portal_form_mapped": "Portail Mappé",
       "is_multiple_form_submission": "Soumission de Formulaires Multiple",
       "last_application_status": "Statut de la Dernière Candidature",

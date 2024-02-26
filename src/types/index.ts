@@ -17,8 +17,8 @@ export interface Program {
 export interface ProgramDetails {
     program_name: string;
     enrollment_status: string;
-    total_funds_awaited: 0;
-    total_funds_received: 0;
+    total_funds_awaited: number;
+    total_funds_received: number;
 }
 
 export interface ApplicationDetails {
