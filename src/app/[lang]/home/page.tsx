@@ -135,10 +135,10 @@ export default async function Page({ searchParams, params: { lang } }: {
                           </th>
                         );
                       })} */}
-                        <th scope="col" className="px-6 py-3 ">
+                        <th scope="col" className="columnTitle px-6 py-3 ">
                           {page.home.number}
                         </th>
-                        <th scope="col" className="px-6 py-3 ">
+                        <th scope="col" className="columnTitle px-6 py-3 ">
                           <div
                             className="flex items-center w-max"
                         >{page.home.program_name}
@@ -147,7 +147,7 @@ export default async function Page({ searchParams, params: { lang } }: {
                             </svg>
                           </div>
                         </th>
-                        <th scope="col" className="px-6 py-3">
+                        <th scope="col" className="columnTitle px-6 py-3">
                           <div className="flex items-center w-max">
                             {page.home.enrollment_status}
                             <svg data-column="1" className="w-3 h-3 ml-1.5  text-gray-600  sortable-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
@@ -155,7 +155,7 @@ export default async function Page({ searchParams, params: { lang } }: {
                             </svg>
                           </div>
                         </th>
-                        <th scope="col" className="px-6 py-3">
+                        <th scope="col" className="columnTitle px-6 py-3">
                           <div className="flex items-center w-max">
                             {page.home.total_funds_awaited}
                             <svg data-column="2" className="w-3 h-3 ml-1.5  text-gray-600  sortable-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
@@ -163,7 +163,7 @@ export default async function Page({ searchParams, params: { lang } }: {
                             </svg>
                           </div>
                         </th>
-                        <th scope="col" className="px-6 py-3">
+                        <th scope="col" className="columnTitle px-6 py-3">
                           <div className="flex items-center w-max">
                             {page.home.total_funds_received}
                             <svg data-column="3" className="w-3 h-3 ml-1.5  text-gray-600  sortable-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
@@ -177,16 +177,16 @@ export default async function Page({ searchParams, params: { lang } }: {
                       {programs.map((program, index) => (
                         <tr key={index} className="bg-white border-b dark:bg-white-200 dark:border-white-200 text-gray-600">
                           <td className="px-6 py-4">{index + 1}</td>
-                          <td scope="row" className="px-6 py-4 ">
+                          <td scope="row" className="rowElement px-6 py-4 ">
                             {program.program_name}
                           </td>
                           <td className="px-6 py-4">
                             <button
                               type="button"
-                              className="h-5 min-w-[84px] rounded text-center tracking-[0px] opacity-100 border-collapse border-[none] left-[811px] bg-[#c7ebd1] text-[#075e45]"
-                              disabled={true}
+                              className={`${program.enrollment_status==='enrolled'? 'enrolledButton' : 'draftButton'} buttonElement top-14 text-xs  w-24 h-8 rounded-md text-center tracking-[0px] opacity-100 border-collapse border-[none] left-[811px] ${program.enrollment_status ? 'bg-gray-300 text-gray-600' : 'bg-[#c7ebd1] text-[#075e45]'}`}
+                            disabled={true}
                             >
-                              {program.enrollment_status}
+                              {program.enrollment_status==='enrolled'? 'Enrolled' : 'Draft'}
                             </button>
                           </td>
                           {/* <td className="px-6 py-4">
@@ -199,13 +199,13 @@ export default async function Page({ searchParams, params: { lang } }: {
                             </button>
                           </td> */}
                           <td className="px-6 py-4">
-                            {program.total_funds_awaited}
+                          {Number(program.total_funds_awaited).toFixed(2)}
                           </td>
                           {/* <td className="px-6 py-4">
                             <span>{program.is_multiple_form_submission}</span>
                           </td> */}
                           <td className="px-6 py-4">
-                            {program.total_funds_received}
+                          {Number(program.total_funds_received).toFixed(2)}
                           </td>
                         </tr>
                       ))}

@@ -14,6 +14,89 @@ html,body{
   width:100%;
 
 }
+
+.viewButton {
+  top: 336px;
+  left: 1110px;
+  width: 84px;
+  height: 30px;
+
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+  border: 1px solid #494DAF;
+  border-radius: 4px;
+  opacity: 1;
+}
+.applyButton {
+  text-align: center;
+  font: normal normal medium 12px/15px Inter;
+  letter-spacing: 0px;
+  color: #FFFFFF;
+  opacity: 1;
+}
+.enrolledButton {
+  background: #C7EBD1 0% 0% no-repeat padding-box;
+  border-radius: 4px;
+  opacity: 1;
+}
+.notAppliedButton {
+  background: #DCE3E8 0% 0% no-repeat padding-box;
+  border-radius: 4px;
+  opacity: 1;
+}
+.draftButton {
+  background: #DCE3E8 0% 0% no-repeat padding-box;
+  border-radius: 4px;
+  opacity: 1;
+}
+.submittedButton {
+  background: #FAF6CF 0% 0% no-repeat padding-box;
+  border-radius: 4px;
+  opacity: 1;
+}
+.completedButton {
+  background: #4CAF50 0% 0% no-repeat padding-box;
+  border-radius: 4px;
+  opacity: 1;
+}
+
+.activeButton {
+  background: #FFC107 0% 0% no-repeat padding-box;
+  border-radius: 4px;
+  opacity: 1;
+}
+
+.inProgressButton {
+  background: #2196F3 0% 0% no-repeat padding-box;
+  border-radius: 4px;
+  opacity: 1;
+}
+
+.rejectedButton {
+  background: #F44336 0% 0% no-repeat padding-box;
+  border-radius: 4px;
+  opacity: 1;
+}
+.rowElement {
+  text-align: left;
+  font: normal normal 600 13px/16px Inter;
+  letter-spacing: 0px;
+  color: #494DAF;
+  opacity: 1
+}
+.buttonElement{
+  text-align: center;
+  font: normal normal medium 12px/15px Inter;
+  letter-spacing: 0px;
+  color: #075E45;
+  opacity: 1;
+}
+.columnTitle{
+  text-align: left;
+  font: normal normal 600 13px/16px Inter;
+  letter-spacing: 0px;
+  color: #646464;
+  opacity: 1;
+}
 /* @media (min-width: 1024px) {
   footer {
     position: fixed;

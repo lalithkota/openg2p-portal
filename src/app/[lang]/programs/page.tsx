@@ -172,10 +172,10 @@ export default async function ProgrmPage({ searchParams, params: { lang } }: {
                           </th>
                         );
                       })} */}
-                      <th scope="col" className="px-6 py-3">
+                      <th scope="col" className="columnTitle px-6 py-3 text-sm font-normal">
                         {page.home.number}
                       </th>
-                      <th scope="col" className="px-6 py-3">
+                      <th scope="col" className="columnTitle px-6 py-3 text-sm font-normal">
                         <div className="flex items-center">
                           {page.programs.name}
                           <a href="#">
@@ -193,7 +193,7 @@ export default async function ProgrmPage({ searchParams, params: { lang } }: {
                         </div>
                       </th>
 
-                      <th scope="col" className="px-6 py-3">
+                      <th scope="col" className="columnTitle px-6 py-3">
                         <div className="flex items-center">
                           {page.programs.has_applied}
                           <a href="#">
@@ -209,7 +209,7 @@ export default async function ProgrmPage({ searchParams, params: { lang } }: {
                           </a>
                         </div>
                       </th>
-                      <th scope="col" className="px-6 py-3">
+                      <th scope="col" className="columnTitle px-6 py-3">
                         <div className="flex items-center">
                           {page.programs.state}
                           <a href="#">
@@ -234,14 +234,13 @@ export default async function ProgrmPage({ searchParams, params: { lang } }: {
                         className="bg-white border-b dark:bg-white-200 dark:border-white-200 text-gray-600"
                       >
                         <td className="px-6 py-4">{index + 1}</td>
-                        <td scope="row" className="px-6 py-4 ">
+                        <td scope="row" className="rowElement px-6 py-4 ">
                           {program.name}
                         </td>
                         <td className="px-6 py-4">
                           <button
                             type="button"
-                            className={`top-14  w-24 h-8 rounded-md text-center tracking-[0px] opacity-100 border-collapse border-[none] left-[811px] ${program.has_applied ? 'bg-gray-300 text-gray-600' : 'bg-[#c7ebd1] text-[#075e45]'
-                              }`}
+                            className={`${program.has_applied ? 'enrolledButton' : 'notAppliedButton'} buttonElement top-14 text-xs  w-24 h-8 rounded-md text-center tracking-[0px] opacity-100 border-collapse border-[none] left-[811px] `}
                             disabled={true}
                           >
                             {program.has_applied ? 'Enrolled' : 'Not Applied'}
@@ -253,19 +252,19 @@ export default async function ProgrmPage({ searchParams, params: { lang } }: {
                             {program.is_portal_form_mapped && !program.has_applied && (
                                 <button
                                 type="button"
-                                className="w-24 h-8 bg-blue-700 rounded-md text-white text-sm font-normal flex items-center justify-center"
+                                className="applyButton w-24 h-8 bg-blue-700 rounded-md text-white text-xs font-normal flex items-center justify-center"
                                 onClick={() => handleApplyClick(program)}>Apply</button>
                               )}
-                              {program.has_applied && program.state === 'enrolled' && (
+                              {program.has_applied && program.state === ('enrolled'||'draft') && (
                                 <button
                                 type="button"
-                                className="w-24 h-8 bg-blue-700 rounded-md text-white text-sm font-normal flex items-center justify-center"
+                                className="viewButton w-24 h-8 bg-white-700 rounded-md text-blue text-xs font-normal flex items-center justify-center"
                                 onClick={() => handleViewClick(program)}>View</button>
                               )}
                               {program.has_applied && program.is_multiple_form_submission && (
                                 <button
                                 type="button"
-                                className="w-24 h-8 bg-blue-700 rounded-md text-white text-sm font-normal flex items-center justify-center"
+                                className="applyButton w-24 h-8 bg-blue-700 rounded-md text-white text-xs font-normal flex items-center justify-center"
                                 onClick={() => handleApplyClick(program)}>Reapply</button>
                               )}
                           </div>

@@ -315,10 +315,10 @@ return (
                 <table className=" w-full  text-sm text-left text-gray-600 ">
                   <thead className="text-xs text-gray-600 bg-gray-100">
                     <tr>
-                      <th scope="col" className="px-6 py-3 ">
+                      <th scope="col" className="columnTitle px-6 py-3 ">
                         {page.benefit.number}
                       </th>
-                      <th scope="col" className="px-6 py-3 ">
+                      <th scope="col" className="columnTitle px-6 py-3 ">
                         <div
                           className="flex items-center w-max"
                       >{page.benefit.program_name}
@@ -327,7 +327,7 @@ return (
                           </svg>
                         </div>
                       </th>
-                      <th scope="col" className="px-6 py-3">
+                      <th scope="col" className="columnTitle px-6 py-3">
                         <div className="flex items-center w-max">
                           {page.benefit.enrollment_status}
                           <svg data-column="1" className="w-3 h-3 ml-1.5  text-gray-600  sortable-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
@@ -335,7 +335,7 @@ return (
                           </svg>
                         </div>
                       </th>
-                      <th scope="col" className="px-6 py-3">
+                      <th scope="col" className="columnTitle px-6 py-3">
                         <div className="flex items-center w-max">
                           {page.benefit.entitlement_reference_number}
                           <svg data-column="2" className="w-3 h-3 ml-1.5  text-gray-600  sortable-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
@@ -343,7 +343,7 @@ return (
                           </svg>
                         </div>
                       </th>
-                      <th scope="col" className="px-6 py-3">
+                      <th scope="col" className="columnTitle px-6 py-3">
                         <div className="flex items-center w-max">
                           {page.benefit.funds_awaited}
                           <svg data-column="3" className="w-3 h-3 ml-1.5  text-gray-600  sortable-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
@@ -365,17 +365,17 @@ return (
                     {benefits.map((benefit, index) => (
                       <tr key={index} className="bg-white border-b dark:bg-white-200 dark:border-white-200 text-gray-600">
                         <td className="px-6 py-4">{index + 1}</td>
-                        <td scope="row" className="px-6 py-4 ">
+                        <td scope="row" className="rowElement px-6 py-4 ">
                           {benefit.program_name}
                         </td>
                         <td className="px-6 py-4">
-                          <button
-                            type="button"
-                            className="h-5 min-w-[84px] rounded text-center tracking-[0px] opacity-100 border-collapse border-[none] left-[811px] bg-[#c7ebd1] text-[#075e45]"
+                        <button
+                              type="button"
+                              className={`${benefit.enrollment_status==='enrolled'? 'enrolledButton' : 'draftButton'} buttonElement top-14 text-xs  w-24 h-8 rounded-md text-center tracking-[0px] opacity-100 border-collapse border-[none] left-[811px] ${benefit.enrollment_status ? 'bg-gray-300 text-gray-600' : 'bg-[#c7ebd1] text-[#075e45]'}`}
                             disabled={true}
-                          >
-                            {benefit.enrollment_status}
-                          </button>
+                            >
+                              {benefit.enrollment_status==='enrolled'? 'Enrolled' : 'Draft'}
+                            </button>
                         </td>
                         {/* <td className="px-6 py-4">
                           <button
@@ -386,17 +386,17 @@ return (
                             {program.has_applied}
                           </button>
                         </td> */}
-                        <td className="px-6 py-4">
+                        <td className="text-sm px-6 py-4">
                           {benefit.entitlement_reference_number ? benefit.entitlement_reference_number : 'Entitlement not approved'}
                         </td>
                         {/* <td className="px-6 py-4">
                           <span>{program.is_multiple_form_submission}</span>
                         </td> */}
                         <td className="px-6 py-4">
-                          {benefit.funds_received}
+                          {Number(benefit.funds_received).toFixed(2)}
                         </td>
                         <td className="px-6 py-4">
-                          {benefit.funds_awaited}
+                          {Number(benefit.funds_awaited).toFixed(2)}
                         </td>
                       </tr>
                     ))}

@@ -74,6 +74,26 @@ export default async function ApplcnPage({ searchParams, params: { lang } }: {
   }
   const { page } = dictionary;
 
+  function getStatusClass(status: string) {
+    switch(status) {
+        case 'completed':
+            return 'completedButton';
+        case 'active':
+            return 'activeButton';
+        case 'inprogress':
+            return 'inProgressButton';
+        case 'rejected':
+            return 'rejectedButton';
+        default:
+            return '';
+    }
+}
+
+function toTitleCase(str: string) {
+  return str.replace(/\w\S*/g, function(txt) {
+      return txt.charAt(0).toUpperCase() + txt.substring(1).toLowerCase();
+  });
+}
 
   // useEffect(() => {
   //   const fetchData = async () => {
@@ -315,10 +335,10 @@ return (
                 <table className=" w-full  text-sm text-left text-gray-600 ">
                   <thead className="text-xs text-gray-600 bg-gray-100">
                     <tr>
-                      <th scope="col" className="px-6 py-3 ">
+                      <th scope="col" className="columnTitle px-6 py-3 ">
                         {page.application.number}
                       </th>
-                      <th scope="col" className="px-6 py-3 ">
+                      <th scope="col" className="columnTitle px-6 py-3 ">
                         <div
                           className="flex items-center w-max"
                       >{page.application.program_name}
@@ -327,7 +347,7 @@ return (
                           </svg>
                         </div>
                       </th>
-                      <th scope="col" className="px-6 py-3">
+                      <th scope="col" className="columnTitle px-6 py-3">
                         <div className="flex items-center w-max">
                           {page.application.application_status}
                           <svg data-column="1" className="w-3 h-3 ml-1.5  text-gray-600  sortable-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
@@ -335,7 +355,7 @@ return (
                           </svg>
                         </div>
                       </th>
-                      <th scope="col" className="px-6 py-3">
+                      <th scope="col" className="columnTitle px-6 py-3">
                         <div className="flex items-center w-max">
                           {page.application.application_id}
                           <svg data-column="2" className="w-3 h-3 ml-1.5  text-gray-600  sortable-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
@@ -343,7 +363,7 @@ return (
                           </svg>
                         </div>
                       </th>
-                      <th scope="col" className="px-6 py-3">
+                      <th scope="col" className="columnTitle px-6 py-3">
                         <div className="flex items-center w-max">
                           {page.application.date_applied}
                           <svg data-column="3" className="w-3 h-3 ml-1.5  text-gray-600  sortable-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
@@ -357,16 +377,16 @@ return (
                     {applications.map((application, index) => (
                       <tr key={index} className="bg-white border-b dark:bg-white-200 dark:border-white-200 text-gray-600">
                         <td className="px-6 py-4">{index + 1}</td>
-                        <td scope="row" className="px-6 py-4 ">
+                        <td scope="row" className="rowElement px-6 py-4 ">
                           {application.program_name}
                         </td>
                         <td className="px-6 py-4">
                           <button
                             type="button"
-                            className="h-5 min-w-[84px] rounded text-center tracking-[0px] opacity-100 border-collapse border-[none] left-[811px] bg-[#c7ebd1] text-[#075e45]"
+                            className={`top-14 text-xs  w-24 h-8 rounded-md text-center tracking-[0px] opacity-100 border-collapse border-[none] left-[811px] text-white ${getStatusClass(application.application_status)}`}
                             disabled={true}
                           >
-                            {application.application_status}
+                            {toTitleCase(application.application_status)}
                           </button>
                         </td>
                         {/* <td className="px-6 py-4">
