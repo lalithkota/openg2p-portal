@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 // import { MouseEventHandler, useState } from "react";
 import { Card, Pagination } from '../components';
 import { fetchProgramDetails } from '@/utils'
@@ -9,6 +9,7 @@ import Loading from '../loading';
 import { getDictionary } from '@/lib/dictionary'
 import { Locale } from '@/i18n.config'
 import { AuthUtil } from '../components/auth';
+import { ProgramDetails } from '@types';
 
 
 export default async function Page({ searchParams, params: { lang } }: {
@@ -19,89 +20,35 @@ export default async function Page({ searchParams, params: { lang } }: {
   params: { lang: Locale }
 }) {
 
-  // const [sortKey, setSortKey] = useState<SortKeys>("id");
-  // const [sortOrder, setSortOrder] = useState<SortOrder>("ascn");
-  // type SortKeys = keyof Program;
-  // type SortOrder = "ascn" | "desc";
+  const [programs, setPrograms] = useState<ProgramDetails[]>([]);
+  const [page, setPage] = useState<any>(null);
 
-  // function sortData({
-  //   tableData,
-  //   sortKey,
-  //   reverse,
-  // }: {
-  //   tableData: Program[];
-  //   sortKey: SortKeys;
-  //   reverse: boolean;
-  // }) {
-  //   if (!sortKey) return tableData;
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const result: ProgramDetails[] = await fetchProgramDetails();
+        setPrograms(result);
 
-  //   const sortedData = programs.sort((a, b) => {
-  //     return a[sortKey] > b[sortKey] ? 1 : -1;
-  //   });
+        const dictionary = await getDictionary(lang);
+        if (!dictionary) {
+          return null;
+        }
 
-  //   if (reverse) {
-  //     return sortedData.reverse();
-  //   }
+        const { page } = dictionary;
+        setPage(page);
 
-  //   return sortedData;
-  // }
-  // const sortedData = () => sortData({ tableData: programs, sortKey, reverse: sortOrder === "desc" });
-  // function SortButton({
-  //   sortOrder,
-  //   columnKey,
-  //   sortKey,
-  //   onClick,
-  // }: {
-  //   sortOrder: SortOrder;
-  //   columnKey: SortKeys;
-  //   sortKey: SortKeys;
-  //   onClick: MouseEventHandler<HTMLButtonElement>;
-  // }) {
-  //   return (
-  //     <button
-  //       onClick={onClick}
-  //       className={`${sortKey === columnKey && sortOrder === "desc"
-  //         ? "w-3 h-3 ml-1.5  text-gray-400 sort-reverse"
-  //         : "w-3 h-3 ml-1.5  text-gray-400"
-  //         }`}
-  //     >
-  //       ▲
-  //     </button>
-  //   );
-  // }
+      } catch (error) {
+        console.error('Error fetching program details:', error);
+      }
+    };
 
-  // const headers: { key: SortKeys; label: string }[] = [
-  //   { key: "id", label: "ID" },
-  //   { key: "program_name", label: "Program Name" },
-  //   { key: "application_id", label: "Application Id" },
-  //   { key: "program_status", label: "Program Status" },
-  //   { key: "application_status", label: " Application Status" },
-  //   { key: "submitted_on", label: "Submiited On" },
-  //   { key: "entitlement", label: "Entitlement (in USD)" },
-  //   { key: "amount_received", label: "Amount Receieved" },
-  // ];
-
-  // function changeSort(key: SortKeys) {
-  //   setSortOrder(sortOrder === "ascn" ? "desc" : "ascn");
-
-  //   setSortKey(key);
-  // }
+    fetchData();
+  }, []);
 
   const query = searchParams?.query || '';
   const currentPage = Number(searchParams?.page) || 1;
 
-  const programs = await fetchProgramDetails({
-    program: query || "",
-    currentPage: currentPage,
-  });
-
-
   const isDataEmpty = !Array.isArray(programs) || programs.length < 1 || !programs
-  const dictionary = await getDictionary(lang);
-  if (!dictionary) {
-    return null;
-  }
-  const { page } = dictionary;
 
   return (
     <div >

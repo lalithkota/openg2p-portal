@@ -1,83 +1,93 @@
-import { Program,ProgramForm, FilterProps, ApplFilterProps, BenefFilterProps, ProfileFilter, ProgramDetails, ApplicationDetails, BenefitDetails,} from '@types';
+import { Program,ProgramForm, FilterProps, ApplFilterProps, BenefFilterProps, ProfileFilter, ProgramDetails, ApplicationDetails, BenefitDetails, ProgramRegistrantInfo,} from '@types';
 import { prefixBaseApiPath } from './path';
 // import { unstable_noStore as noStore } from 'next/cache';
 
 
   // const res = await fetch(`http://localhost:8000/programs?program_id=${program}&page=${currentPage}`);
 
-  export async function fetchProgramDetails(filters: FilterProps): Promise<ProgramDetails[]> {
-  const { program ,currentPage} = filters;
+export async function fetchProgramDetails(): Promise<ProgramDetails[]> {
+
   const res = await fetch(prefixBaseApiPath(`/programdetails`));
-
   if (!res.ok) {
-
     throw new Error('Failed to fetch data');
   }
-
-  return res.json();
-
+  const data: ProgramDetails[] = await res.json();
+  return data;
 }
 
-export async function fetchApplicationDetails(filters: ApplFilterProps): Promise<ApplicationDetails[]> {
-  const { application ,currentPage} = filters
+export async function fetchApplicationDetails(): Promise<ApplicationDetails[]> {
+
   const res = await fetch(prefixBaseApiPath("/applicationdetails"));
   if (!res.ok) {
-
     throw new Error('Failed to fetch data')
   }
-
-  return res.json()
-
+  const data: ApplicationDetails[] = await res.json();
+  return data;
 }
 
-export async function fetchBenefitDetails(filters: BenefFilterProps): Promise<BenefitDetails[]> {
-  const { benefit ,currentPage} = filters;
+export async function fetchBenefitDetails(): Promise<BenefitDetails[]> {
+
   const res = await fetch(prefixBaseApiPath("/benefitdetails"));
   if (!res.ok) {
+    throw new Error('Failed to fetch data');
+  }
+  const data: BenefitDetails[] = await res.json();
+  return data;
+}
 
+export async function fetchPrograms(): Promise<Program[]> {
+
+  const res = await fetch(prefixBaseApiPath("/program"));
+  if (!res.ok) {
+    throw new Error('Failed to fetch data');
+  }
+  const data: Program[] = await res.json();
+  return data;
+}
+
+export async function fetchProgramForm(programId: number): Promise<ProgramForm> {
+  const res = await fetch(prefixBaseApiPath(`/form/${programId}`));
+  if (!res.ok) {
     throw new Error('Failed to fetch data');
   }
 
-  return res.json();
+  const data: ProgramForm = await res.json();
+  return data;
 
 }
+export async function PutProgramForm(programId: number, submissionData: any): Promise<ProgramRegistrantInfo> {
+  const url = prefixBaseApiPath(`/form/${programId}`);
+  const res = await fetch(url, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(submissionData),
+  });
 
-export async function fetchPrograms(filters: FilterProps): Promise<Program[]> {
-  const { program ,currentPage} = filters
-  try {
-    const response = await fetch(
-      prefixBaseApiPath(`/program`)
-    );
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error("Error fetching form data:", error);
-    return [];
+  if (!res.ok) {
+    throw new Error('Failed to update resource');
   }
-  // noStore();
-}
-export async function fetchProgramForm(programId: number): Promise<ProgramForm | null> {
-  try {
-    const response = await fetch(
-      prefixBaseApiPath(`/form/${programId}`)
-    );
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error("Error fetching program data:", error);
-    return null;
-  }
+
+  const data: ProgramRegistrantInfo = await res.json();
+  return data;
 }
 
-export async function SubmitForm(programId: number): Promise<ProgramForm | null> {
-  try {
-    const response = await fetch(
-      prefixBaseApiPath(`/forms/programid=${programId}/submit`)
-    );
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error("Error fetching form data:", error);
-    return null;
+export async function SubmitForm(programId: number, submissionData: any): Promise<ProgramRegistrantInfo> {
+  const url = prefixBaseApiPath(`/form/${programId}/submit`);
+
+  const res = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(submissionData),
+  });
+
+  if (!res.ok) {
+    throw new Error('Failed to submit data');
   }
+
+  const data: ProgramRegistrantInfo = await res.json();
+  return data;
 }

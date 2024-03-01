@@ -1,4 +1,3 @@
-import ProgramList from "@app/[lang]/forms/page";
 
 export interface SearchProgramsProps{
     program:string;
@@ -38,14 +37,18 @@ export interface BenefitDetails {
 
 export interface ProgramForm {
     program_id:number;
+    form_id:number;
     id: number;
-    schema: {
-    components: Record<string, any>[];
-  };
+    schema: string,
     submission_data:{},
     program_name : string;
     program_description:string;
 }
+
+export interface ProgramRegistrantInfo{
+    program_registrant_info :{};
+}
+
 
 
 export interface FilterProps{

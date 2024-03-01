@@ -1,5 +1,7 @@
 
 'use client'
+import { Locale } from '@i18n.config';
+import { getDictionary } from '@lib/dictionary';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { useState, useEffect } from 'react';
@@ -26,9 +28,9 @@ export default function Submission() {
             <div className='print:hidden'>
                 <div className='text-gray-700 text-xl '>Program Submission</div>
                 <div className='flex flex-wrap gap-2 mt-4 items-center mx-auto max-w-screen-xl'>
-                    <Link href="/" className="flex items-center  text-blue-900"> Home </Link>
+                    <Link href={`/en/home`}  className="flex items-center  text-blue-900"> Home </Link>
                     <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512"><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z" /></svg>
-                    <Link href="/programs" className="flex items-center  text-blue-900"> All Programs </Link>
+                    <Link href={`/en/programs`}  className="flex items-center  text-blue-900"> All Programs </Link>
                     <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512"><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z" /></svg>
                     <p className='m-0'>Program Submission</p>
                 </div>
@@ -82,7 +84,7 @@ export default function Submission() {
                     </div>
                     <hr className="border-t mx-0 border-gray-400 " />
                     <div className='flex flex-col  gap-2 items-center m-4'>
-                        <Link href='/home' className=" w-full p-6 h-8 bg-white border border-blue-700 rounded-md text-blue-700 text-sm font-normal flex items-center justify-center" >View all programs</Link>
+                        <Link href={`/en/home`}  className=" w-full p-6 h-8 bg-white border border-blue-700 rounded-md text-blue-700 text-sm font-normal flex items-center justify-center" >View all programs</Link>
                         <button className=" w-full p-6 h-8  bg-blue-700 rounded-md text-white text-sm font-normal flex items-center justify-center" onClick={handlePrint} >print</button>
                     </div>
                 </div>

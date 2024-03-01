@@ -4,6 +4,10 @@
     "contact": "Contactez-nous",
     "others": "Autres"
   },
+  "apply":{
+    "home": "Home",
+    "allprograms":"All Programs"
+  },
   "page": {
     "main": {
       "title": "Bienvenue sur le portail de libre-service",

@@ -4,6 +4,10 @@
       "contact": "Makipag-ugnayan sa Amin",
       "others": "Iba"
   },
+  "apply":{
+    "home": "Home",
+    "allprograms":"All Programs"
+  },
   "page": {
       "main": {
           "title": "Maligayang Pagdating sa Self Service Portal",

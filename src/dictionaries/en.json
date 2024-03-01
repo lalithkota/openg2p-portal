@@ -4,6 +4,10 @@
     "contact": "Contact Us",
     "others": "Others"
   },
+  "apply":{
+    "home": "Home",
+    "allprograms":"All Programs"
+  },
   "page": {
     "main": {
       "title": "Welcome to Self service portal",
