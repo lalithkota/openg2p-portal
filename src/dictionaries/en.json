@@ -4,18 +4,18 @@
     "contact": "Contact Us",
     "others": "Others"
   },
-  "apply":{
-    "home": "Home",
-    "allprograms":"All Programs"
-  },
   "page": {
     "main": {
       "title": "Welcome to Self service portal",
       "description": "Self service portal login"
     },
     "about": {
-      "title": "About Us",
+      "title": "OpenG2P",
       "description": "This is the about page"
+    },
+    "apply":{
+      "title": "Home",
+      "description":"All Programs"
     },
     "programs": {
       "name": "Program Name",

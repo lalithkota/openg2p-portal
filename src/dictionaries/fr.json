@@ -4,18 +4,18 @@
     "contact": "Contactez-nous",
     "others": "Autres"
   },
-  "apply":{
-    "home": "Home",
-    "allprograms":"All Programs"
-  },
   "page": {
     "main": {
-      "title": "Bienvenue sur le portail de libre-service",
+      "title": "OpenG2P",
       "description": "Connexion au portail de libre-service"
     },
     "about": {
-      "title": "À propos de nous",
+      "title": "Section Based Approach | Centre",
       "description": "Ceci est la page À propos"
+    },
+    "apply":{
+      "home": "Home",
+      "allprograms":"All Programs"
     },
     "programs": {
       "name": "Nom du Programme",

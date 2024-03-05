@@ -24,10 +24,15 @@ export default async function AboutUs({
 
         </div>
         <div className='container'>
-          <h1 className='text-3xl font-bold'>{page.about.title}</h1>
-          <p className='text-gray-500'>{page.about.description}</p>
+          <h1 className='text-3xl font-bold' style={{ textAlign: 'center', fontFamily: 'Inter, sans-serif', fontSize: '17px', lineHeight: '20px', letterSpacing: '0px', color: '#333333', opacity: 1 }}>{page.about.title} </h1>
+          <h2>
+          The OpenG2P ERP, built on the excellent Odoo opensource ERP, is an opensource web-based enterprise resource planning (ERP) solution for managing many facets of large scale relief program. It can both be as a standalone solution and as the administrative interface to the rest of the OpenG2P stack.
 
+          Bootstrapped by DSTI and the Government of Sierra Leone,The Mifos Initiative and Fynarfin, “OpenG2P” aims to provide a confluence for and solutions to effectively digitize government to person, and large-scale social protection transfers. It is a set of digital building blocks helping SPs digitize key cogs & address gaps in the delivery chain of targeting & enrollment, list management, payment digitization, & recourse. OpenG2P comprises of several projects (blocks), each addressing a single key pain point in the delivery chain. These can be used independently of the other blocks depending on a program’s gaps or as a package seamlessly integrated to provide an end-to-end solution kit. OpenG2P is under active development. If you need help, would like to contribute, or simply want to talk about the project with like-minded individuals, we have a number of open channels for communication.
+          </h2>
+          <p className='text-gray-500'>{page.about.description}</p>
         </div>
+
     </div>
 
     </div>

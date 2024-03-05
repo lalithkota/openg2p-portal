@@ -4,18 +4,18 @@
       "contact": "Makipag-ugnayan sa Amin",
       "others": "Iba"
   },
-  "apply":{
-    "home": "Home",
-    "allprograms":"All Programs"
-  },
   "page": {
       "main": {
-          "title": "Maligayang Pagdating sa Self Service Portal",
+          "title": "OpenG2P",
           "description": "Pag-login sa Self Service Portal"
       },
       "about": {
-          "title": "Tungkol sa Amin",
+          "title": "Section Based Approach | Centre",
           "description": "Ito ay tungkol sa pahina"
+      },
+      "apply":{
+        "home": "Home",
+        "allprograms":"All Programs"
       },
       "programs": {
         "name": "Pangalan ng Programa",

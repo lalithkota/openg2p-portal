@@ -60,6 +60,108 @@ export default async function ProgrmPage({ searchParams, params: { lang } }: {
     router.push(`submission?programId=${program.id}`);
 
   };
+  const handleReapplyClick = (program: Program) => {
+    router.push(`apply?programid=${program.id}`);
+  };
+
+
+  const renderActionButton = (program:Program) => {
+    if (program.has_applied) {
+      switch (program.state) {
+        case 'Applied':
+          return (
+            <>
+              {/* <td>
+                <button className="submittedButton buttonElement w-24 h-8 bg-blue-700 rounded-md text-white text-xs font-normal flex items-center justify-center"
+                disabled>Applied</button>
+              </td> */}
+              <td>
+                {program.is_portal_form_mapped && (
+                  program.is_multiple_form_submission ? (
+                    // <a href={`/selfservice/submissions/${program.id}`}>
+                    <a>
+                      <button className="applyButton buttonElement w-24 h-8 bg-blue-700 rounded-md text-white text-xs font-normal flex items-center justify-center"
+                      onClick={() => handleReapplyClick(program)}>Reapply</button>
+                    </a>
+                  ) : (
+                    // <a href={`/selfservice/submitted/${program.id}`}>
+                    <a>
+                      <button className="viewButton buttonElement w-24 h-8 bg-blue-700 rounded-md text-blue text-xs font-normal flex items-center justify-center"
+                      onClick={() => handleViewClick(program)}>View</button>
+                    </a>
+                  )
+                )}
+              </td>
+            </>
+          );
+        case 'enrolled':
+          return (
+            <>
+              {/* <td>
+                {program.single_submission && program.is_application_rejected ? (
+                  <button className="notapplied-button" disabled>Rejected</button>
+                ) : (
+                  <button className="enroll-button" disabled>Enrolled</button>
+                )}
+              </td> */}
+              <td>
+                {program.is_portal_form_mapped && (
+                  program.is_multiple_form_submission ? (
+                    // <a href={`/selfservice/submissions/${program.id}`}>
+                    <a>
+                      <button className="applyButton w-24 h-8 bg-blue-700 rounded-md text-white text-xs font-normal flex items-center justify-center"
+                      onClick={() => handleReapplyClick(program)}>Reapply</button>
+                    </a>
+                  ) : (
+                    // <a href={`/selfservice/submitted/${program.id}`}>
+                    <a>
+                      <button className="viewButton w-24 h-8 bg-blue-700 rounded-md text-blue text-xs font-normal flex items-center justify-center"
+                      onClick={() => handleViewClick(program)}>View</button>
+                    </a>
+                  )
+                )}
+              </td>
+            </>
+          );
+        case 'Not Eligible':
+          return (
+            <>
+              {/* <td>
+                <button className="notAppliedButton buttonElement w-24 h-8 bg-blue-700 rounded-md text-white text-xs font-normal flex items-center justify-center"
+                disabled>Not Eligible</button>
+              </td> */}
+              <td>
+                {/* <a href={`/selfservice/submitted/${program.id}`}> */}
+                <a>
+                  <button className="viewButton w-24 h-8 bg-blue-700 rounded-md text-blue text-xs font-normal flex items-center justify-center"
+                  onClick={() => handleViewClick(program)}>View</button>
+                </a>
+              </td>
+            </>
+          );
+        default:
+          return null;
+      }
+    } else {
+      return (
+        <>
+          {/* <td>
+            <button className="notAppliedButton buttonElement w-24 h-8 bg-blue-700 rounded-md text-white text-xs font-normal flex items-center justify-center"
+             disabled>Not Applied</button>
+          </td> */}
+          <td>
+            {program.is_portal_form_mapped && (
+              // <a href={`/selfservice/apply/${program.id}`}>
+              <a>
+                <button className="applyButton w-24 h-8 bg-blue-700 rounded-md text-white text-xs font-normal flex items-center justify-center"
+                onClick={() => handleApplyClick(program)}>Apply</button>
+              </a>
+            )}
+          </td>
+        </>
+      );
+    }
+  };
 
   return (
     <div className=" rounded-lg border-gray-200 p-4 mx-4 lg:px-4 m-0 mt-2">
@@ -168,65 +270,25 @@ export default async function ProgrmPage({ searchParams, params: { lang } }: {
                           {program.name}
                         </td>
                         <td className="px-6 py-4">
-                          <button
-                            type="button"
-                            className={`${program.has_applied ? 'enrolledButton' : 'notAppliedButton'} buttonElement top-14 text-xs  w-24 h-8 rounded-md text-center tracking-[0px] opacity-100 border-collapse border-[none] left-[811px] `}
-                            disabled={true}
-                          >
-                            {program.has_applied ? 'Enrolled' : 'Not Applied'}
-                          </button>
-
-                        </td>
-                        {/* <td className="px-6 py-4">
-                          <div className="flex space-x-2">
-                            {program.is_portal_form_mapped && !program.has_applied && (
-                                <button
-                                type="button"
-                                className="applyButton w-24 h-8 bg-blue-700 rounded-md text-white text-xs font-normal flex items-center justify-center"
-                                onClick={() => handleApplyClick(program)}>Apply</button>
-                              )}
-                              {program.has_applied && program.state === ('enrolled'||'draft') && (
-                                <button
-                                type="button"
-                                className="viewButton w-24 h-8 bg-white-700 rounded-md text-blue text-xs font-normal flex items-center justify-center"
-                                onClick={() => handleViewClick(program)}>View</button>
-                              )}
-                              {program.has_applied && program.is_multiple_form_submission && (
-                                <button
-                                type="button"
-                                className="applyButton w-24 h-8 bg-blue-700 rounded-md text-white text-xs font-normal flex items-center justify-center"
-                                onClick={() => handleApplyClick(program)}>Reapply</button>
-                              )}
-                          </div>
-                        </td> */}
+                        <button
+                          type="button"
+                          className={`
+                            top-14 text-xs w-24 h-8 rounded-md text-center tracking-[0px] opacity-100 border-collapse border-[none] left-[811px]
+                            ${program.state === 'enrolled' ? 'enrolledButton' :
+                              program.state === 'Not Applied' ? 'notAppliedButton' :
+                              program.state === 'draft' ? 'submittedButton' :
+                              program.state === 'applied' ? 'appliedButton' :''}
+                          `}
+                          disabled={true}
+                        >
+                          {program.state}
+                        </button>
+                      </td>
                         <td className="px-6 py-4">
                           <div className="flex space-x-2">
-                            {program.is_portal_form_mapped && (
-                            <>
-                            {!program.has_applied && (
-                            <button
-                              type="button"
-                              className="applyButton w-24 h-8 bg-blue-700 rounded-md text-white text-xs font-normal flex items-center justify-center"
-                              onClick={() => handleApplyClick(program)}>Apply</button>
-                              )}
-                              {program.has_applied && (
-                              <>
-                              <button
-                                type="button"
-                                className="viewButton w-24 h-8 bg-white-700 rounded-md text-blue text-xs font-normal flex items-center justify-center"
-                                onClick={() => handleViewClick(program)}>View</button>
-                                {program.is_multiple_form_submission && (
-                                <button
-                                  type="button"
-                                  className="applyButton w-24 h-8 bg-blue-700 rounded-md text-white text-xs font-normal flex items-center justify-center"
-                                  onClick={() => handleApplyClick(program)}>Reapply</button>
-                                  )}
-                              </>
-                            )}
-                          </>
-                     )}
-        </div>
-      </td>
+                            {renderActionButton(program)}
+                          </div>
+                        </td>
                       </tr>
                     ))}
                   </tbody>
