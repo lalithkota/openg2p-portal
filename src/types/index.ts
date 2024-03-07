@@ -21,6 +21,7 @@ export interface ProgramDetails {
 }
 
 export interface ApplicationDetails {
+    program_id: any;
     program_name: string;
     application_id: number;
     date_applied: string;

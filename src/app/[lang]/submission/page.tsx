@@ -2,28 +2,67 @@
 'use client'
 import { Locale } from '@i18n.config';
 import { getDictionary } from '@lib/dictionary';
+import { ApplicationDetails } from '@types';
+import {fetchApplicationDetails,fetchPrograms} from '@utils';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
-import { useState, useEffect } from 'react';
-export default function Submission() {
+import React, { useEffect, useState } from 'react';
 
+export default async function Submission({ params: { lang } }: {
+    searchParams?: {
+      query?: string;
+      page?: string;
+    },
+    params: { lang: Locale }
+  }){
     const [currentDate, setCurrentDate] = useState('');
     const [isToastVisible, setIsToastVisible] = useState(true);
+    const [page, setPage] = useState<any>(null);
+    // const [applications, setApplications] = useState<ApplicationDetails[]>([]);
+    const [applicationId, setApplicationId] = useState('');
+    const [applicationDetails, setApplicationDetails] = useState<ApplicationDetails | null>(null);
     const searchParams = useSearchParams()
+    const programId = searchParams.get('programId');
     const formId = searchParams.get('formId')
     useEffect(() => {
-        const currentDate = new Date();
-        const formattedDate = currentDate.toLocaleDateString();
-        setCurrentDate(formattedDate);
-    }, []);
+      const fetchData = async () => {
+        try {
+            // const result: ApplicationDetails[] = await fetchApplicationDetails();
+            // setApplications(result);
+            const programs = await fetchPrograms();
+            const applications= await fetchApplicationDetails();
+            const program = programs.find(prog => prog.id === Number(programId));     // Find the program by ID
+            const application = applications.find(app => app.program_name=== program?.name);    // Find the application that corresponds to the program name
+            // if (application) {
+            //   setApplicationId(application.application_id.toString());
+            // }
+            if (application) {
+                setApplicationDetails(application);
+              }
+            const currentDate = new Date();
+            const formattedDate = currentDate.toLocaleDateString();
+            setCurrentDate(formattedDate);
+            const dictionary = await getDictionary(lang);
+            if (!dictionary) {
+                return null;
+            }
+
+            const { page } = dictionary;
+            setPage(page);
+        } catch (error) {
+            console.error('Error fetching applications details:', error);
+          }
+      };
+      fetchData();
+    }, [programId]);
     const handlePrint = () => {
         window.print();
     };
     const hideToastSuccessMsg = () => {
         setIsToastVisible(false);
     };
+    // const isDataEmpty = !Array.isArray(applicationId) || applicationId.length < 1 || !applicationId
     return (
-
         <div className=' rounded-lg border-gray-200 m-6 p-4 '>
             <div className='print:hidden'>
                 <div className='text-gray-700 text-xl '>Program Submission</div>
@@ -35,11 +74,12 @@ export default function Submission() {
                     <p className='m-0'>Program Submission</p>
                 </div>
             </div>
-
+            {applicationDetails && (
+                <div>
             <div className={`fixed top-110 right-5 md:right-5 w-full md:w-1/4 z-50 bg-green-600 text-white py-2 px-4 rounded-lg font-semibold text-sm leading-5 ${isToastVisible ? 'block' : 'hidden'}`}>
                 <div className="relative">
                     Thank you. Your application has been submitted successfully.
-                    Please note your application ID for future reference - 03082304630
+                    Please note your application ID for future reference - {applicationDetails.application_id}
                 </div>
                 <button className="absolute top-3 right-3 md:right-3 md:top-3 outline-none bg-transparent border-none text-white cursor-pointer p-0" onClick={hideToastSuccessMsg}>
                     <img src="/img/close_icon@2x.png" alt="close" width={10} height={10} />
@@ -50,10 +90,10 @@ export default function Submission() {
                 <div className=" border border-gray-300 bg-brand container rounded-lg shadow-md">
                     <div className="flex-col  flex-wrap justify-between items-center">
                         <div className='m-5 '>
-                            <p className='text-gray-900 mb-4'>Dear Light,</p>
+                            <p className='text-gray-900 mb-4'>Dear User,</p>
                             <div className='text-gray-700 mb-4'>
-                                Thank you for submitting your form for the program Techie.
-                                Your application number is 16102359106
+                                Thank you for submitting your form for the {applicationDetails.program_name}.
+                                Your application number is {applicationDetails.application_id}
                             </div>
                             <div className='text-gray-700 mb-4'>
                                 We appreciate your interest in and we are committed to providing you with the support you need to achieve your goals. Our team will now review your application and assess your eligibility for the scheme. This process may take some time, and we appreciate your patience while we work to provide you with the best possible service.
@@ -73,14 +113,14 @@ export default function Submission() {
                     </div>
                 </div>
                 <div className="basis-1/2 print:hidden mb-80 flex-col flex-wrap justify-between items-center border border-gray-300 bg-brand container pb-10 rounded-lg top-24 shadow-md ">
-                    <p className=" text-gray-700 pt-4 pl-4 pb-0  ">Program name</p>
+                    <p className=" text-gray-700 pt-4 pl-4 pb-0  ">{applicationDetails.program_name}</p>
                     <button className=' ml-4 mb-4 w-24 h-8 bg-blue-700 rounded-md text-white text-sm font-normal flex items-center justify-center '>Applied</button>
                     <hr className="border-t mx-0 border-gray-400 " />
                     <div className='pt-4 text-sm text-gray-700 pl-4 pb-0 '>
                         <h3 >Application ID</h3>
-                        <h1 className='text-black font-bold mb-4'>1233534645757</h1>
+                        <h1 className='text-black font-bold mb-4'>{applicationDetails.application_id}</h1>
                         <h3>Submitted On</h3>
-                        <h1 className='text-black font-bold mb-4'>{currentDate}</h1>
+                        <h1 className='text-black font-bold mb-4'>{applicationDetails.date_applied}</h1>
                     </div>
                     <hr className="border-t mx-0 border-gray-400 " />
                     <div className='flex flex-col  gap-2 items-center m-4'>
@@ -89,6 +129,8 @@ export default function Submission() {
                     </div>
                 </div>
             </div>
+            </div>
+            )}
         </div>
     );
 };

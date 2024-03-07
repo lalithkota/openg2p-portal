@@ -91,3 +91,7 @@ export async function SubmitForm(programId: number, submissionData: any): Promis
   const data: ProgramRegistrantInfo = await res.json();
   return data;
 }
+
+export function useClient() {
+    throw new Error('Function not implemented.');
+}

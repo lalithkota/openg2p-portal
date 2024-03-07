@@ -94,6 +94,7 @@ export default async function ProgrmPage({ searchParams, params: { lang } }: {
               </td>
             </>
           );
+        case'draft':
         case 'enrolled':
           return (
             <>

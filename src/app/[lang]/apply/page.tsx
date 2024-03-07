@@ -86,7 +86,7 @@ export default function Apply({ lang }: { lang: Locale }) {
 
   return (
     <div className=' rounded-lg border-gray-200 m-6 p-4 '>
-      <div className='text-gray-700 text-xl '>Application Form</div>
+      <div className='text-gray-700 text-xl '>Form for {form?.program_name}</div>
       <div className='flex flex-wrap gap-2 mt-4 items-center mx-auto max-w-screen-xl'>
          <Link href={`/en/home`}className="flex items-center  text-blue-900">Home</Link>
         {/* <a>
@@ -94,22 +94,24 @@ export default function Apply({ lang }: { lang: Locale }) {
           onClick={() => handlehomeClick()}>Home</button>
         </a> */}
         <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512"><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z" /></svg>
-        <Link href={`/en/programs`} className="flex items-center  text-blue-900">All program</Link>
+        <Link href={`/en/programs`} className="flex items-center  text-blue-900">All Programs</Link>
         <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512"><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z" /></svg>
         <p className='m-0'>Application Form</p>
       </div>
       <div className="flex flex-row gap-10 justify-center mt-4 align-top ">
         <div className="flex-col flex-wrap justify-between items-center border border-gray-300 bg-brand container pb-10 rounded-lg top-24 shadow-md ">
           <p className=" text-gray-700 pt-4 pl-4 pb-0 font-fontcustom  ">Application form</p>
-          {/* <h1 className='font-fontcustom text-gray-700 pl-4 pb-4'>{form.program_name}</h1> */}
+          <h1 className='font-fontcustom text-gray-700 pl-4 pb-4'>{form?.program_name}</h1>
           <hr className="border-t mx-0 border-gray-400 " />
             <div id="formio" className='m-4'>
             </div>
         </div>
         <div className="basis-1/2 mb-80 flex-col flex-wrap justify-between items-center border border-gray-300 bg-brand container pb-10 rounded-lg top-24 shadow-md ">
-          {/* <p className=" text-gray-700 pt-4 pl-4 pb-0 font-fontcustom  ">{form.program_name}</p> */}
-          <h1 className='font-fontcustom text-gray-700 pl-4 pb-4'>About the programsss</h1>
+          <p className=" text-gray-700 pt-4 pl-4 pb-0 font-fontcustom  ">About {form?.program_name}</p>
+          {/* <h1 className='font-fontcustom text-gray-700 pl-4 pb-4'>About the Program</h1> */}
           <hr className="border-t mx-0 border-gray-400 " />
+          <p className=" text-gray-700 pt-4 pl-4 pb-0 font-fontcustom  ">{form?.program_description}</p>
+          <hr className="border-t mx-0 border-gray-600 " />
           <div className='flex flex-col  gap-2 items-center m-4'>
             <button id="custom-submit-button" className=" w-full p-6 h-8 bg-blue-700 rounded-md text-white text-sm font-normal flex items-center justify-center" >Submit</button>
             <Modal params={{
