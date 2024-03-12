@@ -18,9 +18,9 @@ export default async function Card ({
 
     return (
         <>
-            <div className="w-full flex flex-col mx-auto max-w-screen-xl font-fontcustom mt-24 md:flex-row gap-8  m-4 p-6 md:space-x-8 ">
+            <div className="w-full flex flex-col mx-auto max-w-screen-xl font-fontcustom mt-0 md:flex-row gap-8  m-4 p-6 md:space-x-6 ">
                 <div className=" flex flex-col w-full bg-brand border border-gray-200 square-lg shadow  dark:bg-brand rounded-lg">
-                <div className="flex items-center justify-between pt-4 pl-4 mb-2 ">
+                <div className="flex items-center justify-between pt-4 pl-4 mb-0 ">
                         <h5 className="text-xl font-bol d leading-none text-gray-600">{page.card.title_a}</h5>
 
                     </div>

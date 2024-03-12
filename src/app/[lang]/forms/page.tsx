@@ -171,7 +171,7 @@ import { Locale } from '@i18n.config'
 // Assuming additional imports like useEffect, useState, etc., are already in place
 
 import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 // import { ProgramForm, Locale } from '@types';
 import { fetchProgramForm } from '@utils';
 import Loading from '../loading';

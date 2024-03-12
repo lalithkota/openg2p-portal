@@ -14,8 +14,8 @@
       "description": "Ceci est la page À propos"
     },
     "apply":{
-      "home": "Home",
-      "allprograms":"All Programs"
+      "home": "Home_fr",
+      "allprograms":"All_Programs_fr"
     },
     "programs": {
       "name": "Nom du Programme",

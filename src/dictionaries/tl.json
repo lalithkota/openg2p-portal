@@ -14,8 +14,8 @@
           "description": "Ito ay tungkol sa pahina"
       },
       "apply":{
-        "home": "Home",
-        "allprograms":"All Programs"
+        "home": "Home_tl",
+        "allprograms":"All_Programs_tl"
       },
       "programs": {
         "name": "Pangalan ng Programa",

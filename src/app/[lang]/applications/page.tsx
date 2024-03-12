@@ -1,9 +1,9 @@
 'use client'
 import { fetchApplicationDetails } from '@utils'
-import Loading from '../loading';
+// import Loading from '../loading';
 import { Locale } from '@i18n.config'
 import { getDictionary } from '@lib/dictionary'
-import { Suspense } from 'react';
+// import { Suspense } from 'react';
 import { Card, Pagination, SearchBar } from '../components';
 import { AuthUtil } from '../components/auth';
 import React, { useEffect, useState } from 'react'
@@ -20,10 +20,12 @@ export default async function ApplcnPage({ searchParams, params: { lang } }: {
   const router = useRouter();
   const [applications, setApplications] = useState<ApplicationDetails[]>([]);
   const [page, setPage] = useState<any>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setIsLoading(true);
         const result: ApplicationDetails[] = await fetchApplicationDetails();
         setApplications(result);
 
@@ -34,7 +36,7 @@ export default async function ApplcnPage({ searchParams, params: { lang } }: {
 
         const { page } = dictionary;
         setPage(page);
-
+        setIsLoading(false);
       } catch (error) {
         console.error('Error fetching applications details:', error);
       }
@@ -82,18 +84,21 @@ function toTitleCase(str: string) {
 return (
   <div >
     <AuthUtil failedRedirectUrl='/en/login' />
-      {!isDataEmpty ? (
+    {isLoading ? (
+      <div className='mt-16 flex justify-center items-center flex-col gap-2'>
+        </div>
+      ): !isDataEmpty ? (
         <div className=" m-6 p-6 md:space-x-4 mx-auto max-w-screen-xl flex justify-center items-center">
           <div className="bg-brand container w-1180 shadow-md  pb-0 rounded-lg top-24">
             <div className="flex flex-wrap justify-between items-center">
-              <p className="flex items-center text-gray-700 text-x p-2 font-fontcustom m-2 ">{page.application.title}</p>
+              <p className="flex items-center text-gray-700 text-x p-2 font-fontcustom m-2 font-bold ">{page.application.title}</p>
               <SearchBar />
             </div>
               {/* <div className="flex flex-wrap justify-between items-center">
                 <p className="flex items-center text-gray-700 text-x p-2 font-fontcustom m-2 ">{page.application.title}</p>
               <SearchBar />
             </div> */}
-            <Suspense fallback={<Loading />}>
+            {/* <Suspense fallback={<Loading />}> */}
               <div className="m-4 md:space-x-8 mx-auto max-w-screen-xl flex justify-center items-center relative overflow-x-auto  ">
                 <table className=" w-full  text-sm text-left text-gray-600 ">
                   <thead className="text-xs text-gray-600 bg-gray-100">
@@ -139,7 +144,7 @@ return (
                   <tbody>
                     {applications.map((application, index) => (
                       <tr key={index} className="bg-white border-b dark:bg-white-200 dark:border-white-200 text-gray-600">
-                        <td className="px-6 py-4">{index + 1}</td>
+                        <td className="px-6 py-4 snoElement">{index + 1}</td>
                         <td scope="row" className="rowElement px-6 py-4 ">
                           {application.program_name}
                         </td>
@@ -162,33 +167,35 @@ return (
                           </button>
                         </td> */}
                         <td className="px-6 py-4">
-                          {application.application_id}
+                        {application.application_id ? application.application_id : 'Form not submitted'}
                         </td>
                         {/* <td className="px-6 py-4">
                           <span>{program.is_multiple_form_submission}</span>
                         </td> */}
                         <td className="px-6 py-4">
-                          {application.date_applied}
+                          {application.date_applied?.slice(0, 10)}
                         </td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
               </div>
-            </Suspense>
-            {/* <div className='p-2'>
+            {/* </Suspense> */}
+            <div className='p-2 snoElement'>
             <Pagination />
-          </div> */}
+          </div>
           </div>
         </div>
-      ) : (
+      )
+      : (
         <div className='mt-16 flex justify-center items-center flex-col gap-2 '>
           <h2 className='tetx-black text-xl font-bold'>
-            Oops no results
+            Oops no results..
+            Sign in Again!
           </h2>
-          <p>Message</p>
         </div>
-      )}
+      )
+      }
       <div className='pt-0'>
           <Card params={{ lang }} />
       </div>

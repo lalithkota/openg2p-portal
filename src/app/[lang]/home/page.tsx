@@ -4,8 +4,8 @@ import React, { useEffect, useState } from 'react'
 import { Card, Pagination } from '../components';
 import { fetchProgramDetails } from '@/utils'
 import { SearchBar } from '../components';
-import { Suspense } from 'react'
-import Loading from '../loading';
+// import { Suspense } from 'react'
+// import Loading from '../loading';
 import { getDictionary } from '@/lib/dictionary'
 import { Locale } from '@/i18n.config'
 import { AuthUtil } from '../components/auth';
@@ -22,10 +22,12 @@ export default async function Page({ searchParams, params: { lang } }: {
 
   const [programs, setPrograms] = useState<ProgramDetails[]>([]);
   const [page, setPage] = useState<any>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setIsLoading(true);
         const result: ProgramDetails[] = await fetchProgramDetails();
         setPrograms(result);
 
@@ -36,7 +38,7 @@ export default async function Page({ searchParams, params: { lang } }: {
 
         const { page } = dictionary;
         setPage(page);
-
+        setIsLoading(false);
       } catch (error) {
         console.error('Error fetching program details:', error);
       }
@@ -53,14 +55,17 @@ export default async function Page({ searchParams, params: { lang } }: {
   return (
     <div >
       <AuthUtil failedRedirectUrl='/en/login' />
-        {!isDataEmpty ? (
+      {isLoading ? (
+      <div className='mt-16 flex justify-center items-center flex-col gap-2'>
+        </div>
+        ): !isDataEmpty ? (
           <div className=" m-6 p-6 md:space-x-4 mx-auto max-w-screen-xl flex justify-center items-center">
             <div className="bg-brand container w-1180 shadow-md  pb-0 rounded-lg top-24">
               <div className="flex flex-wrap justify-between items-center">
-                <p className="flex items-center text-gray-700 text-x p-2 font-fontcustom m-2 ">{page.home.title}</p>
+                <p className="flex items-center text-gray-700 text-x p-2 font-fontcustom m-2 font-bold ">{page.home.title}</p>
                 <SearchBar />
               </div>
-              <Suspense fallback={<Loading />}>
+              {/* <Suspense fallback={<Loading />}> */}
                 <div className="m-4 md:space-x-8 mx-auto max-w-screen-xl flex justify-center items-center relative overflow-x-auto  ">
                   <table className=" w-full  text-sm text-left text-gray-600 ">
                     <thead className="text-xs text-gray-600 bg-gray-100">
@@ -123,7 +128,7 @@ export default async function Page({ searchParams, params: { lang } }: {
                     <tbody>
                       {programs.map((program, index) => (
                         <tr key={index} className="bg-white border-b dark:bg-white-200 dark:border-white-200 text-gray-600">
-                          <td className="px-6 py-4">{index + 1}</td>
+                          <td className="px-6 py-4 snoElement ">{index + 1}</td>
                           <td scope="row" className="rowElement px-6 py-4 ">
                             {program.program_name}
                           </td>
@@ -159,22 +164,23 @@ export default async function Page({ searchParams, params: { lang } }: {
                     </tbody>
                   </table>
                 </div>
-              </Suspense>
-              {/* <div className='p-2'>
+              {/* </Suspense> */}
+              <div className='p-2 snoElement'>
               <Pagination />
-            </div> */}
+            </div>
             </div>
           </div>
-        ) : (
+        )
+        : (
           <div className='mt-16 flex justify-center items-center flex-col gap-2 '>
             <h2 className='tetx-black text-xl font-bold'>
-              Oops no results
+              Oops no results..
+              Sign in Again!
             </h2>
-            <p>Message</p>
           </div>
         )}
 
-        <div className='pt-0'>
+        <div className='pt'>
           <Card params={{ lang }} />
         </div>
     </div>

@@ -14,8 +14,8 @@ export default async function page({
   //   }
   // const { page } = dictionary;
   const authUtilProps = {
-    successRedirectUrl: `/${lang}/home`,
-    failedRedirectUrl: `/${lang}/login`,
+    successRedirectUrl: `spar/${lang}/home`,
+    failedRedirectUrl: `spar/${lang}/login`,
   };
   return (
     // <section className='py-24'>

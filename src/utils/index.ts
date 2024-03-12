@@ -85,6 +85,8 @@ export async function SubmitForm(programId: number, submissionData: any): Promis
   });
 
   if (!res.ok) {
+    const errorResponse = await res.json();
+    console.error('Error response:', errorResponse);
     throw new Error('Failed to submit data');
   }
 

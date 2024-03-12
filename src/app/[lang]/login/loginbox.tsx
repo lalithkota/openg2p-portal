@@ -70,7 +70,7 @@ export default function LoginBox() {
               loginProviders.length !== 0 &&
               loginProviders.map((x) => (
                 <div key={`provider-${x.id}`} className="m-2 text-center p-1">
-                  <a href={prefixBaseApiPath(`/auth/getLoginProviderRedirect/${x.id}?redirect_uri=%2Fhome`)}>
+                  <a href={prefixBaseApiPath(`/auth/getLoginProviderRedirect/${x.id}?redirect_uri=%2Fspar%2Fen%2Fhome`)}>
                     <Button
                       startIcon={<Avatar variant="square" src={x.displayIconUrl} />}
                       className="text-black-500"

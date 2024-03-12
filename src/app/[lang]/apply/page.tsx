@@ -12,9 +12,13 @@ import { getDictionary } from '@/lib/dictionary'
 import { useRouter } from 'next/navigation';
 
 
-export default function Apply({ lang }: { lang: Locale }) {
-
-
+export default function Apply({ params: { lang } }: {
+  searchParams?: {
+    query?: string;
+    page?: string;
+  },
+  params: { lang: Locale }
+}) {
   const [page, setPage] = useState<any>(null);
   Formio.use(tailwind);
   Templates.framework = "tailwind";
@@ -88,13 +92,13 @@ export default function Apply({ lang }: { lang: Locale }) {
     <div className=' rounded-lg border-gray-200 m-6 p-4 '>
       <div className='text-gray-700 text-xl '>Form for {form?.program_name}</div>
       <div className='flex flex-wrap gap-2 mt-4 items-center mx-auto max-w-screen-xl'>
-         <Link href={`/en/home`}className="flex items-center  text-blue-900">Home</Link>
+         <Link href={`/${lang}/home`}className="flex items-center  text-blue-900">Home</Link>
         {/* <a>
           <button className="w-24 h-8 bg-white-700 rounded-md text-blue text-xs font-normal flex items-center justify-center"
           onClick={() => handlehomeClick()}>Home</button>
         </a> */}
         <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512"><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z" /></svg>
-        <Link href={`/en/programs`} className="flex items-center  text-blue-900">All Programs</Link>
+        <Link href={`/${lang}/programs`} className="flex items-center  text-blue-900">All Programs</Link>
         <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512"><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z" /></svg>
         <p className='m-0'>Application Form</p>
       </div>

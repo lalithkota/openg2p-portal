@@ -16,11 +16,6 @@ html,body{
 }
 
 .viewButton {
-  top: 336px;
-  left: 1110px;
-  width: 84px;
-  height: 30px;
-
   background: #FFFFFF 0% 0% no-repeat padding-box;
   border: 1px solid #494DAF;
   border-radius: 4px;
@@ -83,6 +78,13 @@ html,body{
   color: #494DAF;
   opacity: 1
 }
+.snoElement{
+  text-align: left;
+  font: normal normal normal 13px/16px Inter;
+  letter-spacing: 0px;
+  color: #535353;
+  opacity: 1;
+}
 .buttonElement{
   text-align: center;
   font: normal normal medium 12px/15px Inter;
@@ -96,6 +98,9 @@ html,body{
   letter-spacing: 0px;
   color: #646464;
   opacity: 1;
+}
+.shift-right {
+  margin-left: 20px;
 }
 /* @media (min-width: 1024px) {
   footer {
