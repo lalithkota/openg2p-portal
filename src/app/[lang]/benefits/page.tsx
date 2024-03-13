@@ -109,7 +109,7 @@ return (
                 <p className="flex items-center text-gray-700 text-x p-2 font-fontcustom m-2 ">{page.application.title}</p>
               <SearchBar />
             </div> */}
-            {/* <Suspense fallback={<Loading />}> */}
+            <Suspense fallback={<Loading />}>
               <div className="m-4 md:space-x-8 mx-auto max-w-screen-xl flex justify-center items-center relative overflow-x-auto  ">
                 <table className=" w-full  text-sm text-left text-gray-600 ">
                   <thead className="text-xs text-gray-600 bg-gray-100">
@@ -202,7 +202,7 @@ return (
                   </tbody>
                 </table>
               </div>
-            {/* </Suspense> */}
+            </Suspense>
             <div className='p-2 snoElement'>
             <Pagination />
           </div>

@@ -25,7 +25,7 @@ function Search() {
                 <input
                     type="search"
                     id="default-search"
-                    className="block pl-10 ml-7 p-2 text-sm text-black-600 rounded-lg bg-white-200 focus:ring-gray-100 focus:border-transparent dark:bg-white-400 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black-800 dark:focus:ring-gray-500 dark:focus:border-transparent outline-none flex-grow"
+                    className="block pl-10 ml-0 p-2 text-sm text-black-600 rounded-lg bg-white-200 focus:ring-gray-100 focus:border-transparent dark:bg-white-400 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black-800 dark:focus:ring-gray-500 dark:focus:border-transparent outline-none flex-grow"
                     placeholder="Search"
                 />
             </div>

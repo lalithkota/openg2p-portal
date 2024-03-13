@@ -9,8 +9,7 @@ import { Locale } from '@i18n.config';
 import { prefixBaseApiPath } from "@/utils/path";
 import { authContext } from "../auth";
 import { useRouter } from "next/navigation";
-import {
-  Avatar} from "@mui/material";
+import { Avatar} from "@mui/material";
 import { useState } from 'react';
 
 function classNames(...classes: string[]): string {

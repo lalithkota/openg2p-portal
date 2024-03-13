@@ -15,6 +15,18 @@ export async function fetchProgramDetails(): Promise<ProgramDetails[]> {
   return data;
 }
 
+// export async function fetchProgramDetails(page = 1, itemsPerPage = 10) {
+//   const res = await fetch(`${prefixBaseApiPath(`/programdetails`)}?page=${page}&limit=${itemsPerPage}`);
+//   if (!res.ok) {
+//     throw new Error('Failed to fetch data');
+//   }
+//   const data = await res.json();
+//   return {
+//     programs: data.items, // Assuming 'items' contains the list of programs
+//     total: data.total   // Assuming 'total' is provided by your API
+//   };
+// }
+
 export async function fetchApplicationDetails(): Promise<ApplicationDetails[]> {
 
   const res = await fetch(prefixBaseApiPath("/applicationdetails"));

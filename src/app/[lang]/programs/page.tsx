@@ -2,10 +2,10 @@
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { fetchApplicationDetails, fetchPrograms } from '@utils'
-// import Loading from '../loading';
+import Loading from '../loading';
 import { Locale } from '@i18n.config'
 import { getDictionary } from '@lib/dictionary'
-// import { Suspense } from 'react';
+import { Suspense } from 'react';
 import { Card, Pagination, SearchBar } from '../components';
 import { AuthUtil } from '../components/auth';
 import { useRouter } from 'next/navigation';
@@ -232,10 +232,10 @@ export default async function ProgrmPage({ searchParams, params: { lang } }: {
   };
 
   return (
-    <div className=" rounded-lg border-gray-200 p-4 mx-4 lg:px-4 m-0 mt-2 font-bold">
+    <div className=" rounded-lg border-gray-200 p-4 mx-4 lg:px-4 m-0 mt-2 ">
       <AuthUtil failedRedirectUrl='/en/login' />
       <div className='mx-auto max-w-screen-xl'>
-        <div className='max-w-screen-xl text-gray-700 text-xl shift-right '>All Programs</div>
+        <div className='max-w-screen-xl text-gray-700 text-xl shift-right font-bold '>All Programs</div>
         <div className='flex flex-wrap gap-2 mt-6 items-center '>
           <Link href={`/${lang}/home`} className="flex items-center no-underline text-blue-900 shift-right "> Home </Link>
           <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512"><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z" /></svg>
@@ -252,7 +252,7 @@ export default async function ProgrmPage({ searchParams, params: { lang } }: {
               <p className="flex items-center text-gray-700 text-x p-2 font-fontcustom m-2 ">{page.home.title}</p>
               <SearchBar />
             </div>
-            {/* <Suspense fallback={<Loading />}> */}
+            <Suspense fallback={<Loading />}>
               <div className="  md:space-x-8 mx-auto max-w-screen-xl flex justify-center items-center relative overflow-x-auto">
                 <table className="w-full text-sm text-left text-gray-600">
                   <thead className="text-xs text-gray-600 bg-gray-100">
@@ -365,7 +365,7 @@ export default async function ProgrmPage({ searchParams, params: { lang } }: {
                   </tbody>
                 </table>
               </div>
-            {/* </Suspense> */}
+            </Suspense>
             <div className='p-2 snoElement'>
               <Pagination />
             </div>

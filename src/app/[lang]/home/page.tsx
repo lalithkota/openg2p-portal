@@ -4,12 +4,13 @@ import React, { useEffect, useState } from 'react'
 import { Card, Pagination } from '../components';
 import { fetchProgramDetails } from '@/utils'
 import { SearchBar } from '../components';
-// import { Suspense } from 'react'
-// import Loading from '../loading';
+import { Suspense } from 'react'
+import Loading from '../loading';
 import { getDictionary } from '@/lib/dictionary'
 import { Locale } from '@/i18n.config'
 import { AuthUtil } from '../components/auth';
 import { ProgramDetails } from '@types';
+import router, { useRouter } from 'next/router';
 
 
 export default async function Page({ searchParams, params: { lang } }: {
@@ -48,15 +49,13 @@ export default async function Page({ searchParams, params: { lang } }: {
   }, []);
 
   const query = searchParams?.query || '';
-  const currentPage = Number(searchParams?.page) || 1;
-
   const isDataEmpty = !Array.isArray(programs) || programs.length < 1 || !programs
 
   return (
     <div >
       <AuthUtil failedRedirectUrl='/en/login' />
       {isLoading ? (
-      <div className='mt-16 flex justify-center items-center flex-col gap-2'>
+      <div className='mt- 2 flex justify-center items-center flex-col gap-2'>
         </div>
         ): !isDataEmpty ? (
           <div className=" m-6 p-6 md:space-x-4 mx-auto max-w-screen-xl flex justify-center items-center">
@@ -65,7 +64,7 @@ export default async function Page({ searchParams, params: { lang } }: {
                 <p className="flex items-center text-gray-700 text-x p-2 font-fontcustom m-2 font-bold ">{page.home.title}</p>
                 <SearchBar />
               </div>
-              {/* <Suspense fallback={<Loading />}> */}
+              <Suspense fallback={<Loading />}>
                 <div className="m-4 md:space-x-8 mx-auto max-w-screen-xl flex justify-center items-center relative overflow-x-auto  ">
                   <table className=" w-full  text-sm text-left text-gray-600 ">
                     <thead className="text-xs text-gray-600 bg-gray-100">
@@ -164,7 +163,7 @@ export default async function Page({ searchParams, params: { lang } }: {
                     </tbody>
                   </table>
                 </div>
-              {/* </Suspense> */}
+              </Suspense>
               <div className='p-2 snoElement'>
               <Pagination />
             </div>
@@ -180,7 +179,7 @@ export default async function Page({ searchParams, params: { lang } }: {
           </div>
         )}
 
-        <div className='pt'>
+        <div className=''>
           <Card params={{ lang }} />
         </div>
     </div>
