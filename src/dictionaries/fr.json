@@ -53,6 +53,13 @@
       "total_funds_awaited": "Fonds Totaux En Attente",
       "total_funds_received": "Fonds Totaux Reçus"
     },
+    "progrm": {
+      "title": "All Programs fr",
+      "number": "No. fr",
+      "enrollment_status":"Program Status fr",
+      "program_name": "Program Name fr",
+      "action":"Actions fr"
+    },
     "application": {
       "title": "Ma Candidature",
       "number": "N°",

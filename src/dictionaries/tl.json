@@ -56,6 +56,13 @@
         "total_funds_awaited": "Kabuuang Inaasahang Pondo",
         "total_funds_received": "Kabuuang Natanggap na Pondo"
       },
+      "progrm": {
+        "title": "All Programs tl",
+        "number": "No.tl",
+        "enrollment_status":"Program Status tl",
+        "program_name": "Program Name tl",
+        "action":"Actions tl"
+      },
       "application": {
         "title": "Aking Aplikasyon",
         "number": "Blg.",

@@ -9,6 +9,7 @@ import { AuthUtil } from '../components/auth';
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation';
 import { ApplicationDetails } from '@types';
+const ITEMS_PER_PAGE = 10;
 
 export default async function ApplcnPage({ searchParams, params: { lang } }: {
   searchParams?: {
@@ -22,12 +23,19 @@ export default async function ApplcnPage({ searchParams, params: { lang } }: {
   const [page, setPage] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
 
+  const [paginatedApplications, setPaginatedApplications] = useState<ApplicationDetails[]>([]);
+  const [totalPages, setTotalPages] = useState<number>(0);
+  const currentPage = Number(searchParams?.page) || 1;
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         setIsLoading(true);
-        const result: ApplicationDetails[] = await fetchApplicationDetails();
-        setApplications(result);
+        const allApplications: ApplicationDetails[] = await fetchApplicationDetails();
+        setApplications(allApplications);
+        
+        setTotalPages(Math.ceil(allApplications.length / ITEMS_PER_PAGE));
+        setIsLoading(false);
 
         const dictionary = await getDictionary(lang);
         if (!dictionary) {
@@ -43,10 +51,20 @@ export default async function ApplcnPage({ searchParams, params: { lang } }: {
     };
 
     fetchData();
-  }, []);
+  }, [lang]);
 
-  const query = searchParams?.query || '';
-  const currentPage = Number(searchParams?.page) || 1;
+  useEffect(() => {
+    const start = (currentPage - 1) * ITEMS_PER_PAGE;
+    const end = start + ITEMS_PER_PAGE;
+    setPaginatedApplications(applications.slice(start, end));
+  }, [currentPage, applications]);
+
+  const handlePageChange = (page: number) => {
+    router.push(`?page=${page}`);
+  };
+
+  // const query = searchParams?.query || '';
+  // const currentPage = Number(searchParams?.page) || 1;
 
 
 
@@ -65,7 +83,7 @@ export default async function ApplcnPage({ searchParams, params: { lang } }: {
         case 'completed':
             return 'completedButton';
         case 'active':
-            return 'activeButton';
+            return 'appliedButton';
         case 'inprogress':
             return 'inProgressButton';
         case 'rejected':
@@ -91,7 +109,9 @@ return (
         <div className=" m-6 p-6 md:space-x-4 mx-auto max-w-screen-xl flex justify-center items-center">
           <div className="bg-brand container w-1180 shadow-md  pb-0 rounded-lg top-24">
             <div className="flex flex-wrap justify-between items-center">
-              <p className="flex items-center text-gray-700 text-x p-2 font-fontcustom m-2 font-bold ">{page.application.title}</p>
+              <p className="font-fontcustom m-4 " 
+              style={{ top: '226px', left: '159px', width: '98px', height: '20px', textAlign: 'left', font: 'normal normal 600 16px/20px Inter', letterSpacing: '0px', color: '#484848', opacity: '1', whiteSpace: 'nowrap' }}>
+                {page.application.title}</p>
               <SearchBar />
             </div>
               {/* <div className="flex flex-wrap justify-between items-center">
@@ -142,9 +162,11 @@ return (
                     </tr>
                   </thead>
                   <tbody>
-                    {applications.map((application, index) => (
+                    {paginatedApplications.map((application, index) => {
+                      const itemNumber = (currentPage - 1) * ITEMS_PER_PAGE + index + 1;
+                      return (
                       <tr key={index} className="bg-white border-b dark:bg-white-200 dark:border-white-200 text-gray-600">
-                        <td className="px-6 py-4 snoElement">{index + 1}</td>
+                        <td className="px-6 py-4 snoElement">{itemNumber}</td>
                         <td scope="row" className="rowElement px-6 py-4 ">
                           {application.program_name}
                         </td>
@@ -154,7 +176,7 @@ return (
                             className={`top-14 text-xs  w-24 h-8 rounded-md text-center tracking-[0px] opacity-100 border-collapse border-[none] left-[811px] text-white ${getStatusClass(application.application_status)}`}
                             disabled={true}
                           >
-                            {toTitleCase(application.application_status)}
+                          {application.application_status === 'active' ? 'Applied' : toTitleCase(application.application_status)}
                           </button>
                         </td>
                         {/* <td className="px-6 py-4">
@@ -167,7 +189,7 @@ return (
                           </button>
                         </td> */}
                         <td className="px-6 py-4">
-                        {application.application_id ? application.application_id : 'Form not submitted'}
+                        {application.application_id}
                         </td>
                         {/* <td className="px-6 py-4">
                           <span>{program.is_multiple_form_submission}</span>
@@ -176,13 +198,18 @@ return (
                           {application.date_applied?.slice(0, 10)}
                         </td>
                       </tr>
-                    ))}
+                      );
+                    })}
                   </tbody>
                 </table>
               </div>
             </Suspense>
             <div className='p-2 snoElement'>
-            <Pagination />
+            <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={handlePageChange}
+            />
           </div>
           </div>
         </div>

@@ -3,14 +3,18 @@
 import clsx from 'clsx';
 import { usePathname, useSearchParams, useRouter } from 'next/navigation';
 
+interface PaginationProps {
+  currentPage: number;
+  totalPages: number;
+  onPageChange: (page: number) => void;
+}
 
-
-const Pagination = () => {
+const Pagination = ({ currentPage, totalPages, onPageChange }: PaginationProps) => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const currentPage = Number(searchParams.get('page')) || 1;
+  // const currentPage = Number(searchParams.get('page')) || 1;
   const { replace } = useRouter();
-  const totalPages = 2
+  // const totalPages = 2
 
 
   const generatePageNumbers = (currentPage: number, totalPages: number) => {
@@ -23,10 +27,13 @@ const Pagination = () => {
   const pageNumbers = generatePageNumbers(currentPage, totalPages);
 
 
+  // const goToPage = (page: number) => {
+  //   const params = new URLSearchParams(searchParams);
+  //   params.set('page', page.toString());
+  //   replace(`${pathname}?${params.toString()}`);
+  // };
   const goToPage = (page: number) => {
-    const params = new URLSearchParams(searchParams);
-    params.set('page', page.toString());
-    replace(`${pathname}?${params.toString()}`);
+    onPageChange(page);
   };
 
   const goToPreviousPage = () => {

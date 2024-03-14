@@ -47,6 +47,15 @@ export async function fetchBenefitDetails(): Promise<BenefitDetails[]> {
   return data;
 }
 
+// export async function fetchBenefitDetails(page: number = 1, pageSize: number = 10): Promise<BenefitDetails[]> {
+//   const res = await fetch(prefixBaseApiPath(`/benefitdetails?page=${page}&pageSize=${pageSize}`));
+//   if (!res.ok) {
+//     throw new Error('Failed to fetch data');
+//   }
+//   const data: BenefitDetails[] = await res.json();
+//   return data;
+// }
+
 export async function fetchPrograms(): Promise<Program[]> {
 
   const res = await fetch(prefixBaseApiPath("/program"));

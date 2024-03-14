@@ -11,6 +11,7 @@ import { AuthUtil } from '../components/auth';
 import { useState ,useEffect} from 'react';
 import { useRouter } from 'next/navigation';
 import { BenefitDetails } from '@types';
+const ITEMS_PER_PAGE = 7;
 export default async function BenefPage({ searchParams, params: { lang } }
   : {
   searchParams?: {
@@ -54,13 +55,21 @@ export default async function BenefPage({ searchParams, params: { lang } }
   const [benefits, setBenefits] = useState<BenefitDetails[]>([]);
   const [page, setPage] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [paginatedBenefits, setPaginatedBenefits] = useState<BenefitDetails[]>([]);
+  // const [currentPage, setCurrentPage] = useState<number>(1);
+  const [totalPages, setTotalPages] = useState<number>(0);
+  const currentPage = Number(searchParams?.page) || 1;
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         setIsLoading(true);
-        const result: BenefitDetails[] = await fetchBenefitDetails();
-        setBenefits(result);
+        const allBenefits: BenefitDetails[] = await fetchBenefitDetails();
+        setBenefits(allBenefits);
+
+        setTotalPages(Math.ceil(allBenefits.length / ITEMS_PER_PAGE));
+        // setPaginatedBenefits(allBenefits.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE));
+        setIsLoading(false);
 
         const dictionary = await getDictionary(lang);
         if (!dictionary) {
@@ -79,8 +88,17 @@ export default async function BenefPage({ searchParams, params: { lang } }
     fetchData();
   }, [lang]);
 
-  const query = searchParams?.query || '';
-  const currentPage = Number(searchParams?.page) || 1;
+  useEffect(() => {
+    const start = (currentPage - 1) * ITEMS_PER_PAGE;
+    const end = start + ITEMS_PER_PAGE;
+    setPaginatedBenefits(benefits.slice(start, end));
+  }, [currentPage, benefits]);
+
+  const handlePageChange = (page: number) => {
+    router.push(`?page=${page}`);
+  };
+  // const query = searchParams?.query || '';
+  // const currentPage = Number(searchParams?.page) || 1;
 
   // const handleApplyClick = (benefit: BenefitDetails) => {
   //   router.push(`apply?ern=${benefit.entitlement_reference_number}`);
@@ -102,7 +120,9 @@ return (
         <div className=" m-6 p-6 md:space-x-4 mx-auto max-w-screen-xl flex justify-center items-center">
           <div className="bg-brand container w-1180 shadow-md  pb-0 rounded-lg top-24">
             <div className="flex flex-wrap justify-between items-center">
-              <p className="flex items-center text-gray-700 text-x p-2 font-fontcustom m-2 font-bold">{page.benefit.title}</p>
+              <p className="font-fontcustom m-4 " 
+              style={{ top: '226px', left: '159px', width: '98px', height: '20px', textAlign: 'left', font: 'normal normal 600 16px/20px Inter', letterSpacing: '0px', color: '#484848', opacity: '1', whiteSpace: 'nowrap' }}>
+                {page.benefit.title}</p>
               <SearchBar />
             </div>
               {/* <div className="flex flex-wrap justify-between items-center">
@@ -161,11 +181,13 @@ return (
                     </tr>
                   </thead>
                   <tbody>
-                    {benefits.map((benefit, index) => (
+                    {paginatedBenefits.map((benefit, index) => {
+                      const itemNumber = (currentPage - 1) * ITEMS_PER_PAGE + index + 1;
+                      return (           
                       <tr key={index} className="bg-white border-b dark:bg-white-200 dark:border-white-200 text-gray-600">
-                        <td className="snoElement px-6 py-4">{index + 1}</td>
+                        <td className="snoElement px-6 py-4">{itemNumber}</td>
                         <td scope="row" className="rowElement px-6 py-4 ">
-                          {benefit.program_name}
+                        {benefit.program_name}
                         </td>
                         <td className="px-6 py-4">
                         <button
@@ -186,25 +208,30 @@ return (
                           </button>
                         </td> */}
                         <td className="text-sm px-6 py-4">
-                          {benefit.entitlement_reference_number ? benefit.entitlement_reference_number : 'Entitlement not approved'}
+                        {benefit.entitlement_reference_number ? benefit.entitlement_reference_number : 'Entitlement not approved'}
                         </td>
                         {/* <td className="px-6 py-4">
                           <span>{program.is_multiple_form_submission}</span>
                         </td> */}
                         <td className="px-6 py-4">
-                          {Number(benefit.funds_received).toFixed(2)}
+                        {Number(benefit.funds_received).toFixed(2)}
                         </td>
                         <td className="px-6 py-4">
-                          {Number(benefit.funds_awaited).toFixed(2)}
+                        {Number(benefit.funds_awaited).toFixed(2)}
                         </td>
                       </tr>
-                    ))}
+                      );
+                      })}
                   </tbody>
                 </table>
               </div>
             </Suspense>
             <div className='p-2 snoElement'>
-            <Pagination />
+            <Pagination 
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={handlePageChange}
+              />
           </div>
           </div>
         </div>

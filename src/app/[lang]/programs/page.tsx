@@ -11,6 +11,8 @@ import { AuthUtil } from '../components/auth';
 import { useRouter } from 'next/navigation';
 import { ApplicationDetails, Program } from '@types';
 
+const ITEMS_PER_PAGE = 6;
+
 export default async function ProgrmPage({ searchParams, params: { lang } }: {
   searchParams?: {
     query?: string;
@@ -26,13 +28,19 @@ export default async function ProgrmPage({ searchParams, params: { lang } }: {
   const [applications, setApplications] = useState<ApplicationDetails[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
+  const [paginatedPrograms, setPaginatedPrograms] = useState<Program[]>([]);
+  const [totalPages, setTotalPages] = useState<number>(0);
+  const currentPage = Number(searchParams?.page) || 1;  
   useEffect(() => {
     const fetchData = async () => {
       try {
         setIsLoading(true);
-        const result: Program[] = await fetchPrograms();
-        setPrograms(result);
+        const allPrograms: Program[] = await fetchPrograms();
+        setPrograms(allPrograms);
 
+        setTotalPages(Math.ceil(allPrograms.length / ITEMS_PER_PAGE));
+        setIsLoading(false);
+        
         const dictionary = await getDictionary(lang);
         if (!dictionary) {
           return null;
@@ -61,10 +69,20 @@ export default async function ProgrmPage({ searchParams, params: { lang } }: {
     };
 
     fetchAppDetails();
-  }, []);
+  }, [lang]);
 
-  const query = searchParams?.query || '';
-  const currentPage = Number(searchParams?.page) || 1;
+  useEffect(() => {
+    const start = (currentPage - 1) * ITEMS_PER_PAGE;
+    const end = start + ITEMS_PER_PAGE;
+    setPaginatedPrograms(programs.slice(start, end));
+  }, [currentPage, programs]);
+
+  const handlePageChange = (page: number) => {
+    router.push(`?page=${page}`);
+  };
+
+  // const query = searchParams?.query || '';
+  // const currentPage = Number(searchParams?.page) || 1;
 
   const isDataEmpty = !Array.isArray(programs) || programs.length < 1 || !programs
 
@@ -232,24 +250,26 @@ export default async function ProgrmPage({ searchParams, params: { lang } }: {
   };
 
   return (
-    <div className=" rounded-lg border-gray-200 p-4 mx-4 lg:px-4 m-0 mt-2 ">
+    <div className=" rounded-lg border-gray-200 p-4 mx-4 lg:px-4 m-0">
       <AuthUtil failedRedirectUrl='/en/login' />
       <div className='mx-auto max-w-screen-xl'>
-        <div className='max-w-screen-xl text-gray-700 text-xl shift-right font-bold '>All Programs</div>
-        <div className='flex flex-wrap gap-2 mt-6 items-center '>
-          <Link href={`/${lang}/home`} className="flex items-center no-underline text-blue-900 shift-right "> Home </Link>
-          <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512"><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z" /></svg>
-          <p className='m-0'>All Programs</p>
+        <div className=' shift-right'style={{ textAlign: 'left', font: 'normal normal 600 16px/20px Inter', letterSpacing: '0px', color: '#484848', opacity: '1', top: '118px', left: '139px', width: '135px', height: '26px' }}>All Programs</div>
+        <div className='flex flex-wrap gap-2 mt-1 items-center '>
+          <Link href={`/${lang}/home`} className="shift-right"style={{ top: '154px', left: '139px', width: '40px', height: '17px', textAlign: 'left', font: 'normal normal 600 14px/17px Inter', letterSpacing: '0px', color: '#494DAF', opacity: '1' }}> Home </Link>
+          <svg xmlns="http://www.w3.org/2000/svg" height="0.8em" viewBox="0 0 320 512"><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z" /></svg>
+          <p className=''style={{ top: '154px', left: '197px', width: '86px', height: '17px', textAlign: 'left', font: 'normal normal 600 14px/17px Inter', letterSpacing: '0px', color: '#848484', opacity: '1',whiteSpace: 'nowrap' }}>All Programs</p>
         </div>
       </div>
       {isLoading ? (
-      <div className='mt-16 flex justify-center items-center flex-col gap-2'>
+      <div className='mt-0 flex justify-center items-center flex-col gap-2'>
         </div>
       ):!isDataEmpty ? (
         <div className=" m-6 p-4 md:space-x-8 mx-auto max-w-screen-xl flex justify-center items-center">
           <div className=" bg-brand container w-1180 shadow-md rounded-lg top-24">
             <div className="flex flex-wrap justify-between items-center">
-              <p className="flex items-center text-gray-700 text-x p-2 font-fontcustom m-2 ">{page.home.title}</p>
+             <p className="font-fontcustom m-4 " 
+             style={{ top: '226px', left: '159px', width: '98px', height: '20px', textAlign: 'left', font: 'normal normal 600 16px/20px Inter', letterSpacing: '0px', color: '#484848', opacity: '1', whiteSpace: 'nowrap' }}>
+              {page.progrm.title}</p>
               <SearchBar />
             </div>
             <Suspense fallback={<Loading />}>
@@ -276,11 +296,11 @@ export default async function ProgrmPage({ searchParams, params: { lang } }: {
                         );
                       })} */}
                       <th scope="col" className="columnTitle px-6 py-3 text-sm font-normal">
-                        {page.home.number}
+                        {page.progrm.number}
                       </th>
                       <th scope="col" className="columnTitle px-6 py-3 text-sm font-normal">
                         <div className="flex items-center">
-                          {page.programs.name}
+                          {page.progrm.program_name}
                           <a href="#">
 
                             <svg
@@ -298,7 +318,7 @@ export default async function ProgrmPage({ searchParams, params: { lang } }: {
 
                       <th scope="col" className="columnTitle px-6 py-3">
                         <div className="flex items-center">
-                          {page.programs.has_applied}
+                          {page.progrm.enrollment_status}
                           <a href="#">
                             <svg
                               className="w-3 h-3 ml-1.5 text-gray-400"
@@ -314,7 +334,7 @@ export default async function ProgrmPage({ searchParams, params: { lang } }: {
                       </th>
                       <th scope="col" className="columnTitle px-6 py-3">
                         <div className="flex items-center">
-                          {page.programs.state}
+                          {page.progrm.action}
                           <a href="#">
                             <svg
                               className="w-3 h-3 ml-1.5 text-gray-400"
@@ -331,12 +351,14 @@ export default async function ProgrmPage({ searchParams, params: { lang } }: {
                     </tr>
                   </thead>
                   <tbody>
-                    {programs.map((program, index) => (
+                    {paginatedPrograms.map((program, index) => {
+                      const itemNumber = (currentPage - 1) * ITEMS_PER_PAGE + index + 1;
+                      return (
                       <tr
                         key={program.id}
                         className="bg-white border-b dark:bg-white-200 dark:border-white-200 text-gray-600"
                       >
-                        <td className="snoElement px-6 py-4">{index + 1}</td>
+                        <td className="snoElement px-6 py-4">{itemNumber}</td>
                         <td scope="row" className="rowElement px-6 py-4 ">
                           {program.name}
                         </td>
@@ -361,13 +383,18 @@ export default async function ProgrmPage({ searchParams, params: { lang } }: {
                           </div>
                         </td>
                       </tr>
-                    ))}
+                      );
+                    })}
                   </tbody>
                 </table>
               </div>
             </Suspense>
             <div className='p-2 snoElement'>
-              <Pagination />
+              <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={handlePageChange}
+              />
             </div>
           </div>
         </div>
