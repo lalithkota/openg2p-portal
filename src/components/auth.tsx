@@ -1,11 +1,10 @@
 "use client";
-
 import {useRouter} from "next/navigation";
-import { prefixBaseApiPath } from "@/utils/path";
-
+import {prefixBaseApiPath} from "@/utils/path";
 import {useEffect} from "react";
 
-// TODO: Try to use context or state
+import {useAuth} from "@/context/global";
+
 export const authContext: {
   profile?: null | {
     sub?: string;
@@ -23,11 +22,15 @@ export const authContext: {
 } = {profile: null};
 
 export function AuthUtil(params: {successRedirectUrl?: string; failedRedirectUrl?: string}) {
+  const {setProfile} = useAuth();
   const {push} = useRouter();
 
   function checkAndRedirect() {
-    if (params.successRedirectUrl && authContext.profile) return push(params.successRedirectUrl);
-    else if (params.failedRedirectUrl && !authContext.profile) return push(params.failedRedirectUrl);
+    if (params.successRedirectUrl && authContext.profile) {
+      return push(params.successRedirectUrl);
+    } else if (params.failedRedirectUrl && !authContext.profile) {
+      return push(params.failedRedirectUrl);
+    }
   }
 
   useEffect(() => {
@@ -38,6 +41,7 @@ export function AuthUtil(params: {successRedirectUrl?: string; failedRedirectUrl
             .json()
             .then((resJson) => {
               authContext.profile = resJson;
+              setProfile(resJson);
             })
             .catch((err) => {
               console.log("Error Getting profile json", err);
@@ -52,8 +56,7 @@ export function AuthUtil(params: {successRedirectUrl?: string; failedRedirectUrl
         console.log("Error Getting profile", err);
         checkAndRedirect();
       });
-    // TODO: Find better way. Disable dependency error for now
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   return <></>;
 }

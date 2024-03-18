@@ -2,7 +2,7 @@
 
 import {Avatar, Button} from "@mui/material";
 import {SyntheticEvent, useEffect, useState} from "react";
-import { prefixBaseApiPath } from "@/utils/path";
+import {prefixBaseApiPath, prefixBasePath} from "@/utils/path";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -38,7 +38,7 @@ export default function LoginBox() {
         <form onSubmit={handleLoginSubmit} className=" mt-0 m-0">
           <div className="m-8 w-max h-max ">
             <Image
-              src="http://spar.openg2p.my/spar/img/logo@2x.png"
+              src={prefixBasePath("/img/logo@2x.png")}
               priority={true}
               alt="Logo"
               width={300}
@@ -46,21 +46,38 @@ export default function LoginBox() {
             />
           </div>
           <div className="mb-4">
-            <label htmlFor="login" className="font-bold text-white-600 ">Email or Phone</label>
-            <input type="text" placeholder="Enter email or phone" name="login" id="login" className="w-full border border-solid border-white-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-300" />
+            <label htmlFor="login" className="font-bold text-white-600 ">
+              Email or Phone
+            </label>
+            <input
+              type="text"
+              placeholder="Enter email or phone"
+              name="login"
+              id="login"
+              className="w-full border border-solid border-white-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-300"
+            />
           </div>
           <div className="mb-4">
             <div className="flex items-center">
-              <label htmlFor="password" className="flex-1 font-bold text-white-600">Password</label>
+              <label htmlFor="password" className="flex-1 font-bold text-white-600">
+                Password
+              </label>
               <div className="text-blue-600">
                 <Link href="/web/reset_password">Reset Password</Link>
               </div>
-
             </div>
-            <input type="password" placeholder="Enter password" name="password" id="password" className="w-full border border-solid border-white-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-300" />
+            <input
+              type="password"
+              placeholder="Enter password"
+              name="password"
+              id="password"
+              className="w-full border border-solid border-white-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-300"
+            />
           </div>
           <div className="mb-4 mt-2">
-            <button type="submit" className="w-full bg-blue-500 text-white rounded-md py-2">Login</button>
+            <button type="submit" className="w-full bg-blue-500 text-white rounded-md py-2">
+              Login
+            </button>
           </div>
           <div className="mb-4 flex items-center justify-center">
             <span className="text-gray-600 p-2">OR</span>
@@ -70,7 +87,7 @@ export default function LoginBox() {
               loginProviders.length !== 0 &&
               loginProviders.map((x) => (
                 <div key={`provider-${x.id}`} className="m-2 text-center p-1">
-                  <a href={prefixBaseApiPath(`/auth/getLoginProviderRedirect/${x.id}?redirect_uri=%2Fspar%2Fen%2Fhome`)}>
+                  <Link href={prefixBaseApiPath(`/auth/getLoginProviderRedirect/${x.id}`)}>
                     <Button
                       startIcon={<Avatar variant="square" src={x.displayIconUrl} />}
                       className="text-black-500"
@@ -79,13 +96,12 @@ export default function LoginBox() {
                     >
                       {x.displayName}
                     </Button>
-                  </a>
+                  </Link>
                 </div>
               ))}
           </div>
         </form>
       </div>
     </div>
-
   );
 }

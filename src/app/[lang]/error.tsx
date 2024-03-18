@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import {useEffect} from 'react';
+import {useEffect} from "react";
 
 type Props = {
   error: Error;
@@ -8,12 +8,9 @@ type Props = {
 };
 
 export default function Error({error, reset}: Props) {
-
-
   useEffect(() => {
     console.error(error);
   }, [error]);
-
 
   return (
     <div className="error-container">

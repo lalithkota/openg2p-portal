@@ -13,9 +13,9 @@
       "title": "OpenG2P",
       "description": "This is the about page"
     },
-    "apply":{
+    "apply": {
       "title": "Home",
-      "description":"All Programs"
+      "description": "All Programs"
     },
     "programs": {
       "name": "Program Name",
@@ -47,22 +47,21 @@
       "description_c2": "Tap to view your Benefits",
 
       "view_all": "View all"
-
     },
     "home": {
       "title": "My Programs",
       "number": "No.",
-      "enrollment_status":"Status",
+      "enrollment_status": "Status",
       "program_name": "Program Name",
-      "total_funds_awaited":"Total Funds Awaited ($)",
+      "total_funds_awaited": "Total Funds Awaited ($)",
       "total_funds_received": "Total Funds Received ($)"
     },
     "progrm": {
       "title": "All Programs",
       "number": "No.",
-      "enrollment_status":"Program Status",
+      "enrollment_status": "Program Status",
       "program_name": "Program Name",
-      "action":"Actions"
+      "action": "Actions"
     },
     "application": {
       "title": "My Application",
