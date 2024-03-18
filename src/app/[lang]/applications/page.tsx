@@ -9,7 +9,7 @@ import { AuthUtil } from '../components/auth';
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation';
 import { ApplicationDetails } from '@types';
-const ITEMS_PER_PAGE = 10;
+const ITEMS_PER_PAGE = 30;
 
 export default async function ApplcnPage({ searchParams, params: { lang } }: {
   searchParams?: {

@@ -25,6 +25,8 @@ export default function Apply({ params: { lang } }: {
   const [form, setForm] = useState<ProgramForm>();
   const searchParams = useSearchParams()
   const programid = searchParams.get('programid')
+  const formId = searchParams.get('formId')
+
   useEffect(() => {
   // const fetchDraftData = async (form: any) => {
   //   try {
@@ -60,6 +62,7 @@ export default function Apply({ params: { lang } }: {
           try {
             const data = await SubmitForm(Number(programid), submission.data);
             console.log("Form submission response:", data);
+            router.push(`/${lang}/submission?page=submitted&programId=${programid}`);
           } catch (error) {
             console.error("Error submitting form:", error);
           }
@@ -98,20 +101,20 @@ export default function Apply({ params: { lang } }: {
         </a> */}
         <svg xmlns="http://www.w3.org/2000/svg" height="0.8em" viewBox="0 0 320 512"><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z" /></svg>
         <Link href={`/${lang}/programs`} className=""
-         style={{ top: '154px', left: '139px', width: '40px', height: '17px', textAlign: 'left', font: 'normal normal 600 14px/17px Inter', letterSpacing: '0px', color: '#494DAF', opacity: '1',whiteSpace: 'nowrap' }}
+         style={{ top: '154px', left: '139px', width: '40px', height: '17px', textAlign: 'left', font: 'normal normal 600 14px/17px Inter', letterSpacing: '0px', color: '#494DAF', opacity: '1', whiteSpace: 'nowrap' }}
          >All Programs</Link>
 <       div style={{ marginLeft: '50px' }}>
         <svg xmlns="http://www.w3.org/2000/svg" height="0.8em" viewBox="0 0 320 512"><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z" /></svg>
         </div>
         <p className='m-0'
-        style={{ top: '154px', left: '317px', width: '115px', height: '17px', textAlign: 'left', font: 'normal normal 600 14px/17px Inter', letterSpacing: '0px', color: '#848484', opacity: '1' }}
+        style={{ top: '154px', left: '317px', width: '115px', height: '17px', textAlign: 'left', font: 'normal normal 600 14px/17px Inter', letterSpacing: '0px', color: '#848484', opacity: '1', whiteSpace: 'nowrap' }}
         >Application Form</p>
       </div>
       <div className="flex flex-row gap-10 justify-center mt-4 align-top ">
         <div className="flex-col flex-wrap justify-between items-center border border-gray-300 bg-brand container pb-10 rounded-lg top-24 shadow-md ">
           <p className="shift-right mt-2"
-          style={{ top: '219px', left: '159px', width: '131px', height: '20px', textAlign: 'left', font: 'normal normal 600 16px/20px Inter', letterSpacing: '0px', color: '#484848', opacity: '1' }}
-          >Application form</p>
+          style={{ top: '219px', left: '159px', width: '131px', height: '20px', textAlign: 'left', font: 'normal normal 600 16px/20px Inter', letterSpacing: '0px', color: '#484848', opacity: '1', whiteSpace: 'nowrap' }}
+          >Application Form</p>
           <h1 className='shift-right mt-0'
           style={{ top: '242px', left: '159px', width: '147px', height: '16px', textAlign: 'left', font: 'normal normal medium 13px/16px Inter', letterSpacing: '0px', color: '#959595', opacity: '1' }}
           >{form?.program_name}</h1>

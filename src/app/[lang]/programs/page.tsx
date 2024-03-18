@@ -91,8 +91,11 @@ export default async function ProgrmPage({ searchParams, params: { lang } }: {
   const handleApplyClick = (program: Program) => {
     router.push(`apply?programid=${program.id}`);
   };
+  // const handleViewClick = (program: Program) => {
+  //   router.push(`submission?programId=${program.id}`);
+  // };
   const handleViewClick = (program: Program) => {
-    router.push(`submission?programId=${program.id}`);
+    router.push(`view?programid=${program.id}`)
   };
   const handleReapplyClick = (program: Program) => {
     router.push(`apply?programid=${program.id}`);

@@ -71,20 +71,43 @@ export interface BenefFilterProps{
 export interface ProfileFilter{
     id:number;
 }
-export interface Profile{
-    id:number;
-    given_name: string;
-    family_name: string;
-    addl_name: string;
-    date_of_birth: string;
+// export interface Profile{
+//     id:number;
+//     given_name: string;
+//     family_name: string;
+//     addl_name: string;
+//     date_of_birth: string;
+//     email: string;
+//     gender: string;
+//     address: string;
+//     ids:string;
+//     notification_preferance:string;
+//     bank_ids:string;
+//     phone_numbers:string;
+// }
+export interface Profile {
+    id: number;
+    ids: Array<{
+      id_type: string;
+      value: string;
+      expiry_date: string | null;
+    }>;
     email: string;
     gender: string;
-    address: string;
-    ids:string;
-    notification_preferance:string;
-    bank_ids:string;
-    phone_numbers:string;
-}
+    bank_ids: Array<any>; // Specify the correct type if possible
+    addl_name: string;
+    given_name: string;
+    family_name: string;
+    birthdate: string;
+    phone_numbers: Array<{
+      phone_no: string;
+      date_collected: string | null;
+    }>;
+    birth_place: string | null;
+    notification_preference: string | null;
+    // Add other fields as needed
+  }
+  
 
 
 export interface FormFilterProps{
