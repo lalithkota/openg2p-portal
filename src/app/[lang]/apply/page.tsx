@@ -1,8 +1,6 @@
 "use client";
 import {SubmitForm, fetchProgramForm} from "@/utils";
 import Link from "next/link";
-import {Formio, Templates} from "@tsed/react-formio";
-import tailwind from "@tsed/tailwind-formio";
 import {useEffect, useState} from "react";
 import {ProgramForm} from "@/types";
 import Modal from "@/components/Modal";
@@ -11,26 +9,14 @@ import {Locale} from "@/i18n.config";
 
 export default function Apply({params: {lang}}: {params: {lang: Locale}}) {
   // const [page, setPage] = useState<any>(null);
-  Formio.use(tailwind);
-  Templates.framework = "tailwind";
   const [form, setForm] = useState<ProgramForm>();
   const searchParams = useSearchParams();
   const programid = searchParams.get("programid");
   useEffect(() => {
-    // const fetchDraftData = async (form: any) => {
-    //   try {
-    //     const draftResponse = await fetchProgramForm(Number(programid));
-    //     console.log('try1', form.submission);
-    //   } catch (error) {
-    //     console.error("Error fetching draft data:", error);
-    //   }
-    //   const dictionary = await getDictionary(lang);
-    //   if (!dictionary) {
-    //       return null;
-    //   }
-    //   const { page } = dictionary;
-    //   setPage(page);
-    // };
+    const {Formio, Templates} = require("@tsed/react-formio");
+    const tailwind = require("@tsed/tailwind-formio");
+    Formio.use(tailwind);
+    Templates.framework = "tailwind";
 
     const fetchData = async () => {
       try {
