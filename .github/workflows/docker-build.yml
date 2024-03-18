@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       NAMESPACE: ${{ secrets.docker_hub_organisation }}
-      SELF_SERVICE_IMAGE_NAME: "openg2p-self-service-portal-ui"
+      SELF_SERVICE_IMAGE_NAME: "openg2p-beneficiary-portal-ui"
     steps:
       - uses: actions/checkout@v3
       - name: Setup branch and env

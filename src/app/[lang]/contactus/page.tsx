@@ -1,13 +1,11 @@
 "use client";
 import React from "react";
 import Link from "next/link";
-import {AuthUtil} from "@/components/auth";
 import {Locale} from "@/i18n.config";
 
 export default function ContactUs({params: {lang}}: {params: {lang: Locale}}) {
   return (
     <div className=" rounded-lg border-gray-200 p-4 mx-4 lg:px-4 m-0 mt-2">
-      <AuthUtil failedRedirectUrl={`/${lang}/login`} />
       <div className="mx-auto max-w-screen-xl">
         <div className="text-gray-700 text-xl ">Contact Us</div>
         <div className="flex flex-wrap gap-2 mt-6 items-center mx-auto max-w-screen-xl">
