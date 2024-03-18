@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       NAMESPACE: ${{ secrets.docker_hub_organisation }}
-      SELF_SERVICE_IMAGE_NAME: "openg2p-beneficiary-portal-ui"
+      SELFSERVICE_SERVICE_NAME: "openg2p-selfservice-ui"
     steps:
       - uses: actions/checkout@v3
       - name: Setup branch and env
@@ -23,24 +23,24 @@ jobs:
           fi
           echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
           echo "VERSION=$VERSION" >> $GITHUB_ENV
-      - name: Build selfservice docker
+      - name: Build docker
         run: |
-          SELF_SERVICE_IMAGE_ID=$NAMESPACE/$SELF_SERVICE_IMAGE_NAME
+          SELFSERVICE_IMAGE_ID=$NAMESPACE/$SELFSERVICE_SERVICE_NAME
 
           # Change all uppercase to lowercase
-          SELF_SERVICE_IMAGE_ID=$(echo $SELF_SERVICE_IMAGE_ID | tr '[A-Z]' '[a-z]')
+          SELFSERVICE_IMAGE_ID=$(echo $SELFSERVICE_IMAGE_ID | tr '[A-Z]' '[a-z]')
 
-          echo IMAGE_ID=$SELF_SERVICE_IMAGE_ID
+          echo SELFSERVICE_IMAGE_ID=$SELFSERVICE_IMAGE_ID
           echo VERSION=$VERSION
 
-          echo "SELF_SERVICE_IMAGE_ID=$SELF_SERVICE_IMAGE_ID" >> $GITHUB_ENV
+          echo "SELFSERVICE_IMAGE_ID=$SELFSERVICE_IMAGE_ID" >> $GITHUB_ENV
 
           docker build . \
             --file Dockerfile \
-            --tag $SELF_SERVICE_IMAGE_ID:$VERSION
+            --tag $SELFSERVICE_IMAGE_ID:$VERSION
           docker build . \
             --file Dockerfile.no-runtime-build \
-            --tag $SELF_SERVICE_IMAGE_ID:$VERSION-no-runtime-build
+            --tag $SELFSERVICE_IMAGE_ID:$VERSION-no-runtime-build
       - name: Docker login
         run: |
           echo "${{ secrets.docker_hub_token }}" | docker login -u ${{ secrets.docker_hub_actor }} --password-stdin
@@ -50,5 +50,5 @@ jobs:
           fi
       - name: Docker Push images
         run: |
-          docker push $SELF_SERVICE_IMAGE_ID:$VERSION
-          docker push $SELF_SERVICE_IMAGE_ID:$VERSION-no-runtime-build
+          docker push $SELFSERVICE_IMAGE_ID:$VERSION
+          docker push $SELFSERVICE_IMAGE_ID:$VERSION-no-runtime-build
