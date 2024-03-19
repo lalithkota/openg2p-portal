@@ -1,53 +1,84 @@
 {
   "footer": {
-      "about": "À propos de nous",
-      "contact": "Contactez-nous",
-      "others": "Autres"
+    "about": "À propos de nous",
+    "contact": "Contactez-nous",
+    "others": "Autres"
   },
   "page": {
-      "main": {
-          "title": "Bienvenue sur le portail de libre-service",
-          "description": "Connexion au portail de libre-service"
-      },
-      "about": {
-          "title": "À propos de nous",
-          "description": "Ceci est la page À propos"
-      },
-      "home": {
-          "title": "Mes applications",
-          "number": "N°",
-          "program_name": "Nom du programme",
-          "application_id": "Identifiant de l'application",
-          "program_status": "État du programme",
-          "application_status": "État de l'application",
-          "submiited_on": "Soumis le",
-          "entitlement": "Droit (en USD)",
-          "amount_receieved": "Montant reçu",
-          "error": "Oops, pas de résultats"
-      },
-      "card": {
-          "title_a": "Tous les programmes",
-          "heading_a1": "Santé",
-          "description_a1": "Plus de 30 programmes disponibles",
-          "heading_a2": "Éducation",
-          "description_a2": "Plus de 55 programmes disponibles",
-
-          "title_b": "Autres services",
-          "heading_b1": "Aide",
-          "description_b1": "Appuyez ici pour obtenir de l'aide",
-          "heading_b2": "FAQ",
-          "description_b2": "Appuyez pour en savoir plus",
-
-          "title_c": "Droits",
-          "heading_c": "",
-          "description_c": "",
-          "view_all": "Voir tout"
-      },
-      "programs": {
-        "title": "All Programs",
-        "status":"Status",
-        "program_name": "Program Name",
-        "actions":"Actions"
-      }
+    "main": {
+      "title": "OpenG2P",
+      "description": "Connexion au portail de libre-service"
+    },
+    "about": {
+      "title": "Section Based Approach | Centre",
+      "description": "Ceci est la page À propos"
+    },
+    "apply": {
+      "home": "Home_fr",
+      "allprograms": "All_Programs_fr"
+    },
+    "programs": {
+      "name": "Nom du Programme",
+      "description": "Description",
+      "state": "Statut de Candidature",
+      "has_applied": "État du Programme",
+      "is_portal_form_mapped": "Portail Mappé",
+      "is_multiple_form_submission": "Soumission de Formulaires Multiple",
+      "last_application_status": "Statut de la Dernière Candidature",
+      "error": "Oops, pas de résultats"
+    },
+    "card": {
+      "title_a": "Tous les programmes",
+      "heading_a1": "Santé",
+      "description_a1": "Plus de 30 programmes disponibles",
+      "heading_a2": "Éducation",
+      "description_a2": "Plus de 55 programmes disponibles",
+      "title_b": "Autres services",
+      "heading_b1": "Aide",
+      "description_b1": "Appuyez ici pour obtenir de l'aide",
+      "heading_b2": "FAQ",
+      "description_b2": "Appuyez pour en savoir plus",
+      "title_c": "Entitlements",
+      "heading_c1": "Applications",
+      "description_c1": "Tap to view your Applications",
+      "heading_c2": "Benefits",
+      "description_c2": "Tap to view your Benefits",
+      "view_all": "View all"
+    },
+    "home": {
+      "title": "Mon Tableau de Bord",
+      "number": "N°",
+      "enrollment_status": "statut d'inscription",
+      "program_name": "Nom du Programme",
+      "total_funds_awaited": "Fonds Totaux En Attente",
+      "total_funds_received": "Fonds Totaux Reçus"
+    },
+    "progrm": {
+      "title": "All Programs fr",
+      "number": "No. fr",
+      "enrollment_status": "Program Status fr",
+      "program_name": "Program Name fr",
+      "action": "Actions fr"
+    },
+    "application": {
+      "title": "Ma Candidature",
+      "number": "N°",
+      "program_name": "Nom du Programme",
+      "application_id": "ID de Candidature",
+      "date_applied": "Date de Candidature",
+      "application_status": "Statut de la Candidature"
+    },
+    "benefit": {
+      "title": "Mes Avantages",
+      "number": "N°",
+      "program_name": "Nom du Programme",
+      "enrollment_status": "Statut d'Inscription",
+      "funds_awaited": "Fonds en Attente",
+      "funds_received": "Fonds Reçus",
+      "entitlement_reference_number": "Numéro de Référence du Droit"
+    },
+    "lang": {
+      "language": "French"
+    }
   }
 }

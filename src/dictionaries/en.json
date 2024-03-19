@@ -10,19 +10,21 @@
       "description": "Self service portal login"
     },
     "about": {
-      "title": "About Us",
+      "title": "OpenG2P",
       "description": "This is the about page"
     },
-    "home": {
-      "title": "My Applications",
-      "number": "No.",
-      "program_name": "Program Name",
-      "application_id": " Application Id",
-      "program_status": " Program Status",
-      "application_status": "Application Status",
-      "submiited_on": "Submiited On",
-      "entitlement": "Entitlement (in USD)",
-      "amount_receieved": "Amount Receieved",
+    "apply": {
+      "title": "Home",
+      "description": "All Programs"
+    },
+    "programs": {
+      "name": "Program Name",
+      "description": " Description ",
+      "state": "Action",
+      "has_applied": "Program Status",
+      "is_portal_form_mapped": "Portal Mapped",
+      "is_multiple_form_submission": "Multiple Form Submission",
+      "last_application_status": "Application Status",
       "error": "Oops no results"
     },
     "card": {
@@ -39,15 +41,47 @@
       "description_b2": "Tap to know more",
 
       "title_c": "Entitlements",
-      "heading_c": "",
-      "description_c": "",
+      "heading_c1": "Applications",
+      "description_c1": "Tap to view your Applications",
+      "heading_c2": "Benefits",
+      "description_c2": "Tap to view your Benefits",
+
       "view_all": "View all"
     },
-    "programs": {
-      "title": "All Programs",
-      "status":"Status",
+    "home": {
+      "title": "My Programs",
+      "number": "No.",
+      "enrollment_status": "Status",
       "program_name": "Program Name",
-      "actions":"Actions"
+      "total_funds_awaited": "Total Funds Awaited ($)",
+      "total_funds_received": "Total Funds Received ($)"
+    },
+    "progrm": {
+      "title": "All Programs",
+      "number": "No.",
+      "enrollment_status": "Program Status",
+      "program_name": "Program Name",
+      "action": "Actions"
+    },
+    "application": {
+      "title": "My Application",
+      "number": "No.",
+      "program_name": "Program Name",
+      "application_id": "Application ID",
+      "date_applied": "Date Applied",
+      "application_status": "Application Status"
+    },
+    "benefit": {
+      "title": "My Benefits",
+      "number": "No.",
+      "program_name": "Program Name",
+      "enrollment_status": "Enrollment Status",
+      "funds_awaited": "Funds Awaited ($)",
+      "funds_received": "Funds Received ($)",
+      "entitlement_reference_number": "Entitlement Reference Number"
+    },
+    "lang": {
+      "language": "English"
     }
   }
 }

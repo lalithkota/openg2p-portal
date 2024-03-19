@@ -1,53 +1,87 @@
 {
   "footer": {
-      "about": "Tungkol sa Amin",
-      "contact": "Makipag-ugnayan sa Amin",
-      "others": "Iba"
+    "about": "Tungkol sa Amin",
+    "contact": "Makipag-ugnayan sa Amin",
+    "others": "Iba"
   },
   "page": {
-      "main": {
-          "title": "Maligayang Pagdating sa Self Service Portal",
-          "description": "Pag-login sa Self Service Portal"
-      },
-      "about": {
-          "title": "Tungkol sa Amin",
-          "description": "Ito ay tungkol sa pahina"
-      },
-      "home": {
-          "title": "Aking Mga Aplikasyon",
-          "number": "Blg.",
-          "program_name": "Pangalan ng Programa",
-          "application_id": "Id ng Aplikasyon",
-          "program_status": "Kalagayan ng Programa",
-          "application_status": "Kalagayan ng Aplikasyon",
-          "submiited_on": "Nai-pasa noong",
-          "entitlement": "Karapatan (sa USD)",
-          "amount_receieved": "Halaga na Natanggap",
-          "error": "Ay, walang resulta"
-      },
-      "card": {
-          "title_a": "Lahat ng Programa",
-          "heading_a1": "Kalusugan",
-          "description_a1": "Mayroong mahigit sa 30 mga scheme na magagamit",
-          "heading_a2": "Edukasyon",
-          "description_a2": "Mayroong mahigit sa 55 mga scheme na magagamit",
+    "main": {
+      "title": "OpenG2P",
+      "description": "Pag-login sa Self Service Portal"
+    },
+    "about": {
+      "title": "Section Based Approach | Centre",
+      "description": "Ito ay tungkol sa pahina"
+    },
+    "apply": {
+      "home": "Home_tl",
+      "allprograms": "All_Programs_tl"
+    },
+    "programs": {
+      "name": "Pangalan ng Programa",
+      "description": "Deskripsyon",
+      "state": "Katayuan ng Aplikasyon",
+      "has_applied": "Katayuan ng Programa",
+      "is_portal_form_mapped": "Nakamapa sa Portal",
+      "is_multiple_form_submission": "Maramihang Pagsusumite ng Form",
+      "last_application_status": "Katayuan ng Huling Aplikasyon",
+      "error": "Ay, wala mga resulta"
+    },
+    "card": {
+      "title_a": "Lahat ng Programa",
+      "heading_a1": "Kalusugan",
+      "description_a1": "Mayroong mahigit sa 30 mga scheme na magagamit",
+      "heading_a2": "Edukasyon",
+      "description_a2": "Mayroong mahigit sa 55 mga scheme na magagamit",
 
-          "title_b": "Iba Pang Serbisyo",
-          "heading_b1": "Tulong",
-          "description_b1": "Pindutin dito para sa tulong",
-          "heading_b2": "Mga Katanungan (FAQ)",
-          "description_b2": "Pindutin upang malaman pa ang higit",
+      "title_b": "Iba Pang Serbisyo",
+      "heading_b1": "Tulong",
+      "description_b1": "Pindutin dito para sa tulong",
+      "heading_b2": "Mga Katanungan (FAQ)",
+      "description_b2": "Pindutin upang malaman pa ang higit",
 
-          "title_c": "Karapatan",
-          "heading_c": "",
-          "description_c": "",
-          "view_all": "Tingnan ang Lahat"
-      },
-      "programs": {
-        "title": "All Programs",
-        "status":"Status",
-        "program_name": "Program Name",
-        "actions":"Actions"
-      }
+      "title_c": "Entitlements",
+      "heading_c1": "Applications",
+      "description_c1": "Tap to view your Applications",
+      "heading_c2": "Benefits",
+      "description_c2": "Tap to view your Benefits",
+
+      "view_all": "View all"
+    },
+    "home": {
+      "title": "Aking Dashboard",
+      "number": "Blg.",
+      "enrollment_status": "katayuan sa pag-eenroll",
+      "program_name": "Pangalan ng Programa",
+      "total_funds_awaited": "Kabuuang Inaasahang Pondo",
+      "total_funds_received": "Kabuuang Natanggap na Pondo"
+    },
+    "progrm": {
+      "title": "All Programs tl",
+      "number": "No.tl",
+      "enrollment_status": "Program Status tl",
+      "program_name": "Program Name tl",
+      "action": "Actions tl"
+    },
+    "application": {
+      "title": "Aking Aplikasyon",
+      "number": "Blg.",
+      "program_name": "Pangalan ng Programa",
+      "application_id": "ID ng Aplikasyon",
+      "date_applied": "Petsa ng Aplikasyon",
+      "application_status": "Katayuan ng Aplikasyon"
+    },
+    "benefit": {
+      "title": "Aking Mga Benepisyo",
+      "number": "Blg.",
+      "program_name": "Pangalan ng Programa",
+      "enrollment_status": "Katayuan ng Pagpaparehistro",
+      "funds_awaited": "Mga Pondong Hinihintay",
+      "funds_received": "Mga Pondong Natanggap",
+      "entitlement_reference_number": "Numero ng Sanggunian sa Karapatan"
+    },
+    "lang": {
+      "language": "Filipino"
+    }
   }
 }
