@@ -18,9 +18,9 @@ export default function Submitted({
   };
   params: {lang: Locale};
 }) {
-  // const [currentDate, setCurrentDate] = useState("");
+  const [currentDate, setCurrentDate] = useState("");
   const [isToastVisible, setIsToastVisible] = useState(true);
-  // const [page, setPage] = useState<any>(null);
+  const [page, setPage] = useState<any>(null);
   // const [applications, setApplications] = useState<ApplicationDetails[]>([]);
   // const [applicationId, setApplicationId] = useState('');
   const [applicationDetails, setApplicationDetails] = useState<ApplicationDetails | null>(null);
@@ -35,13 +35,18 @@ export default function Submitted({
         const programs = await fetchPrograms();
         const applications = await fetchApplicationDetails();
         const program = programs.find((prog) => prog.id === Number(programId)); // Find the program by ID
-        const application = applications.find((app) => app.program_name === program?.name); // Find the application that corresponds to the program name
-        // if (application) {
-        //   setApplicationId(application.application_id.toString());
-        // }
-        if (application) {
-          setApplicationDetails(application);
-        }
+        if (program) {
+          // Filter applications for those that match the program name and sort them to get the latest one
+          const filteredApplications = applications.filter(app => app.program_name === program.name);
+          const latestApplication = filteredApplications.sort((a, b) => {
+              const dateA = new Date(a.date_applied);
+              const dateB = new Date(b.date_applied);
+              return dateB.getTime() - dateA.getTime();
+          })[0];
+          if (latestApplication) {
+              setApplicationDetails(latestApplication);
+          }
+      }
         // const currentDate = new Date();
         // const formattedDate = currentDate.toLocaleDateString();
         // setCurrentDate(formattedDate);
@@ -57,7 +62,7 @@ export default function Submitted({
       }
     };
     fetchData();
-  }, [programId]);
+  }, [programId,lang]);
   const handlePrint = () => {
     window.print();
   };

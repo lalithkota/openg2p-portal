@@ -5,6 +5,7 @@ import {
   ApplicationDetails,
   BenefitDetails,
   ProgramRegistrantInfo,
+  Profile,
 } from "@/types";
 import {prefixBaseApiPath} from "./path";
 
@@ -90,6 +91,15 @@ export async function SubmitForm(programId: number, submissionData: any): Promis
 
   const data: ProgramRegistrantInfo = await res.json();
   return data;
+}
+
+export async function fetchProfile(): Promise<Profile> {
+
+  const res = await fetch(prefixBaseApiPath(`/auth/profile`));
+  if (!res.ok) {
+    throw new Error('Failed to fetch profile data');
+  }
+  return await res.json();
 }
 
 export function useClient() {

@@ -6,6 +6,7 @@ import {ProgramForm} from "@/types";
 import Modal from "@/components/Modal";
 import {useSearchParams} from "next/navigation";
 import {Locale} from "@/i18n.config";
+import router from "next/router";
 
 export default function Apply({params: {lang}}: {params: {lang: Locale}}) {
   // const [page, setPage] = useState<any>(null);
@@ -37,6 +38,7 @@ export default function Apply({params: {lang}}: {params: {lang: Locale}}) {
             try {
               const data = await SubmitForm(Number(programid), submission.data);
               console.log("Form submission response:", data);
+              router.push(`/${lang}/submission?page=submitted&programId=${programid}`);
             } catch (error) {
               console.error("Error submitting form:", error);
             }
@@ -135,6 +137,7 @@ export default function Apply({params: {lang}}: {params: {lang: Locale}}) {
             letterSpacing: "0px",
             color: "#848484",
             opacity: "1",
+            whiteSpace: 'nowrap'
           }}
         >
           Application Form
@@ -154,6 +157,7 @@ export default function Apply({params: {lang}}: {params: {lang: Locale}}) {
               letterSpacing: "0px",
               color: "#484848",
               opacity: "1",
+              whiteSpace: 'nowrap'
             }}
           >
             Application form
