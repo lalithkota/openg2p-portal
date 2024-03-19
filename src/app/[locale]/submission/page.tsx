@@ -2,15 +2,16 @@
 import Link from "next/link";
 import Image from "next/image";
 import {useSearchParams} from "next/navigation";
+import {useLocale, useTranslations} from "next-intl";
 import {useEffect, useState} from "react";
 import {AuthUtil} from "@/components/auth";
-import {useTranslations} from "@/i18n";
 import {ApplicationDetails} from "@/types";
 import {fetchApplicationDetails, fetchPrograms} from "@/utils";
 import {prefixBasePath} from "@/utils/path";
 
 export default function Submitted() {
-  AuthUtil({failedRedirectUrl: "/login"});
+  const lang = useLocale();
+  AuthUtil({failedRedirectUrl: `/${lang}/login`});
 
   const [isToastVisible, setIsToastVisible] = useState(true);
   const [applicationDetails, setApplicationDetails] = useState<ApplicationDetails | null>(null);
@@ -46,13 +47,13 @@ export default function Submitted() {
       <div className="print:hidden">
         <div className="text-gray-700 text-xl ">Program Submission</div>
         <div className="flex flex-wrap gap-2 mt-4 items-center mx-auto max-w-screen-xl">
-          <Link href="/home" className="flex items-center  text-blue-900">
+          <Link href={`/${lang}/home`} className="flex items-center  text-blue-900">
             {" " + t("Home") + " "}
           </Link>
           <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512">
             <path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z" />
           </svg>
-          <Link href="/programs" className="flex items-center  text-blue-900">
+          <Link href={`/${lang}/programs`} className="flex items-center  text-blue-900">
             {" " + t("All Programs") + " "}
           </Link>
           <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512">
@@ -129,7 +130,7 @@ export default function Submitted() {
               <hr className="border-t mx-0 border-gray-400 " />
               <div className="flex flex-col  gap-2 items-center m-4">
                 <Link
-                  href="/home"
+                  href={`/${lang}/home`}
                   className=" w-full p-6 h-8 bg-white border border-blue-700 rounded-md text-blue-700 text-sm font-normal flex items-center justify-center"
                 >
                   {t("View My Programs")}

@@ -1,38 +1,32 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import {useRouter} from "next/navigation";
+import {usePathname} from "next/navigation";
+import {useLocale, useTranslations} from "next-intl";
 import {Fragment} from "react";
 import {Menu, Transition} from "@headlessui/react";
 import {ChevronDownIcon} from "@heroicons/react/outline";
-import {useTranslations as getTranslator} from "@/i18n";
 import {prefixBasePath} from "@/utils/path";
-import {getCurrentLocale, getSupportedLocales, setCurrentLocale} from "@/utils/lang";
+import {getSupportedLocales} from "@/utils/lang";
 
 export default function LanguageDropDown() {
-  const router = useRouter();
-  const currentLocale = getCurrentLocale();
+  const currentLocale = useLocale();
   const supportedLocales = getSupportedLocales();
-  const ct = getTranslator(currentLocale);
-  const allT = supportedLocales.map((locale) => getTranslator(locale));
-
-  const changeLanguage = (newLocale: string) => {
-    setCurrentLocale(newLocale);
-    router.refresh();
-  };
+  const pathAbs = usePathname();
+  const t = useTranslations();
 
   return (
     <Menu as="div" className="relative inline-block text-left w-[120px] print:hidden">
       <div>
         <Menu.Button className="flex border border-gray-400 justify-between items-center w-full gap-x-2 rounded-md bg-white px-2 py-2 text-sm font-semibold text-gray-900 hover:bg-gray-50">
           <Image
-            src={prefixBasePath(ct("@flag_url"))}
-            alt={ct("@language_title")}
+            src={prefixBasePath(t(`@flag_url_${currentLocale}`))}
+            alt={t(`@language_title_${currentLocale}`)}
             className="mr-2"
             width={50}
             height={50}
           />
-          <span>{ct("@language_title")}</span>
+          <span>{t(`@language_title_${currentLocale}`)}</span>
           <ChevronDownIcon className="mr-1 h-5 w-10 text-gray-400 hide" aria-hidden="true" />
         </Menu.Button>
       </div>
@@ -48,24 +42,23 @@ export default function LanguageDropDown() {
       >
         <Menu.Items className="absolute flex-col right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white ring-1 ring-gray-400  focus:outline-none">
           <div className="py-1 flex-col items-center">
-            {supportedLocales.map((locale, i) => (
+            {supportedLocales.map((locale) => (
               <Menu.Item key={`locale-${locale}`}>
                 {({active}) => (
                   <Link
-                    href="#"
-                    onClick={() => changeLanguage(locale)}
+                    href={pathAbs.replace(currentLocale, locale)}
                     className={
                       (active ? "bg-gray-100 text-gray-900" : "text-gray-700") +
                       " px-4 py-2 text-sm flex items-center gap-2"
                     }
                   >
                     <Image
-                      src={prefixBasePath(allT[i]("@flag_url"))}
-                      alt={allT[i]("@language_title")}
+                      src={prefixBasePath(t(`@flag_url_${locale}`))}
+                      alt={t(`@language_title_${locale}`)}
                       width={50}
                       height={50}
                     />
-                    <span>{allT[i]("@language_title")}</span>
+                    <span>{t(`@language_title_${locale}`)}</span>
                   </Link>
                 )}
               </Menu.Item>

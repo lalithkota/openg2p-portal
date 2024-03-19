@@ -1,10 +1,11 @@
 "use client";
 import Link from "next/link";
+import {useLocale, useTranslations} from "next-intl";
 import {Fragment, useState} from "react";
 import {Dialog, Transition} from "@headlessui/react";
-import {useTranslations} from "@/i18n";
 
 export default function Modal() {
+  const lang = useLocale();
   const t = useTranslations();
   const [isOpen, setIsOpen] = useState(false);
   const openModal = () => {
@@ -62,7 +63,7 @@ export default function Modal() {
                   </Dialog.Title>
                   <div className="mt-2">
                     <p className="text-sm text-gray-500">
-                      {t("The entered data will not be saved. Are you sure you want to discard the form?")}
+                      {t("The entered data will not be saved_ Are you sure you want to discard the form?")}
                     </p>
                   </div>
 
@@ -74,7 +75,7 @@ export default function Modal() {
                     >
                       {t("Discard")}
                     </button>
-                    <Link href="/home">
+                    <Link href={`/${lang}/home`}>
                       <button
                         type="button"
                         className="inline-flex justify-center rounded-md   bg-white border border-blue-700 px-4 py-2 text-sm font-medium text-blue-900 focus:outline-none"

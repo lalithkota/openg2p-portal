@@ -1,9 +1,10 @@
 import Link from "next/link";
 import Image from "next/image";
+import {useLocale, useTranslations} from "next-intl";
 import {prefixBasePath} from "@/utils/path";
-import {useTranslations} from "@/i18n";
 
 export default function Card() {
+  const lang = useLocale();
   const t = useTranslations();
   return (
     <>
@@ -61,7 +62,7 @@ export default function Card() {
           </div>
           <div className="mx-auto mb-2">
             <Link
-              href="/programs"
+              href={`/${lang}/programs`}
               className="text-sm font-medium text-blue-600 dark:text-blue-500 no-underline hover:underline "
             >
               {t("View all")}
@@ -121,7 +122,7 @@ export default function Card() {
           </div>
           <div className="mx-auto ">
             <Link
-              href="/forms"
+              href={`/${lang}/forms`}
               className="text-sm font-medium text-blue-600 hover:underline no-underline  dark:text-blue-500"
             >
               {t("View all")}
@@ -149,7 +150,7 @@ export default function Card() {
                   </div>
                   <div className="flex-1 min-w-0 mt-2 ">
                     <Link
-                      href="/applications"
+                      href={`/${lang}/applications`}
                       className="text-sm font-medium no-underline  text-gray-600 truncate"
                     >
                       {t("Applications")}
@@ -173,7 +174,7 @@ export default function Card() {
                   </div>
                   <div className="flex-1 min-w-0 mt-2">
                     <Link
-                      href="/benefits"
+                      href={`/${lang}/benefits`}
                       className="text-sm  no-underline  font-medium text-gray-600 truncate"
                     >
                       {t("Benefits")}

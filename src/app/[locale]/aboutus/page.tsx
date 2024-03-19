@@ -1,14 +1,15 @@
 import Link from "next/link";
-import {useTranslations} from "@/i18n";
+import {useLocale, useTranslations} from "next-intl";
 
 export default function AboutUs() {
+  const lang = useLocale();
   const t = useTranslations();
   return (
     <div className="rounded-lg border-gray-200 p-4 mx-4 lg:px-4 m-0 mt-2">
       <div className="mx-auto max-w-screen-xl">
         <div className="text-xl">{t("About Us")}</div>
         <div className="flex flex-wrap gap-2 mt-6 items-center mx-auto max-w-screen-xl">
-          <Link href="/home" className="flex items-center  text-blue-900">
+          <Link href={`/${lang}/home`} className="flex items-center  text-blue-900">
             {" " + t("Home") + " "}
           </Link>
           <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512">

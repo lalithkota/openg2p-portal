@@ -1,15 +1,16 @@
 "use client";
 import Link from "next/link";
 import {useSearchParams} from "next/navigation";
+import {useLocale, useTranslations} from "next-intl";
 import {useEffect, useState} from "react";
 import {AuthUtil} from "@/components/auth";
 import Modal from "@/components/Modal";
-import {useTranslations} from "@/i18n";
 import {ProgramForm} from "@/types";
 import {SubmitForm, fetchProgramForm} from "@/utils";
 
 export default function Apply() {
-  AuthUtil({failedRedirectUrl: "/login"});
+  const lang = useLocale();
+  AuthUtil({failedRedirectUrl: `/${lang}/login`});
 
   // const [page, setPage] = useState<any>(null);
   const [form, setForm] = useState<ProgramForm>();
@@ -76,7 +77,7 @@ export default function Apply() {
       </div>
       <div className="flex flex-wrap gap-2 mt-4 items-center mx-auto max-w-screen-xl">
         <Link
-          href="/home"
+          href={`/${lang}/home`}
           className=""
           style={{
             top: "154px",
@@ -96,7 +97,7 @@ export default function Apply() {
           <path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z" />
         </svg>
         <Link
-          href="/programs"
+          href={`/${lang}/programs`}
           className=""
           style={{
             top: "154px",

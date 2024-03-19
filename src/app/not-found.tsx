@@ -1,18 +1,26 @@
 import Link from "next/link";
-import {Header, Footer} from "@/components";
-import {useTranslations} from "@/i18n";
+// import {Header, Footer} from "@/components";
+import "@/commons/styles/globals.css";
+import {GlobalContextProvider} from "@/context/global";
 
 export default function NotFound() {
-  const t = useTranslations();
   return (
-    <>
-      <Header />
-      <h2>{t("There was a problem")}</h2>
-      <p>{t("We could not find the page you are looking for")}</p>
-      <Link href="/" className="bg-blue-500 text-center">
-        {t("Home")}
-      </Link>
-      <Footer />
-    </>
+    <html lang="en">
+      <body>
+        <main>
+          <div className="bg-bgc font-fontcustom flex flex-col min-h-screen">
+            <GlobalContextProvider>
+              {/* <Header /> */}
+              <h2>There was a problem</h2>
+              <p>We could not find the page you are looking for</p>
+              <Link href="/" className="bg-blue-500 text-center">
+                Home
+              </Link>
+              {/* <Footer /> */}
+            </GlobalContextProvider>
+          </div>
+        </main>
+      </body>
+    </html>
   );
 }

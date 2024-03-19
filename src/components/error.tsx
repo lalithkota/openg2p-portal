@@ -1,6 +1,6 @@
 "use client";
+import {useTranslations} from "next-intl";
 import {useEffect} from "react";
-import {useTranslations} from "@/i18n";
 
 type Props = {
   error: Error;

@@ -2,6 +2,18 @@
   "@language_title": "Français",
   "@flag_url": "/img/flag_fr.png",
 
+  "@language_title_en": "English",
+  "@flag_url_en": "/img/flag_en.png",
+
+  "@language_title_es": "Español",
+  "@flag_url_es": "/img/flag_es.png",
+
+  "@language_title_fr": "Français",
+  "@flag_url_fr": "/img/flag_fr.png",
+
+  "@language_title_tl": "Tagalog",
+  "@flag_url_tl": "/img/flag_tl.png",
+
   "OpenG2P": "OpenG2P",
 
   "Home": "Accueil",
@@ -50,7 +62,7 @@
   "Total Funds Awaited": "Total des fonds attendus (€)",
   "Total Funds Received": "Total des fonds reçus (€)",
 
-  "The entered data will not be saved. Are you sure you want to discard the form?": "Les données saisies ne seront pas enregistrées. Êtes-vous sûr de vouloir annuler le formulaire?",
+  "The entered data will not be saved_ Are you sure you want to discard the form?": "Les données saisies ne seront pas enregistrées. Êtes-vous sûr de vouloir annuler le formulaire?",
   "There was a problem": "Il y a eu un problème",
   "We could not find the page you are looking for": "Nous n'avons pas pu trouver la page que vous recherchez",
 
@@ -86,7 +98,7 @@
   "Message": "Message",
   "View": "Voir",
   "Print": "Imprimer",
-  "No.": "N°",
+  "No_": "N°",
 
   "@copyright": "© 2023 Portail national des avantages sociaux. Tous droits réservés."
 }

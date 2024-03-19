@@ -1,11 +1,12 @@
 "use client";
 import Link from "next/link";
+import {useLocale, useTranslations} from "next-intl";
 import {AuthUtil} from "@/components/auth";
 import {useAuth} from "@/context/global";
-import {useTranslations} from "@/i18n";
 
 export default function Profile() {
-  AuthUtil({failedRedirectUrl: "/login"});
+  const lang = useLocale();
+  AuthUtil({failedRedirectUrl: `/${lang}/login`});
 
   const {profile} = useAuth();
   const t = useTranslations();
@@ -15,7 +16,7 @@ export default function Profile() {
       <div className="mx-auto max-w-screen-xl">
         <div className="text-gray-700 text-xl ">Profile</div>
         <div className="flex flex-wrap gap-2 mt-6 items-center mx-auto max-w-screen-xl">
-          <Link href="/programs" className="flex items-center text-blue-900">
+          <Link href={`/${lang}/programs`} className="flex items-center text-blue-900">
             {" " + t("Home") + " "}
           </Link>
           <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512">

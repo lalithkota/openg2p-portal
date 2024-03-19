@@ -1,14 +1,11 @@
-import {getCurrentLocale, loadTranslations} from "@/utils/lang";
+import {getRequestConfig} from "next-intl/server";
+import {notFound} from "next/navigation";
+import {getSupportedLocales} from "@/utils/lang";
 
-export function useTranslations(locale?: string) {
-  // TODO: Expand this
+export default getRequestConfig(async ({locale}) => {
+  if (!getSupportedLocales().includes(locale as any)) notFound();
 
-  if (!locale) {
-    locale = getCurrentLocale();
-  }
-  const translations = loadTranslations(locale);
-  const t = (term: string) => {
-    return translations[term] || term;
+  return {
+    messages: (await import(`../messages/${locale}.json`)).default,
   };
-  return t;
-}
+});

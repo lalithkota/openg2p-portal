@@ -1,16 +1,16 @@
 "use client";
 import {useRouter} from "next/navigation";
-import {Suspense, useEffect, useState} from "react";
+import {useTranslations, useLocale} from "next-intl";
+import {useEffect, useState, Suspense} from "react";
 import {Card, Pagination, SearchBar} from "@/components";
 import {AuthUtil} from "@/components/auth";
-import {useTranslations} from "@/i18n";
-import {ApplicationDetails} from "@/types";
-import {fetchApplicationDetails} from "@/utils";
+import {ProgramDetails} from "@/types";
+import {fetchProgramDetails} from "@/utils";
 import Loading from "../loading";
 
-const ITEMS_PER_PAGE = 10;
+const ITEMS_PER_PAGE = 6;
 
-export default function ApplcnPage({
+export default function Page({
   searchParams,
 }: {
   searchParams?: {
@@ -18,13 +18,14 @@ export default function ApplcnPage({
     page?: string;
   };
 }) {
-  AuthUtil({failedRedirectUrl: "/login"});
+  const lang = useLocale();
+  AuthUtil({failedRedirectUrl: `/${lang}/login`});
 
   const router = useRouter();
-  const [applications, setApplications] = useState<ApplicationDetails[]>([]);
+  const [programs, setPrograms] = useState<ProgramDetails[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const [paginatedApplications, setPaginatedApplications] = useState<ApplicationDetails[]>([]);
+  const [paginatedPrograms, setPaginatedPrograms] = useState<ProgramDetails[]>([]);
   const [totalPages, setTotalPages] = useState<number>(0);
   const currentPage = Number(searchParams?.page) || 1;
   const t = useTranslations();
@@ -33,14 +34,13 @@ export default function ApplcnPage({
     const fetchData = async () => {
       try {
         setIsLoading(true);
-        const allApplications: ApplicationDetails[] = await fetchApplicationDetails();
-        setApplications(allApplications);
+        const allPrograms: ProgramDetails[] = await fetchProgramDetails();
+        setPrograms(allPrograms);
 
-        setTotalPages(Math.ceil(allApplications.length / ITEMS_PER_PAGE));
-        setIsLoading(false);
+        setTotalPages(Math.ceil(allPrograms.length / ITEMS_PER_PAGE));
         setIsLoading(false);
       } catch (error) {
-        console.error("Error fetching applications details:", error);
+        console.error("Error fetching program details:", error);
       }
     };
 
@@ -50,40 +50,19 @@ export default function ApplcnPage({
   useEffect(() => {
     const start = (currentPage - 1) * ITEMS_PER_PAGE;
     const end = start + ITEMS_PER_PAGE;
-    setPaginatedApplications(applications.slice(start, end));
-  }, [currentPage, applications]);
+    setPaginatedPrograms(programs.slice(start, end));
+  }, [currentPage, programs]);
 
   const handlePageChange = (page: number) => {
     router.push(`?page=${page}`);
   };
 
-  const isDataEmpty = !Array.isArray(applications) || applications.length < 1 || !applications;
-
-  function getStatusClass(status: string) {
-    switch (status) {
-      case "completed":
-        return "completedButton";
-      case "active":
-        return "appliedButton";
-      case "inprogress":
-        return "inProgressButton";
-      case "rejected":
-        return "rejectedButton";
-      default:
-        return "";
-    }
-  }
-
-  function toTitleCase(str: string) {
-    return str.replace(/\w\S*/g, function (txt) {
-      return txt.charAt(0).toUpperCase() + txt.substring(1).toLowerCase();
-    });
-  }
+  const isDataEmpty = !Array.isArray(programs) || programs.length < 1 || !programs;
 
   return (
     <div>
       {isLoading ? (
-        <div className="mt-16 flex justify-center items-center flex-col gap-2"></div>
+        <div className="mt- 2 flex justify-center items-center flex-col gap-2"></div>
       ) : !isDataEmpty ? (
         <div className=" m-6 p-6 md:space-x-4 mx-auto max-w-screen-xl flex justify-center items-center">
           <div className="bg-brand container w-1180 shadow-md  pb-0 rounded-lg top-24">
@@ -103,7 +82,7 @@ export default function ApplcnPage({
                   whiteSpace: "nowrap",
                 }}
               >
-                {t("My Application")}
+                {t("My Programs")}
               </p>
               <SearchBar />
             </div>
@@ -113,7 +92,7 @@ export default function ApplcnPage({
                   <thead className="text-xs text-gray-600 bg-gray-100">
                     <tr>
                       <th scope="col" className="columnTitle px-6 py-3 ">
-                        {t("No.")}
+                        {t("No_")}
                       </th>
                       <th scope="col" className="columnTitle px-6 py-3 ">
                         <div className="flex items-center w-max">
@@ -132,7 +111,7 @@ export default function ApplcnPage({
                       </th>
                       <th scope="col" className="columnTitle px-6 py-3">
                         <div className="flex items-center w-max">
-                          {t("Application Status")}
+                          {t("Enrollment Status")}
                           <svg
                             data-column="1"
                             className="w-3 h-3 ml-1.5  text-gray-600  sortable-icon"
@@ -147,7 +126,7 @@ export default function ApplcnPage({
                       </th>
                       <th scope="col" className="columnTitle px-6 py-3">
                         <div className="flex items-center w-max">
-                          {t("Application ID")}
+                          {t("Total Funds Awaited")}
                           <svg
                             data-column="2"
                             className="w-3 h-3 ml-1.5  text-gray-600  sortable-icon"
@@ -162,7 +141,7 @@ export default function ApplcnPage({
                       </th>
                       <th scope="col" className="columnTitle px-6 py-3">
                         <div className="flex items-center w-max">
-                          {t("Date Applied")}
+                          {t("Total Funds Received")}
                           <svg
                             data-column="3"
                             className="w-3 h-3 ml-1.5  text-gray-600  sortable-icon"
@@ -178,30 +157,28 @@ export default function ApplcnPage({
                     </tr>
                   </thead>
                   <tbody>
-                    {paginatedApplications.map((application, index) => {
+                    {paginatedPrograms.map((program, index) => {
                       const itemNumber = (currentPage - 1) * ITEMS_PER_PAGE + index + 1;
                       return (
                         <tr
                           key={index}
                           className="bg-white border-b dark:bg-white-200 dark:border-white-200 text-gray-600"
                         >
-                          <td className="px-6 py-4 snoElement">{itemNumber}</td>
+                          <td className="px-6 py-4 snoElement ">{itemNumber}</td>
                           <td scope="row" className="rowElement px-6 py-4 ">
-                            {application.program_name}
+                            {program.program_name}
                           </td>
                           <td className="px-6 py-4">
                             <button
                               type="button"
-                              className={`top-14 text-xs  w-24 h-8 rounded-md text-center tracking-[0px] opacity-100 border-collapse border-[none] left-[811px] text-white ${getStatusClass(application.application_status)}`}
+                              className={`${program.enrollment_status === "enrolled" ? "enrolledButton" : "draftButton"} buttonElement top-14 text-xs  w-24 h-8 rounded-md text-center tracking-[0px] opacity-100 border-collapse border-[none] left-[811px] ${program.enrollment_status ? "bg-gray-300 text-gray-600" : "bg-[#c7ebd1] text-[#075e45]"}`}
                               disabled={true}
                             >
-                              {application.application_status === "active"
-                                ? "Applied"
-                                : toTitleCase(application.application_status)}
+                              {program.enrollment_status === "enrolled" ? "Enrolled" : "Draft"}
                             </button>
                           </td>
-                          <td className="px-6 py-4">{application.application_id}</td>
-                          <td className="px-6 py-4">{application.date_applied?.slice(0, 10)}</td>
+                          <td className="px-6 py-4">{Number(program.total_funds_awaited).toFixed(2)}</td>
+                          <td className="px-6 py-4">{Number(program.total_funds_received).toFixed(2)}</td>
                         </tr>
                       );
                     })}
@@ -219,6 +196,7 @@ export default function ApplcnPage({
           <h2 className="tetx-black text-xl font-bold">Oops no results.. Sign in Again!</h2>
         </div>
       )}
+
       <div className="pt-0">
         <Card />
       </div>

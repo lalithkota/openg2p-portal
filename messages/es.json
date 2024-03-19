@@ -2,6 +2,18 @@
   "@language_title": "Español",
   "@flag_url": "/img/flag_es.png",
 
+  "@language_title_en": "English",
+  "@flag_url_en": "/img/flag_en.png",
+
+  "@language_title_es": "Español",
+  "@flag_url_es": "/img/flag_es.png",
+
+  "@language_title_fr": "Français",
+  "@flag_url_fr": "/img/flag_fr.png",
+
+  "@language_title_tl": "Tagalog",
+  "@flag_url_tl": "/img/flag_tl.png",
+
   "OpenG2P": "OpenG2P",
 
   "Home": "Inicio",
@@ -50,7 +62,7 @@
   "Total Funds Awaited": "Total de fondos esperados ($)",
   "Total Funds Received": "Total de fondos recibidos ($)",
 
-  "The entered data will not be saved. Are you sure you want to discard the form?": "Los datos ingresados no se guardarán. ¿Está seguro de que desea descartar el formulario?",
+  "The entered data will not be saved_ Are you sure you want to discard the form?": "Los datos ingresados no se guardarán. ¿Está seguro de que desea descartar el formulario?",
   "There was a problem": "Hubo un problema",
   "We could not find the page you are looking for": "No pudimos encontrar la página que está buscando",
 
@@ -86,7 +98,7 @@
   "Message": "Mensaje",
   "View": "Ver",
   "Print": "Imprimir",
-  "No.": "No.",
+  "No_": "No.",
 
   "@copyright": "© 2023 Portal Nacional de Beneficios Sociales. Todos los derechos reservados."
 }

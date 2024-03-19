@@ -1,14 +1,15 @@
 "use client";
 import {useRouter} from "next/navigation";
+import {useTranslations, useLocale} from "next-intl";
 import {useState, useEffect} from "react";
 import {AuthUtil} from "@/components/auth";
-import {useTranslations} from "@/i18n";
 import {ProgramForm} from "@/types";
 import {fetchProgramForm} from "@/utils";
 import Loading from "../loading";
 
 export default function ProgramList() {
-  AuthUtil({failedRedirectUrl: "/login"});
+  const lang = useLocale();
+  AuthUtil({failedRedirectUrl: `/${lang}/login`});
 
   const [programForms, setProgramForms] = useState<ProgramForm[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -34,7 +35,7 @@ export default function ProgramList() {
   }, []);
 
   const handleApplyClick = (programId: number) => {
-    router.push(`/apply/${programId}`);
+    router.push(`/${lang}/apply/${programId}`);
   };
 
   if (isLoading) {

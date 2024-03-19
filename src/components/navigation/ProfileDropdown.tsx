@@ -1,17 +1,18 @@
 "use client";
 import Link from "next/link";
 import {useRouter} from "next/navigation";
+import {useLocale, useTranslations} from "next-intl";
 import {Fragment} from "react";
 import {Menu, Transition} from "@headlessui/react";
 import {ChevronDownIcon} from "@heroicons/react/outline";
 import {Avatar} from "@mui/material";
 import {useAuth} from "@/context/global";
-import {useTranslations} from "@/i18n";
 import {prefixBaseApiPath} from "@/utils/path";
 
 export default function ProfileDropDown() {
-  const {profile, setProfile} = useAuth();
+  const lang = useLocale();
   const t = useTranslations();
+  const {profile, setProfile} = useAuth();
   const router = useRouter();
 
   const logoutHandler = () => {
@@ -19,7 +20,7 @@ export default function ProfileDropDown() {
       method: "POST",
     }).finally(() => {
       setProfile(null);
-      router.push("/login");
+      router.push(`/${lang}/login`);
     });
   };
   return (
@@ -45,7 +46,7 @@ export default function ProfileDropDown() {
             <Menu.Item>
               {({active}) => (
                 <Link
-                  href="/myprofile"
+                  href={`/${lang}/myprofile`}
                   className={
                     (active ? "bg-gray-100 text-gray-900" : "text-gray-700") + " block px-4 py-2 text-sm"
                   }

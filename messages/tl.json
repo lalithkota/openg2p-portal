@@ -2,6 +2,18 @@
   "@language_title": "Tagalog",
   "@flag_url": "/img/flag_tl.png",
 
+  "@language_title_en": "English",
+  "@flag_url_en": "/img/flag_en.png",
+
+  "@language_title_es": "Español",
+  "@flag_url_es": "/img/flag_es.png",
+
+  "@language_title_fr": "Français",
+  "@flag_url_fr": "/img/flag_fr.png",
+
+  "@language_title_tl": "Tagalog",
+  "@flag_url_tl": "/img/flag_tl.png",
+
   "OpenG2P": "OpenG2P",
 
   "Home": "Bahay",
@@ -50,7 +62,7 @@
   "Total Funds Awaited": "Kabuuang Pondo na Inaasahan ($)",
   "Total Funds Received": "Kabuuang Natanggap na Pondo ($)",
 
-  "The entered data will not be saved. Are you sure you want to discard the form?": "Ang mga naipasok na datos ay hindi maiimbak. Sigurado ka bang nais mong itapon ang form?",
+  "The entered data will not be saved_ Are you sure you want to discard the form?": "Ang mga naipasok na datos ay hindi maiimbak. Sigurado ka bang nais mong itapon ang form?",
   "There was a problem": "Mayroong problema",
   "We could not find the page you are looking for": "Hindi namin mahanap ang pahinang hinahanap mo",
 
@@ -86,7 +98,7 @@
   "Message": "Mensahe",
   "View": "Tingnan",
   "Print": "I-print",
-  "No.": "Numero",
+  "No_": "Numero",
 
   "@copyright": "© 2023 Pambansang Portal ng mga Benepisyo. Lahat ng karapatan ay nakalaan."
 }

@@ -1,13 +1,5 @@
-import {AuthUtil} from "@/components/auth";
+import {redirect} from "next/navigation";
 
 export default function RootPage() {
-  const authUtilProps = {
-    successRedirectUrl: `/home`,
-    failedRedirectUrl: `/login`,
-  };
-  return (
-    <div>
-      <AuthUtil {...authUtilProps} />
-    </div>
-  );
+  redirect("/en");
 }

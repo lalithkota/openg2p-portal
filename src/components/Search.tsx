@@ -1,4 +1,4 @@
-import {useTranslations} from "@/i18n";
+import {useTranslations} from "next-intl";
 
 export default function Search() {
   const t = useTranslations();

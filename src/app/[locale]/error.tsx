@@ -1,6 +1,6 @@
 "use client";
+import {useTranslations} from "next-intl";
 import {useEffect} from "react";
-import {useTranslations} from "@/i18n";
 
 export default function Error({error, reset}: {error: Error; reset: () => void}) {
   const t = useTranslations();

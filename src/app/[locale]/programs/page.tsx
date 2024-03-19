@@ -1,10 +1,10 @@
 "use client";
 import Link from "next/link";
 import {useRouter} from "next/navigation";
+import {useLocale, useTranslations} from "next-intl";
 import {useEffect, useState, Suspense} from "react";
 import {Card, Pagination, SearchBar} from "@/components";
 import {AuthUtil} from "@/components/auth";
-import {useTranslations} from "@/i18n";
 import {ApplicationDetails, Program} from "@/types";
 import {fetchApplicationDetails, fetchPrograms} from "@/utils";
 import Loading from "../loading";
@@ -19,7 +19,8 @@ export default function ProgrmPage({
     page?: string;
   };
 }) {
-  AuthUtil({failedRedirectUrl: "/login"});
+  const lang = useLocale();
+  AuthUtil({failedRedirectUrl: `/${lang}/login`});
 
   const router = useRouter();
 
@@ -252,7 +253,7 @@ export default function ProgrmPage({
         </div>
         <div className="flex flex-wrap gap-2 mt-1 items-center ">
           <Link
-            href="/home"
+            href={`/${lang}/home`}
             className="shift-right"
             style={{
               top: "154px",
@@ -321,7 +322,7 @@ export default function ProgrmPage({
                   <thead className="text-xs text-gray-600 bg-gray-100">
                     <tr>
                       <th scope="col" className="columnTitle px-6 py-3 text-sm font-normal">
-                        {t("No.")}
+                        {t("No_")}
                       </th>
                       <th scope="col" className="columnTitle px-6 py-3 text-sm font-normal">
                         <div className="flex items-center">

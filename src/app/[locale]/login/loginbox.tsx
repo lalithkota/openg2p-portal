@@ -1,8 +1,8 @@
 "use client";
 import Image from "next/image";
+import {useTranslations} from "next-intl";
 import {SyntheticEvent, useEffect, useState} from "react";
 import {Avatar, Button} from "@mui/material";
-import {useTranslations} from "@/i18n";
 import {prefixBaseApiPath, prefixBasePath} from "@/utils/path";
 
 type LoginProvider = {

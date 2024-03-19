@@ -2,6 +2,18 @@
   "@language_title": "English",
   "@flag_url": "/img/flag_en.png",
 
+  "@language_title_en": "English",
+  "@flag_url_en": "/img/flag_en.png",
+
+  "@language_title_es": "Español",
+  "@flag_url_es": "/img/flag_es.png",
+
+  "@language_title_fr": "Français",
+  "@flag_url_fr": "/img/flag_fr.png",
+
+  "@language_title_tl": "Tagalog",
+  "@flag_url_tl": "/img/flag_tl.png",
+
   "OpenG2P": "OpenG2P",
 
   "Home": "Home",
@@ -50,7 +62,7 @@
   "Total Funds Awaited": "Total Funds Awaited ($)",
   "Total Funds Received": "Total Funds Received ($)",
 
-  "The entered data will not be saved. Are you sure you want to discard the form?": "The entered data will not be saved. Are you sure you want to discard the form?",
+  "The entered data will not be saved_ Are you sure you want to discard the form?": "The entered data will not be saved. Are you sure you want to discard the form?",
   "There was a problem": "There was a problem",
   "We could not find the page you are looking for": "We could not find the page you are looking for",
 
@@ -86,7 +98,7 @@
   "Message": "Message",
   "View": "View",
   "Print": "Print",
-  "No.": "No.",
+  "No_": "No.",
 
   "@copyright": "© 2023 National Social Benefits Portal. All rights reserved."
 }
