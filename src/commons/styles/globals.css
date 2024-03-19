@@ -1,23 +1,21 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap');
-@import '~formiojs/dist/formio.full.min.css';
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap");
+@import "~formiojs/dist/formio.full.min.css";
 @import "~@tsed/tailwind-formio/styles/index.css";
-
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-
-html,body{
+html,
+body {
   overflow-x: hidden;
   margin: 0;
-  width:100%;
-
+  width: 100%;
 }
 
 .viewButton {
-  background: #FFFFFF 0% 0% no-repeat padding-box;
-  border: 1px solid #494DAF;
+  background: #ffffff 0% 0% no-repeat padding-box;
+  border: 1px solid #494daf;
   border-radius: 4px;
   opacity: 1;
 }
@@ -25,49 +23,49 @@ html,body{
   text-align: center;
   font: normal normal medium 12px/15px Inter;
   letter-spacing: 0px;
-  color: #FFFFFF;
+  color: #ffffff;
   opacity: 1;
 }
 .enrolledButton {
-  background: #C7EBD1 0% 0% no-repeat padding-box;
+  background: #c7ebd1 0% 0% no-repeat padding-box;
   border-radius: 4px;
   opacity: 1;
 }
 .notAppliedButton {
-  background: #DCE3E8 0% 0% no-repeat padding-box;
+  background: #dce3e8 0% 0% no-repeat padding-box;
   border-radius: 4px;
   opacity: 1;
 }
 .draftButton {
-  background: #DCE3E8 0% 0% no-repeat padding-box;
+  background: #dce3e8 0% 0% no-repeat padding-box;
   border-radius: 4px;
   opacity: 1;
 }
 .submittedButton {
-  background: #FAF6CF 0% 0% no-repeat padding-box;
+  background: #faf6cf 0% 0% no-repeat padding-box;
   border-radius: 4px;
   opacity: 1;
 }
 .completedButton {
-  background: #4CAF50 0% 0% no-repeat padding-box;
+  background: #4caf50 0% 0% no-repeat padding-box;
   border-radius: 4px;
   opacity: 1;
 }
 
 .appliedButton {
-  background: #FF9800 0% 0% no-repeat padding-box;
+  background: #ff9800 0% 0% no-repeat padding-box;
   border-radius: 4px;
   opacity: 1;
 }
 
 .inProgressButton {
-  background: #2196F3 0% 0% no-repeat padding-box;
+  background: #2196f3 0% 0% no-repeat padding-box;
   border-radius: 4px;
   opacity: 1;
 }
 
 .rejectedButton {
-  background: #F44336 0% 0% no-repeat padding-box;
+  background: #f44336 0% 0% no-repeat padding-box;
   border-radius: 4px;
   opacity: 1;
 }
@@ -75,24 +73,24 @@ html,body{
   text-align: left;
   font: normal normal 600 13px/16px Inter;
   letter-spacing: 0px;
-  color: #494DAF;
-  opacity: 1
+  color: #494daf;
+  opacity: 1;
 }
-.snoElement{
+.snoElement {
   text-align: left;
   font: normal normal normal 13px/16px Inter;
   letter-spacing: 0px;
   color: #535353;
   opacity: 1;
 }
-.buttonElement{
+.buttonElement {
   text-align: center;
   font: normal normal medium 12px/15px Inter;
   letter-spacing: 0px;
-  color: #075E45;
+  color: #075e45;
   opacity: 1;
 }
-.columnTitle{
+.columnTitle {
   text-align: left;
   font: normal normal 600 13px/16px Inter;
   letter-spacing: 0px;

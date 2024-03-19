@@ -10,14 +10,14 @@ import Search from "./Search";
 import Pagination from "./Pagination";
 
 export {
-    Card,
-    Footer,
-    Header,
-    LanguageDropDown,
-    ProfileDropDown,
-    SearchBar,
-    SearchProgram,
-    Search,
-    Toast,
-    Pagination
-}
+  Card,
+  Footer,
+  Header,
+  LanguageDropDown,
+  ProfileDropDown,
+  SearchBar,
+  SearchProgram,
+  Search,
+  Toast,
+  Pagination,
+};

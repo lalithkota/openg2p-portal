@@ -13,9 +13,9 @@
       "title": "Section Based Approach | Centre",
       "description": "Ceci est la page À propos"
     },
-    "apply":{
+    "apply": {
       "home": "Home_fr",
-      "allprograms":"All_Programs_fr"
+      "allprograms": "All_Programs_fr"
     },
     "programs": {
       "name": "Nom du Programme",
@@ -56,9 +56,9 @@
     "progrm": {
       "title": "All Programs fr",
       "number": "No. fr",
-      "enrollment_status":"Program Status fr",
+      "enrollment_status": "Program Status fr",
       "program_name": "Program Name fr",
-      "action":"Actions fr"
+      "action": "Actions fr"
     },
     "application": {
       "title": "Ma Candidature",
