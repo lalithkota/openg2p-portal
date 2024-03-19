@@ -1,12 +1,11 @@
 "use client";
-import React from "react";
+import {useState, Fragment} from "react";
 import {Combobox, Transition} from "@headlessui/react";
 import {SearchProgramsProps} from "../types";
-import {useState, Fragment} from "react";
-import {programs} from "../constants";
 
 const SearchProgram = ({program, setProgram}: SearchProgramsProps) => {
   const [query, setQuery] = useState("");
+  const programs = ["p-1", "p-2", "p-3", "p-4"];
 
   const filteredPrograms =
     query === ""
@@ -65,7 +64,7 @@ const SearchProgram = ({program, setProgram}: SearchProgramsProps) => {
                   <Combobox.Option
                     key={item}
                     className={({active}) =>
-                      ` hover:bg-white opacity-90 z-10 relative cursor-default bg-blue-100 select-none py-2 pl-10 pr-4 ${
+                      `hover:bg-white opacity-90 z-10 relative cursor-default bg-blue-100 select-none py-2 pl-10 pr-4 ${
                         active ? "bg-primary-blue text-black" : "text-gray-900"
                       }`
                     }

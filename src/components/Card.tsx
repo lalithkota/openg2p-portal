@@ -1,23 +1,16 @@
-import React from "react";
-import Image from "next/image";
 import Link from "next/link";
-import {Locale} from "@/i18n.config";
-import {getDictionary} from "@/lib/dictionary";
+import Image from "next/image";
 import {prefixBasePath} from "@/utils/path";
+import {useTranslations} from "@/i18n";
 
-export default async function Card({params: {lang}}: {params: {lang: Locale}}) {
-  const dictionary = await getDictionary(lang);
-  if (!dictionary) {
-    return null;
-  }
-  const {page} = dictionary;
-
+export default function Card() {
+  const t = useTranslations();
   return (
     <>
       <div className="w-full flex flex-col mx-auto max-w-screen-xl font-fontcustom md:flex-row gap-8  m-4 p-6 md:space-x-6 ">
         <div className=" flex flex-col w-full bg-brand border border-gray-200 square-lg shadow  dark:bg-brand rounded-lg">
           <div className="flex items-center justify-between pt-4 pl-4 mb-2 ">
-            <h5 className="text-xl font-bol d leading-none text-gray-600">{page.card.title_a}</h5>
+            <h5 className="text-xl font-bol d leading-none text-gray-600">{t("All Programs")}</h5>
           </div>
           <hr className="border-t mx-0 border-gray-400 " />
           <div className="flow-root">
@@ -35,10 +28,10 @@ export default async function Card({params: {lang}}: {params: {lang: Locale}}) {
                   </div>
                   <div className="flex-1 min-w-0 mt-2 ">
                     <Link href="#" className="text-sm font-medium text-gray-600  no-underline truncate">
-                      {page.card.heading_a1}
+                      {t("Healthcare")}
                     </Link>
                     <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                      {page.card.description_a1}
+                      {t("@Healthcare_description")}
                     </p>
                   </div>
                 </div>
@@ -56,10 +49,10 @@ export default async function Card({params: {lang}}: {params: {lang: Locale}}) {
                   </div>
                   <div className="flex-1 min-w-0 mt-2">
                     <Link href="#" className="text-sm font-medium no-underline  text-gray-600 truncate">
-                      {page.card.heading_a2}
+                      {t("Education")}
                     </Link>
                     <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                      {page.card.description_a2}
+                      {t("@Education_description")}
                     </p>
                   </div>
                 </div>
@@ -68,16 +61,16 @@ export default async function Card({params: {lang}}: {params: {lang: Locale}}) {
           </div>
           <div className="mx-auto mb-2">
             <Link
-              href={`/${lang}/programs`}
+              href="/programs"
               className="text-sm font-medium text-blue-600 dark:text-blue-500 no-underline hover:underline "
             >
-              {page.card.view_all}
+              {t("View all")}
             </Link>
           </div>
         </div>
         <div className=" flex flex-col w-full bg-brand border border-gray-200 square-lg shadow  dark:bg-brand rounded-lg">
           <div className="flex items-center justify-between pt-4 pl-4 mb-2 ">
-            <h5 className="text-xl font-bol d leading-none text-gray-600">{page.card.title_b}</h5>
+            <h5 className="text-xl font-bol d leading-none text-gray-600">{t("Other Services")}</h5>
           </div>
           <hr className="border-t mx-0 border-gray-400 " />
           <div className="flow-root">
@@ -95,10 +88,10 @@ export default async function Card({params: {lang}}: {params: {lang: Locale}}) {
                   </div>
                   <div className="flex-1 min-w-0 mt-2 ">
                     <Link href="#" className="text-sm font-medium no-underline  text-gray-600 truncate">
-                      {page.card.heading_b1}
+                      {t("Help")}
                     </Link>
                     <p className="text-sm text-gray-500  truncate dark:text-gray-400">
-                      {page.card.description_b1}
+                      {t("Tap here for assistance")}
                     </p>
                   </div>
                 </div>
@@ -116,10 +109,10 @@ export default async function Card({params: {lang}}: {params: {lang: Locale}}) {
                   </div>
                   <div className="flex-1 min-w-0 mt-2">
                     <Link href="#" className="text-sm  no-underline  font-medium text-gray-600 truncate">
-                      {page.card.heading_b2}
+                      {t("FAQ")}
                     </Link>
                     <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                      {page.card.description_b2}
+                      {t("Tap to know more")}
                     </p>
                   </div>
                 </div>
@@ -128,17 +121,17 @@ export default async function Card({params: {lang}}: {params: {lang: Locale}}) {
           </div>
           <div className="mx-auto ">
             <Link
-              href={`/${lang}/forms`}
+              href="/forms"
               className="text-sm font-medium text-blue-600 hover:underline no-underline  dark:text-blue-500"
             >
-              {page.card.view_all}
+              {t("View all")}
             </Link>
           </div>
         </div>
 
         <div className=" flex flex-col w-full bg-brand border border-gray-200 square-lg shadow  dark:bg-brand rounded-lg">
           <div className="flex items-center justify-between pt-4 pl-4 mb-2 ">
-            <h5 className="text-xl font-bol d leading-none text-gray-600">{page.card.title_c}</h5>
+            <h5 className="text-xl font-bol d leading-none text-gray-600">{t("Entitlements")}</h5>
           </div>
           <hr className="border-t mx-0 border-gray-400 " />
           <div className="flow-root">
@@ -156,13 +149,13 @@ export default async function Card({params: {lang}}: {params: {lang: Locale}}) {
                   </div>
                   <div className="flex-1 min-w-0 mt-2 ">
                     <Link
-                      href={`/${lang}/applications`}
+                      href="/applications"
                       className="text-sm font-medium no-underline  text-gray-600 truncate"
                     >
-                      {page.card.heading_c1}
+                      {t("Applications")}
                     </Link>
                     <p className="text-sm text-gray-500  truncate dark:text-gray-400">
-                      {page.card.description_c1}
+                      {t("Tap to view your Applications")}
                     </p>
                   </div>
                 </div>
@@ -180,13 +173,13 @@ export default async function Card({params: {lang}}: {params: {lang: Locale}}) {
                   </div>
                   <div className="flex-1 min-w-0 mt-2">
                     <Link
-                      href={`/${lang}/benefits`}
+                      href="/benefits"
                       className="text-sm  no-underline  font-medium text-gray-600 truncate"
                     >
-                      {page.card.heading_c2}
+                      {t("Benefits")}
                     </Link>
                     <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                      {page.card.description_c2}
+                      {t("Tap to view your Benefits")}
                     </p>
                   </div>
                 </div>
@@ -194,20 +187,6 @@ export default async function Card({params: {lang}}: {params: {lang: Locale}}) {
             </ul>
           </div>
         </div>
-
-        {/* <div className=" flex flex-col w-full bg-brand border border-gray-200 square-lg shadow dark:bg-brand rounded-lg">
-                    <div className="flex items-center justify-between pt-4 pl-4 mb-2 ">
-                        <h5 className="text-xl font-bol d leading-none text-gray-600">{page.card.title_c}</h5>
-
-                    </div>
-                    <hr className="border-t mx-0 border-gray-400" /> */}
-        {/* <Link href={`/${lang}/applications`} className="text-sm font-medium text-blue-600 dark:text-blue-500 no-underline hover:underline">
-                            {page.card.applications}
-                    </Link>
-                    <Link href={`/${lang}/benefits`} className="text-sm font-medium text-blue-600 dark:text-blue-500 no-underline hover:underline">
-                            {page.card.benefits}
-                    </Link> */}
-        {/* </div> */}
       </div>
     </>
   );

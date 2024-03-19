@@ -1,6 +1,6 @@
 "use client";
 
-import {createContext, useContext, useState} from "react";
+import {ReactNode, createContext, useContext, useState} from "react";
 
 interface GlobalContextType {
   formState: boolean;
@@ -17,8 +17,10 @@ interface GlobalContextType {
     address?: any;
     phone_number?: string;
   } | null;
-  setFormState: (_formStaet: boolean) => void;
+  profileObtained: boolean;
+  setFormState: (_formState: boolean) => void;
   setProfile: (_profile: GlobalContextType["profile"]) => void;
+  setProfileObtained: (_profileObtained: boolean) => void;
 }
 
 const GlobalContext = createContext<GlobalContextType>({
@@ -26,6 +28,8 @@ const GlobalContext = createContext<GlobalContextType>({
   setFormState: () => {},
   profile: {},
   setProfile: () => {},
+  profileObtained: false,
+  setProfileObtained: () => {},
 });
 
 export const useGlobalContext = () => {
@@ -38,15 +42,23 @@ export const useGlobalContext = () => {
 
 export const useAuth = () => {
   const context = useGlobalContext();
-  return {profile: context.profile, setProfile: context.setProfile};
+  return {
+    profile: context.profile,
+    setProfile: context.setProfile,
+    profileObtained: context.profileObtained,
+    setProfileObtained: context.setProfileObtained,
+  };
 };
 
-export const GlobalContextProvider = ({children}: {children: React.ReactNode}) => {
+export const GlobalContextProvider = ({children}: {children: ReactNode}) => {
   const [formState, setFormState] = useState(false);
   const [profile, setProfile] = useState<GlobalContextType["profile"]>(null);
+  const [profileObtained, setProfileObtained] = useState(false);
 
   return (
-    <GlobalContext.Provider value={{formState, profile, setFormState, setProfile}}>
+    <GlobalContext.Provider
+      value={{formState, profile, profileObtained, setFormState, setProfile, setProfileObtained}}
+    >
       {children}
     </GlobalContext.Provider>
   );
