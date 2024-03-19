@@ -1,5 +1,5 @@
 'use client'
-import { fetchApplicationDetails } from '@utils'
+import { fetchApplicationDetails, fetchPrograms} from '@utils'
 import Loading from '../loading';
 import { Locale } from '@i18n.config'
 import { getDictionary } from '@lib/dictionary'
@@ -9,7 +9,6 @@ import { AuthUtil } from '../components/auth';
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation';
 import { ApplicationDetails } from '@types';
-const ITEMS_PER_PAGE = 10;
 
 export default async function ApplcnPage({ searchParams, params: { lang } }: {
   searchParams?: {
@@ -20,22 +19,23 @@ export default async function ApplcnPage({ searchParams, params: { lang } }: {
 }) {
   const router = useRouter();
   const [applications, setApplications] = useState<ApplicationDetails[]>([]);
+  // const [programId, setProgramId] = useState<number | null>(null); // Add state for programId
   const [page, setPage] = useState<any>(null);
-  const [isLoading, setIsLoading] = useState(true);
-
-  const [paginatedApplications, setPaginatedApplications] = useState<ApplicationDetails[]>([]);
-  const [totalPages, setTotalPages] = useState<number>(0);
-  const currentPage = Number(searchParams?.page) || 1;
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        setIsLoading(true);
-        const allApplications: ApplicationDetails[] = await fetchApplicationDetails();
-        setApplications(allApplications);
-        
-        setTotalPages(Math.ceil(allApplications.length / ITEMS_PER_PAGE));
-        setIsLoading(false);
+        const result: ApplicationDetails[] = await fetchApplicationDetails();
+        // const allApplications: ApplicationDetails[] = await fetchApplicationDetails();
+        const programs = await fetchPrograms();
+        setApplications(result);
+        // if (programId !== null) {
+        //   const selectedProgram = programs.find(program => program.id === programId);
+        //   if (selectedProgram) {
+        //     const filteredApplications = allApplications.filter(app => app.program_id === selectedProgram.id);
+        //     setApplications(filteredApplications);
+        //   }
+        // }
 
         const dictionary = await getDictionary(lang);
         if (!dictionary) {
@@ -44,27 +44,17 @@ export default async function ApplcnPage({ searchParams, params: { lang } }: {
 
         const { page } = dictionary;
         setPage(page);
-        setIsLoading(false);
+
       } catch (error) {
         console.error('Error fetching applications details:', error);
       }
     };
 
     fetchData();
-  }, [lang]);
+  }, []);
 
-  useEffect(() => {
-    const start = (currentPage - 1) * ITEMS_PER_PAGE;
-    const end = start + ITEMS_PER_PAGE;
-    setPaginatedApplications(applications.slice(start, end));
-  }, [currentPage, applications]);
-
-  const handlePageChange = (page: number) => {
-    router.push(`?page=${page}`);
-  };
-
-  // const query = searchParams?.query || '';
-  // const currentPage = Number(searchParams?.page) || 1;
+  const query = searchParams?.query || '';
+  const currentPage = Number(searchParams?.page) || 1;
 
 
 
@@ -83,7 +73,7 @@ export default async function ApplcnPage({ searchParams, params: { lang } }: {
         case 'completed':
             return 'completedButton';
         case 'active':
-            return 'appliedButton';
+            return 'activeButton';
         case 'inprogress':
             return 'inProgressButton';
         case 'rejected':
@@ -102,16 +92,11 @@ function toTitleCase(str: string) {
 return (
   <div >
     <AuthUtil failedRedirectUrl='/en/login' />
-    {isLoading ? (
-      <div className='mt-16 flex justify-center items-center flex-col gap-2'>
-        </div>
-      ): !isDataEmpty ? (
+      {!isDataEmpty ? (
         <div className=" m-6 p-6 md:space-x-4 mx-auto max-w-screen-xl flex justify-center items-center">
           <div className="bg-brand container w-1180 shadow-md  pb-0 rounded-lg top-24">
             <div className="flex flex-wrap justify-between items-center">
-              <p className="font-fontcustom m-4 " 
-              style={{ top: '226px', left: '159px', width: '98px', height: '20px', textAlign: 'left', font: 'normal normal 600 16px/20px Inter', letterSpacing: '0px', color: '#484848', opacity: '1', whiteSpace: 'nowrap' }}>
-                {page.application.title}</p>
+              <p className="flex items-center text-gray-700 text-x p-2 font-fontcustom m-2 ">{page.application.title}</p>
               <SearchBar />
             </div>
               {/* <div className="flex flex-wrap justify-between items-center">
@@ -162,11 +147,9 @@ return (
                     </tr>
                   </thead>
                   <tbody>
-                    {paginatedApplications.map((application, index) => {
-                      const itemNumber = (currentPage - 1) * ITEMS_PER_PAGE + index + 1;
-                      return (
+                    {applications.map((application, index) => (
                       <tr key={index} className="bg-white border-b dark:bg-white-200 dark:border-white-200 text-gray-600">
-                        <td className="px-6 py-4 snoElement">{itemNumber}</td>
+                        <td className="px-6 py-4">{index + 1}</td>
                         <td scope="row" className="rowElement px-6 py-4 ">
                           {application.program_name}
                         </td>
@@ -176,7 +159,7 @@ return (
                             className={`top-14 text-xs  w-24 h-8 rounded-md text-center tracking-[0px] opacity-100 border-collapse border-[none] left-[811px] text-white ${getStatusClass(application.application_status)}`}
                             disabled={true}
                           >
-                          {application.application_status === 'active' ? 'Applied' : toTitleCase(application.application_status)}
+                            {toTitleCase(application.application_status)}
                           </button>
                         </td>
                         {/* <td className="px-6 py-4">
@@ -189,40 +172,34 @@ return (
                           </button>
                         </td> */}
                         <td className="px-6 py-4">
-                        {application.application_id}
+                          {application.application_id}
                         </td>
                         {/* <td className="px-6 py-4">
                           <span>{program.is_multiple_form_submission}</span>
                         </td> */}
                         <td className="px-6 py-4">
-                          {application.date_applied?.slice(0, 10)}
+                          {application.date_applied}
                         </td>
                       </tr>
-                      );
-                    })}
+                    ))}
                   </tbody>
                 </table>
               </div>
             </Suspense>
-            <div className='p-2 snoElement'>
-            <Pagination
-            currentPage={currentPage}
-            totalPages={totalPages}
-            onPageChange={handlePageChange}
-            />
-          </div>
+            {/* <div className='p-2'>
+            <Pagination />
+          </div> */}
           </div>
         </div>
-      )
-      : (
+      ) : (
         <div className='mt-16 flex justify-center items-center flex-col gap-2 '>
           <h2 className='tetx-black text-xl font-bold'>
             Oops no results..
             Sign in Again!
           </h2>
+          <p>Message</p>
         </div>
-      )
-      }
+      )}
       <div className='pt-0'>
           <Card params={{ lang }} />
       </div>

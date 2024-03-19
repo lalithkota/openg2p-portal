@@ -18,10 +18,12 @@ export default async function Submitted({ params: { lang } }: {
     const [currentDate, setCurrentDate] = useState('');
     const [isToastVisible, setIsToastVisible] = useState(true);
     const [page, setPage] = useState<any>(null);
+    // const [applications, setApplications] = useState<ApplicationDetails[]>([]);
+    // const [applicationId, setApplicationId] = useState('');
     const [applicationDetails, setApplicationDetails] = useState<ApplicationDetails | null>(null);
     const searchParams = useSearchParams()
     const programId = searchParams.get('programId');
-    // const formId = searchParams.get('formId')
+    const formId = searchParams.get('formId')
     useEffect(() => {
       const fetchData = async () => {
         try {
@@ -29,20 +31,17 @@ export default async function Submitted({ params: { lang } }: {
             // setApplications(result);
             const programs = await fetchPrograms();
             const applications= await fetchApplicationDetails();
-            const program = programs.find(prog => prog.id === Number(programId));  // Find the program by ID
-
-            if (program) {
-                // Filter applications for those that match the program name and sort them to get the latest one
-                const filteredApplications = applications.filter(app => app.program_name === program.name);
-                const latestApplication = filteredApplications.sort((a, b) => {
-                    const dateA = new Date(a.date_applied);
-                    const dateB = new Date(b.date_applied);
-                    return dateB.getTime() - dateA.getTime();
-                })[0];
-                if (latestApplication) {
-                    setApplicationDetails(latestApplication);
-                }
-            }
+            const program = programs.find(prog => prog.id === Number(programId));     // Find the program by ID
+            const application = applications.find(app => app.program_name=== program?.name);    // Find the application that corresponds to the program name
+            // if (application) {
+            //   setApplicationId(application.application_id.toString());
+            // }
+            if (application) {
+                setApplicationDetails(application);
+              }
+            const currentDate = new Date();
+            const formattedDate = currentDate.toLocaleDateString();
+            setCurrentDate(formattedDate);
             const dictionary = await getDictionary(lang);
             if (!dictionary) {
                 return null;
@@ -55,8 +54,7 @@ export default async function Submitted({ params: { lang } }: {
           }
       };
       fetchData();
-    }, [programId,lang]);
-    
+    }, [programId]);
     const handlePrint = () => {
         window.print();
     };
@@ -81,7 +79,7 @@ export default async function Submitted({ params: { lang } }: {
             <div className={`fixed top-110 right-5 md:right-5 w-full md:w-1/4 z-50 bg-green-600 text-white py-2 px-4 rounded-lg font-semibold text-sm leading-5 ${isToastVisible ? 'block' : 'hidden'}`}>
                 <div className="relative">
                     Thank you. Your application has been submitted successfully.
-                    Please note your application ID for future reference - {applicationDetails.program_name}
+                    Please note your application ID for future reference - {applicationDetails.application_id}
                 </div>
                 <button className="absolute top-3 right-3 md:right-3 md:top-3 outline-none bg-transparent border-none text-white cursor-pointer p-0" onClick={hideToastSuccessMsg}>
                     <img src="/img/close_icon@2x.png" alt="close" width={10} height={10} />
