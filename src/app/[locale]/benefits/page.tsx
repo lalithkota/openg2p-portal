@@ -2,7 +2,7 @@
 import {useRouter} from "next/navigation";
 import {useTranslations, useLocale} from "next-intl";
 import {useState, useEffect, Suspense} from "react";
-import {Card, Pagination, SearchBar} from "@/components";
+import {Pagination, SearchBar} from "@/components";
 import {AuthUtil} from "@/components/auth";
 import {BenefitDetails} from "@/types";
 import {fetchBenefitDetails} from "@/utils";
@@ -217,11 +217,6 @@ export default function BenefPage({
           <p>{t("Message")}</p>
         </div>
       )}
-      (
-      <div className="pt-0">
-        <Card />
-      </div>
-      )
     </div>
   );
 }
