@@ -1,4 +1,4 @@
-import type {Metadata} from "next";
+import type {Metadata, Viewport} from "next";
 import {NextIntlClientProvider, useMessages} from "next-intl";
 import {ReactNode} from "react";
 import "@/commons/styles/globals.css";
@@ -9,8 +9,9 @@ export const metadata: Metadata = {
   title: "Beneficiary Portal",
   description: "OpenG2P self-service portal for Beneficiaries",
   icons: [{rel: "icon", url: Favicon.src}],
-  viewport: {width: "device-width", initialScale: 1},
 };
+
+export const viewport: Viewport = {width: "device-width", initialScale: 1};
 
 export default function RootLayout({
   children,
