@@ -23,8 +23,8 @@ export default function LanguageDropDown() {
             src={prefixBasePath(t(`@flag_url_${currentLocale}`))}
             alt={t(`@language_title_${currentLocale}`)}
             className="mr-2"
-            width={50}
-            height={50}
+            width={20}
+            height={20}
           />
           <span>{t(`@language_title_${currentLocale}`)}</span>
           <ChevronDownIcon className="mr-1 h-5 w-10 text-gray-400 hide" aria-hidden="true" />

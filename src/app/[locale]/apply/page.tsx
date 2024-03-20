@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import {useSearchParams} from "next/navigation";
+import {useRouter, useSearchParams} from "next/navigation";
 import {useLocale, useTranslations} from "next-intl";
 import {useEffect, useState} from "react";
 import {AuthUtil} from "@/components/auth";
@@ -12,7 +12,7 @@ export default function Apply() {
   const lang = useLocale();
   AuthUtil({failedRedirectUrl: `/${lang}/login`});
 
-  // const [page, setPage] = useState<any>(null);
+  const router = useRouter();
   const [form, setForm] = useState<ProgramForm>();
   const searchParams = useSearchParams();
   const programid = searchParams.get("programid");
@@ -43,6 +43,7 @@ export default function Apply() {
             try {
               const data = await SubmitForm(Number(programid), submission.data);
               console.log("Form submission response:", data);
+              router.push(`/${lang}/submission?page=submitted&programId=${programid}`);
             } catch (error) {
               console.error("Error submitting form:", error);
             }
@@ -55,7 +56,7 @@ export default function Apply() {
     };
 
     fetchData();
-  }, [programid]);
+  }, [programid, lang, router]);
 
   return (
     <div className=" rounded-lg border-gray-200 m-6 p-4 ">
@@ -131,6 +132,7 @@ export default function Apply() {
             letterSpacing: "0px",
             color: "#848484",
             opacity: "1",
+            whiteSpace: "nowrap",
           }}
         >
           {t("Application Form")}
@@ -150,6 +152,7 @@ export default function Apply() {
               letterSpacing: "0px",
               color: "#484848",
               opacity: "1",
+              whiteSpace: "nowrap",
             }}
           >
             {t("Application form")}

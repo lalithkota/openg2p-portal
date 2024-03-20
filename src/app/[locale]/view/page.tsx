@@ -1,23 +1,16 @@
 "use client";
 import {useRouter} from "next/navigation";
-import {useTranslations, useLocale} from "next-intl";
+import {useLocale, useTranslations} from "next-intl";
 import {Suspense, useEffect, useState} from "react";
 import {Card, Pagination, SearchBar} from "@/components";
 import {AuthUtil} from "@/components/auth";
-import {ApplicationDetails} from "@/types";
 import {fetchApplicationDetails} from "@/utils";
+import {ApplicationDetails} from "@/types";
 import Loading from "../loading";
 
 const ITEMS_PER_PAGE = 30;
 
-export default function ApplcnPage({
-  searchParams,
-}: {
-  searchParams?: {
-    query?: string;
-    page?: string;
-  };
-}) {
+export default function ApplcnPage({searchParams}: {searchParams?: {query?: string; page?: string}}) {
   const lang = useLocale();
   AuthUtil({failedRedirectUrl: `/${lang}/login`});
 
@@ -28,6 +21,7 @@ export default function ApplcnPage({
   const [paginatedApplications, setPaginatedApplications] = useState<ApplicationDetails[]>([]);
   const [totalPages, setTotalPages] = useState<number>(0);
   const currentPage = Number(searchParams?.page) || 1;
+
   const t = useTranslations();
 
   useEffect(() => {
@@ -83,13 +77,13 @@ export default function ApplcnPage({
   return (
     <div>
       {isLoading ? (
-        <div className="mt-16 flex justify-center items-center flex-col gap-2"></div>
+        <div className="mt-16 flex justify-center items-center flex-col gap-2" />
       ) : !isDataEmpty ? (
         <div className=" m-6 p-6 md:space-x-4 mx-auto max-w-screen-xl flex justify-center items-center">
           <div className="bg-brand container w-1180 shadow-md  pb-0 rounded-lg top-24">
             <div className="flex flex-wrap justify-between items-center">
               <p
-                className="font-fontcustom m-4 "
+                className="font-fontcustom m-4"
                 style={{
                   top: "226px",
                   left: "159px",

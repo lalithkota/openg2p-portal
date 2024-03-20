@@ -77,12 +77,15 @@
   "Enter password": "Enter password",
   "Reset Password": "Reset Password",
 
-  "Name": "Name",
-  "Last Name": "Last Name",
+  "Given Name": "Given Name",
+  "Additional Name": "Additional Name",
+  "Family Name": "Family Name",
   "Gender": "Gender",
   "Birthdate": "Birthdate",
   "Email": "Email",
   "Phone": "Phone",
+  "Personal Information": "Personal Information",
+  "Contact Information": "Contact Information",
 
   "OR": "OR",
   "Actions": "Actions",

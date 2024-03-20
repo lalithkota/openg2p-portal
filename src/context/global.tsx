@@ -1,22 +1,11 @@
 "use client";
 
 import {ReactNode, createContext, useContext, useState} from "react";
+import {Profile} from "@/types";
 
 interface GlobalContextType {
   formState: boolean;
-  profile: {
-    sub?: string;
-    name?: string;
-    given_name?: string;
-    family_name?: string;
-    middle_name?: string;
-    picture?: string;
-    email?: string;
-    gender?: string;
-    birthdate?: string;
-    address?: any;
-    phone_number?: string;
-  } | null;
+  profile: Profile | null;
   profileObtained: boolean;
   setFormState: (_formState: boolean) => void;
   setProfile: (_profile: GlobalContextType["profile"]) => void;
