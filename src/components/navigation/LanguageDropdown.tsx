@@ -58,8 +58,8 @@ export default function LanguageDropDown() {
             src={getFlagImage(selectedLanguage || "en")}
             alt={selectedLanguage}
             className="mr-2"
-            width={50}
-            height={50}
+            width={20}
+            height={20}
           />
           <span>
             {selectedLanguage === "en" ? "English" : selectedLanguage === "fr" ? "Français" : "Language"}

@@ -15,7 +15,8 @@ const SearchProgram = ({program, setProgram}: SearchProgramsProps) => {
           item.toLowerCase().replace(/\s+/g, "").includes(query.toLowerCase().replace(/\s+/g, ""))
         );
   return (
-    <div className=" ">
+    <div className=" relative w-full flex justify-end">
+      <div className="w-1/2">
       <Combobox value={program} onChange={setProgram}>
         <div className="relative  mt-1 ">
           <div className=" w-full">
@@ -92,6 +93,7 @@ const SearchProgram = ({program, setProgram}: SearchProgramsProps) => {
           </Transition>
         </div>
       </Combobox>
+      </div>
     </div>
   );
 };
