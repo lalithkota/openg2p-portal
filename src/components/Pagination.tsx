@@ -40,8 +40,8 @@ export default function Pagination({
     }
   };
   return (
-    <div className="flex justify-center items-center space-x-4">
-      <button onClick={goToPreviousPage}>
+    <div className="flex justify-center items-center space-x-6">
+      <button onClick={goToPreviousPage} className="p-2 hover:bg-gray-200 rounded">
         <div className="h-5 w-5">
           <svg viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
@@ -58,7 +58,7 @@ export default function Pagination({
         <button
           key={pageNumber}
           onClick={() => goToPage(pageNumber)}
-          className={clsx({
+          className={clsx("w-10 h-10 flex items-center justify-center rounded-lg text-sm", {
             "bg-blue-700 rounded-lg w-8 h-8 text-white": pageNumber === currentPage,
           })}
         >
@@ -66,7 +66,7 @@ export default function Pagination({
         </button>
       ))}
       <button onClick={goToNextPage}>
-        <div className="h-5 w-5">
+        <div className="p-2 hover:bg-gray-200 rounded">
           <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
             <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>

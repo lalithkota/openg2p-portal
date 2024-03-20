@@ -21,7 +21,7 @@ export function AuthUtil(params: {successRedirectUrl?: string; failedRedirectUrl
   }
 
   useEffect(() => {
-    if (auth.profileObtained) {
+    if (typeof auth.profile !== "undefined") {
       return checkAndRedirect();
     }
     fetch(prefixBaseApiPath("/auth/profile"))
@@ -30,6 +30,7 @@ export function AuthUtil(params: {successRedirectUrl?: string; failedRedirectUrl
           res
             .json()
             .then((resJson) => {
+              auth.profile = resJson;
               auth.setProfile(resJson);
             })
             .catch((err) => {
@@ -44,9 +45,6 @@ export function AuthUtil(params: {successRedirectUrl?: string; failedRedirectUrl
       .catch((err) => {
         console.log("Error Getting profile", err);
         checkAndRedirect();
-      })
-      .finally(() => {
-        auth.setProfileObtained(true);
       });
     // TODO: Fix this
     // eslint-disable-next-line react-hooks/exhaustive-deps

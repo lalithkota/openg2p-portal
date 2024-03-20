@@ -26,9 +26,17 @@ export default function Submitted() {
         const programs = await fetchPrograms();
         const applications = await fetchApplicationDetails();
         const program = programs.find((prog) => prog.id === Number(programId)); // Find the program by ID
-        const application = applications.find((app) => app.program_name === program?.name); // Find the application that corresponds to the program name
-        if (application) {
-          setApplicationDetails(application);
+        if (program) {
+          // Filter applications for those that match the program name and sort them to get the latest one
+          const filteredApplications = applications.filter((app) => app.program_name === program.name);
+          const latestApplication = filteredApplications.sort((a, b) => {
+            const dateA = new Date(a.date_applied);
+            const dateB = new Date(b.date_applied);
+            return dateB.getTime() - dateA.getTime();
+          })[0];
+          if (latestApplication) {
+            setApplicationDetails(latestApplication);
+          }
         }
       } catch (error) {
         console.error("Error fetching applications details:", error);
