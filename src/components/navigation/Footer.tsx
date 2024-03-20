@@ -1,22 +1,16 @@
-import React from "react";
-import Link from "next/link";
-import {Locale} from "@/i18n.config";
-import {getDictionary} from "@/lib/dictionary";
 import Image from "next/image";
+import Link from "next/link";
 import {prefixBasePath} from "@/utils/path";
+import {useLocale, useTranslations} from "next-intl";
 
-export default async function Footer({lang}: {lang: Locale}) {
-  const dictionary = await getDictionary(lang);
-  if (!dictionary) {
-    return null;
-  }
-  const {footer} = dictionary;
-
+export default function Footer() {
+  const lang = useLocale();
+  const t = useTranslations();
   return (
     <footer className="mt-auto">
       <div className=" w-full font-fontcustom bg-no-repeat shadow-md opacity-100  bg-brand border-gray-200 p-1 lg:px-4 print:hidden ">
         <div className="flex flex-wrap justify-between items-center  mx-auto  max-w-screen-xl ">
-          <Link href={`/${lang}/home`} className=" m-3 flex items-center">
+          <Link href={`/${lang}/home`} className="m-3 flex items-center">
             <Image
               src={prefixBasePath("/img/logo@2x.png")}
               priority={true}
@@ -31,7 +25,7 @@ export default async function Footer({lang}: {lang: Locale}) {
                 href={`/${lang}/aboutus`}
                 className="mr-4 hover:underline text-gray-500 no-underline md:mr-6 "
               >
-                {footer.about}
+                {t("About Us")}
               </Link>
             </li>
             <li>
@@ -39,7 +33,7 @@ export default async function Footer({lang}: {lang: Locale}) {
                 href={`/${lang}/contactus`}
                 className="mr-4 hover:underline text-gray-500 no-underline md:mr-6"
               >
-                {footer.contact}
+                {t("Contact Us")}
               </Link>
             </li>
             <li>
@@ -47,14 +41,14 @@ export default async function Footer({lang}: {lang: Locale}) {
                 href={`/${lang}/otherpage`}
                 className="mr-4 hover:underline text-gray-500 no-underline md:mr-6 "
               >
-                {footer.others}
+                {t("Others")}
               </Link>
             </li>
           </ul>
         </div>
         <hr className="my-6 border-gray-200 sm:mx-auto dark:border-gray-200 lg:my-8" />
         <span className="block text-sm text-gray-500 sm:text-center dark:text-gray-400">
-          © 2023 National Social Benefits Portal. All rights reserved.
+          {t("@copyright")}
         </span>
       </div>
     </footer>

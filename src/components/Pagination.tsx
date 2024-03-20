@@ -1,21 +1,16 @@
 "use client";
 
 import clsx from "clsx";
-// import {usePathname, useSearchParams, useRouter} from "next/navigation";
 
-interface PaginationProps {
+export default function Pagination({
+  currentPage,
+  totalPages,
+  onPageChange,
+}: {
   currentPage: number;
   totalPages: number;
   onPageChange: (_page: number) => void;
-}
-
-const Pagination = ({currentPage, totalPages, onPageChange}: PaginationProps) => {
-  // const pathname = usePathname();
-  // const searchParams = useSearchParams();
-  // const currentPage = Number(searchParams.get('page')) || 1;
-  // const {replace} = useRouter();
-  // const totalPages = 2
-
+}) {
   const generatePageNumbers = (currentPage: number, totalPages: number) => {
     const pageNumbers = [];
     for (let i = 1; i <= totalPages; i++) {
@@ -25,11 +20,6 @@ const Pagination = ({currentPage, totalPages, onPageChange}: PaginationProps) =>
   };
   const pageNumbers = generatePageNumbers(currentPage, totalPages);
 
-  // const goToPage = (page: number) => {
-  //   const params = new URLSearchParams(searchParams);
-  //   params.set('page', page.toString());
-  //   replace(`${pathname}?${params.toString()}`);
-  // };
   const goToPage = (page: number) => {
     onPageChange(page);
   };
@@ -95,6 +85,4 @@ const Pagination = ({currentPage, totalPages, onPageChange}: PaginationProps) =>
       </button>
     </div>
   );
-};
-
-export default Pagination;
+}

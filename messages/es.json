@@ -1,0 +1,104 @@
+{
+  "@language_title": "Español",
+  "@flag_url": "/img/flag_es.png",
+
+  "@language_title_en": "English",
+  "@flag_url_en": "/img/flag_en.png",
+
+  "@language_title_es": "Español",
+  "@flag_url_es": "/img/flag_es.png",
+
+  "@language_title_fr": "Français",
+  "@flag_url_fr": "/img/flag_fr.png",
+
+  "@language_title_tl": "Tagalog",
+  "@flag_url_tl": "/img/flag_tl.png",
+
+  "OpenG2P": "OpenG2P",
+
+  "Home": "Inicio",
+  "About Us": "Acerca de nosotros",
+  "Contact Us": "Contáctenos",
+  "Others": "Otros",
+
+  "Other Services": "Otros Servicios",
+  "Healthcare": "Cuidado de la salud",
+  "@Healthcare_description": "Más de 30 programas disponibles",
+  "Education": "Educación",
+  "@Education_description": "Más de 55 programas disponibles",
+  "Help": "Ayuda",
+  "Tap here for assistance": "Toque aquí para ayuda",
+  "FAQ": "Preguntas frecuentes",
+  "Tap to know more": "Toque para saber más",
+  "Entitlements": "Derechos",
+  "Applications": "Solicitudes",
+  "Application Form": "Formulario de solicitud",
+  "Tap to view your Applications": "Toque para ver sus solicitudes",
+  "Benefits": "Beneficios",
+  "Tap to view your Benefits": "Toque para ver sus beneficios",
+  "View all": "Ver todo",
+
+  "This is the about page": "Esta es la página Acerca de",
+
+  "All Programs": "Todos los programas",
+  "View My Programs": "Ver mis programas",
+  "Program Name": "Nombre del programa",
+  "Program List": "Lista de programas",
+  "Application ID": "ID de solicitud",
+  "Entitlement Reference Number": "Número de referencia de derechos",
+  "Date Applied": "Fecha de solicitud",
+  "Submitted On": "Enviado el",
+
+  "My Profile": "Mi perfil",
+  "My Application": "Mi solicitud",
+  "My Programs": "Mis programas",
+  "My Benefits": "Mis beneficios",
+  "Application Status": "Estado de la solicitud",
+  "Program Status": "Estado del programa",
+  "Enrollment Status": "Estado de inscripción",
+  "Program Submission": "Envío del programa",
+  "Funds Awaited": "Fondos esperados ($)",
+  "Funds Received": "Fondos recibidos ($)",
+  "Total Funds Awaited": "Total de fondos esperados ($)",
+  "Total Funds Received": "Total de fondos recibidos ($)",
+
+  "The entered data will not be saved_ Are you sure you want to discard the form?": "Los datos ingresados no se guardarán. ¿Está seguro de que desea descartar el formulario?",
+  "There was a problem": "Hubo un problema",
+  "We could not find the page you are looking for": "No pudimos encontrar la página que está buscando",
+
+  "An error occurred": "Se produjo un error",
+  "Try again": "Inténtalo de nuevo",
+
+  "Facing any challenges?": "¿Enfrentando algún desafío?",
+
+  "Email or Phone": "Correo electrónico o teléfono",
+  "Enter email or Phone": "Ingrese correo electrónico o teléfono",
+  "Password": "Contraseña",
+  "Enter password": "Ingrese contraseña",
+  "Reset Password": "Restablecer contraseña",
+
+  "Name": "Nombre",
+  "Last Name": "Apellido",
+  "Gender": "Género",
+  "Birthdate": "Fecha de nacimiento",
+  "Email": "Correo electrónico",
+  "Phone": "Teléfono",
+
+  "OR": "O",
+  "Actions": "Acciones",
+  "Login": "Iniciar sesión",
+  "Log out": "Cerrar sesión",
+  "Apply": "Aplicar",
+  "Reapply": "Reaplicar",
+  "Cancel": "Cancelar",
+  "Discard": "Descartar",
+  "Search": "Buscar",
+  "Submit": "Enviar",
+  "Status": "Estado",
+  "Message": "Mensaje",
+  "View": "Ver",
+  "Print": "Imprimir",
+  "No_": "No.",
+
+  "@copyright": "© 2023 Portal Nacional de Beneficios Sociales. Todos los derechos reservados."
+}

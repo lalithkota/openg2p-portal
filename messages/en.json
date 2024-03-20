@@ -1,0 +1,104 @@
+{
+  "@language_title": "English",
+  "@flag_url": "/img/flag_en.png",
+
+  "@language_title_en": "English",
+  "@flag_url_en": "/img/flag_en.png",
+
+  "@language_title_es": "Español",
+  "@flag_url_es": "/img/flag_es.png",
+
+  "@language_title_fr": "Français",
+  "@flag_url_fr": "/img/flag_fr.png",
+
+  "@language_title_tl": "Tagalog",
+  "@flag_url_tl": "/img/flag_tl.png",
+
+  "OpenG2P": "OpenG2P",
+
+  "Home": "Home",
+  "About Us": "About Us",
+  "Contact Us": "Contact Us",
+  "Others": "Others",
+
+  "Other Services": "Other Services",
+  "Healthcare": "Healthcare",
+  "@Healthcare_description": "30+ Schemes available",
+  "Education": "Education",
+  "@Education_description": "55+ Schemes available",
+  "Help": "Help",
+  "Tap here for assistance": "Tap here for assistance",
+  "FAQ": "FAQ",
+  "Tap to know more": "Tap to know more",
+  "Entitlements": "Entitlements",
+  "Applications": "Applications",
+  "Application Form": "Application Form",
+  "Tap to view your Applications": "Tap to view your Applications",
+  "Benefits": "Benefits",
+  "Tap to view your Benefits": "Tap to view your Benefits",
+  "View all": "View all",
+
+  "This is the about page": "This is the about page",
+
+  "All Programs": "All Programs",
+  "View My Programs": "View My Programs",
+  "Program Name": "Program Name",
+  "Program List": "Program List",
+  "Application ID": "Application ID",
+  "Entitlement Reference Number": "Entitlement Reference Number",
+  "Date Applied": "Date Applied",
+  "Submitted On": "Submitted On",
+
+  "My Profile": "My Profile",
+  "My Application": "My Application",
+  "My Programs": "My Programs",
+  "My Benefits": "My Benefits",
+  "Application Status": "Application Status",
+  "Program Status": "Program Status",
+  "Enrollment Status": "Enrollment Status",
+  "Program Submission": "Program Submission",
+  "Funds Awaited": "Funds Awaited ($)",
+  "Funds Received": "Funds Received ($)",
+  "Total Funds Awaited": "Total Funds Awaited ($)",
+  "Total Funds Received": "Total Funds Received ($)",
+
+  "The entered data will not be saved_ Are you sure you want to discard the form?": "The entered data will not be saved. Are you sure you want to discard the form?",
+  "There was a problem": "There was a problem",
+  "We could not find the page you are looking for": "We could not find the page you are looking for",
+
+  "An error occurred": "An error occurred",
+  "Try again": "Try again",
+
+  "Facing any challenges?": "Facing any challenges?",
+
+  "Email or Phone": "Email or Phone",
+  "Enter email or Phone": "Enter email or Phone",
+  "Password": "Password",
+  "Enter password": "Enter password",
+  "Reset Password": "Reset Password",
+
+  "Name": "Name",
+  "Last Name": "Last Name",
+  "Gender": "Gender",
+  "Birthdate": "Birthdate",
+  "Email": "Email",
+  "Phone": "Phone",
+
+  "OR": "OR",
+  "Actions": "Actions",
+  "Login": "Login",
+  "Log out": "Log out",
+  "Apply": "Apply",
+  "Reapply": "Reapply",
+  "Canel": "Cancel",
+  "Discard": "Discard",
+  "Search": "Search",
+  "Submit": "Submit",
+  "Status": "Status",
+  "Message": "Message",
+  "View": "View",
+  "Print": "Print",
+  "No_": "No.",
+
+  "@copyright": "© 2023 National Social Benefits Portal. All rights reserved."
+}

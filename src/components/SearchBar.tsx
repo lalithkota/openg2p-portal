@@ -1,19 +1,18 @@
 "use client";
-import React, {useState} from "react";
-import {SearchProgram} from ".";
 import {useSearchParams, usePathname, useRouter} from "next/navigation";
+import {useState, FormEvent} from "react";
+import {SearchProgram} from ".";
 
 const SearchButton = () => <button type="submit" className="-ml-3 z-10 "></button>;
 
-function SearchBar() {
-  //const router = useRouter()
+export default function SearchBar() {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const {replace} = useRouter();
 
   const [program, setProgram] = useState("");
 
-  const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSearch = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (program === "") {
       return alert("Please fill in the search bar");
@@ -22,7 +21,6 @@ function SearchBar() {
   };
   const updateSearchParam = (program: string) => {
     const params = new URLSearchParams(searchParams);
-    //params.set('page', '1');
     if (program) {
       params.set("query", program);
     } else {
@@ -42,5 +40,3 @@ function SearchBar() {
     </form>
   );
 }
-
-export default SearchBar;

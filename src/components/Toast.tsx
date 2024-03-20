@@ -1,4 +1,4 @@
-import React from "react";
+import {ReactNode, ReactElement, JSXElementConstructor} from "react";
 import {ToastContainer, ToastContentProps, toast} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -8,10 +8,10 @@ export default function Toast() {
       | string
       | number
       | boolean
-      | React.ReactElement<any, string | React.JSXElementConstructor<any>>
-      | Iterable<React.ReactNode>
-      // | React.PromiseLikeOfReactNode
-      | ((_props: ToastContentProps<unknown>) => React.ReactNode)
+      | ReactElement<any, string | JSXElementConstructor<any>>
+      | Iterable<ReactNode>
+      // | PromiseLikeOfReactNode
+      | ((_props: ToastContentProps<unknown>) => ReactNode)
       | null
       | undefined,
     type: string

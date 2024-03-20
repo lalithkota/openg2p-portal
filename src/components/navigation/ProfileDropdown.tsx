@@ -1,20 +1,17 @@
 "use client";
-
+import Link from "next/link";
+import {useRouter} from "next/navigation";
+import {useLocale, useTranslations} from "next-intl";
 import {Fragment} from "react";
 import {Menu, Transition} from "@headlessui/react";
 import {ChevronDownIcon} from "@heroicons/react/outline";
-import Link from "next/link";
-import {Locale} from "@/i18n.config";
-import {prefixBaseApiPath} from "@/utils/path";
-import {useRouter} from "next/navigation";
 import {Avatar} from "@mui/material";
 import {useAuth} from "@/context/global";
+import {prefixBaseApiPath} from "@/utils/path";
 
-function classNames(...classes: string[]): string {
-  return classes.filter(Boolean).join(" ");
-}
-
-export default function ProfileDropDown({lang}: {lang: Locale}) {
+export default function ProfileDropDown() {
+  const lang = useLocale();
+  const t = useTranslations();
   const {profile, setProfile} = useAuth();
   const router = useRouter();
 
@@ -29,7 +26,7 @@ export default function ProfileDropDown({lang}: {lang: Locale}) {
   return (
     <Menu as="div" className="print:hidden relative inline-block text-left border-none">
       <div>
-        <Menu.Button className="inline-flex w-full justify-center gap-x-1.5 px-3 py-2 text-sm font-semibold text-gray-900  border-transparent  ">
+        <Menu.Button className="inline-flex w-full justify-center gap-x-1.5 px-3 py-2 text-sm font-semibold text-gray-900 border-transparent">
           <Avatar src={profile?.picture} sx={{width: 55, height: 55}} />
           <ChevronDownIcon className="-mr-1 mt-3 h-5 w-10 text-gray-400" aria-hidden="true" />
         </Menu.Button>
@@ -50,12 +47,11 @@ export default function ProfileDropDown({lang}: {lang: Locale}) {
               {({active}) => (
                 <Link
                   href={`/${lang}/myprofile`}
-                  className={classNames(
-                    active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                    "block px-4 py-2 text-sm"
-                  )}
+                  className={
+                    (active ? "bg-gray-100 text-gray-900" : "text-gray-700") + " block px-4 py-2 text-sm"
+                  }
                 >
-                  My profile
+                  {t("My Profile")}
                 </Link>
               )}
             </Menu.Item>
@@ -64,12 +60,12 @@ export default function ProfileDropDown({lang}: {lang: Locale}) {
                 <button
                   type="submit"
                   onClick={logoutHandler}
-                  className={classNames(
-                    active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                    "block w-full px-4 py-2 text-left text-sm"
-                  )}
+                  className={
+                    (active ? "bg-gray-100 text-gray-900" : "text-gray-700") +
+                    " block w-full px-4 py-2 text-left text-sm"
+                  }
                 >
-                  Log out
+                  {t("Log out")}
                 </button>
               )}
             </Menu.Item>

@@ -1,10 +1,11 @@
-import React from "react";
+import {useTranslations} from "next-intl";
 
-function Search() {
+export default function Search() {
+  const t = useTranslations();
   return (
     <form className="w-3/4 gap-3 border print:hidden border-gray-400 rounded-lg relative">
       <label htmlFor="default-search" className="mb-2 text-sm font-medium text-gray-900 sr-only">
-        Search
+        {t("Search")}
       </label>
       <div className="flex items-center">
         <svg
@@ -32,5 +33,3 @@ function Search() {
     </form>
   );
 }
-
-export default Search;

@@ -1,47 +1,36 @@
 "use client";
 import {useRouter} from "next/navigation";
-import {prefixBaseApiPath} from "@/utils/path";
 import {useEffect} from "react";
-
 import {useAuth} from "@/context/global";
+import {prefixBaseApiPath} from "@/utils/path";
 
-export const authContext: {
-  profile?: null | {
-    sub?: string;
-    name?: string;
-    given_name?: string;
-    family_name?: string;
-    middle_name?: string;
-    picture?: string;
-    email?: string;
-    gender?: string;
-    birthdate?: string;
-    address?: any;
-    phone_number?: string;
-  };
-} = {profile: null};
-
+// On client side directly call this function. Example:
+// AuthUtil({failedRedirectUrl: "/en/home"});
+// On server side render this element. Example:
+// <AuthUtil failedRedirectUrl="/en/home" />
 export function AuthUtil(params: {successRedirectUrl?: string; failedRedirectUrl?: string}) {
-  const {setProfile} = useAuth();
+  const auth = useAuth();
   const {push} = useRouter();
 
   function checkAndRedirect() {
-    if (params.successRedirectUrl && authContext.profile) {
+    if (params.successRedirectUrl && auth.profile) {
       return push(params.successRedirectUrl);
-    } else if (params.failedRedirectUrl && !authContext.profile) {
+    } else if (params.failedRedirectUrl && !auth.profile) {
       return push(params.failedRedirectUrl);
     }
   }
 
   useEffect(() => {
+    if (auth.profileObtained) {
+      return checkAndRedirect();
+    }
     fetch(prefixBaseApiPath("/auth/profile"))
       .then((res) => {
         if (res.ok) {
           res
             .json()
             .then((resJson) => {
-              authContext.profile = resJson;
-              setProfile(resJson);
+              auth.setProfile(resJson);
             })
             .catch((err) => {
               console.log("Error Getting profile json", err);
@@ -55,7 +44,12 @@ export function AuthUtil(params: {successRedirectUrl?: string; failedRedirectUrl
       .catch((err) => {
         console.log("Error Getting profile", err);
         checkAndRedirect();
+      })
+      .finally(() => {
+        auth.setProfileObtained(true);
       });
+    // TODO: Fix this
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return <></>;
