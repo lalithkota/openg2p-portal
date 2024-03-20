@@ -72,7 +72,7 @@
   "Facing any challenges?": "Rencontrez-vous des défis?",
 
   "Email or Phone": "E-mail ou téléphone",
-  "Enter email or Phone": "Entrez l'e-mail ou le téléphone",
+  "Enter email or phone": "Entrez l'e-mail ou le téléphone",
   "Password": "Mot de passe",
   "Enter password": "Entrez le mot de passe",
   "Reset Password": "Réinitialiser le mot de passe",
@@ -86,6 +86,7 @@
   "Phone": "Téléphone",
   "Personal Information": "Informations Personnelles",
   "Contact Information": "Informations de Contact",
+  "Demographic Details": "Détails Démographiques",
 
   "OR": "OR",
   "Actions": "Actions",
