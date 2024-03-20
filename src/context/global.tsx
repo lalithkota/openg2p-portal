@@ -5,20 +5,15 @@ import {Profile} from "@/types";
 
 interface GlobalContextType {
   formState: boolean;
-  profile: Profile | null;
-  profileObtained: boolean;
+  profile?: Profile | null;
   setFormState: (_formState: boolean) => void;
   setProfile: (_profile: GlobalContextType["profile"]) => void;
-  setProfileObtained: (_profileObtained: boolean) => void;
 }
 
 const GlobalContext = createContext<GlobalContextType>({
   formState: false,
   setFormState: () => {},
-  profile: {},
   setProfile: () => {},
-  profileObtained: false,
-  setProfileObtained: () => {},
 });
 
 export const useGlobalContext = () => {
@@ -34,20 +29,15 @@ export const useAuth = () => {
   return {
     profile: context.profile,
     setProfile: context.setProfile,
-    profileObtained: context.profileObtained,
-    setProfileObtained: context.setProfileObtained,
   };
 };
 
 export const GlobalContextProvider = ({children}: {children: ReactNode}) => {
   const [formState, setFormState] = useState(false);
-  const [profile, setProfile] = useState<GlobalContextType["profile"]>(null);
-  const [profileObtained, setProfileObtained] = useState(false);
+  const [profile, setProfile] = useState<GlobalContextType["profile"]>(undefined);
 
   return (
-    <GlobalContext.Provider
-      value={{formState, profile, profileObtained, setFormState, setProfile, setProfileObtained}}
-    >
+    <GlobalContext.Provider value={{formState, profile, setFormState, setProfile}}>
       {children}
     </GlobalContext.Provider>
   );

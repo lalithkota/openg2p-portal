@@ -1,4 +1,4 @@
-import type {Metadata, Viewport} from "next";
+import type {Metadata} from "next";
 import {NextIntlClientProvider, useMessages} from "next-intl";
 import {ReactNode} from "react";
 import "@/commons/styles/globals.css";
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   icons: [{rel: "icon", url: Favicon.src}],
 };
 
-export const viewport: Viewport = {width: "device-width", initialScale: 1};
+export const viewport = {width: "device-width", initialScale: 1};
 
 export default function RootLayout({
   children,
