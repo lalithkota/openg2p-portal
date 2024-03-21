@@ -83,7 +83,7 @@ export default function ProgrmPage({
     router.push(`apply?programid=${program.id}`);
   };
   const handleViewClick = (program: Program) => {
-    router.push(`submission?programId=${program.id}`);
+    router.push(`view?programId=${program.id}`);
   };
   const handleReapplyClick = (program: Program) => {
     router.push(`apply?programid=${program.id}`);
@@ -105,24 +105,20 @@ export default function ProgrmPage({
                 {program.is_portal_form_mapped &&
                   (program.is_multiple_form_submission ? (
                     showReapplyButton ? (
-                      <Link href="#">
                         <button
                           className="applyButton buttonElement w-24 h-8 bg-blue-700 rounded-md text-white text-xs font-normal flex items-center justify-center"
                           onClick={() => handleReapplyClick(program)}
                         >
                           {t("Reapply")}
                         </button>
-                      </Link>
                     ) : null
                   ) : (
-                    <Link href="#">
                       <button
                         className="viewButton buttonElement w-24 h-8 bg-blue-700 rounded-md text-blue text-xs font-normal flex items-center justify-center"
                         onClick={() => handleViewClick(program)}
                       >
                         {t("View")}
                       </button>
-                    </Link>
                   ))}
               </td>
             </>
@@ -134,33 +130,27 @@ export default function ProgrmPage({
                 {program.is_portal_form_mapped &&
                   (program.is_multiple_form_submission ? (
                     showReapplyButton ? (
-                      <Link href="#">
                         <button
                           className="applyButton w-24 h-8 bg-blue-700 rounded-md text-white text-xs font-normal flex items-center justify-center"
                           onClick={() => handleReapplyClick(program)}
                         >
                           {t("Reapply")}
                         </button>
-                      </Link>
                     ) : (
-                      <Link href="#">
                         <button
                           className="applyButton w-24 h-8 bg-blue-700 rounded-md text-white text-xs font-normal flex items-center justify-center"
                           onClick={() => handleApplyClick(program)}
                         >
                           {t("Apply")}
                         </button>
-                      </Link>
                     )
                   ) : (
-                    <Link href="#">
                       <button
                         className="viewButton w-24 h-8 bg-blue-700 rounded-md text-blue text-xs font-normal flex items-center justify-center"
                         onClick={() => handleViewClick(program)}
                       >
                         {t("View")}
                       </button>
-                    </Link>
                   ))}
               </td>
             </>
@@ -172,24 +162,20 @@ export default function ProgrmPage({
                 {program.is_portal_form_mapped &&
                   (program.is_multiple_form_submission ? (
                     showReapplyButton ? (
-                      <Link href="#">
                         <button
                           className="applyButton w-24 h-8 bg-blue-700 rounded-md text-white text-xs font-normal flex items-center justify-center"
                           onClick={() => handleReapplyClick(program)}
                         >
                           {t("Reapply")}
                         </button>
-                      </Link>
                     ) : null
                   ) : (
-                    <Link href="#">
                       <button
                         className="viewButton w-24 h-8 bg-blue-700 rounded-md text-blue text-xs font-normal flex items-center justify-center"
                         onClick={() => handleViewClick(program)}
                       >
                         {t("View")}
                       </button>
-                    </Link>
                   ))}
               </td>
             </>
@@ -198,14 +184,12 @@ export default function ProgrmPage({
           return (
             <>
               <td>
-                <Link href="#">
                   <button
                     className="viewButton w-24 h-8 bg-blue-700 rounded-md text-blue text-xs font-normal flex items-center justify-center"
                     onClick={() => handleViewClick(program)}
                   >
                     {t("View")}
                   </button>
-                </Link>
               </td>
             </>
           );
@@ -217,14 +201,12 @@ export default function ProgrmPage({
         <>
           <td>
             {program.is_portal_form_mapped && (
-              <Link href="#">
                 <button
                   className="applyButton w-24 h-8 bg-blue-700 rounded-md text-white text-xs font-normal flex items-center justify-center"
                   onClick={() => handleApplyClick(program)}
                 >
                   {t("Apply")}
                 </button>
-              </Link>
             )}
           </td>
         </>
