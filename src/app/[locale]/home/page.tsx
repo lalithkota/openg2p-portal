@@ -7,6 +7,7 @@ import {AuthUtil} from "@/components/auth";
 import {ProgramDetails} from "@/types";
 import {fetchProgramDetails} from "@/utils";
 import Loading from "../loading";
+import Link from 'next/link';
 
 const ITEMS_PER_PAGE = 6;
 
@@ -193,10 +194,15 @@ export default function Page({
         </div>
       ) : (
         <div className="mt-16 flex justify-center items-center flex-col gap-2 ">
-          <h2 className="tetx-black text-xl font-bold">Oops no results.. Sign in Again!</h2>
+        <h2 className="text-black-100 text-xl
+        style={{ top: '339px', left: '621px', width: '124px', height: '17px', textAlign: 'center', font: 'normal normal 600 14px/17px Inter', letterSpacing: '0px', color: '#494DAF', opacity: 1 }">
+       {t("You haven’t enrolled into any programs yet, please tap on the below link to view all programs")}</h2>
+        <Link href={`/${lang}/programs`} >
+          <p className="text-blue-500 hover:underline mb-20" style={{ top: '339px', left: '621px', width: '124px', height: '17px', textAlign: 'center', font: 'normal normal 600 14px/17px Inter', letterSpacing: '0px', color: '#494DAF', opacity: 1 }}>
+          {t("View All Program")}</p>  
+          </Link>
         </div>
       )}
-
       <div className="pt-0">
         <Card />
       </div>
