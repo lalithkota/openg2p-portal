@@ -55,7 +55,8 @@ export default function Footer() {
                   color: "#484848",
                   opacity: "1",
                   whiteSpace: "nowrap",
-                }}              >
+                }}
+              >
                 {t("Contact Us")}
               </Link>
             </li>
@@ -74,7 +75,8 @@ export default function Footer() {
                   color: "#484848",
                   opacity: "1",
                   whiteSpace: "nowrap",
-                }}              >
+                }}
+              >
                 {t("Others")}
               </Link>
             </li>

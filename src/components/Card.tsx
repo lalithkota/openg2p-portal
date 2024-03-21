@@ -71,16 +71,18 @@ export function CardItem({
   return (
     <div className="flex flex-col w-full bg-brand border border-gray-200 square-lg shadow dark:bg-brand rounded-lg">
       <div className="flex items-center justify-between pt-4 pl-4 mb-2 ">
-        <h5 className="font-fontcustom m-4 "
-                style={{
-                  font: "normal normal 600 16px/20px Inter",
-                  letterSpacing: "0px",
-                  color: "#484848",
-                  opacity: "1",
-                  whiteSpace: "nowrap",
-                }}
-                >
-                {title}</h5>
+        <h5
+          className="font-fontcustom m-4 "
+          style={{
+            font: "normal normal 600 16px/20px Inter",
+            letterSpacing: "0px",
+            color: "#484848",
+            opacity: "1",
+            whiteSpace: "nowrap",
+          }}
+        >
+          {title}
+        </h5>
       </div>
       <hr className="border-t mx-0 border-gray-200 " />
       <div className="flow-root">
@@ -100,7 +102,9 @@ export function CardItem({
                 <Link href={link1} className="text-sm font-medium text-gray-100 truncate columnElement">
                   {heading1}
                 </Link>
-                <p className="text-sm text-gray-600 truncate dark:text-gray-400 columnElement">{description1}</p>
+                <p className="text-sm text-gray-600 truncate dark:text-gray-400 columnElement">
+                  {description1}
+                </p>
               </div>
             </div>
           </li>
@@ -123,7 +127,9 @@ export function CardItem({
                 <Link href={link2} className="text-sm font-medium text-gray-100 truncate columnElement">
                   {heading2}
                 </Link>
-                <p className="text-sm text-gray-600 truncate dark:text-gray-400 columnElement">{description2}</p>
+                <p className="text-sm text-gray-600 truncate dark:text-gray-400 columnElement">
+                  {description2}
+                </p>
               </div>
             </div>
           </li>
