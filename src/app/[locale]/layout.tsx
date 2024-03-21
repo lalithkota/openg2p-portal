@@ -9,8 +9,9 @@ export const metadata: Metadata = {
   title: "Beneficiary Portal",
   description: "OpenG2P self-service portal for Beneficiaries",
   icons: [{rel: "icon", url: Favicon.src}],
-  viewport: {width: "device-width", initialScale: 1},
 };
+
+export const viewport = {width: "device-width", initialScale: 1};
 
 export default function RootLayout({
   children,

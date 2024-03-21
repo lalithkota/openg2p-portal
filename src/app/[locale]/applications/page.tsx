@@ -2,7 +2,7 @@
 import {useRouter} from "next/navigation";
 import {useTranslations, useLocale} from "next-intl";
 import {Suspense, useEffect, useState} from "react";
-import {Card, Pagination, SearchBar} from "@/components";
+import {Pagination, SearchBar} from "@/components";
 import {AuthUtil} from "@/components/auth";
 import {ApplicationDetails} from "@/types";
 import {fetchApplicationDetails} from "@/utils";
@@ -219,9 +219,6 @@ export default function ApplcnPage({
           <h2 className="tetx-black text-xl font-bold">Oops no results.. Sign in Again!</h2>
         </div>
       )}
-      <div className="pt-0">
-        <Card />
-      </div>
     </div>
   );
 }

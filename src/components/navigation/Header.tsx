@@ -12,7 +12,7 @@ export default function Header() {
     <header>
       <nav className="w-full font-fontcustom bg-no-repeat shadow-md opacity-100  bg-brand border-gray-200 p-1 lg:px-4  ">
         <div className="flex justify-between items-center mx-auto max-w-screen-xl ">
-          <Link href={`/${lang}/home`} className=" ml-6 m-3 flex items-center">
+          <Link href={`/${lang}/home`} className=" ml-2 m-1 flex items-center">
             <Image
               src={prefixBasePath("/img/logo@2x.png")}
               priority={true}
@@ -22,7 +22,7 @@ export default function Header() {
             />
           </Link>
 
-          <div className="flex items-center gap-2 lg:order-2 mr-10 lg:ml-0 ml-auto">
+          <div className="flex items-center gap-6 lg:order-2 mr-10 lg:ml-0 ml-auto">
             <Search />
             <LanguageDropDown />
             <ProfileDropDown />

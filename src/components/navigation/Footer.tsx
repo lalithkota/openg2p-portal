@@ -23,7 +23,19 @@ export default function Footer() {
             <li>
               <Link
                 href={`/${lang}/aboutus`}
-                className="mr-4 hover:underline text-gray-500 no-underline md:mr-6 "
+                className="font-fontcustom m-4"
+                style={{
+                  top: "226px",
+                  left: "159px",
+                  width: "98px",
+                  height: "20px",
+                  textAlign: "left",
+                  font: "normal normal 600 16px/20px Inter",
+                  letterSpacing: "0px",
+                  color: "#484848",
+                  opacity: "1",
+                  whiteSpace: "nowrap",
+                }}
               >
                 {t("About Us")}
               </Link>
@@ -31,16 +43,38 @@ export default function Footer() {
             <li>
               <Link
                 href={`/${lang}/contactus`}
-                className="mr-4 hover:underline text-gray-500 no-underline md:mr-6"
-              >
+                className="font-fontcustom m-4"
+                style={{
+                  top: "226px",
+                  left: "159px",
+                  width: "98px",
+                  height: "20px",
+                  textAlign: "left",
+                  font: "normal normal 600 16px/20px Inter",
+                  letterSpacing: "0px",
+                  color: "#484848",
+                  opacity: "1",
+                  whiteSpace: "nowrap",
+                }}              >
                 {t("Contact Us")}
               </Link>
             </li>
             <li>
               <Link
                 href={`/${lang}/otherpage`}
-                className="mr-4 hover:underline text-gray-500 no-underline md:mr-6 "
-              >
+                className="font-fontcustom m-4"
+                style={{
+                  top: "226px",
+                  left: "159px",
+                  width: "98px",
+                  height: "20px",
+                  textAlign: "left",
+                  font: "normal normal 600 16px/20px Inter",
+                  letterSpacing: "0px",
+                  color: "#484848",
+                  opacity: "1",
+                  whiteSpace: "nowrap",
+                }}              >
                 {t("Others")}
               </Link>
             </li>
