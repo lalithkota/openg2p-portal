@@ -217,12 +217,31 @@ export default function ApplcnPage({
         </div>
       ) : (
         <div className="mt-16 flex justify-center items-center flex-col gap-2 ">
-        <h2 className="text-black-100 text-xl
-        style={{ top: '339px', left: '621px', width: '124px', height: '17px', textAlign: 'center', font: 'normal normal 600 14px/17px Inter', letterSpacing: '0px', color: '#494DAF', opacity: 1 }">
-       {t("You haven’t enrolled into any programs yet, please tap on the below link to view all programs")}</h2>
-        <Link href={`/${lang}/programs`} >
-          <p className="text-blue-500 hover:underline mb-20" style={{ top: '339px', left: '621px', width: '124px', height: '17px', textAlign: 'center', font: 'normal normal 600 14px/17px Inter', letterSpacing: '0px', color: '#494DAF', opacity: 1 }}>
-          {t("View All Program")}</p>  
+          <h2
+            className="text-black-100 text-xl
+        style={{ top: '339px', left: '621px', width: '124px', height: '17px', textAlign: 'center', font: 'normal normal 600 14px/17px Inter', letterSpacing: '0px', color: '#494DAF', opacity: 1 }"
+          >
+            {t(
+              "You haven’t enrolled into any programs yet, please tap on the below link to view all programs"
+            )}
+          </h2>
+          <Link href={`/${lang}/programs`}>
+            <p
+              className="text-blue-500 hover:underline mb-20"
+              style={{
+                top: "339px",
+                left: "621px",
+                width: "124px",
+                height: "17px",
+                textAlign: "center",
+                font: "normal normal 600 14px/17px Inter",
+                letterSpacing: "0px",
+                color: "#494DAF",
+                opacity: 1,
+              }}
+            >
+              {t("View All Program")}
+            </p>
           </Link>
         </div>
       )}

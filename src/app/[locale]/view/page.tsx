@@ -1,18 +1,24 @@
 "use client";
+import {useSearchParams} from "next/navigation";
 import {useRouter} from "next/navigation";
 import {useLocale, useTranslations} from "next-intl";
-import {Suspense, useEffect, useState} from "react";
-import {Card, Pagination, SearchBar} from "@/components";
+import React, {Suspense, useEffect, useState} from "react";
+import {Pagination, SearchBar} from "@/components";
 import {AuthUtil} from "@/components/auth";
-import {fetchApplicationDetails} from "@/utils";
-import {ApplicationDetails} from "@/types";
+import {fetchApplicationDetails, fetchPrograms} from "@/utils";
+import {ApplicationDetails, Program} from "@/types";
 import Loading from "../loading";
 
-const ITEMS_PER_PAGE = 30;
+const ITEMS_PER_PAGE = 10;
 
-export default function ApplcnPage({searchParams}: {searchParams?: {query?: string; page?: string}}) {
+export default function ApplcnPage() {
   const lang = useLocale();
   AuthUtil({failedRedirectUrl: `/${lang}/login`});
+
+  const searchParams = useSearchParams();
+  const programid = searchParams.get("programid") || ""; // Default to empty string if undefined
+  const pageParam = searchParams.get("page");
+  const currentPage = Number(pageParam) || 1;
 
   const router = useRouter();
   const [applications, setApplications] = useState<ApplicationDetails[]>([]);
@@ -20,18 +26,23 @@ export default function ApplcnPage({searchParams}: {searchParams?: {query?: stri
 
   const [paginatedApplications, setPaginatedApplications] = useState<ApplicationDetails[]>([]);
   const [totalPages, setTotalPages] = useState<number>(0);
-  const currentPage = Number(searchParams?.page) || 1;
 
   const t = useTranslations();
-
   useEffect(() => {
     const fetchData = async () => {
       try {
         setIsLoading(true);
+        const allPrograms: Program[] = await fetchPrograms();
+        const selectedProgram = allPrograms.find(p => p.id === Number(programid));
+        const selectedProgramName = selectedProgram ? selectedProgram.name : null;
+  
         const allApplications: ApplicationDetails[] = await fetchApplicationDetails();
-        setApplications(allApplications);
-
-        setTotalPages(Math.ceil(allApplications.length / ITEMS_PER_PAGE));
+        const filteredApplications = selectedProgramName
+          ? allApplications.filter(app => app.program_name === selectedProgramName)
+          : [];
+  
+        setApplications(filteredApplications);
+        setTotalPages(Math.ceil(filteredApplications.length / ITEMS_PER_PAGE));
         setIsLoading(false);
       } catch (error) {
         console.error("Error fetching applications details:", error);
@@ -39,7 +50,7 @@ export default function ApplcnPage({searchParams}: {searchParams?: {query?: stri
     };
 
     fetchData();
-  }, []);
+  }, [programid]);
 
   useEffect(() => {
     const start = (currentPage - 1) * ITEMS_PER_PAGE;
@@ -210,12 +221,9 @@ export default function ApplcnPage({searchParams}: {searchParams?: {query?: stri
         </div>
       ) : (
         <div className="mt-16 flex justify-center items-center flex-col gap-2 ">
-          <h2 className="tetx-black text-xl font-bold">Oops no results.. Sign in Again!</h2>
+          <h2 className="tetx-black text-xl font-bold">Oops no results..</h2>
         </div>
       )}
-      <div className="pt-0">
-        <Card />
-      </div>
     </div>
   );
 }
