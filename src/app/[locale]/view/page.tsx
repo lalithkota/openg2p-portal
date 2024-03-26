@@ -33,14 +33,14 @@ export default function ApplcnPage() {
       try {
         setIsLoading(true);
         const allPrograms: Program[] = await fetchPrograms();
-        const selectedProgram = allPrograms.find(p => p.id === Number(programid));
+        const selectedProgram = allPrograms.find((p) => p.id === Number(programid));
         const selectedProgramName = selectedProgram ? selectedProgram.name : null;
-  
+
         const allApplications: ApplicationDetails[] = await fetchApplicationDetails();
         const filteredApplications = selectedProgramName
-          ? allApplications.filter(app => app.program_name === selectedProgramName)
+          ? allApplications.filter((app) => app.program_name === selectedProgramName)
           : [];
-  
+
         setApplications(filteredApplications);
         setTotalPages(Math.ceil(filteredApplications.length / ITEMS_PER_PAGE));
         setIsLoading(false);

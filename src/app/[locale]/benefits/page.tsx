@@ -198,8 +198,8 @@ export default function BenefPage({
                               ? benefit.entitlement_reference_number
                               : "Entitlement not approved"}
                           </td>
-                          <td className="px-6 py-4">{Number(benefit.funds_received).toFixed(2)}</td>
                           <td className="px-6 py-4">{Number(benefit.funds_awaited).toFixed(2)}</td>
+                          <td className="px-6 py-4">{Number(benefit.funds_received).toFixed(2)}</td>
                         </tr>
                       );
                     })}

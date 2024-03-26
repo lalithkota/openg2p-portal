@@ -87,7 +87,7 @@ export default function ProgrmPage({
   // };
   const handleViewClick = (program: Program) => {
     router.push(`view?programid=${program.id}`);
-  };  
+  };
   const handleReapplyClick = (program: Program) => {
     router.push(`apply?programid=${program.id}`);
   };
