@@ -28,7 +28,7 @@ export interface ApplicationDetails {
 }
 export interface BenefitDetails {
   program_name: string;
-  enrollment_status: string;
+  date_approved: string;
   funds_awaited: number;
   funds_received: number;
   entitlement_reference_number: number;

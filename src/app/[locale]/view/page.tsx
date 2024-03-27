@@ -9,7 +9,7 @@ import {fetchApplicationDetails, fetchPrograms} from "@/utils";
 import {ApplicationDetails, Program} from "@/types";
 import Loading from "../loading";
 
-const ITEMS_PER_PAGE = 10;
+const ITEMS_PER_PAGE = 100;
 
 export default function ApplcnPage() {
   const lang = useLocale();
@@ -206,7 +206,7 @@ export default function ApplcnPage() {
                             </button>
                           </td>
                           <td className="px-6 py-4">{application.application_id}</td>
-                          <td className="px-6 py-4">{application.date_applied?.slice(0, 10)}</td>
+                          <td className="px-6 py-4">{new Date(application.date_applied).toLocaleString()}</td>
                         </tr>
                       );
                     })}
