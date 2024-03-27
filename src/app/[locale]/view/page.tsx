@@ -9,7 +9,7 @@ import {fetchApplicationDetails, fetchPrograms} from "@/utils";
 import {ApplicationDetails, Program} from "@/types";
 import Loading from "../loading";
 
-const ITEMS_PER_PAGE = 100;
+const ITEMS_PER_PAGE = 10;
 
 export default function ApplcnPage() {
   const lang = useLocale();
@@ -17,8 +17,7 @@ export default function ApplcnPage() {
 
   const searchParams = useSearchParams();
   const programid = searchParams.get("programid") || ""; // Default to empty string if undefined
-  const pageParam = searchParams.get("page");
-  const currentPage = Number(pageParam) || 1;
+  // const currentPage = Number(pageParam) || 1;
 
   const router = useRouter();
   const [applications, setApplications] = useState<ApplicationDetails[]>([]);
@@ -26,6 +25,7 @@ export default function ApplcnPage() {
 
   const [paginatedApplications, setPaginatedApplications] = useState<ApplicationDetails[]>([]);
   const [totalPages, setTotalPages] = useState<number>(0);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const t = useTranslations();
   useEffect(() => {
@@ -59,7 +59,8 @@ export default function ApplcnPage() {
   }, [currentPage, applications]);
 
   const handlePageChange = (page: number) => {
-    router.push(`?page=${page}`);
+    setCurrentPage(page);
+    router.push(`?programid=${programid}&page=${page}`);
   };
 
   const isDataEmpty = !Array.isArray(applications) || applications.length < 1 || !applications;

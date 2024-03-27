@@ -391,7 +391,7 @@ export default function ProgrmPage({
                           `}
                               disabled={true}
                             >
-                              {program.state==="draft"?"Applied":program.state}
+                              {program.state === "draft" ? "Applied" : program.state}
                             </button>
                           </td>
                           <td className="px-6 py-4">

@@ -59,14 +59,12 @@ export default function BenefPage({
   };
 
   const isDataEmpty = !Array.isArray(benefits) || benefits.length < 1 || !benefits;
-  let filteredRowCounter = 0;
 
   return (
     <div>
       {isLoading ? (
         <div className="mt-16 flex justify-center items-center flex-col gap-2"></div>
-      ) : !isDataEmpty ?
-       (
+      ) : !isDataEmpty ? (
         <div className=" m-6 p-6 md:space-x-4 mx-auto max-w-screen-xl flex justify-center items-center">
           <div className="bg-brand container w-1180 shadow-md  pb-0 rounded-lg top-24">
             <div className="flex flex-wrap justify-between items-center">
@@ -194,7 +192,7 @@ export default function BenefPage({
                           <td className="px-6 py-4">{Number(benefit.funds_awaited).toFixed(2)}</td>
                           <td className="px-6 py-4">{Number(benefit.funds_received).toFixed(2)}</td>
                           <td scope="row" className="px-6 py-4 ">
-                          {new Date(benefit.date_approved).toLocaleDateString()}
+                            {new Date(benefit.date_approved).toLocaleDateString()}
 
                             {/* {benefit.date_approved} */}
                           </td>
@@ -216,9 +214,7 @@ export default function BenefPage({
             className="text-black-100 text-xl
         style={{ top: '339px', left: '621px', width: '124px', height: '17px', textAlign: 'center', font: 'normal normal 600 14px/17px Inter', letterSpacing: '0px', color: '#494DAF', opacity: 1 }"
           >
-            {t(
-              "No benefits found, please tap on the below link to view all programs"
-            )}
+            {t("No benefits found, please tap on the below link to view all programs")}
           </h2>
           <Link href={`/${lang}/programs`}>
             <p
