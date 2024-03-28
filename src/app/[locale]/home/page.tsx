@@ -7,6 +7,7 @@ import {AuthUtil} from "@/components/auth";
 import {ProgramDetails} from "@/types";
 import {fetchProgramDetails} from "@/utils";
 import Loading from "../loading";
+import Link from "next/link";
 
 const ITEMS_PER_PAGE = 6;
 
@@ -171,10 +172,10 @@ export default function Page({
                           <td className="px-6 py-4">
                             <button
                               type="button"
-                              className={`${program.enrollment_status === "enrolled" ? "enrolledButton" : "draftButton"} buttonElement top-14 text-xs  w-24 h-8 rounded-md text-center tracking-[0px] opacity-100 border-collapse border-[none] left-[811px] ${program.enrollment_status ? "bg-gray-300 text-gray-600" : "bg-[#c7ebd1] text-[#075e45]"}`}
+                              className={`${program.enrollment_status === "enrolled" ? "enrolledButton" : "submittedButton"} buttonElement top-14 text-xs  w-24 h-8 rounded-md text-center tracking-[0px] opacity-100 border-collapse border-[none] left-[811px] ${program.enrollment_status ? "bg-gray-300 text-gray-600" : "bg-[#c7ebd1] text-[#075e45]"}`}
                               disabled={true}
                             >
-                              {program.enrollment_status === "enrolled" ? "Enrolled" : "Draft"}
+                              {program.enrollment_status === "enrolled" ? "Enrolled" : "Applied"}
                             </button>
                           </td>
                           <td className="px-6 py-4">{Number(program.total_funds_awaited).toFixed(2)}</td>
@@ -193,10 +194,34 @@ export default function Page({
         </div>
       ) : (
         <div className="mt-16 flex justify-center items-center flex-col gap-2 ">
-          <h2 className="tetx-black text-xl font-bold">Oops no results.. Sign in Again!</h2>
+          <h2
+            className="text-black-100 text-xl
+        style={{ top: '339px', left: '621px', width: '124px', height: '17px', textAlign: 'center', font: 'normal normal 600 14px/17px Inter', letterSpacing: '0px', color: '#494DAF', opacity: 1 }"
+          >
+            {t(
+              "You haven’t enrolled into any programs yet, please tap on the below link to view all programs"
+            )}
+          </h2>
+          <Link href={`/${lang}/programs`}>
+            <p
+              className="text-blue-500 hover:underline mb-20"
+              style={{
+                top: "339px",
+                left: "621px",
+                width: "124px",
+                height: "17px",
+                textAlign: "center",
+                font: "normal normal 600 14px/17px Inter",
+                letterSpacing: "0px",
+                color: "#494DAF",
+                opacity: 1,
+              }}
+            >
+              {t("View All Program")}
+            </p>
+          </Link>
         </div>
       )}
-
       <div className="pt-0">
         <Card />
       </div>

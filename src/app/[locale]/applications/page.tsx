@@ -7,6 +7,7 @@ import {AuthUtil} from "@/components/auth";
 import {ApplicationDetails} from "@/types";
 import {fetchApplicationDetails} from "@/utils";
 import Loading from "../loading";
+import Link from "next/link";
 
 const ITEMS_PER_PAGE = 30;
 
@@ -66,7 +67,7 @@ export default function ApplcnPage({
       case "active":
         return "appliedButton";
       case "inprogress":
-        return "inProgressButton";
+        return "inprogressButton";
       case "rejected":
         return "rejectedButton";
       default:
@@ -195,13 +196,14 @@ export default function ApplcnPage({
                               className={`top-14 text-xs  w-24 h-8 rounded-md text-center tracking-[0px] opacity-100 border-collapse border-[none] left-[811px] text-white ${getStatusClass(application.application_status)}`}
                               disabled={true}
                             >
-                              {application.application_status === "active"
+                              {application.application_status === "active" ||
+                              application.application_status === "inprogress"
                                 ? "Applied"
                                 : toTitleCase(application.application_status)}
                             </button>
                           </td>
                           <td className="px-6 py-4">{application.application_id}</td>
-                          <td className="px-6 py-4">{application.date_applied?.slice(0, 10)}</td>
+                          <td className="px-6 py-4">{new Date(application.date_applied).toLocaleString()}</td>
                         </tr>
                       );
                     })}
@@ -216,7 +218,32 @@ export default function ApplcnPage({
         </div>
       ) : (
         <div className="mt-16 flex justify-center items-center flex-col gap-2 ">
-          <h2 className="tetx-black text-xl font-bold">Oops no results.. Sign in Again!</h2>
+          <h2
+            className="text-black-100 text-xl
+        style={{ top: '339px', left: '621px', width: '124px', height: '17px', textAlign: 'center', font: 'normal normal 600 14px/17px Inter', letterSpacing: '0px', color: '#494DAF', opacity: 1 }"
+          >
+            {t(
+              "You haven’t enrolled into any programs yet, please tap on the below link to view all programs"
+            )}
+          </h2>
+          <Link href={`/${lang}/programs`}>
+            <p
+              className="text-blue-500 hover:underline mb-20"
+              style={{
+                top: "339px",
+                left: "621px",
+                width: "124px",
+                height: "17px",
+                textAlign: "center",
+                font: "normal normal 600 14px/17px Inter",
+                letterSpacing: "0px",
+                color: "#494DAF",
+                opacity: 1,
+              }}
+            >
+              {t("View All Program")}
+            </p>
+          </Link>
         </div>
       )}
     </div>

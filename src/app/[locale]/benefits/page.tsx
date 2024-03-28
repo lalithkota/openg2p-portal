@@ -7,8 +7,9 @@ import {AuthUtil} from "@/components/auth";
 import {BenefitDetails} from "@/types";
 import {fetchBenefitDetails} from "@/utils";
 import Loading from "../loading";
+import Link from "next/link";
 
-const ITEMS_PER_PAGE = 7;
+const ITEMS_PER_PAGE = 10;
 
 export default function BenefPage({
   searchParams,
@@ -111,7 +112,7 @@ export default function BenefPage({
                       </th>
                       <th scope="col" className="columnTitle px-6 py-3">
                         <div className="flex items-center w-max">
-                          {t("Enrollment Status")}
+                          {t("Entitlement Reference Number")}
                           <svg
                             data-column="1"
                             className="w-3 h-3 ml-1.5  text-gray-600  sortable-icon"
@@ -126,7 +127,7 @@ export default function BenefPage({
                       </th>
                       <th scope="col" className="columnTitle px-6 py-3">
                         <div className="flex items-center w-max">
-                          {t("Entitlement Reference Number")}
+                          {t("Funds Awaited")}
                           <svg
                             data-column="2"
                             className="w-3 h-3 ml-1.5  text-gray-600  sortable-icon"
@@ -141,7 +142,7 @@ export default function BenefPage({
                       </th>
                       <th scope="col" className="columnTitle px-6 py-3">
                         <div className="flex items-center w-max">
-                          {t("Funds Awaited")}
+                          {t("Funds Received")}
                           <svg
                             data-column="3"
                             className="w-3 h-3 ml-1.5  text-gray-600  sortable-icon"
@@ -156,7 +157,7 @@ export default function BenefPage({
                       </th>
                       <th scope="col" className="px-6 py-3">
                         <div className="flex items-center w-max">
-                          {t("Funds Received")}
+                          {t("Date Approved")}
                           <svg
                             data-column="4"
                             className="w-3 h-3 ml-1.5  text-gray-600  sortable-icon"
@@ -183,22 +184,18 @@ export default function BenefPage({
                           <td scope="row" className="rowElement px-6 py-4 ">
                             {benefit.program_name}
                           </td>
-                          <td className="px-6 py-4">
-                            <button
-                              type="button"
-                              className={`${benefit.enrollment_status === "enrolled" ? "enrolledButton" : "draftButton"} buttonElement top-14 text-xs  w-24 h-8 rounded-md text-center tracking-[0px] opacity-100 border-collapse border-[none] left-[811px] ${benefit.enrollment_status ? "bg-gray-300 text-gray-600" : "bg-[#c7ebd1] text-[#075e45]"}`}
-                              disabled={true}
-                            >
-                              {benefit.enrollment_status === "enrolled" ? "Enrolled" : "Draft"}
-                            </button>
-                          </td>
                           <td className="text-sm px-6 py-4">
                             {benefit.entitlement_reference_number
                               ? benefit.entitlement_reference_number
                               : "Entitlement not approved"}
                           </td>
-                          <td className="px-6 py-4">{Number(benefit.funds_received).toFixed(2)}</td>
                           <td className="px-6 py-4">{Number(benefit.funds_awaited).toFixed(2)}</td>
+                          <td className="px-6 py-4">{Number(benefit.funds_received).toFixed(2)}</td>
+                          <td scope="row" className="px-6 py-4 ">
+                            {new Date(benefit.date_approved).toLocaleDateString()}
+
+                            {/* {benefit.date_approved} */}
+                          </td>
                         </tr>
                       );
                     })}
@@ -213,8 +210,30 @@ export default function BenefPage({
         </div>
       ) : (
         <div className="mt-16 flex justify-center items-center flex-col gap-2 ">
-          <h2 className="tetx-black text-xl font-bold">Oops no results.. Sign in Again!</h2>
-          <p>{t("Message")}</p>
+          <h2
+            className="text-black-100 text-xl
+        style={{ top: '339px', left: '621px', width: '124px', height: '17px', textAlign: 'center', font: 'normal normal 600 14px/17px Inter', letterSpacing: '0px', color: '#494DAF', opacity: 1 }"
+          >
+            {t("No benefits found, please tap on the below link to view all programs")}
+          </h2>
+          <Link href={`/${lang}/programs`}>
+            <p
+              className="text-blue-500 hover:underline mb-20"
+              style={{
+                top: "339px",
+                left: "621px",
+                width: "124px",
+                height: "17px",
+                textAlign: "center",
+                font: "normal normal 600 14px/17px Inter",
+                letterSpacing: "0px",
+                color: "#494DAF",
+                opacity: 1,
+              }}
+            >
+              {t("View All Program")}
+            </p>
+          </Link>
         </div>
       )}
     </div>

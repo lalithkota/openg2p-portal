@@ -82,8 +82,11 @@ export default function ProgrmPage({
   const handleApplyClick = (program: Program) => {
     router.push(`apply?programid=${program.id}`);
   };
+  // const handleViewClick = (program: Program) => {
+  //   router.push(`view?programId=${program.id}`);
+  // };
   const handleViewClick = (program: Program) => {
-    router.push(`view?programId=${program.id}`);
+    router.push(`view?programid=${program.id}`);
   };
   const handleReapplyClick = (program: Program) => {
     router.push(`apply?programid=${program.id}`);
@@ -105,20 +108,20 @@ export default function ProgrmPage({
                 {program.is_portal_form_mapped &&
                   (program.is_multiple_form_submission ? (
                     showReapplyButton ? (
-                        <button
-                          className="applyButton buttonElement w-24 h-8 bg-blue-700 rounded-md text-white text-xs font-normal flex items-center justify-center"
-                          onClick={() => handleReapplyClick(program)}
-                        >
-                          {t("Reapply")}
-                        </button>
+                      <button
+                        className="applyButton buttonElement w-24 h-8 bg-blue-700 rounded-md text-white text-xs font-normal flex items-center justify-center"
+                        onClick={() => handleReapplyClick(program)}
+                      >
+                        {t("Reapply")}
+                      </button>
                     ) : null
                   ) : (
-                      <button
-                        className="viewButton buttonElement w-24 h-8 bg-blue-700 rounded-md text-blue text-xs font-normal flex items-center justify-center"
-                        onClick={() => handleViewClick(program)}
-                      >
-                        {t("View")}
-                      </button>
+                    <button
+                      className="viewButton buttonElement w-24 h-8 bg-blue-700 rounded-md text-blue text-xs font-normal flex items-center justify-center"
+                      onClick={() => handleViewClick(program)}
+                    >
+                      {t("View")}
+                    </button>
                   ))}
               </td>
             </>
@@ -130,27 +133,27 @@ export default function ProgrmPage({
                 {program.is_portal_form_mapped &&
                   (program.is_multiple_form_submission ? (
                     showReapplyButton ? (
-                        <button
-                          className="applyButton w-24 h-8 bg-blue-700 rounded-md text-white text-xs font-normal flex items-center justify-center"
-                          onClick={() => handleReapplyClick(program)}
-                        >
-                          {t("Reapply")}
-                        </button>
+                      <button
+                        className="applyButton w-24 h-8 bg-blue-700 rounded-md text-white text-xs font-normal flex items-center justify-center"
+                        onClick={() => handleReapplyClick(program)}
+                      >
+                        {t("Reapply")}
+                      </button>
                     ) : (
-                        <button
-                          className="applyButton w-24 h-8 bg-blue-700 rounded-md text-white text-xs font-normal flex items-center justify-center"
-                          onClick={() => handleApplyClick(program)}
-                        >
-                          {t("Apply")}
-                        </button>
+                      <button
+                        className="applyButton w-24 h-8 bg-blue-700 rounded-md text-white text-xs font-normal flex items-center justify-center"
+                        onClick={() => handleApplyClick(program)}
+                      >
+                        {t("Apply")}
+                      </button>
                     )
                   ) : (
-                      <button
-                        className="viewButton w-24 h-8 bg-blue-700 rounded-md text-blue text-xs font-normal flex items-center justify-center"
-                        onClick={() => handleViewClick(program)}
-                      >
-                        {t("View")}
-                      </button>
+                    <button
+                      className="viewButton w-24 h-8 bg-blue-700 rounded-md text-blue text-xs font-normal flex items-center justify-center"
+                      onClick={() => handleViewClick(program)}
+                    >
+                      {t("View")}
+                    </button>
                   ))}
               </td>
             </>
@@ -162,20 +165,20 @@ export default function ProgrmPage({
                 {program.is_portal_form_mapped &&
                   (program.is_multiple_form_submission ? (
                     showReapplyButton ? (
-                        <button
-                          className="applyButton w-24 h-8 bg-blue-700 rounded-md text-white text-xs font-normal flex items-center justify-center"
-                          onClick={() => handleReapplyClick(program)}
-                        >
-                          {t("Reapply")}
-                        </button>
+                      <button
+                        className="applyButton w-24 h-8 bg-blue-700 rounded-md text-white text-xs font-normal flex items-center justify-center"
+                        onClick={() => handleReapplyClick(program)}
+                      >
+                        {t("Reapply")}
+                      </button>
                     ) : null
                   ) : (
-                      <button
-                        className="viewButton w-24 h-8 bg-blue-700 rounded-md text-blue text-xs font-normal flex items-center justify-center"
-                        onClick={() => handleViewClick(program)}
-                      >
-                        {t("View")}
-                      </button>
+                    <button
+                      className="viewButton w-24 h-8 bg-blue-700 rounded-md text-blue text-xs font-normal flex items-center justify-center"
+                      onClick={() => handleViewClick(program)}
+                    >
+                      {t("View")}
+                    </button>
                   ))}
               </td>
             </>
@@ -184,12 +187,12 @@ export default function ProgrmPage({
           return (
             <>
               <td>
-                  <button
-                    className="viewButton w-24 h-8 bg-blue-700 rounded-md text-blue text-xs font-normal flex items-center justify-center"
-                    onClick={() => handleViewClick(program)}
-                  >
-                    {t("View")}
-                  </button>
+                <button
+                  className="viewButton w-24 h-8 bg-blue-700 rounded-md text-blue text-xs font-normal flex items-center justify-center"
+                  onClick={() => handleViewClick(program)}
+                >
+                  {t("View")}
+                </button>
               </td>
             </>
           );
@@ -201,12 +204,12 @@ export default function ProgrmPage({
         <>
           <td>
             {program.is_portal_form_mapped && (
-                <button
-                  className="applyButton w-24 h-8 bg-blue-700 rounded-md text-white text-xs font-normal flex items-center justify-center"
-                  onClick={() => handleApplyClick(program)}
-                >
-                  {t("Apply")}
-                </button>
+              <button
+                className="applyButton w-24 h-8 bg-blue-700 rounded-md text-white text-xs font-normal flex items-center justify-center"
+                onClick={() => handleApplyClick(program)}
+              >
+                {t("Apply")}
+              </button>
             )}
           </td>
         </>
@@ -388,7 +391,7 @@ export default function ProgrmPage({
                           `}
                               disabled={true}
                             >
-                              {program.state}
+                              {program.state === "draft" ? "Applied" : program.state}
                             </button>
                           </td>
                           <td className="px-6 py-4">
