@@ -58,12 +58,11 @@ body {
   opacity: 1;
 }
 
-.inProgressButton {
+/* .inProgressButton {
   background: #2196f3 0% 0% no-repeat padding-box;
   border-radius: 4px;
   opacity: 1;
-}
-
+} */
 .rejectedButton {
   background: #f44336 0% 0% no-repeat padding-box;
   border-radius: 4px;

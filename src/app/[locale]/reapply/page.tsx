@@ -35,9 +35,8 @@ export default function ApplcnPage() {
       case "completed":
         return "completedButton";
       case "active":
-        return "activeButton";
       case "inprogress":
-        return "inProgressButton";
+        return "appliedButton";
       case "rejected":
         return "rejectedButton";
       default:
@@ -148,7 +147,10 @@ export default function ApplcnPage() {
                             className={`top-14 text-xs  w-24 h-8 rounded-md text-center tracking-[0px] opacity-100 border-collapse border-[none] left-[811px] text-white ${getStatusClass(application.application_status)}`}
                             disabled={true}
                           >
-                            {toTitleCase(application.application_status)}
+                            {application.application_status === "active" ||
+                            application.application_status === "inprogress"
+                              ? "Applied"
+                              : toTitleCase(application.application_status)}
                           </button>
                         </td>
                         <td className="px-6 py-4">{application.application_id}</td>

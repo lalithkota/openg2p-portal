@@ -5,8 +5,8 @@ import {useSearchParams} from "next/navigation";
 import {useLocale, useTranslations} from "next-intl";
 import {useEffect, useState} from "react";
 import {AuthUtil} from "@/components/auth";
-import {ApplicationDetails} from "@/types";
-import {fetchApplicationDetails, fetchPrograms} from "@/utils";
+import {ApplicationDetails, Profile} from "@/types";
+import {fetchApplicationDetails, fetchPrograms, fetchProfile} from "@/utils";
 import {prefixBasePath} from "@/utils/path";
 
 export default function Submitted() {
@@ -15,10 +15,24 @@ export default function Submitted() {
 
   const [isToastVisible, setIsToastVisible] = useState(true);
   const [applicationDetails, setApplicationDetails] = useState<ApplicationDetails | null>(null);
+  const [profile, setProfile] = useState<Profile | null>(null);
   const searchParams = useSearchParams();
   const programId = searchParams.get("programId");
 
   const t = useTranslations();
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const userProfile = await fetchProfile();
+        setProfile(userProfile);
+      } catch (error) {
+        console.error("Error fetching user profile:", error);
+      }
+    };
+
+    fetchUserData();
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -91,7 +105,9 @@ export default function Submitted() {
             <div className=" border border-gray-300 bg-brand container rounded-lg shadow-md">
               <div className="flex-col  flex-wrap justify-between items-center">
                 <div className="m-5 ">
-                  <p className="text-gray-900 mb-4">Dear User,</p>
+                  <p className="text-gray-900 mb-4">
+                    Dear {profile?.given_name} {profile?.family_name},
+                  </p>
                   <div className="text-gray-700 mb-4">
                     Thank you for submitting your form for the program {applicationDetails.program_name}. Your
                     application number is {applicationDetails.application_id}.
@@ -126,7 +142,10 @@ export default function Submitted() {
             <div className="basis-1/2 print:hidden mb-80 flex-col flex-wrap justify-between items-center border border-gray-300 bg-brand container pb-10 rounded-lg top-24 shadow-md ">
               <p className=" text-gray-700 pt-4 pl-4 pb-0  ">{applicationDetails.program_name}</p>
               <button className=" ml-4 mb-4 w-24 h-8 bg-blue-700 rounded-md text-white text-sm font-normal flex items-center justify-center ">
-                {applicationDetails.application_status}
+                {applicationDetails.application_status === "active" ||
+                applicationDetails.application_status === "inprogress"
+                  ? "Applied"
+                  : applicationDetails.application_status}
               </button>
               <hr className="border-t mx-0 border-gray-400 " />
               <div className="pt-4 text-sm text-gray-700 pl-4 pb-0 ">
