@@ -155,7 +155,7 @@ export default function BenefPage({
                           </svg>
                         </div>
                       </th>
-                      <th scope="col" className="px-6 py-3">
+                      <th scope="col" className="columnTitle px-6 py-3">
                         <div className="flex items-center w-max">
                           {t("Date Approved")}
                           <svg

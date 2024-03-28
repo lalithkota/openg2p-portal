@@ -65,9 +65,8 @@ export default function ApplcnPage({
       case "completed":
         return "completedButton";
       case "active":
-        return "appliedButton";
       case "inprogress":
-        return "inprogressButton";
+        return "appliedButton";
       case "rejected":
         return "rejectedButton";
       default:
