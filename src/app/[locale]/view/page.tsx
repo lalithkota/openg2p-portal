@@ -27,6 +27,9 @@ export default function ApplcnPage() {
   const [totalPages, setTotalPages] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState(1);
 
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
+  const [sortedColumn, setSortedColumn] = useState<string | null>(null);
+
   const t = useTranslations();
   useEffect(() => {
     const fetchData = async () => {
@@ -85,6 +88,42 @@ export default function ApplcnPage() {
     });
   }
 
+  function getTransformedStatus(status: string) {
+    if (status === "active" || status === "inprogress") {
+      return "Applied";
+    }
+    return toTitleCase(status);
+  }
+  const sortApplications = (column: string) => {
+    const order = column === sortedColumn && sortOrder === "asc" ? "desc" : "asc";
+    const sortedApplications = [...applications].sort((a, b) => {
+      if (column === "program_name") {
+        return order === "asc"
+          ? a.program_name.localeCompare(b.program_name)
+          : b.program_name.localeCompare(a.program_name);
+      } else if (column === "application_status") {
+        return order === "asc"
+          ? getTransformedStatus(a.application_status).localeCompare(
+              getTransformedStatus(b.application_status)
+            )
+          : getTransformedStatus(b.application_status).localeCompare(
+              getTransformedStatus(a.application_status)
+            );
+      } else if (column === "application_id") {
+        return order === "asc" ? a.application_id - b.application_id : b.application_id - a.application_id;
+      } else if (column === "date_applied") {
+        const dateA = new Date(a.date_applied).getTime();
+        const dateB = new Date(b.date_applied).getTime();
+        return order === "asc" ? dateA - dateB : dateB - dateA;
+      }
+      return 0;
+    });
+
+    setApplications(sortedApplications);
+    setSortOrder(order);
+    setSortedColumn(column);
+  };
+
   return (
     <div>
       {isLoading ? (
@@ -121,7 +160,10 @@ export default function ApplcnPage() {
                         {t("No_")}
                       </th>
                       <th scope="col" className="columnTitle px-6 py-3 ">
-                        <div className="flex items-center w-max">
+                        <div
+                          className="flex items-center cursor-pointer"
+                          onClick={() => sortApplications("program_name")}
+                        >
                           {t("Program Name")}
                           <svg
                             data-column="0"
@@ -136,7 +178,10 @@ export default function ApplcnPage() {
                         </div>
                       </th>
                       <th scope="col" className="columnTitle px-6 py-3">
-                        <div className="flex items-center w-max">
+                        <div
+                          className="flex items-center cursor-pointer"
+                          onClick={() => sortApplications("application_status")}
+                        >
                           {t("Application Status")}
                           <svg
                             data-column="1"
@@ -151,7 +196,10 @@ export default function ApplcnPage() {
                         </div>
                       </th>
                       <th scope="col" className="columnTitle px-6 py-3">
-                        <div className="flex items-center w-max">
+                        <div
+                          className="flex items-center cursor-pointer"
+                          onClick={() => sortApplications("application_id")}
+                        >
                           {t("Application ID")}
                           <svg
                             data-column="2"
@@ -166,7 +214,10 @@ export default function ApplcnPage() {
                         </div>
                       </th>
                       <th scope="col" className="columnTitle px-6 py-3">
-                        <div className="flex items-center w-max">
+                        <div
+                          className="flex items-center cursor-pointer"
+                          onClick={() => sortApplications("date_applied")}
+                        >
                           {t("Date Applied")}
                           <svg
                             data-column="3"

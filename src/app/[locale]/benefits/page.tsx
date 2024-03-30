@@ -31,6 +31,9 @@ export default function BenefPage({
   const currentPage = Number(searchParams?.page) || 1;
   const t = useTranslations();
 
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
+  const [sortedColumn, setSortedColumn] = useState<string | null>(null);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -56,6 +59,34 @@ export default function BenefPage({
 
   const handlePageChange = (page: number) => {
     router.push(`?page=${page}`);
+  };
+
+  const sortBenefits = (column: string) => {
+    const order = column === sortedColumn && sortOrder === "asc" ? "desc" : "asc";
+    const sortedBenefits = [...benefits].sort((a, b) => {
+      if (column === "program_name") {
+        return order === "asc"
+          ? a.program_name.localeCompare(b.program_name)
+          : b.program_name.localeCompare(a.program_name);
+      } else if (column === "entitlement_reference_number") {
+        return order === "asc"
+          ? a.entitlement_reference_number - b.entitlement_reference_number
+          : b.entitlement_reference_number - a.entitlement_reference_number;
+      } else if (column === "funds_awaited") {
+        return order === "asc" ? a.funds_awaited - b.funds_awaited : b.funds_awaited - a.funds_awaited;
+      } else if (column === "funds_received") {
+        return order === "asc" ? a.funds_received - b.funds_received : b.funds_received - a.funds_received;
+      } else if (column === "date_approved") {
+        const dateA = new Date(a.date_approved).getDate();
+        const dateB = new Date(b.date_approved).getDate();
+        return order === "asc" ? dateA - dateB : dateB - dateA;
+      }
+      return 0;
+    });
+
+    setBenefits(sortedBenefits);
+    setSortOrder(order);
+    setSortedColumn(column);
   };
 
   const isDataEmpty = !Array.isArray(benefits) || benefits.length < 1 || !benefits;
@@ -96,7 +127,10 @@ export default function BenefPage({
                         {t("No_")}
                       </th>
                       <th scope="col" className="columnTitle px-6 py-3 ">
-                        <div className="flex items-center w-max">
+                        <div
+                          className="flex items-center w-max cursor-pointer"
+                          onClick={() => sortBenefits("program_name")}
+                        >
                           {t("Program Name")}
                           <svg
                             data-column="0"
@@ -111,7 +145,10 @@ export default function BenefPage({
                         </div>
                       </th>
                       <th scope="col" className="columnTitle px-6 py-3">
-                        <div className="flex items-center w-max">
+                        <div
+                          className="flex items-center w-max cursor-pointer"
+                          onClick={() => sortBenefits("entitlement_reference_number")}
+                        >
                           {t("Entitlement Reference Number")}
                           <svg
                             data-column="1"
@@ -126,7 +163,10 @@ export default function BenefPage({
                         </div>
                       </th>
                       <th scope="col" className="columnTitle px-6 py-3">
-                        <div className="flex items-center w-max">
+                        <div
+                          className="flex items-center w-max cursor-pointer"
+                          onClick={() => sortBenefits("funds_awaited")}
+                        >
                           {t("Funds Awaited")}
                           <svg
                             data-column="2"
@@ -141,7 +181,10 @@ export default function BenefPage({
                         </div>
                       </th>
                       <th scope="col" className="columnTitle px-6 py-3">
-                        <div className="flex items-center w-max">
+                        <div
+                          className="flex items-center w-max cursor-pointer"
+                          onClick={() => sortBenefits("funds_received")}
+                        >
                           {t("Funds Received")}
                           <svg
                             data-column="3"
@@ -156,7 +199,10 @@ export default function BenefPage({
                         </div>
                       </th>
                       <th scope="col" className="columnTitle px-6 py-3">
-                        <div className="flex items-center w-max">
+                        <div
+                          className="flex items-center w-max cursor-pointer"
+                          onClick={() => sortBenefits("date_approved")}
+                        >
                           {t("Date Approved")}
                           <svg
                             data-column="4"
