@@ -89,13 +89,11 @@ export default function BenefPage({
     setSortedColumn(column);
   };
 
-  const isDataEmpty = !Array.isArray(benefits) || benefits.length < 1 || !benefits;
-
   return (
     <div>
       {isLoading ? (
         <div className="mt-16 flex justify-center items-center flex-col gap-2"></div>
-      ) : !isDataEmpty ? (
+      ) : (
         <div className=" m-6 p-6 md:space-x-4 mx-auto max-w-screen-xl flex justify-center items-center">
           <div className="bg-brand container w-1180 shadow-md  pb-0 rounded-lg top-24">
             <div className="flex flex-wrap justify-between items-center">
@@ -219,32 +217,65 @@ export default function BenefPage({
                     </tr>
                   </thead>
                   <tbody>
-                    {paginatedBenefits.map((benefit, index) => {
-                      const itemNumber = (currentPage - 1) * ITEMS_PER_PAGE + index + 1;
-                      return (
-                        <tr
-                          key={index}
-                          className="bg-white border-b dark:bg-white-200 dark:border-white-200 text-gray-600"
-                        >
-                          <td className="snoElement px-6 py-4">{itemNumber}</td>
-                          <td scope="row" className="rowElement px-6 py-4 ">
-                            {benefit.program_name}
-                          </td>
-                          <td className="text-sm px-6 py-4">
-                            {benefit.entitlement_reference_number
-                              ? benefit.entitlement_reference_number
-                              : "Entitlement not approved"}
-                          </td>
-                          <td className="px-6 py-4">{Number(benefit.funds_awaited).toFixed(2)}</td>
-                          <td className="px-6 py-4">{Number(benefit.funds_received).toFixed(2)}</td>
-                          <td scope="row" className="px-6 py-4 ">
-                            {new Date(benefit.date_approved).toLocaleDateString()}
+                    {benefits.length > 0 ? (
+                      paginatedBenefits.map((benefit, index) => {
+                        const itemNumber = (currentPage - 1) * ITEMS_PER_PAGE + index + 1;
+                        return (
+                          <tr
+                            key={index}
+                            className="bg-white border-b dark:bg-white-200 dark:border-white-200 text-gray-600"
+                          >
+                            <td className="snoElement px-6 py-4">{itemNumber}</td>
+                            <td scope="row" className="rowElement px-6 py-4 ">
+                              {benefit.program_name}
+                            </td>
+                            <td className="text-sm px-6 py-4">
+                              {benefit.entitlement_reference_number
+                                ? benefit.entitlement_reference_number
+                                : "Entitlement not approved"}
+                            </td>
+                            <td className="px-6 py-4">{Number(benefit.funds_awaited).toFixed(2)}</td>
+                            <td className="px-6 py-4">{Number(benefit.funds_received).toFixed(2)}</td>
+                            <td scope="row" className="px-6 py-4 ">
+                              {new Date(benefit.date_approved).toLocaleDateString()}
 
-                            {/* {benefit.date_approved} */}
-                          </td>
-                        </tr>
-                      );
-                    })}
+                              {/* {benefit.date_approved} */}
+                            </td>
+                          </tr>
+                        );
+                      })
+                    ) : (
+                      <tr>
+                        <td colSpan={6} className="text-center py-10">
+                          <div className="flex flex-col items-center justify-center">
+                            <h2
+                              className="text-black-100 text-xl flex-col gap-2 mb-4
+                          style={{ top: '339px', left: '621px', width: '124px', height: '17px', textAlign: 'center', font: 'normal normal 600 14px/17px Inter', letterSpacing: '0px', color: '#494DAF', opacity: 1 }"
+                            >
+                              {t("No benefits yet, please tap on the below link to view all programs")}
+                            </h2>
+                            <Link href={`/${lang}/programs`}>
+                              <p
+                                className="text-blue-500 hover:underline mb-20"
+                                style={{
+                                  top: "339px",
+                                  left: "621px",
+                                  width: "124px",
+                                  height: "17px",
+                                  textAlign: "center",
+                                  font: "normal normal 600 14px/17px Inter",
+                                  letterSpacing: "0px",
+                                  color: "#494DAF",
+                                  opacity: 1,
+                                }}
+                              >
+                                {t("View All Program")}
+                              </p>
+                            </Link>
+                          </div>
+                        </td>
+                      </tr>
+                    )}
                   </tbody>
                 </table>
               </div>
@@ -253,33 +284,6 @@ export default function BenefPage({
               <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
             </div>
           </div>
-        </div>
-      ) : (
-        <div className="mt-16 flex justify-center items-center flex-col gap-2 ">
-          <h2
-            className="text-black-100 text-xl
-        style={{ top: '339px', left: '621px', width: '124px', height: '17px', textAlign: 'center', font: 'normal normal 600 14px/17px Inter', letterSpacing: '0px', color: '#494DAF', opacity: 1 }"
-          >
-            {t("No benefits found, please tap on the below link to view all programs")}
-          </h2>
-          <Link href={`/${lang}/programs`}>
-            <p
-              className="text-blue-500 hover:underline mb-20"
-              style={{
-                top: "339px",
-                left: "621px",
-                width: "124px",
-                height: "17px",
-                textAlign: "center",
-                font: "normal normal 600 14px/17px Inter",
-                letterSpacing: "0px",
-                color: "#494DAF",
-                opacity: 1,
-              }}
-            >
-              {t("View All Program")}
-            </p>
-          </Link>
         </div>
       )}
     </div>

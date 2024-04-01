@@ -90,13 +90,11 @@ export default function Page({
     router.push(`?page=${page}`);
   };
 
-  const isDataEmpty = !Array.isArray(programs) || programs.length < 1 || !programs;
-
   return (
     <div>
       {isLoading ? (
         <div className="mt- 2 flex justify-center items-center flex-col gap-2"></div>
-      ) : !isDataEmpty ? (
+      ) : (
         <div className=" m-6 p-6 md:space-x-4 mx-auto max-w-screen-xl flex justify-center items-center">
           <div className="bg-brand container w-1180 shadow-md  pb-0 rounded-lg top-24">
             <div className="flex flex-wrap justify-between items-center">
@@ -202,31 +200,66 @@ export default function Page({
                     </tr>
                   </thead>
                   <tbody>
-                    {paginatedPrograms.map((program, index) => {
-                      const itemNumber = (currentPage - 1) * ITEMS_PER_PAGE + index + 1;
-                      return (
-                        <tr
-                          key={index}
-                          className="bg-white border-b dark:bg-white-200 dark:border-white-200 text-gray-600"
-                        >
-                          <td className="px-6 py-4 snoElement ">{itemNumber}</td>
-                          <td scope="row" className="rowElement px-6 py-4 ">
-                            {program.program_name}
-                          </td>
-                          <td className="px-6 py-4">
-                            <button
-                              type="button"
-                              className={`${program.enrollment_status === "enrolled" ? "enrolledButton" : "submittedButton"} buttonElement top-14 text-xs  w-24 h-8 rounded-md text-center tracking-[0px] opacity-100 border-collapse border-[none] left-[811px] ${program.enrollment_status ? "bg-gray-300 text-gray-600" : "bg-[#c7ebd1] text-[#075e45]"}`}
-                              disabled={true}
+                    {programs.length > 0 ? (
+                      paginatedPrograms.map((program, index) => {
+                        const itemNumber = (currentPage - 1) * ITEMS_PER_PAGE + index + 1;
+                        return (
+                          <tr
+                            key={index}
+                            className="bg-white border-b dark:bg-white-200 dark:border-white-200 text-gray-600"
+                          >
+                            <td className="px-6 py-4 snoElement ">{itemNumber}</td>
+                            <td scope="row" className="rowElement px-6 py-4 ">
+                              {program.program_name}
+                            </td>
+                            <td className="px-6 py-4">
+                              <button
+                                type="button"
+                                className={`${program.enrollment_status === "enrolled" ? "enrolledButton" : "submittedButton"} buttonElement top-14 text-xs  w-24 h-8 rounded-md text-center tracking-[0px] opacity-100 border-collapse border-[none] left-[811px] ${program.enrollment_status ? "bg-gray-300 text-gray-600" : "bg-[#c7ebd1] text-[#075e45]"}`}
+                                disabled={true}
+                              >
+                                {program.enrollment_status === "enrolled" ? "Enrolled" : "Applied"}
+                              </button>
+                            </td>
+                            <td className="px-6 py-4">{Number(program.total_funds_awaited).toFixed(2)}</td>
+                            <td className="px-6 py-4">{Number(program.total_funds_received).toFixed(2)}</td>
+                          </tr>
+                        );
+                      })
+                    ) : (
+                      <tr>
+                        <td colSpan={5} className="text-center py-10">
+                          <div className="flex flex-col items-center justify-center">
+                            <h2
+                              className="text-black-100 text-xl flex-col gap-2 mb-4
+                          style={{ top: '339px', left: '621px', width: '124px', height: '17px', textAlign: 'center', font: 'normal normal 600 14px/17px Inter', letterSpacing: '0px', color: '#494DAF', opacity: 1 }"
                             >
-                              {program.enrollment_status === "enrolled" ? "Enrolled" : "Applied"}
-                            </button>
-                          </td>
-                          <td className="px-6 py-4">{Number(program.total_funds_awaited).toFixed(2)}</td>
-                          <td className="px-6 py-4">{Number(program.total_funds_received).toFixed(2)}</td>
-                        </tr>
-                      );
-                    })}
+                              {t(
+                                "You haven’t enrolled into any programs yet, please tap on the below link to view all programs"
+                              )}
+                            </h2>
+                            <Link href={`/${lang}/programs`}>
+                              <p
+                                className="text-blue-500 hover:underline mb-20"
+                                style={{
+                                  top: "339px",
+                                  left: "621px",
+                                  width: "124px",
+                                  height: "17px",
+                                  textAlign: "center",
+                                  font: "normal normal 600 14px/17px Inter",
+                                  letterSpacing: "0px",
+                                  color: "#494DAF",
+                                  opacity: 1,
+                                }}
+                              >
+                                {t("View All Program")}
+                              </p>
+                            </Link>
+                          </div>
+                        </td>
+                      </tr>
+                    )}
                   </tbody>
                 </table>
               </div>
@@ -235,35 +268,6 @@ export default function Page({
               <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
             </div>
           </div>
-        </div>
-      ) : (
-        <div className="mt-16 flex justify-center items-center flex-col gap-2 ">
-          <h2
-            className="text-black-100 text-xl
-        style={{ top: '339px', left: '621px', width: '124px', height: '17px', textAlign: 'center', font: 'normal normal 600 14px/17px Inter', letterSpacing: '0px', color: '#494DAF', opacity: 1 }"
-          >
-            {t(
-              "You haven’t enrolled into any programs yet, please tap on the below link to view all programs"
-            )}
-          </h2>
-          <Link href={`/${lang}/programs`}>
-            <p
-              className="text-blue-500 hover:underline mb-20"
-              style={{
-                top: "339px",
-                left: "621px",
-                width: "124px",
-                height: "17px",
-                textAlign: "center",
-                font: "normal normal 600 14px/17px Inter",
-                letterSpacing: "0px",
-                color: "#494DAF",
-                opacity: 1,
-              }}
-            >
-              {t("View All Program")}
-            </p>
-          </Link>
         </div>
       )}
       <div className="pt-0">
