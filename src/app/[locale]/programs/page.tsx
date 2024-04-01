@@ -34,6 +34,9 @@ export default function ProgrmPage({
 
   const t = useTranslations();
 
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
+  const [sortedColumn, setSortedColumn] = useState<string | null>(null);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -69,6 +72,21 @@ export default function ProgrmPage({
     const end = start + ITEMS_PER_PAGE;
     setPaginatedPrograms(programs.slice(start, end));
   }, [currentPage, programs]);
+
+  const sortPrograms = (column: string) => {
+    const order = column === sortedColumn && sortOrder === "asc" ? "desc" : "asc";
+    const sortedPrograms = [...programs].sort((a, b) => {
+      if (column === "name") {
+        return order === "asc" ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name);
+      } else if (column === "program_status")
+        return order === "asc" ? a.state.localeCompare(b.state) : b.state.localeCompare(a.state);
+      return 0;
+    });
+
+    setPrograms(sortedPrograms);
+    setSortOrder(order);
+    setSortedColumn(column);
+  };
 
   const handlePageChange = (page: number) => {
     router.push(`?page=${page}`);
@@ -310,7 +328,10 @@ export default function ProgrmPage({
                         {t("No_")}
                       </th>
                       <th scope="col" className="columnTitle px-6 py-3 text-sm font-normal">
-                        <div className="flex items-center">
+                        <div
+                          className="flex items-center cursor-pointer"
+                          onClick={() => sortPrograms("name")}
+                        >
                           {t("Program Name")}
                           <Link href="#">
                             <svg
@@ -327,7 +348,10 @@ export default function ProgrmPage({
                       </th>
 
                       <th scope="col" className="columnTitle px-6 py-3">
-                        <div className="flex items-center">
+                        <div
+                          className="flex items-center cursor-pointer"
+                          onClick={() => sortPrograms("program_status")}
+                        >
                           {t("Program Status")}
                           <Link href="#">
                             <svg

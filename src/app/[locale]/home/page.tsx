@@ -29,6 +29,10 @@ export default function Page({
   const [paginatedPrograms, setPaginatedPrograms] = useState<ProgramDetails[]>([]);
   const [totalPages, setTotalPages] = useState<number>(0);
   const currentPage = Number(searchParams?.page) || 1;
+
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
+  const [sortedColumn, setSortedColumn] = useState<string | null>(null);
+
   const t = useTranslations();
 
   useEffect(() => {
@@ -53,6 +57,34 @@ export default function Page({
     const end = start + ITEMS_PER_PAGE;
     setPaginatedPrograms(programs.slice(start, end));
   }, [currentPage, programs]);
+
+  const sortPrograms = (column: string) => {
+    const order = column === sortedColumn && sortOrder === "asc" ? "desc" : "asc";
+    const sortedPrograms = [...programs].sort((a, b) => {
+      if (column === "program_name") {
+        return order === "asc"
+          ? a.program_name.localeCompare(b.program_name)
+          : b.program_name.localeCompare(a.program_name);
+      } else if (column === "enrollment_status") {
+        return order === "asc"
+          ? a.enrollment_status.localeCompare(b.enrollment_status)
+          : b.enrollment_status.localeCompare(a.enrollment_status);
+      } else if (column === "total_funds_awaited") {
+        return order === "asc"
+          ? a.total_funds_awaited - b.total_funds_awaited
+          : b.total_funds_awaited - a.total_funds_awaited;
+      } else if (column === "total_funds_received") {
+        return order === "asc"
+          ? a.total_funds_received - b.total_funds_received
+          : b.total_funds_received - a.total_funds_received;
+      }
+      return 0;
+    });
+
+    setPrograms(sortedPrograms);
+    setSortOrder(order);
+    setSortedColumn(column);
+  };
 
   const handlePageChange = (page: number) => {
     router.push(`?page=${page}`);
@@ -96,7 +128,10 @@ export default function Page({
                         {t("No_")}
                       </th>
                       <th scope="col" className="columnTitle px-6 py-3 ">
-                        <div className="flex items-center w-max">
+                        <div
+                          className="flex items-center w-max cursor-pointer"
+                          onClick={() => sortPrograms("program_name")}
+                        >
                           {t("Program Name")}
                           <svg
                             data-column="0"
@@ -111,7 +146,10 @@ export default function Page({
                         </div>
                       </th>
                       <th scope="col" className="columnTitle px-6 py-3">
-                        <div className="flex items-center w-max">
+                        <div
+                          className="flex items-center w-max cursor-pointer"
+                          onClick={() => sortPrograms("enrollment_status")}
+                        >
                           {t("Enrollment Status")}
                           <svg
                             data-column="1"
@@ -126,7 +164,10 @@ export default function Page({
                         </div>
                       </th>
                       <th scope="col" className="columnTitle px-6 py-3">
-                        <div className="flex items-center w-max">
+                        <div
+                          className="flex items-center w-max cursor-pointer"
+                          onClick={() => sortPrograms("total_funds_awaited")}
+                        >
                           {t("Total Funds Awaited")}
                           <svg
                             data-column="2"
@@ -141,7 +182,10 @@ export default function Page({
                         </div>
                       </th>
                       <th scope="col" className="columnTitle px-6 py-3">
-                        <div className="flex items-center w-max">
+                        <div
+                          className="flex items-center w-max cursor-pointer"
+                          onClick={() => sortPrograms("total_funds_received")}
+                        >
                           {t("Total Funds Received")}
                           <svg
                             data-column="3"
