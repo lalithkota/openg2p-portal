@@ -59,6 +59,7 @@
   "Program Submission": "Pagpasa ng Programa",
   "Funds Awaited": "Pondo na Inaasahan ($)",
   "Funds Received": "Natanggap na Pondo ($)",
+  "Date Approved": "Petsa ng Pag-apruba",
   "Total Funds Awaited": "Kabuuang Pondo na Inaasahan ($)",
   "Total Funds Received": "Kabuuang Natanggap na Pondo ($)",
 
@@ -104,5 +105,13 @@
   "Print": "I-print",
   "No_": "Numero",
 
-  "@copyright": "© 2023 Pambansang Portal ng mga Benepisyo. Lahat ng karapatan ay nakalaan."
+  "@copyright": "© 2023 Pambansang Portal ng mga Benepisyo. Lahat ng karapatan ay nakalaan.",
+
+  "KYC": "Kilalanin ang Iyong Kustomer",
+  "Housing": "Pabahay",
+
+  "No applications yet, please tap on the below link to view all programs": "Wala pang mga aplikasyon, mangyaring pindutin ang link sa ibaba upang tingnan lahat ng mga programa",
+  "No benefits yet, please tap on the below link to view all programs": "Wala pang mga benepisyo, mangyaring pindutin ang link sa ibaba upang tingnan lahat ng mga programa",
+  "You haven’t enrolled into any programs yet, please tap on the below link to view all programs": "Hindi ka pa nakapag-enroll sa anumang programa, mangyaring pindutin ang link sa ibaba upang tingnan lahat ng mga programa",
+  "View All Program": "Tingnan Lahat ng Programa"
 }
