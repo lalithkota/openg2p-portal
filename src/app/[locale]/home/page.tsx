@@ -115,7 +115,9 @@ export default function Page({
               >
                 {t("My Programs")}
               </p>
-              <SearchBar />
+              <div className="flex-1 flex justify-end">
+                <SearchBar />
+              </div>
             </div>
             <Suspense fallback={<Loading />}>
               <div className="m-4 md:space-x-8 mx-auto max-w-screen-xl flex justify-center items-center relative overflow-x-auto  ">
@@ -229,7 +231,10 @@ export default function Page({
                     ) : (
                       <tr>
                         <td colSpan={5} className="text-center py-10">
-                          <div className="flex flex-col items-center justify-center">
+                          <div
+                            className="flex flex-col items-center justify-center "
+                            style={{marginTop: "80px"}}
+                          >
                             <h2
                               className="text-black-100 text-xl flex-col gap-2 mb-4
                           style={{ top: '339px', left: '621px', width: '124px', height: '17px', textAlign: 'center', font: 'normal normal 600 14px/17px Inter', letterSpacing: '0px', color: '#494DAF', opacity: 1 }"

@@ -149,7 +149,9 @@ export default function ApplcnPage() {
               >
                 {t("My Application")}
               </p>
-              <SearchBar />
+              <div className="flex-1 flex justify-end">
+                <SearchBar />
+              </div>
             </div>
             <Suspense fallback={<Loading />}>
               <div className="m-4 md:space-x-8 mx-auto max-w-screen-xl flex justify-center items-center relative overflow-x-auto  ">

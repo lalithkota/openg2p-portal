@@ -8,23 +8,26 @@ export default function Card() {
   const t = useTranslations();
   return (
     <>
-      <div className="w-full flex flex-row mx-auto max-w-screen-xl font-fontcustom gap-8 m-4 p-6 md:space-x-16px ">
+      <div
+        className="w-full flex flex-row mx-auto max-w-screen-xl font-fontcustom gap-8 m-4 p-6 md:space-x-16px "
+        style={{gap: "12px"}}
+      >
         <CardItem
           title={t("All Programs")}
           heading1={t("Healthcare")}
           description1={t("@Healthcare_description")}
-          imagePath1={prefixBasePath("/img/medical.png")}
+          imagePath1={prefixBasePath("/img/medical_services_FILL0_wght400_GRAD0_opsz48@2x.png")}
           link1={`/${lang}/programs`}
           heading2={t("Education")}
           description2={t("@Healthcare_description")}
-          imagePath2={prefixBasePath("/img/school_FILL0_wght400_GRAD0_opsz48.png")}
+          imagePath2={prefixBasePath("/img/school_FILL0_wght400_GRAD0_opsz48@2x.png")}
           link2={`/${lang}/programs`}
         />
         <CardItem
           title={t("Other Services")}
           heading1={t("KYC")}
           description1={t("Tap here for assistance")}
-          imagePath1={prefixBasePath("/img/person_filled_FILL0_wght400_GRAD0_opsz48.png")}
+          imagePath1={prefixBasePath("/img/person_filled_FILL0_wght400_GRAD0_opsz48@2x.png")}
           link1="#"
           heading2={t("Housing")}
           description2={t("Tap here for assistance")}
@@ -70,7 +73,7 @@ export function CardItem({
 }) {
   return (
     <div className="flex flex-col w-full bg-brand border border-gray-200 square-lg shadow dark:bg-brand rounded-lg">
-      <div className="flex items-center justify-between pt-4 pl-4 mb-2 ">
+      <div className="flex items-center justify-between pt-2 pl-4 mb-2 ">
         <h5
           className="font-fontcustom m-4 "
           style={{
@@ -89,14 +92,29 @@ export function CardItem({
         <ul role="list" className="flex-col p-0 m-2 justify-center">
           <li className="p-1 sm:py-4">
             <div className="h-16 pl-0 bg-opacity-10 bg-white bg-no-repeat border  border-gray-300 rounded-lg opacity-100 flex items-start space-x-4">
-              <div className="bg-opacity-10 bg-gray-600 bg-no-repeat bg-0 rounded-lg opacity-100 w-12 h-12 m-5 flex-shrink-0">
-                <Image
-                  className="w-80 h-80 square-full m-3 max-w-[80%] max-h-[80%]"
-                  src={imagePath1}
-                  alt="Image"
-                  width={30}
-                  height={30}
-                />
+              <div
+                className=""
+                style={{
+                  width: "60px",
+                  height: "60px",
+                  marginTop: "6px",
+                  marginBottom: "6px",
+                  marginRight: "10px",
+                  marginLeft: "6px",
+                  backgroundImage: "linear-gradient(rgba(96, 100, 199, 0.1), rgba(96, 100, 199, 0.1))",
+                  backgroundBlendMode: "multiply",
+                  borderRadius: "10px",
+                }}
+              >
+                <div className="bg-opacity-10 bg-gray-600 bg-no-repeat bg-0 rounded-lg opacity-100 w-12 h-12 m-5 flex-shrink-0">
+                  <Image
+                    className="w-80 h-80 square-full m-3 max-w-[80%] max-h-[80%]"
+                    src={imagePath1}
+                    alt="Image"
+                    width={30}
+                    height={30}
+                  />
+                </div>
               </div>
               <div className="flex-1 min-w-0 mt-2 ml-3 ">
                 <Link href={link1} className="text-sm font-medium text-gray-100 truncate columnElement">
@@ -114,14 +132,29 @@ export function CardItem({
         <ul role="list" className="flex-col p-0 m-2 justify-center">
           <li className="p-1 sm:py-4">
             <div className="h-16 pl-0 bg-opacity-10 bg-white bg-no-repeat border  border-gray-300 rounded-lg opacity-100 flex items-start space-x-4">
-              <div className="bg-opacity-10 bg-gray-600 bg-no-repeat bg-0 rounded-lg opacity-100 w-12 h-12 m-4 flex-shrink-0 ">
-                <Image
-                  className="w-80 h-80 square-full m-3 max-w-[80%] max-h-[80%]"
-                  src={imagePath2}
-                  alt="Image"
-                  width={30}
-                  height={30}
-                />
+              <div
+                className=""
+                style={{
+                  width: "60px",
+                  height: "60px",
+                  marginTop: "6px",
+                  marginBottom: "6px",
+                  marginRight: "10px",
+                  marginLeft: "6px",
+                  backgroundImage: "linear-gradient(rgba(96, 100, 199, 0.1), rgba(96, 100, 199, 0.1))",
+                  backgroundBlendMode: "multiply",
+                  borderRadius: "10px",
+                }}
+              >
+                <div className="bg-opacity-10 bg-gray-600 bg-no-repeat bg-0 rounded-lg opacity-100 w-12 h-12 m-4 flex-shrink-0 ">
+                  <Image
+                    className="w-80 h-80 square-full m-3 max-w-[80%] max-h-[80%]"
+                    src={imagePath2}
+                    alt="Image"
+                    width={30}
+                    height={30}
+                  />
+                </div>
               </div>
               <div className="flex-1 min-w-0 mt-2 ml-3">
                 <Link href={link2} className="text-sm font-medium text-gray-100 truncate columnElement">
@@ -135,10 +168,13 @@ export function CardItem({
           </li>
         </ul>
       </div>
-      <div className="mx-auto mb-3">
+      <div className="mx-auto mb-3" style={{marginBottom: "10px"}}>
         <Link
           href={link2}
-          className="text-sm font-medium text-blue-600 dark:text-blue-500 no-underline hover:underline"
+          className="text-sm font-medium text-blue-600 dark:text-blue-500 no-underline hover:underline "
+          style={{
+            font: "normal normal 600 14px/20px Inter",
+          }}
         >
           {title}
         </Link>

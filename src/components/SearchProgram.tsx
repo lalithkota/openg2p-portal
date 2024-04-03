@@ -48,23 +48,7 @@ const SearchProgram = ({program, setProgram}: SearchProgramsProps) => {
           <div className="relative  mt-1 ">
             <div className=" w-full">
               <div className="absolute  inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                <Combobox.Button className="absolute">
-                  <svg
-                    className="w-4 h-4 text-gray-500 dark:text-gray-400"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-                    />
-                  </svg>
-                </Combobox.Button>
+                <Combobox.Button className="absolute"></Combobox.Button>
               </div>
               <Combobox.Input
                 className="ml-7 p-2 text-sm text-black-600  rounded-lg bg-white-200 focus:ring-gray-100 focus:border-transparent dark:bg-white-400 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black-800 dark:focus:ring-gray-500 dark:focus:border-transaparent outline-none"

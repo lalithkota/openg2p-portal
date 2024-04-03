@@ -4,7 +4,6 @@ import {useRouter} from "next/navigation";
 import {useLocale, useTranslations} from "next-intl";
 import {Fragment} from "react";
 import {Menu, Transition} from "@headlessui/react";
-import {ChevronDownIcon} from "@heroicons/react/outline";
 import {Avatar} from "@mui/material";
 import {useAuth} from "@/context/global";
 import {prefixBaseApiPath} from "@/utils/path";
@@ -26,9 +25,14 @@ export default function ProfileDropDown() {
   return (
     <Menu as="div" className="print:hidden relative inline-block text-left border-none">
       <div>
-        <Menu.Button className="inline-flex w-full justify-center gap-x-1.5 px-3 py-2 text-sm font-semibold text-gray-900 border-transparent">
-          <Avatar src={profile?.picture} sx={{width: 55, height: 55}} />
-          <ChevronDownIcon className="-mr-1 mt-3 h-5 w-10 text-gray-400" aria-hidden="true" />
+        <Menu.Button className="inline-flex w-full justify-center px-3 py-2 text-sm font-semibold text-gray-900 border-transparent mt-1">
+          <div className="flex items-center gap-2">
+            <Avatar src={profile?.picture} sx={{width: 60, height: 60}} />
+            <span className="h-4 w-4 text-gray-700" aria-hidden="true">
+              ▼
+            </span>{" "}
+            {/* Chevron Down Character */}
+          </div>
         </Menu.Button>
       </div>
 
