@@ -59,6 +59,7 @@
   "Program Submission": "Program Submission",
   "Funds Awaited": "Funds Awaited ($)",
   "Funds Received": "Funds Received ($)",
+  "Date Approved": "Date Approved",
   "Total Funds Awaited": "Total Funds Awaited ($)",
   "Total Funds Received": "Total Funds Received ($)",
 
@@ -104,5 +105,13 @@
   "Print": "Print",
   "No_": "No.",
 
-  "@copyright": "© 2023 National Social Benefits Portal. All rights reserved."
+  "@copyright": "© 2023 National Social Benefits Portal. All rights reserved.",
+
+  "KYC": "KYC",
+  "Housing": "Housing",
+
+  "No applications yet, please tap on the below link to view all programs": "No applications yet, please tap on the below link to view all programs",
+  "No benefits yet, please tap on the below link to view all programs": "No benefits yet, please tap on the below link to view all programs",
+  "You haven’t enrolled into any programs yet, please tap on the below link to view all programs": "You haven’t enrolled into any programs yet, please tap on the below link to view all programs",
+  "View All Program": "View All Program"
 }

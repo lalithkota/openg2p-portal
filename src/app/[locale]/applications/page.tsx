@@ -97,8 +97,6 @@ export default function ApplcnPage({
     setSortedColumn(column);
   };
 
-  const isDataEmpty = !Array.isArray(applications) || applications.length < 1 || !applications;
-
   function getStatusClass(status: string) {
     switch (status) {
       case "completed":
@@ -123,7 +121,7 @@ export default function ApplcnPage({
     <div>
       {isLoading ? (
         <div className="mt-16 flex justify-center items-center flex-col gap-2"></div>
-      ) : !isDataEmpty ? (
+      ) : (
         <div className=" m-6 p-6 md:space-x-4 mx-auto max-w-screen-xl flex justify-center items-center">
           <div className="bg-brand container w-1180 shadow-md  pb-0 rounded-lg top-24">
             <div className="flex flex-wrap justify-between items-center">
@@ -144,7 +142,9 @@ export default function ApplcnPage({
               >
                 {t("My Application")}
               </p>
-              <SearchBar />
+              <div className="flex-1 flex justify-end">
+                <SearchBar />
+              </div>
             </div>
             <Suspense fallback={<Loading />}>
               <div className="m-4 md:space-x-8 mx-auto max-w-screen-xl flex justify-center items-center relative overflow-x-auto  ">
@@ -229,34 +229,72 @@ export default function ApplcnPage({
                     </tr>
                   </thead>
                   <tbody>
-                    {paginatedApplications.map((application, index) => {
-                      const itemNumber = (currentPage - 1) * ITEMS_PER_PAGE + index + 1;
-                      return (
-                        <tr
-                          key={index}
-                          className="bg-white border-b dark:bg-white-200 dark:border-white-200 text-gray-600"
-                        >
-                          <td className="px-6 py-4 snoElement">{itemNumber}</td>
-                          <td scope="row" className="rowElement px-6 py-4 ">
-                            {application.program_name}
-                          </td>
-                          <td className="px-6 py-4">
-                            <button
-                              type="button"
-                              className={`top-14 text-xs  w-24 h-8 rounded-md text-center tracking-[0px] opacity-100 border-collapse border-[none] left-[811px] text-white ${getStatusClass(application.application_status)}`}
-                              disabled={true}
+                    {applications.length > 0 ? (
+                      paginatedApplications.map((application, index) => {
+                        const itemNumber = (currentPage - 1) * ITEMS_PER_PAGE + index + 1;
+                        return (
+                          <tr
+                            key={index}
+                            className="bg-white border-b dark:bg-white-200 dark:border-white-200 text-gray-600"
+                          >
+                            <td className="px-6 py-4 snoElement">{itemNumber}</td>
+                            <td scope="row" className="rowElement px-6 py-4 ">
+                              {application.program_name}
+                            </td>
+                            <td className="px-6 py-4">
+                              <button
+                                type="button"
+                                className={`top-14 text-xs  w-24 h-8 rounded-md text-center tracking-[0px] opacity-100 border-collapse border-[none] left-[811px] text-white ${getStatusClass(application.application_status)}`}
+                                disabled={true}
+                              >
+                                {application.application_status === "active" ||
+                                application.application_status === "inprogress"
+                                  ? "Applied"
+                                  : toTitleCase(application.application_status)}
+                              </button>
+                            </td>
+                            <td className="px-6 py-4">{application.application_id}</td>
+                            <td className="px-6 py-4">
+                              {new Date(application.date_applied).toLocaleString()}
+                            </td>
+                          </tr>
+                        );
+                      })
+                    ) : (
+                      <tr>
+                        <td colSpan={5} className="text-center py-10">
+                          <div
+                            className="flex flex-col items-center justify-center"
+                            style={{marginTop: "80px"}}
+                          >
+                            <h2
+                              className="text-black-100 text-xl flex-col gap-2 mb-4
+                          style={{ top: '339px', left: '621px', width: '124px', height: '17px', textAlign: 'center', font: 'normal normal 600 14px/17px Inter', letterSpacing: '0px', color: '#494DAF', opacity: 1 }"
                             >
-                              {application.application_status === "active" ||
-                              application.application_status === "inprogress"
-                                ? "Applied"
-                                : toTitleCase(application.application_status)}
-                            </button>
-                          </td>
-                          <td className="px-6 py-4">{application.application_id}</td>
-                          <td className="px-6 py-4">{new Date(application.date_applied).toLocaleString()}</td>
-                        </tr>
-                      );
-                    })}
+                              {t("No applications yet, please tap on the below link to view all programs")}
+                            </h2>
+                            <Link href={`/${lang}/programs`}>
+                              <p
+                                className="text-blue-500 hover:underline mb-20"
+                                style={{
+                                  top: "339px",
+                                  left: "621px",
+                                  width: "124px",
+                                  height: "17px",
+                                  textAlign: "center",
+                                  font: "normal normal 600 14px/17px Inter",
+                                  letterSpacing: "0px",
+                                  color: "#494DAF",
+                                  opacity: 1,
+                                }}
+                              >
+                                {t("View All Program")}
+                              </p>
+                            </Link>
+                          </div>
+                        </td>
+                      </tr>
+                    )}
                   </tbody>
                 </table>
               </div>
@@ -265,35 +303,6 @@ export default function ApplcnPage({
               <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
             </div>
           </div>
-        </div>
-      ) : (
-        <div className="mt-16 flex justify-center items-center flex-col gap-2 ">
-          <h2
-            className="text-black-100 text-xl
-        style={{ top: '339px', left: '621px', width: '124px', height: '17px', textAlign: 'center', font: 'normal normal 600 14px/17px Inter', letterSpacing: '0px', color: '#494DAF', opacity: 1 }"
-          >
-            {t(
-              "You haven’t enrolled into any programs yet, please tap on the below link to view all programs"
-            )}
-          </h2>
-          <Link href={`/${lang}/programs`}>
-            <p
-              className="text-blue-500 hover:underline mb-20"
-              style={{
-                top: "339px",
-                left: "621px",
-                width: "124px",
-                height: "17px",
-                textAlign: "center",
-                font: "normal normal 600 14px/17px Inter",
-                letterSpacing: "0px",
-                color: "#494DAF",
-                opacity: 1,
-              }}
-            >
-              {t("View All Program")}
-            </p>
-          </Link>
         </div>
       )}
     </div>

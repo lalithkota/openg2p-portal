@@ -59,6 +59,7 @@
   "Program Submission": "Envío del programa",
   "Funds Awaited": "Fondos esperados ($)",
   "Funds Received": "Fondos recibidos ($)",
+  "Date Approved": "Fecha de Aprobación",
   "Total Funds Awaited": "Total de fondos esperados ($)",
   "Total Funds Received": "Total de fondos recibidos ($)",
 
@@ -104,5 +105,13 @@
   "Print": "Imprimir",
   "No_": "No.",
 
-  "@copyright": "© 2023 Portal Nacional de Beneficios Sociales. Todos los derechos reservados."
+  "@copyright": "© 2023 Portal Nacional de Beneficios Sociales. Todos los derechos reservados.",
+
+  "KYC": "Conozca a Su Cliente",
+  "Housing": "Vivienda",
+
+  "No applications yet, please tap on the below link to view all programs": "Todavía no hay solicitudes, por favor toque el enlace de abajo para ver todos los programas",
+  "No benefits yet, please tap on the below link to view all programs": "Todavía no hay beneficios, por favor toque el enlace de abajo para ver todos los programas",
+  "You haven’t enrolled into any programs yet, please tap on the below link to view all programs": "Todavía no se ha inscrito en ningún programa, por favor toque el enlace de abajo para ver todos los programas",
+  "View All Program": "Ver Todos los Programas"
 }
