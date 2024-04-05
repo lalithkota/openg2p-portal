@@ -7,7 +7,10 @@ export default function Login() {
   const lang = useLocale();
   const t = useTranslations();
   return (
-    <div className="flex min-h-screen flex-col items-center justify-between p-7">
+    <div
+      className="flex min-h-screen flex-col items-center justify-between p-7"
+      style={{backgroundColor: "#f4f7ff"}}
+    >
       <AuthUtil successRedirectUrl={`/${lang}/home`} />
       <LoginBox />
       <div className="border-0">
