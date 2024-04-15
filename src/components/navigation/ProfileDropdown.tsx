@@ -27,8 +27,8 @@ export default function ProfileDropDown() {
       <div>
         <Menu.Button className="inline-flex w-full justify-center px-3 py-2 text-sm font-semibold text-gray-900 border-transparent mt-1">
           <div className="flex items-center gap-2">
-            <Avatar src={profile?.picture} sx={{width: 60, height: 60}} />
-            <span className="h-4 w-4 text-gray-700" aria-hidden="true">
+            <Avatar src={profile?.picture} sx={{width: 50, height: 50}} />
+            <span className="h-4 w-4 text-gray-700" aria-hidden="true" style={{fontSize: "80%"}}>
               ▼
             </span>{" "}
             {/* Chevron Down Character */}

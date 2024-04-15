@@ -237,8 +237,11 @@ export default function ProgrmPage({
 
   return (
     <div className=" rounded-lg border-gray-200 p-4 mx-4 lg:px-4 m-0">
-      <div className="mx-auto max-w-screen-xl">
-        <div
+      <div
+        className="mx-auto max-w-screen-xl"
+        style={{marginTop: "10px", marginBottom: "5px", height: "10px"}}
+      >
+        {/* <div
           className=" shift-right"
           style={{
             textAlign: "left",
@@ -250,10 +253,11 @@ export default function ProgrmPage({
             left: "139px",
             width: "135px",
             height: "26px",
+            marginLeft:"40px"
           }}
         >
           {t("All Programs")}
-        </div>
+        </div> */}
         <div className="flex flex-wrap gap-2 mt-1 items-center ">
           <Link
             href={`/${lang}/home`}
@@ -264,10 +268,12 @@ export default function ProgrmPage({
               width: "40px",
               height: "17px",
               textAlign: "left",
-              font: "normal normal 600 14px/17px Inter",
+              font: "normal normal 600 16px/17px Inter",
               letterSpacing: "0px",
               color: "#494DAF",
               opacity: "1",
+              marginLeft: "40px",
+              marginRight: "8px",
             }}
           >
             {" " + t("Home") + " "}
@@ -283,7 +289,7 @@ export default function ProgrmPage({
               width: "86px",
               height: "17px",
               textAlign: "left",
-              font: "normal normal 600 14px/17px Inter",
+              font: "normal normal 600 16px/17px Inter",
               letterSpacing: "0px",
               color: "#848484",
               opacity: "1",
@@ -299,7 +305,7 @@ export default function ProgrmPage({
       ) : !isDataEmpty ? (
         <div className=" m-6 p-4 md:space-x-8 mx-auto max-w-screen-xl flex justify-center items-center">
           <div className=" bg-brand container w-1180 shadow-md rounded-lg top-24">
-            <div className="flex flex-wrap justify-between items-center">
+            <div className="flex flex-wrap justify-between items-center" style={{height: "42px"}}>
               <p
                 className="font-fontcustom m-4 "
                 style={{
@@ -313,6 +319,7 @@ export default function ProgrmPage({
                   color: "#484848",
                   opacity: "1",
                   whiteSpace: "nowrap",
+                  marginLeft: "24px",
                 }}
               >
                 {t("All Programs")}
@@ -322,9 +329,12 @@ export default function ProgrmPage({
               </div>
             </div>
             <Suspense fallback={<Loading />}>
-              <div className="  md:space-x-8 mx-auto max-w-screen-xl flex justify-center items-center relative overflow-x-auto">
+              <div
+                className="  md:space-x-8 mx-auto max-w-screen-xl flex justify-center items-center relative overflow-x-auto"
+                style={{marginTop: "24px", marginBottom: "0px"}}
+              >
                 <table className="w-full text-sm text-left text-gray-600">
-                  <thead className="text-xs text-gray-600 bg-gray-100">
+                  <thead className="text-xs text-gray-600 bg-gray-100" style={{height: "56px"}}>
                     <tr>
                       <th scope="col" className="columnTitle px-6 py-3 text-sm font-normal">
                         {t("No_")}
@@ -393,6 +403,7 @@ export default function ProgrmPage({
                         <tr
                           key={program.id}
                           className="bg-white border-b dark:bg-white-200 dark:border-white-200 text-gray-600"
+                          style={{height: "44px"}}
                         >
                           <td className="snoElement px-6 py-4">{itemNumber}</td>
                           <td scope="row" className="rowElement px-6 py-4 ">
@@ -441,7 +452,7 @@ export default function ProgrmPage({
           <p>{t("Message")}</p>
         </div>
       )}
-      <div className="pt-0">
+      <div className="pt-0" style={{marginTop: "0px", marginBottom: "24px"}}>
         <Card />
       </div>
     </div>

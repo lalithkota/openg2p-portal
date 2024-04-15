@@ -95,9 +95,12 @@ export default function Page({
       {isLoading ? (
         <div className="mt- 2 flex justify-center items-center flex-col gap-2"></div>
       ) : (
-        <div className=" m-6 p-6 md:space-x-4 mx-auto max-w-screen-xl flex justify-center items-center">
+        <div
+          className=" m-6 p-6 md:space-x-4 mx-auto max-w-screen-xl flex justify-center items-center"
+          style={{marginTop: "24px", marginBottom: "0px"}}
+        >
           <div className="bg-brand container w-1180 shadow-md  pb-0 rounded-lg top-24">
-            <div className="flex flex-wrap justify-between items-center">
+            <div className="flex flex-wrap justify-between items-center" style={{height: "56px"}}>
               <p
                 className="font-fontcustom m-4 "
                 style={{
@@ -111,6 +114,7 @@ export default function Page({
                   color: "#484848",
                   opacity: "1",
                   whiteSpace: "nowrap",
+                  marginLeft: "24px",
                 }}
               >
                 {t("My Programs")}
@@ -122,7 +126,7 @@ export default function Page({
             <Suspense fallback={<Loading />}>
               <div className="m-4 md:space-x-8 mx-auto max-w-screen-xl flex justify-center items-center relative overflow-x-auto  ">
                 <table className=" w-full  text-sm text-left text-gray-600 ">
-                  <thead className="text-xs text-gray-600 bg-gray-100">
+                  <thead className="text-xs text-gray-600 bg-gray-100" style={{height: "56px"}}>
                     <tr>
                       <th scope="col" className="columnTitle px-6 py-3 ">
                         {t("No_")}
@@ -209,6 +213,7 @@ export default function Page({
                           <tr
                             key={index}
                             className="bg-white border-b dark:bg-white-200 dark:border-white-200 text-gray-600"
+                            style={{height: "44px"}}
                           >
                             <td className="px-6 py-4 snoElement ">{itemNumber}</td>
                             <td scope="row" className="rowElement px-6 py-4 ">
@@ -275,7 +280,7 @@ export default function Page({
           </div>
         </div>
       )}
-      <div className="pt-0">
+      <div className="pt-0" style={{marginTop: "0px", marginBottom: "24px"}}>
         <Card />
       </div>
     </div>

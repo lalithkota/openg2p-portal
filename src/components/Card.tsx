@@ -10,7 +10,7 @@ export default function Card() {
     <>
       <div
         className="w-full flex flex-row mx-auto max-w-screen-xl font-fontcustom gap-8 m-4 p-6 md:space-x-16px "
-        style={{gap: "12px"}}
+        style={{gap: "24px", marginTop: "0px"}}
       >
         <CardItem
           title={t("All Programs")}
@@ -75,13 +75,15 @@ export function CardItem({
     <div className="flex flex-col w-full bg-brand border border-gray-200 square-lg shadow dark:bg-brand rounded-lg">
       <div className="flex items-center justify-between pt-2 pl-4 mb-2 ">
         <h5
-          className="font-fontcustom m-4 "
+          className="font-fontcustom "
           style={{
             font: "normal normal 600 16px/20px Inter",
             letterSpacing: "0px",
             color: "#484848",
             opacity: "1",
             whiteSpace: "nowrap",
+            marginTop: "20px",
+            marginBottom: "20px",
           }}
         >
           {title}

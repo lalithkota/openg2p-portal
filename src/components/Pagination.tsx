@@ -53,9 +53,14 @@ export default function Pagination({
         <button
           key={pageNumber}
           onClick={() => goToPage(pageNumber)}
-          className={clsx("w-10 h-10 flex items-center justify-center rounded-lg text-sm mx-2", {
+          className={clsx("w-10 h-10 flex items-center justify-center rounded-lg text-sm mx-2 px-2", {
             "bg-blue-700 text-white": pageNumber === currentPage,
           })}
+          style={{
+            padding: "0.25rem 0.4rem", // Adjust padding
+            marginLeft: "0.4rem",
+            marginRight: "0.2rem", // Adjust margin
+          }}
         >
           {pageNumber}
         </button>
