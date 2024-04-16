@@ -59,24 +59,24 @@ export default function Apply() {
   }, [programid, lang, router]);
 
   return (
-    <div className=" rounded-lg border-gray-200 m-6 p-4 ">
+    <div className=" rounded-lg border-gray-200 m-6 p-4 " style={{marginLeft: "28px", marginTop: "10px"}}>
       <div
         className=""
         style={{
           textAlign: "left",
-          font: "normal normal 600 16px/20px Inter",
+          font: "normal normal 600 17px/20px Inter",
           letterSpacing: "0px",
           color: "#484848",
           opacity: "1",
-          top: "118px",
-          left: "139px",
-          width: "135px",
-          height: "26px",
+          marginLeft: "22px",
         }}
       >
         {t("Application Form")}
       </div>
-      <div className="flex flex-wrap gap-2 mt-4 items-center mx-auto max-w-screen-xl">
+      <div
+        className="flex flex-wrap gap-2 mt-4 items-center mx-auto max-w-screen-xl"
+        style={{marginBottom: "25px"}}
+      >
         <Link
           href={`/${lang}/home`}
           className=""
@@ -86,10 +86,12 @@ export default function Apply() {
             width: "40px",
             height: "17px",
             textAlign: "left",
-            font: "normal normal 600 14px/17px Inter",
+            font: "normal normal 600 16px/17px Inter",
             letterSpacing: "0px",
             color: "#494DAF",
             opacity: "1",
+            marginLeft: "22px",
+            marginRight: "10px",
           }}
         >
           {t("Home")}
@@ -106,11 +108,12 @@ export default function Apply() {
             width: "40px",
             height: "17px",
             textAlign: "left",
-            font: "normal normal 600 14px/17px Inter",
+            font: "normal normal 600 16px/17px Inter",
             letterSpacing: "0px",
             color: "#494DAF",
             opacity: "1",
             whiteSpace: "nowrap",
+            marginRight: "10px",
           }}
         >
           {t("All Programs")}
@@ -128,7 +131,7 @@ export default function Apply() {
             width: "115px",
             height: "17px",
             textAlign: "left",
-            font: "normal normal 600 14px/17px Inter",
+            font: "normal normal 600 16px/17px Inter",
             letterSpacing: "0px",
             color: "#848484",
             opacity: "1",

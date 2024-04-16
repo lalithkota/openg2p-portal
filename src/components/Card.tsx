@@ -110,7 +110,7 @@ export function CardItem({
               >
                 <div className="bg-opacity-10 bg-gray-600 bg-no-repeat bg-0 rounded-lg opacity-100 w-12 h-12 m-5 flex-shrink-0">
                   <Image
-                    className="w-80 h-80 square-full m-3 max-w-[80%] max-h-[80%]"
+                    className="w-80 h-80 square-full max-w-[80%] max-h-[80%]"
                     src={imagePath1}
                     alt="Image"
                     width={30}
@@ -150,7 +150,7 @@ export function CardItem({
               >
                 <div className="bg-opacity-10 bg-gray-600 bg-no-repeat bg-0 rounded-lg opacity-100 w-12 h-12 m-4 flex-shrink-0 ">
                   <Image
-                    className="w-80 h-80 square-full m-3 max-w-[80%] max-h-[80%]"
+                    className="w-80 h-80 square-full max-w-[80%] max-h-[80%]"
                     src={imagePath2}
                     alt="Image"
                     width={30}

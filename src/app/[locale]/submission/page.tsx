@@ -65,10 +65,35 @@ export default function Submitted() {
     setIsToastVisible(false);
   };
   return (
-    <div className=" rounded-lg border-gray-200 m-6 p-4 ">
+    <div className=" rounded-lg border-gray-200 m-6 p-4 " style={{marginLeft: "28px", marginTop: "10px"}}>
       <div className="print:hidden">
-        <div className="text-gray-700 text-xl ">Program Submission</div>
-        <div className="flex flex-wrap gap-2 mt-4 items-center mx-auto max-w-screen-xl">
+        <div
+          className="text-gray-700 text-xl "
+          style={{
+            textAlign: "left",
+            font: "normal normal 600 17px/20px Inter",
+            letterSpacing: "0px",
+            color: "#484848",
+            opacity: "1",
+            marginLeft: "22px",
+            marginTop: "0px",
+          }}
+        >
+          Program Submission
+        </div>
+        <div
+          className="flex flex-wrap gap-2 mt-4 items-center mx-auto max-w-screen-xl"
+          style={{
+            textAlign: "left",
+            font: "normal normal 600 16px/17px Inter",
+            letterSpacing: "0px",
+            color: "#494DAF",
+            opacity: "1",
+            marginLeft: "22px",
+            marginRight: "10px",
+            marginBottom: "25px",
+          }}
+        >
           <Link href={`/${lang}/home`} className="flex items-center  text-blue-900">
             {" " + t("Home") + " "}
           </Link>
@@ -81,7 +106,23 @@ export default function Submitted() {
           <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512">
             <path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z" />
           </svg>
-          <p className="m-0">{t("Program Submission")}</p>
+          <p
+            className="m-0"
+            style={{
+              top: "154px",
+              left: "317px",
+              width: "115px",
+              height: "17px",
+              textAlign: "left",
+              font: "normal normal 600 16px/17px Inter",
+              letterSpacing: "0px",
+              color: "#848484",
+              opacity: "1",
+              whiteSpace: "nowrap",
+            }}
+          >
+            {t("Program Submission")}
+          </p>
         </div>
       </div>
       {applicationDetails && (
