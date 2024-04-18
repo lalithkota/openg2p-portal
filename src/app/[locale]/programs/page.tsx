@@ -9,7 +9,7 @@ import {ApplicationDetails, Program} from "@/types";
 import {fetchApplicationDetails, fetchPrograms} from "@/utils";
 import Loading from "../loading";
 
-const ITEMS_PER_PAGE = 6;
+const ITEMS_PER_PAGE = 7;
 
 export default function ProgrmPage({
   searchParams,

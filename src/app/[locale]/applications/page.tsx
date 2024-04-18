@@ -9,7 +9,7 @@ import {fetchApplicationDetails} from "@/utils";
 import Loading from "../loading";
 import Link from "next/link";
 
-const ITEMS_PER_PAGE = 30;
+const ITEMS_PER_PAGE = 10;
 
 export default function ApplcnPage({
   searchParams,
@@ -100,10 +100,10 @@ export default function ApplcnPage({
   function getStatusClass(status: string) {
     switch (status) {
       case "completed":
-        return "completedButton";
+        return "enrolledButton";
       case "active":
       case "inprogress":
-        return "appliedButton";
+        return "submittedButton";
       case "rejected":
         return "rejectedButton";
       default:
@@ -249,7 +249,7 @@ export default function ApplcnPage({
                             <td className="px-6 py-4">
                               <button
                                 type="button"
-                                className={`top-14 text-xs  w-24 h-8 rounded-md text-center tracking-[0px] opacity-100 border-collapse border-[none] left-[811px] text-white ${getStatusClass(application.application_status)}`}
+                                className={` buttonElement top-14 text-xs  w-24 h-8 rounded-md text-center tracking-[0px] opacity-100 border-collapse border-[none] left-[811px] ${getStatusClass(application.application_status)}`}
                                 disabled={true}
                               >
                                 {application.application_status === "active" ||
