@@ -1,6 +1,7 @@
 "use client";
 
 import clsx from "clsx";
+import { useMemo } from "react";
 
 export default function Pagination({
   currentPage,
@@ -12,13 +13,35 @@ export default function Pagination({
   onPageChange: (_page: number) => void;
 }) {
   const generatePageNumbers = (currentPage: number, totalPages: number) => {
+    const maxVisiblePages = 4; // Adjust as needed
+
+    let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+    let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+
+    if (endPage - startPage + 1 < maxVisiblePages) {
+      startPage = Math.max(1, endPage - maxVisiblePages + 1);
+    }
+
     const pageNumbers = [];
-    for (let i = 1; i <= totalPages; i++) {
+    if (startPage > 1) {
+      pageNumbers.push(1);
+      if (startPage > 2) {
+        pageNumbers.push('...');
+      }
+    }
+    for (let i = startPage; i <= endPage; i++) {
       pageNumbers.push(i);
+    }
+    if (endPage < totalPages) {
+      if (endPage < totalPages - 1) {
+        pageNumbers.push('...');
+      }
+      pageNumbers.push(totalPages);
     }
     return pageNumbers;
   };
-  const pageNumbers = generatePageNumbers(currentPage, totalPages);
+
+  const pageNumbers = useMemo(() => generatePageNumbers(currentPage, totalPages), [currentPage, totalPages]);
 
   const goToPage = (page: number) => {
     onPageChange(page);
@@ -27,40 +50,45 @@ export default function Pagination({
   const goToPreviousPage = () => {
     if (currentPage > 1) {
       goToPage(currentPage - 1);
-    } else {
-      goToPage(currentPage);
     }
   };
 
   const goToNextPage = () => {
     if (currentPage < totalPages) {
       goToPage(currentPage + 1);
-    } else {
-      goToPage(currentPage);
     }
   };
+
   return (
-    <div className="flex justify-center items-center space-x-2">
+    <div className="flex items-center justify-center space-x-2"
+      style={{marginBottom:"10px", fontSize: "0.85rem" }}>
       <button
         onClick={goToPreviousPage}
-        className="w-10 h-10 flex items-center justify-center rounded-lg text-sm"
+        className={clsx("w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 text-gray-600", {
+          "cursor-pointer": currentPage > 1,
+          "opacity-50 cursor-not-allowed": currentPage <= 1,
+        })}
         disabled={currentPage <= 1}
       >
         {"<"}
       </button>
 
-      {pageNumbers.map((pageNumber) => (
+      {pageNumbers.map((pageNumber, index) => (
         <button
-          key={pageNumber}
-          onClick={() => goToPage(pageNumber)}
-          className={clsx("w-10 h-10 flex items-center justify-center rounded-lg text-sm mx-2 px-2", {
-            "bg-blue-700 text-white": pageNumber === currentPage,
-          })}
-          style={{
-            padding: "0.25rem 0.4rem", // Adjust padding
-            marginLeft: "0.4rem",
-            marginRight: "0.2rem", // Adjust margin
+          key={index}
+          onClick={() => {
+            if (typeof pageNumber === 'number') {
+              goToPage(pageNumber);
+            }
           }}
+          className={clsx(
+            "w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 text-gray-600 ",
+            {
+              " rounded-lg bg-blue-500 text-white": pageNumber === currentPage,
+              "opacity-50 cursor-not-allowed": typeof pageNumber === 'string', // Disable click for ellipses
+            }
+          )}
+          style={{ padding: "0.15rem" }}
         >
           {pageNumber}
         </button>
@@ -68,7 +96,10 @@ export default function Pagination({
 
       <button
         onClick={goToNextPage}
-        className="w-10 h-10 flex items-center justify-center rounded-lg text-sm"
+        className={clsx("w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 text-gray-600", {
+          "cursor-pointer": currentPage < totalPages,
+          "opacity-50 cursor-not-allowed": currentPage >= totalPages,
+        })}
         disabled={currentPage >= totalPages}
       >
         {">"}
