@@ -3,7 +3,7 @@ import Link from "next/link";
 import {useRouter} from "next/navigation";
 import {useLocale, useTranslations} from "next-intl";
 import {useEffect, useState, Suspense} from "react";
-import {Card, Pagination, SearchBar} from "@/components";
+import { Pagination, SearchBar} from "@/components";
 import {AuthUtil} from "@/components/auth";
 import {ApplicationDetails, Program} from "@/types";
 import {fetchApplicationDetails, fetchPrograms} from "@/utils";
@@ -452,9 +452,9 @@ export default function ProgrmPage({
           <p>{t("Message")}</p>
         </div>
       )}
-      <div className="pt-0" style={{marginTop: "0px", marginBottom: "24px"}}>
+      {/* <div className="pt-0" style={{marginTop: "0px", marginBottom: "24px"}}>
         <Card />
-      </div>
+      </div> */}
     </div>
   );
 }

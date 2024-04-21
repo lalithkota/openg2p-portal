@@ -90,7 +90,53 @@ export default function BenefPage({
   };
 
   return (
-    <div>
+    <div className=" rounded-lg border-gray-200 p-4 mx-4 lg:px-4 m-0">
+      <div
+        className="mx-auto max-w-screen-xl"
+        style={{marginTop: "10px", marginBottom: "5px", height: "10px"}}
+      >
+        <div className="flex flex-wrap gap-2 mt-1 items-center ">
+          <Link
+            href={`/${lang}/home`}
+            className="shift-right"
+            style={{
+              top: "154px",
+              left: "139px",
+              width: "40px",
+              height: "17px",
+              textAlign: "left",
+              font: "normal normal 600 16px/17px Inter",
+              letterSpacing: "0px",
+              color: "#494DAF",
+              opacity: "1",
+              marginLeft: "48px",
+              marginRight: "8px",
+            }}
+          >
+            {" " + t("Home") + " "}
+          </Link>
+          <svg xmlns="http://www.w3.org/2000/svg" height="0.8em" viewBox="0 0 320 512">
+            <path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z" />
+          </svg>
+          <p
+            className=""
+            style={{
+              top: "154px",
+              left: "197px",
+              width: "86px",
+              height: "17px",
+              textAlign: "left",
+              font: "normal normal 600 16px/17px Inter",
+              letterSpacing: "0px",
+              color: "#848484",
+              opacity: "1",
+              whiteSpace: "nowrap",
+            }}
+          >
+            {t("My Benefits")}
+          </p>
+        </div>
+      </div>
       {isLoading ? (
         <div className="mt-16 flex justify-center items-center flex-col gap-2"></div>
       ) : (

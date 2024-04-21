@@ -1,7 +1,7 @@
 "use client";
 
 import clsx from "clsx";
-import { useMemo } from "react";
+import {useMemo} from "react";
 
 export default function Pagination({
   currentPage,
@@ -26,7 +26,7 @@ export default function Pagination({
     if (startPage > 1) {
       pageNumbers.push(1);
       if (startPage > 2) {
-        pageNumbers.push('...');
+        pageNumbers.push("...");
       }
     }
     for (let i = startPage; i <= endPage; i++) {
@@ -34,7 +34,7 @@ export default function Pagination({
     }
     if (endPage < totalPages) {
       if (endPage < totalPages - 1) {
-        pageNumbers.push('...');
+        pageNumbers.push("...");
       }
       pageNumbers.push(totalPages);
     }
@@ -60,8 +60,10 @@ export default function Pagination({
   };
 
   return (
-    <div className="flex items-center justify-center space-x-2"
-      style={{marginBottom:"10px", fontSize: "0.85rem" }}>
+    <div
+      className="flex items-center justify-center space-x-2"
+      style={{marginBottom: "10px", fontSize: "0.85rem"}}
+    >
       <button
         onClick={goToPreviousPage}
         className={clsx("w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 text-gray-600", {
@@ -77,7 +79,7 @@ export default function Pagination({
         <button
           key={index}
           onClick={() => {
-            if (typeof pageNumber === 'number') {
+            if (typeof pageNumber === "number") {
               goToPage(pageNumber);
             }
           }}
@@ -85,10 +87,10 @@ export default function Pagination({
             "w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 text-gray-600 ",
             {
               " rounded-lg bg-blue-500 text-white": pageNumber === currentPage,
-              "opacity-50 cursor-not-allowed": typeof pageNumber === 'string', // Disable click for ellipses
+              "opacity-50 cursor-not-allowed": typeof pageNumber === "string", // Disable click for ellipses
             }
           )}
-          style={{ padding: "0.15rem" }}
+          style={{padding: "0.15rem"}}
         >
           {pageNumber}
         </button>
