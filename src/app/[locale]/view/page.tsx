@@ -15,6 +15,34 @@ export default function ApplcnPage() {
   const lang = useLocale();
   AuthUtil({failedRedirectUrl: `/${lang}/login`});
 
+  const showTooltip = (event: React.MouseEvent<HTMLTableCellElement, MouseEvent>, content: string) => {
+    const target = event.target as HTMLTableCellElement;
+
+    // Check if content exceeds cell width
+    if (target.offsetWidth < target.scrollWidth) {
+      const tooltipText = content;
+
+      // Create tooltip element
+      const tooltip = document.createElement("div");
+      tooltip.className = "tooltip";
+      tooltip.textContent = tooltipText || "";
+
+      // Position tooltip above the cursor
+      tooltip.style.position = "absolute";
+      tooltip.style.top = `${event.clientY - 20}px`;
+      tooltip.style.left = `${event.clientX}px`;
+
+      // Append tooltip to body
+      document.body.appendChild(tooltip);
+    }
+  };
+  const hideTooltip = () => {
+    const tooltips = document.querySelectorAll(".tooltip");
+    tooltips.forEach((tooltip) => {
+      tooltip.remove();
+    });
+  };
+
   const searchParams = useSearchParams();
   const programid = searchParams.get("programid") || ""; // Default to empty string if undefined
   // const currentPage = Number(pageParam) || 1;
@@ -249,7 +277,19 @@ export default function ApplcnPage() {
                           style={{height: "44px"}}
                         >
                           <td className="px-6 py-4 snoElement">{itemNumber}</td>
-                          <td scope="row" className="rowElement px-6 py-4 ">
+                          <td
+                            scope="row"
+                            className="rowElement px-6 py-4 "
+                            style={{
+                              maxWidth: "300px",
+                              overflow: "hidden",
+                              textOverflow: "ellipsis",
+                              whiteSpace: "nowrap",
+                            }}
+                            data-tooltip={application.program_name} // Add data-tooltip attribute
+                            onMouseEnter={(e) => showTooltip(e, application.program_name)}
+                            onMouseLeave={() => hideTooltip()} // Hide tooltip on mouse leave
+                          >
                             {application.program_name}
                           </td>
                           <td className="px-6 py-4">

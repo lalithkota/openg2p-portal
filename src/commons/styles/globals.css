@@ -112,6 +112,15 @@ body {
   opacity: 1;
 }
 
+.tooltip {
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 14px;
+  z-index: 9999;
+}
+
 /* @media (min-width: 1024px) {
   footer {
     position: fixed;
