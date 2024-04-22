@@ -3,7 +3,7 @@ import Link from "next/link";
 import {useRouter} from "next/navigation";
 import {useLocale, useTranslations} from "next-intl";
 import {useEffect, useState, Suspense} from "react";
-import { Pagination, SearchBar} from "@/components";
+import {Pagination, SearchBar} from "@/components";
 import {AuthUtil} from "@/components/auth";
 import {ApplicationDetails, Program} from "@/types";
 import {fetchApplicationDetails, fetchPrograms} from "@/utils";
@@ -423,12 +423,20 @@ export default function ProgrmPage({
                                     ? "submittedButton"
                                     : program.state === "applied"
                                       ? "appliedButton"
-                                      : ""
+                                      : program.state === "not_eligible" // Added condition here
+                                        ? "noteligibleButton"
+                                        : ""
                             }
                           `}
                               disabled={true}
                             >
-                              {program.state === "draft" ? "Applied" : program.state}
+                              {
+                                program.state === "draft"
+                                  ? "Applied"
+                                  : program.state === "not_eligible" // Check if state is "not_eligible"
+                                    ? "Not Eligible" // Display "Not Eligible" if true
+                                    : program.state // Otherwise, display the program state
+                              }
                             </button>
                           </td>
                           <td className="px-6 py-4">
