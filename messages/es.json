@@ -111,8 +111,10 @@
   "KYC": "Conozca a Su Cliente",
   "Housing": "Vivienda",
 
-  "No applications yet, please tap on the below link to view all programs": "Todavía no hay solicitudes, por favor toque el enlace de abajo para ver todos los programas",
-  "No benefits yet, please tap on the below link to view all programs": "Todavía no hay beneficios, por favor toque el enlace de abajo para ver todos los programas",
-  "You haven’t enrolled into any programs yet, please tap on the below link to view all programs": "Todavía no se ha inscrito en ningún programa, por favor toque el enlace de abajo para ver todos los programas",
-  "View All Program": "Ver Todos los Programas"
+  "No applications yet please tap on the below link to view all programs": "Todavía no hay solicitudes, por favor toque el enlace de abajo para ver todos los programas",
+  "No benefits yet please tap on the below link to view all programs": "Todavía no hay beneficios, por favor toque el enlace de abajo para ver todos los programas",
+  "You havent enrolled into any programs yet please tap on the below link to view all programs": "Todavía no se ha inscrito en ningún programa, por favor toque el enlace de abajo para ver todos los programas",
+  "View All Program": "Ver Todos los Programas",
+  "No results found": "No se encontraron resultados.",
+  "Search by program name": "Buscar por nombre de programa..."
 }

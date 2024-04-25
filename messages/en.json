@@ -111,8 +111,10 @@
   "KYC": "KYC",
   "Housing": "Housing",
 
-  "No applications yet, please tap on the below link to view all programs": "No applications yet, please tap on the below link to view all programs",
-  "No benefits yet, please tap on the below link to view all programs": "No benefits yet, please tap on the below link to view all programs",
-  "You haven’t enrolled into any programs yet, please tap on the below link to view all programs": "You haven’t enrolled into any programs yet, please tap on the below link to view all programs",
-  "View All Program": "View All Program"
+  "No applications yet please tap on the below link to view all programs": "No applications yet, please tap on the below link to view all programs",
+  "No benefits yet please tap on the below link to view all programs": "No benefits yet, please tap on the below link to view all programs",
+  "You havent enrolled into any programs yet please tap on the below link to view all programs": "You haven’t enrolled into any programs yet, please tap on the below link to view all programs",
+  "View All Program": "View All Program",
+  "No results found": "No results found.",
+  "Search by program name": "Search by program name..."
 }

@@ -3,7 +3,7 @@ import Link from "next/link";
 import {useRouter} from "next/navigation";
 import {useLocale, useTranslations} from "next-intl";
 import {useEffect, useState, Suspense} from "react";
-import {Pagination, SearchBar} from "@/components";
+import {Pagination} from "@/components";
 import {AuthUtil} from "@/components/auth";
 import {ApplicationDetails, Program} from "@/types";
 import {fetchApplicationDetails, fetchPrograms} from "@/utils";
@@ -51,6 +51,11 @@ export default function ProgrmPage({
   };
 
   const router = useRouter();
+
+  const [searchQuery, setSearchQuery] = useState(""); // State to store search query
+  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(event.target.value);
+  };
 
   const [programs, setPrograms] = useState<Program[]>([]);
   const [applications, setApplications] = useState<ApplicationDetails[]>([]);
@@ -120,6 +125,23 @@ export default function ProgrmPage({
     router.push(`?page=${page}`);
   };
 
+  useEffect(() => {
+    // Filter programs based on search query
+    const filtered = programs.filter((program) =>
+      program.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    const totalFilteredPages = Math.ceil(filtered.length / ITEMS_PER_PAGE);
+    setTotalPages(totalFilteredPages);
+
+    const start = (currentPage - 1) * ITEMS_PER_PAGE;
+    const end = start + ITEMS_PER_PAGE;
+
+    // Slice the filtered programs based on pagination
+    const paginated = filtered.slice(start, end);
+
+    // Update paginated programs state
+    setPaginatedPrograms(paginated);
+  }, [currentPage, programs, searchQuery]);
   // const query = searchParams?.query || '';
   // const currentPage = Number(searchParams?.page) || 1;
 
@@ -352,8 +374,36 @@ export default function ProgrmPage({
               >
                 {t("All Programs")}
               </p>
-              <div className="flex-1 flex justify-end">
+              {/* <div className="flex-1 flex justify-end">
                 <SearchBar />
+              </div> */}
+              <div className="relative" style={{marginTop: "10px", marginRight: "10px"}}>
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={handleSearch}
+                  placeholder={t("Search by program name")}
+                  className="border border-gray-300 rounded-md px-2 py-1 pl-8" // Added pl-8 to accommodate icon width
+                  style={{height: "45px", fontSize: "15px"}}
+                />
+                <div
+                  className="absolute inset-y-0 left-0 flex items-center pl-2 pointer-events-none"
+                  style={{
+                    color: "#000", // Icon color
+                  }}
+                >
+                  <svg
+                    className="h-4 w-4" // Icon size
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M19 19l-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                  </svg>
+                </div>
               </div>
             </div>
             <Suspense fallback={<Loading />}>
@@ -490,6 +540,11 @@ export default function ProgrmPage({
                 </table>
               </div>
             </Suspense>
+            {paginatedPrograms.length === 0 && (
+              <p className="text-center text-gray-600" style={{marginTop: "15px"}}>
+                {t("No results found")}
+              </p>
+            )}
             <div className="p-2 snoElement">
               <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
             </div>
