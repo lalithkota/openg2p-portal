@@ -39,6 +39,9 @@ export default function SearchBar() {
         backgroundPosition: "0.75rem center", // Adjust as necessary for icon position
         backgroundSize: "1rem", // Adjust as necessary for icon size
         paddingLeft: "2rem",
+        marginTop: "10px",
+        marginBottom: "0px",
+        marginRight: "10px",
       }}
     >
       <div className="relative ">

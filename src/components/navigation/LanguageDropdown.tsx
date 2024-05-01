@@ -27,9 +27,14 @@ export default function LanguageDropDown() {
             className="mr-1 w-6 h-6 ml-1"
             width={20}
             height={20}
+            style={{marginLeft: "5px"}}
           />
           <span className="flex-grow text-xs mr-1">{t(`@language_title_${currentLocale}`)}</span>
-          <span className="h-4 w-4 text-gray-700" aria-hidden="true">
+          <span
+            className="h-4 w-4 text-gray-700"
+            aria-hidden="true"
+            style={{fontSize: "80%", marginRight: "5px"}}
+          >
             ▼
           </span>{" "}
           {/* Chevron Down Character */}

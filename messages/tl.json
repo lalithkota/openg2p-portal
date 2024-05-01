@@ -98,6 +98,7 @@
   "Cancel": "Kanselahin",
   "Discard": "Itapon",
   "Search": "Maghanap",
+  "Search Programs": "Maghanap ng mga Programa",
   "Submit": "Isaayos",
   "Status": "Katayuan",
   "Message": "Mensahe",
@@ -110,8 +111,10 @@
   "KYC": "Kilalanin ang Iyong Kustomer",
   "Housing": "Pabahay",
 
-  "No applications yet, please tap on the below link to view all programs": "Wala pang mga aplikasyon, mangyaring pindutin ang link sa ibaba upang tingnan lahat ng mga programa",
-  "No benefits yet, please tap on the below link to view all programs": "Wala pang mga benepisyo, mangyaring pindutin ang link sa ibaba upang tingnan lahat ng mga programa",
-  "You haven’t enrolled into any programs yet, please tap on the below link to view all programs": "Hindi ka pa nakapag-enroll sa anumang programa, mangyaring pindutin ang link sa ibaba upang tingnan lahat ng mga programa",
-  "View All Program": "Tingnan Lahat ng Programa"
+  "No applications yet please tap on the below link to view all programs": "Wala pang mga aplikasyon, mangyaring pindutin ang link sa ibaba upang tingnan lahat ng mga programa",
+  "No benefits yet please tap on the below link to view all programs": "Wala pang mga benepisyo, mangyaring pindutin ang link sa ibaba upang tingnan lahat ng mga programa",
+  "You havent enrolled into any programs yet please tap on the below link to view all programs": "Hindi ka pa nakapag-enroll sa anumang programa, mangyaring pindutin ang link sa ibaba upang tingnan lahat ng mga programa",
+  "View All Program": "Tingnan Lahat ng Programa",
+  "No results found": "Walang natagpuang resulta.",
+  "Search by program name": "Maghanap ayon sa pangalan ng programa..."
 }

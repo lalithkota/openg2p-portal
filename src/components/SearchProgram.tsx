@@ -2,11 +2,13 @@
 import {useState, Fragment, useEffect} from "react";
 import {Combobox, Transition} from "@headlessui/react";
 import {Program, SearchProgramsProps} from "../types";
+import {useTranslations} from "next-intl";
 
 const SearchProgram = ({program, setProgram}: SearchProgramsProps) => {
   const [query, setQuery] = useState("");
   // const programs = ["p-1", "p-2", "p-3", "p-4"];
   const [programs, setPrograms] = useState<Program[]>([]);
+  const t = useTranslations();
 
   const fetchProgramsByKeyword = async (keyword: string) => {
     try {
@@ -52,7 +54,8 @@ const SearchProgram = ({program, setProgram}: SearchProgramsProps) => {
               </div>
               <Combobox.Input
                 className="ml-7 p-2 text-sm text-black-600  rounded-lg bg-white-200 focus:ring-gray-100 focus:border-transparent dark:bg-white-400 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black-800 dark:focus:ring-gray-500 dark:focus:border-transaparent outline-none"
-                placeholder="Search Programs"
+                style={{marginBottom: "6px"}}
+                placeholder={t("Search Programs")}
                 displayValue={(program: string) => program}
                 onChange={(e) => setQuery(e.target.value)}
               ></Combobox.Input>

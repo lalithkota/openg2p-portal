@@ -3,13 +3,13 @@ import Link from "next/link";
 import {useRouter} from "next/navigation";
 import {useLocale, useTranslations} from "next-intl";
 import {useEffect, useState, Suspense} from "react";
-import {Card, Pagination, SearchBar} from "@/components";
+import {Pagination} from "@/components";
 import {AuthUtil} from "@/components/auth";
 import {ApplicationDetails, Program} from "@/types";
 import {fetchApplicationDetails, fetchPrograms} from "@/utils";
 import Loading from "../loading";
 
-const ITEMS_PER_PAGE = 6;
+const ITEMS_PER_PAGE = 7;
 
 export default function ProgrmPage({
   searchParams,
@@ -22,7 +22,40 @@ export default function ProgrmPage({
   const lang = useLocale();
   AuthUtil({failedRedirectUrl: `/${lang}/login`});
 
+  const showTooltip = (event: React.MouseEvent<HTMLTableCellElement, MouseEvent>, content: string) => {
+    const target = event.target as HTMLTableCellElement;
+
+    // Check if content exceeds cell width
+    if (target.offsetWidth < target.scrollWidth) {
+      const tooltipText = content;
+
+      // Create tooltip element
+      const tooltip = document.createElement("div");
+      tooltip.className = "tooltip";
+      tooltip.textContent = tooltipText || "";
+
+      // Position tooltip above the cursor
+      tooltip.style.position = "absolute";
+      tooltip.style.top = `${event.clientY - 20}px`;
+      tooltip.style.left = `${event.clientX}px`;
+
+      // Append tooltip to body
+      document.body.appendChild(tooltip);
+    }
+  };
+  const hideTooltip = () => {
+    const tooltips = document.querySelectorAll(".tooltip");
+    tooltips.forEach((tooltip) => {
+      tooltip.remove();
+    });
+  };
+
   const router = useRouter();
+
+  const [searchQuery, setSearchQuery] = useState(""); // State to store search query
+  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(event.target.value);
+  };
 
   const [programs, setPrograms] = useState<Program[]>([]);
   const [applications, setApplications] = useState<ApplicationDetails[]>([]);
@@ -92,6 +125,23 @@ export default function ProgrmPage({
     router.push(`?page=${page}`);
   };
 
+  useEffect(() => {
+    // Filter programs based on search query
+    const filtered = programs.filter((program) =>
+      program.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    const totalFilteredPages = Math.ceil(filtered.length / ITEMS_PER_PAGE);
+    setTotalPages(totalFilteredPages);
+
+    const start = (currentPage - 1) * ITEMS_PER_PAGE;
+    const end = start + ITEMS_PER_PAGE;
+
+    // Slice the filtered programs based on pagination
+    const paginated = filtered.slice(start, end);
+
+    // Update paginated programs state
+    setPaginatedPrograms(paginated);
+  }, [currentPage, programs, searchQuery]);
   // const query = searchParams?.query || '';
   // const currentPage = Number(searchParams?.page) || 1;
 
@@ -237,8 +287,11 @@ export default function ProgrmPage({
 
   return (
     <div className=" rounded-lg border-gray-200 p-4 mx-4 lg:px-4 m-0">
-      <div className="mx-auto max-w-screen-xl">
-        <div
+      <div
+        className="mx-auto max-w-screen-xl"
+        style={{marginTop: "10px", marginBottom: "5px", height: "10px"}}
+      >
+        {/* <div
           className=" shift-right"
           style={{
             textAlign: "left",
@@ -250,10 +303,11 @@ export default function ProgrmPage({
             left: "139px",
             width: "135px",
             height: "26px",
+            marginLeft:"40px"
           }}
         >
           {t("All Programs")}
-        </div>
+        </div> */}
         <div className="flex flex-wrap gap-2 mt-1 items-center ">
           <Link
             href={`/${lang}/home`}
@@ -264,10 +318,12 @@ export default function ProgrmPage({
               width: "40px",
               height: "17px",
               textAlign: "left",
-              font: "normal normal 600 14px/17px Inter",
+              font: "normal normal 600 16px/17px Inter",
               letterSpacing: "0px",
               color: "#494DAF",
               opacity: "1",
+              marginLeft: "40px",
+              marginRight: "8px",
             }}
           >
             {" " + t("Home") + " "}
@@ -283,7 +339,7 @@ export default function ProgrmPage({
               width: "86px",
               height: "17px",
               textAlign: "left",
-              font: "normal normal 600 14px/17px Inter",
+              font: "normal normal 600 16px/17px Inter",
               letterSpacing: "0px",
               color: "#848484",
               opacity: "1",
@@ -299,7 +355,7 @@ export default function ProgrmPage({
       ) : !isDataEmpty ? (
         <div className=" m-6 p-4 md:space-x-8 mx-auto max-w-screen-xl flex justify-center items-center">
           <div className=" bg-brand container w-1180 shadow-md rounded-lg top-24">
-            <div className="flex flex-wrap justify-between items-center">
+            <div className="flex flex-wrap justify-between items-center" style={{height: "42px"}}>
               <p
                 className="font-fontcustom m-4 "
                 style={{
@@ -313,18 +369,50 @@ export default function ProgrmPage({
                   color: "#484848",
                   opacity: "1",
                   whiteSpace: "nowrap",
+                  marginLeft: "24px",
                 }}
               >
                 {t("All Programs")}
               </p>
-              <div className="flex-1 flex justify-end">
+              {/* <div className="flex-1 flex justify-end">
                 <SearchBar />
+              </div> */}
+              <div className="relative" style={{marginTop: "10px", marginRight: "10px"}}>
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={handleSearch}
+                  placeholder={t("Search by program name")}
+                  className="border border-gray-300 rounded-md px-2 py-1 pl-8" // Added pl-8 to accommodate icon width
+                  style={{height: "45px", fontSize: "15px"}}
+                />
+                <div
+                  className="absolute inset-y-0 left-0 flex items-center pl-2 pointer-events-none"
+                  style={{
+                    color: "#000", // Icon color
+                  }}
+                >
+                  <svg
+                    className="h-4 w-4" // Icon size
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M19 19l-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                  </svg>
+                </div>
               </div>
             </div>
             <Suspense fallback={<Loading />}>
-              <div className="  md:space-x-8 mx-auto max-w-screen-xl flex justify-center items-center relative overflow-x-auto">
+              <div
+                className="  md:space-x-8 mx-auto max-w-screen-xl flex justify-center items-center relative overflow-x-auto"
+                style={{marginTop: "24px", marginBottom: "0px"}}
+              >
                 <table className="w-full text-sm text-left text-gray-600">
-                  <thead className="text-xs text-gray-600 bg-gray-100">
+                  <thead className="text-xs text-gray-600 bg-gray-100" style={{height: "56px"}}>
                     <tr>
                       <th scope="col" className="columnTitle px-6 py-3 text-sm font-normal">
                         {t("No_")}
@@ -393,11 +481,25 @@ export default function ProgrmPage({
                         <tr
                           key={program.id}
                           className="bg-white border-b dark:bg-white-200 dark:border-white-200 text-gray-600"
+                          style={{height: "44px"}}
                         >
                           <td className="snoElement px-6 py-4">{itemNumber}</td>
-                          <td scope="row" className="rowElement px-6 py-4 ">
+                          <td
+                            scope="row"
+                            className="rowElement px-6 py-4"
+                            style={{
+                              maxWidth: "100px",
+                              overflow: "hidden",
+                              textOverflow: "ellipsis",
+                              whiteSpace: "nowrap",
+                            }}
+                            data-tooltip={program.name} // Add data-tooltip attribute
+                            onMouseEnter={(e) => showTooltip(e, program.name)}
+                            onMouseLeave={() => hideTooltip()} // Hide tooltip on mouse leave
+                          >
                             {program.name}
                           </td>
+
                           <td className="px-6 py-4">
                             <button
                               type="button"
@@ -412,12 +514,20 @@ export default function ProgrmPage({
                                     ? "submittedButton"
                                     : program.state === "applied"
                                       ? "appliedButton"
-                                      : ""
+                                      : program.state === "not_eligible" // Added condition here
+                                        ? "noteligibleButton"
+                                        : ""
                             }
                           `}
                               disabled={true}
                             >
-                              {program.state === "draft" ? "Applied" : program.state}
+                              {
+                                program.state === "draft"
+                                  ? "Applied"
+                                  : program.state === "not_eligible" // Check if state is "not_eligible"
+                                    ? "Not Eligible" // Display "Not Eligible" if true
+                                    : program.state // Otherwise, display the program state
+                              }
                             </button>
                           </td>
                           <td className="px-6 py-4">
@@ -430,6 +540,11 @@ export default function ProgrmPage({
                 </table>
               </div>
             </Suspense>
+            {paginatedPrograms.length === 0 && (
+              <p className="text-center text-gray-600" style={{marginTop: "15px"}}>
+                {t("No results found")}
+              </p>
+            )}
             <div className="p-2 snoElement">
               <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
             </div>
@@ -441,9 +556,9 @@ export default function ProgrmPage({
           <p>{t("Message")}</p>
         </div>
       )}
-      <div className="pt-0">
+      {/* <div className="pt-0" style={{marginTop: "0px", marginBottom: "24px"}}>
         <Card />
-      </div>
+      </div> */}
     </div>
   );
 }

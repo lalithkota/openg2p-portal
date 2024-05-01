@@ -2,14 +2,14 @@
 import {useRouter} from "next/navigation";
 import {useTranslations, useLocale} from "next-intl";
 import {useEffect, useState, Suspense} from "react";
-import {Card, Pagination, SearchBar} from "@/components";
+import {Card, Pagination} from "@/components";
 import {AuthUtil} from "@/components/auth";
 import {ProgramDetails} from "@/types";
 import {fetchProgramDetails} from "@/utils";
 import Loading from "../loading";
 import Link from "next/link";
 
-const ITEMS_PER_PAGE = 6;
+const ITEMS_PER_PAGE = 7;
 
 export default function Page({
   searchParams,
@@ -22,7 +22,41 @@ export default function Page({
   const lang = useLocale();
   AuthUtil({failedRedirectUrl: `/${lang}/login`});
 
+  const showTooltip = (event: React.MouseEvent<HTMLTableCellElement, MouseEvent>, content: string) => {
+    const target = event.target as HTMLTableCellElement;
+
+    // Check if content exceeds cell width
+    if (target.offsetWidth < target.scrollWidth) {
+      const tooltipText = content;
+
+      // Create tooltip element
+      const tooltip = document.createElement("div");
+      tooltip.className = "tooltip";
+      tooltip.textContent = tooltipText || "";
+
+      // Position tooltip above the cursor
+      tooltip.style.position = "absolute";
+      tooltip.style.top = `${event.clientY - 20}px`;
+      tooltip.style.left = `${event.clientX}px`;
+
+      // Append tooltip to body
+      document.body.appendChild(tooltip);
+    }
+  };
+  const hideTooltip = () => {
+    const tooltips = document.querySelectorAll(".tooltip");
+    tooltips.forEach((tooltip) => {
+      tooltip.remove();
+    });
+  };
+
   const router = useRouter();
+
+  const [searchQuery, setSearchQuery] = useState("");
+  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(event.target.value);
+  };
+
   const [programs, setPrograms] = useState<ProgramDetails[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -90,14 +124,35 @@ export default function Page({
     router.push(`?page=${page}`);
   };
 
+  useEffect(() => {
+    // Filter programs based on search query
+    const filtered = programs.filter((program) =>
+      program.program_name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    const totalFilteredPages = Math.ceil(filtered.length / ITEMS_PER_PAGE);
+    setTotalPages(totalFilteredPages);
+
+    const start = (currentPage - 1) * ITEMS_PER_PAGE;
+    const end = start + ITEMS_PER_PAGE;
+
+    // Slice the filtered programs based on pagination
+    const paginated = filtered.slice(start, end);
+
+    // Update paginated programs state
+    setPaginatedPrograms(paginated);
+  }, [currentPage, programs, searchQuery]);
+
   return (
     <div>
       {isLoading ? (
         <div className="mt- 2 flex justify-center items-center flex-col gap-2"></div>
       ) : (
-        <div className=" m-6 p-6 md:space-x-4 mx-auto max-w-screen-xl flex justify-center items-center">
+        <div
+          className=" m-6 p-6 md:space-x-4 mx-auto max-w-screen-xl flex justify-center items-center"
+          style={{marginTop: "24px", marginBottom: "0px"}}
+        >
           <div className="bg-brand container w-1180 shadow-md  pb-0 rounded-lg top-24">
-            <div className="flex flex-wrap justify-between items-center">
+            <div className="flex flex-wrap justify-between items-center" style={{height: "56px"}}>
               <p
                 className="font-fontcustom m-4 "
                 style={{
@@ -111,18 +166,48 @@ export default function Page({
                   color: "#484848",
                   opacity: "1",
                   whiteSpace: "nowrap",
+                  marginLeft: "24px",
                 }}
               >
                 {t("My Programs")}
               </p>
-              <div className="flex-1 flex justify-end">
+              {/* <div className="flex-1 flex justify-end">
                 <SearchBar />
+              </div> */}
+
+              <div className="relative" style={{marginTop: "10px", marginRight: "10px"}}>
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={handleSearch}
+                  placeholder={t("Search by program name")}
+                  className="border border-gray-300 rounded-md px-2 py-1 pl-8" // Added pl-8 to accommodate icon width
+                  style={{height: "45px", fontSize: "15px"}}
+                />
+                <div
+                  className="absolute inset-y-0 left-0 flex items-center pl-2 pointer-events-none"
+                  style={{
+                    color: "#000", // Icon color
+                  }}
+                >
+                  <svg
+                    className="h-4 w-4" // Icon size
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M19 19l-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                  </svg>
+                </div>
               </div>
             </div>
             <Suspense fallback={<Loading />}>
               <div className="m-4 md:space-x-8 mx-auto max-w-screen-xl flex justify-center items-center relative overflow-x-auto  ">
                 <table className=" w-full  text-sm text-left text-gray-600 ">
-                  <thead className="text-xs text-gray-600 bg-gray-100">
+                  <thead className="text-xs text-gray-600 bg-gray-100" style={{height: "56px"}}>
                     <tr>
                       <th scope="col" className="columnTitle px-6 py-3 ">
                         {t("No_")}
@@ -209,9 +294,22 @@ export default function Page({
                           <tr
                             key={index}
                             className="bg-white border-b dark:bg-white-200 dark:border-white-200 text-gray-600"
+                            style={{height: "44px"}}
                           >
                             <td className="px-6 py-4 snoElement ">{itemNumber}</td>
-                            <td scope="row" className="rowElement px-6 py-4 ">
+                            <td
+                              scope="row"
+                              className="rowElement px-6 py-4 "
+                              style={{
+                                maxWidth: "300px",
+                                overflow: "hidden",
+                                textOverflow: "ellipsis",
+                                whiteSpace: "nowrap",
+                              }}
+                              data-tooltip={program.program_name} // Add data-tooltip attribute
+                              onMouseEnter={(e) => showTooltip(e, program.program_name)}
+                              onMouseLeave={() => hideTooltip()} // Hide tooltip on mouse leave
+                            >
                               {program.program_name}
                             </td>
                             <td className="px-6 py-4">
@@ -240,7 +338,7 @@ export default function Page({
                           style={{ top: '339px', left: '621px', width: '124px', height: '17px', textAlign: 'center', font: 'normal normal 600 14px/17px Inter', letterSpacing: '0px', color: '#494DAF', opacity: 1 }"
                             >
                               {t(
-                                "You haven’t enrolled into any programs yet, please tap on the below link to view all programs"
+                                "You havent enrolled into any programs yet please tap on the below link to view all programs"
                               )}
                             </h2>
                             <Link href={`/${lang}/programs`}>
@@ -269,13 +367,16 @@ export default function Page({
                 </table>
               </div>
             </Suspense>
+            {paginatedPrograms.length === 0 && (
+              <p className="text-center text-gray-600">{t("No results found")}</p>
+            )}
             <div className="p-2 snoElement">
               <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
             </div>
           </div>
         </div>
       )}
-      <div className="pt-0">
+      <div className="pt-0" style={{marginTop: "0px", marginBottom: "24px"}}>
         <Card />
       </div>
     </div>

@@ -10,8 +10,14 @@ export default function Header() {
   const lang = useLocale();
   return (
     <header>
-      <nav className="w-full font-fontcustom bg-no-repeat shadow-md opacity-100  bg-brand border-gray-200 p-1 lg:px-4  ">
-        <div className="flex justify-between items-center mx-auto max-w-screen-xl mt-2 mb-4">
+      <nav
+        className="w-full font-fontcustom bg-no-repeat shadow-md opacity-100  bg-brand border-gray-200 p-1 lg:px-4  "
+        style={{height: "90px"}}
+      >
+        <div
+          className="flex justify-between items-center mx-auto max-w-screen-xl"
+          style={{marginLeft: "40px", marginRight: "30px", marginTop: "5px"}}
+        >
           <Link href={`/${lang}/home`} className=" ml-1 m-1 flex items-center">
             <Image
               src={prefixBasePath("/img/logo@2x.png")}
