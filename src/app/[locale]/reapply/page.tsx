@@ -1,32 +1,144 @@
 "use client";
+import {useSearchParams} from "next/navigation";
+import {useRouter} from "next/navigation";
 import {useLocale, useTranslations} from "next-intl";
-import {useEffect, useState, Suspense} from "react";
-import {Card, SearchBar} from "@/components";
+import React, {Suspense, useEffect, useState} from "react";
+import {Pagination} from "@/components";
 import {AuthUtil} from "@/components/auth";
-import {ApplicationDetails} from "@/types";
-import {fetchApplicationDetails} from "@/utils";
+import {fetchApplicationDetails, fetchPrograms} from "@/utils";
+import {ApplicationDetails, Program} from "@/types";
 import Loading from "../loading";
+
+const ITEMS_PER_PAGE = 10;
 
 export default function ApplcnPage() {
   const lang = useLocale();
   AuthUtil({failedRedirectUrl: `/${lang}/login`});
 
+  const showTooltip = (event: React.MouseEvent<HTMLTableCellElement, MouseEvent>, content: string) => {
+    const target = event.target as HTMLTableCellElement;
+
+    // Check if content exceeds cell width
+    if (target.offsetWidth < target.scrollWidth) {
+      const tooltipText = content;
+
+      // Create tooltip element
+      const tooltip = document.createElement("div");
+      tooltip.className = "tooltip";
+      tooltip.textContent = tooltipText || "";
+
+      // Position tooltip above the cursor
+      tooltip.style.position = "absolute";
+      tooltip.style.top = `${event.clientY - 20}px`;
+      tooltip.style.left = `${event.clientX}px`;
+
+      // Append tooltip to body
+      document.body.appendChild(tooltip);
+    }
+  };
+  const hideTooltip = () => {
+    const tooltips = document.querySelectorAll(".tooltip");
+    tooltips.forEach((tooltip) => {
+      tooltip.remove();
+    });
+  };
+
+  const searchParams = useSearchParams();
+  const programid = searchParams.get("programid") || ""; // Default to empty string if undefined
+  // const currentPage = Number(pageParam) || 1;
+
+  const router = useRouter();
+
+  const [searchQuery] = useState("");
+
   const [applications, setApplications] = useState<ApplicationDetails[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const [paginatedApplications, setPaginatedApplications] = useState<ApplicationDetails[]>([]);
+  const [totalPages, setTotalPages] = useState<number>(0);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
+  const [sortedColumn, setSortedColumn] = useState<string | null>(null);
+
+  const [selectedProgram, setSelectedProgram] = useState<Program | null>(null);
 
   const t = useTranslations();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const result: ApplicationDetails[] = await fetchApplicationDetails();
-        setApplications(result);
+        setIsLoading(true);
+        const allPrograms: Program[] = await fetchPrograms();
+        const selectedProgramId = Number(programid);
+        const program = allPrograms.find((p) => p.id === selectedProgramId);
+        setSelectedProgram(program ?? null);
       } catch (error) {
         console.error("Error fetching applications details:", error);
       }
     };
 
     fetchData();
-  }, []);
+  }, [programid]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setIsLoading(true);
+        const allPrograms: Program[] = await fetchPrograms();
+        const selectedProgram = allPrograms.find((p) => p.id === Number(programid));
+        const selectedProgramName = selectedProgram ? selectedProgram.name : null;
+
+        const allApplications: ApplicationDetails[] = await fetchApplicationDetails();
+        const filteredApplications = selectedProgramName
+          ? allApplications.filter((app) => app.program_name === selectedProgramName)
+          : [];
+
+        setApplications(filteredApplications);
+        setTotalPages(Math.ceil(filteredApplications.length / ITEMS_PER_PAGE));
+        setIsLoading(false);
+      } catch (error) {
+        console.error("Error fetching applications details:", error);
+      }
+    };
+
+    fetchData();
+  }, [programid]);
+
+  useEffect(() => {
+    const start = (currentPage - 1) * ITEMS_PER_PAGE;
+    const end = start + ITEMS_PER_PAGE;
+    setPaginatedApplications(applications.slice(start, end));
+  }, [currentPage, applications]);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    router.push(`?programid=${programid}&page=${page}`);
+  };
+
+  const handleReapplyClick = (program: Program | null) => {
+    if (program) {
+      router.push(`apply?programid=${program.id}`);
+    }
+  };
+
+  useEffect(() => {
+    // Filter programs based on search query
+    const filtered = applications.filter((application) =>
+      application.program_name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    const totalFilteredPages = Math.ceil(filtered.length / ITEMS_PER_PAGE);
+    setTotalPages(totalFilteredPages);
+
+    const start = (currentPage - 1) * ITEMS_PER_PAGE;
+    const end = start + ITEMS_PER_PAGE;
+
+    // Slice the filtered programs based on pagination
+    const paginated = filtered.slice(start, end);
+
+    // Update paginated programs state
+    setPaginatedApplications(paginated);
+  }, [currentPage, applications, searchQuery]);
 
   const isDataEmpty = !Array.isArray(applications) || applications.length < 1 || !applications;
 
@@ -50,27 +162,85 @@ export default function ApplcnPage() {
     });
   }
 
+  function getTransformedStatus(status: string) {
+    if (status === "active" || status === "inprogress") {
+      return "Applied";
+    }
+    return toTitleCase(status);
+  }
+  const sortApplications = (column: string) => {
+    const order = column === sortedColumn && sortOrder === "asc" ? "desc" : "asc";
+    const sortedApplications = [...applications].sort((a, b) => {
+      if (column === "program_name") {
+        return order === "asc"
+          ? a.program_name.localeCompare(b.program_name)
+          : b.program_name.localeCompare(a.program_name);
+      } else if (column === "application_status") {
+        return order === "asc"
+          ? getTransformedStatus(a.application_status).localeCompare(
+              getTransformedStatus(b.application_status)
+            )
+          : getTransformedStatus(b.application_status).localeCompare(
+              getTransformedStatus(a.application_status)
+            );
+      } else if (column === "application_id") {
+        return order === "asc" ? a.application_id - b.application_id : b.application_id - a.application_id;
+      } else if (column === "date_applied") {
+        const dateA = new Date(a.date_applied).getTime();
+        const dateB = new Date(b.date_applied).getTime();
+        return order === "asc" ? dateA - dateB : dateB - dateA;
+      }
+      return 0;
+    });
+
+    setApplications(sortedApplications);
+    setSortOrder(order);
+    setSortedColumn(column);
+  };
+
   return (
     <div>
-      {!isDataEmpty ? (
-        <div className=" m-6 p-6 md:space-x-4 mx-auto max-w-screen-xl flex justify-center items-center">
+      {isLoading ? (
+        <div className="mt-16 flex justify-center items-center flex-col gap-2" />
+      ) : !isDataEmpty ? (
+        <div
+          className=" m-6 p-6 md:space-x-4 mx-auto max-w-screen-xl flex justify-center items-center"
+          style={{marginTop: "24px", marginBottom: "0px"}}
+        >
           <div className="bg-brand container w-1180 shadow-md  pb-0 rounded-lg top-24">
-            <div className="flex flex-wrap justify-between items-center">
-              <p className="flex items-center text-gray-700 text-x p-2 font-fontcustom m-2 ">
+            <div className="flex flex-wrap justify-between items-center" style={{height: "56px"}}>
+              <p
+                className="font-fontcustom m-4"
+                style={{
+                  top: "226px",
+                  left: "159px",
+                  width: "98px",
+                  height: "20px",
+                  textAlign: "left",
+                  font: "normal normal 600 16px/20px Inter",
+                  letterSpacing: "0px",
+                  color: "#484848",
+                  opacity: "1",
+                  whiteSpace: "nowrap",
+                  marginLeft: "24px",
+                }}
+              >
                 {t("My Application")}
               </p>
-              <SearchBar />
             </div>
             <Suspense fallback={<Loading />}>
               <div className="m-4 md:space-x-8 mx-auto max-w-screen-xl flex justify-center items-center relative overflow-x-auto  ">
                 <table className=" w-full  text-sm text-left text-gray-600 ">
-                  <thead className="text-xs text-gray-600 bg-gray-100">
+                  <thead className="text-xs text-gray-600 bg-gray-100" style={{height: "56px"}}>
                     <tr>
                       <th scope="col" className="columnTitle px-6 py-3 ">
                         {t("No_")}
                       </th>
                       <th scope="col" className="columnTitle px-6 py-3 ">
-                        <div className="flex items-center w-max">
+                        <div
+                          className="flex items-center cursor-pointer"
+                          onClick={() => sortApplications("program_name")}
+                        >
                           {t("Program Name")}
                           <svg
                             data-column="0"
@@ -85,7 +255,10 @@ export default function ApplcnPage() {
                         </div>
                       </th>
                       <th scope="col" className="columnTitle px-6 py-3">
-                        <div className="flex items-center w-max">
+                        <div
+                          className="flex items-center cursor-pointer"
+                          onClick={() => sortApplications("application_status")}
+                        >
                           {t("Application Status")}
                           <svg
                             data-column="1"
@@ -100,7 +273,10 @@ export default function ApplcnPage() {
                         </div>
                       </th>
                       <th scope="col" className="columnTitle px-6 py-3">
-                        <div className="flex items-center w-max">
+                        <div
+                          className="flex items-center cursor-pointer"
+                          onClick={() => sortApplications("application_id")}
+                        >
                           {t("Application ID")}
                           <svg
                             data-column="2"
@@ -115,7 +291,10 @@ export default function ApplcnPage() {
                         </div>
                       </th>
                       <th scope="col" className="columnTitle px-6 py-3">
-                        <div className="flex items-center w-max">
+                        <div
+                          className="flex items-center cursor-pointer"
+                          onClick={() => sortApplications("date_applied")}
+                        >
                           {t("Date Applied")}
                           <svg
                             data-column="3"
@@ -132,46 +311,91 @@ export default function ApplcnPage() {
                     </tr>
                   </thead>
                   <tbody>
-                    {applications.map((application, index) => (
-                      <tr
-                        key={index}
-                        className="bg-white border-b dark:bg-white-200 dark:border-white-200 text-gray-600"
-                      >
-                        <td className="px-6 py-4">{index + 1}</td>
-                        <td scope="row" className="rowElement px-6 py-4 ">
-                          {application.program_name}
-                        </td>
-                        <td className="px-6 py-4">
-                          <button
-                            type="button"
-                            className={`top-14 text-xs  w-24 h-8 rounded-md text-center tracking-[0px] opacity-100 border-collapse border-[none] left-[811px] text-white ${getStatusClass(application.application_status)}`}
-                            disabled={true}
+                    {paginatedApplications.map((application, index) => {
+                      const itemNumber = (currentPage - 1) * ITEMS_PER_PAGE + index + 1;
+                      return (
+                        <tr
+                          key={index}
+                          className="bg-white border-b dark:bg-white-200 dark:border-white-200 text-gray-600"
+                          style={{height: "44px"}}
+                        >
+                          <td className="px-6 py-4 snoElement">{itemNumber}</td>
+                          <td
+                            scope="row"
+                            className="rowElement px-6 py-4 "
+                            style={{
+                              maxWidth: "300px",
+                              overflow: "hidden",
+                              textOverflow: "ellipsis",
+                              whiteSpace: "nowrap",
+                            }}
+                            data-tooltip={application.program_name} // Add data-tooltip attribute
+                            onMouseEnter={(e) => showTooltip(e, application.program_name)}
+                            onMouseLeave={() => hideTooltip()} // Hide tooltip on mouse leave
                           >
-                            {application.application_status === "active" ||
-                            application.application_status === "inprogress"
-                              ? "Applied"
-                              : toTitleCase(application.application_status)}
-                          </button>
-                        </td>
-                        <td className="px-6 py-4">{application.application_id}</td>
-                        <td className="px-6 py-4">{application.date_applied}</td>
-                      </tr>
-                    ))}
+                            {application.program_name}
+                          </td>
+                          <td className="px-6 py-4">
+                            <button
+                              type="button"
+                              className={`top-14 text-xs  w-24 h-8 rounded-md text-center tracking-[0px] opacity-100 border-collapse border-[none] left-[811px] text-white ${getStatusClass(application.application_status)}`}
+                              disabled={true}
+                            >
+                              {application.application_status === "active" ||
+                              application.application_status === "inprogress"
+                                ? "Applied"
+                                : toTitleCase(application.application_status)}
+                            </button>
+                          </td>
+                          <td className="px-6 py-4">{application.application_id}</td>
+                          <td className="px-6 py-4">{new Date(application.date_applied).toLocaleString()}</td>
+                        </tr>
+                      );
+                    })}
                   </tbody>
                 </table>
               </div>
             </Suspense>
+            {paginatedApplications.length === 0 && (
+              <p className="text-center text-gray-600">{t("No results found")}</p>
+            )}
+            <div
+              className="p-2 snoElement flex justify-center items-center flex-col"
+              style={{marginTop: "0px", marginBottom: "0px"}}
+            >
+              <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
+              {/* <button className=" viewButton buttonElement w-72 h-10 bg-blue-700 rounded-md text-blue text-xs font-normal flex items-center justify-center"
+              style={{ color: '#494daf', 
+            fontSize:'14px', marginTop:'2px', marginBottom:'2px'}}
+              onClick={() => handleReapplyClick(selectedProgram)}>
+              Proceed to Application
+            </button> */}
+              {applications.some(
+                (app) => app.application_status === "active" || app.application_status === "inprogress"
+              ) ? (
+                <button
+                  className="viewButton buttonElement w-72 h-10 bg-gray-400 rounded-md text-gray-600 text-xs font-normal flex items-center justify-center"
+                  style={{color: "#666666", marginTop: "2px", marginBottom: "2px", fontSize: "14px"}}
+                >
+                  {t("Your Application is still in Progress")}
+                </button>
+              ) : (
+                <button
+                  className="viewButton buttonElement w-72 h-10 bg-blue-700 rounded-md text-blue text-xs font-normal flex items-center justify-center"
+                  style={{color: "#494daf", fontSize: "14px", marginTop: "2px", marginBottom: "2px"}}
+                  onClick={() => handleReapplyClick(selectedProgram)}
+                >
+                  {t("Proceed to Application")}
+                </button>
+              )}
+            </div>
           </div>
         </div>
       ) : (
         <div className="mt-16 flex justify-center items-center flex-col gap-2 ">
-          <h2 className="tetx-black text-xl font-bold">Oops no results.. Sign in Again!</h2>
-          <p>{t("Message")}</p>
+          <h2 className="tetx-black text-xl font-bold">Oops no results..</h2>
         </div>
       )}
-      <div className="pt-0">
-        <Card />
-      </div>
     </div>
   );
 }

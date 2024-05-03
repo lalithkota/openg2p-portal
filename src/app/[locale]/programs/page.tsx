@@ -157,7 +157,7 @@ export default function ProgrmPage({
     router.push(`view?programid=${program.id}`);
   };
   const handleReapplyClick = (program: Program) => {
-    router.push(`apply?programid=${program.id}`);
+    router.push(`reapply?programid=${program.id}`);
   };
 
   const canReapply = (programName: string) => {

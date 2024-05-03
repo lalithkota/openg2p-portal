@@ -165,13 +165,15 @@ export default function Apply() {
             style={{
               top: "242px",
               left: "159px",
-              width: "147px",
               height: "16px",
               textAlign: "left",
               font: "normal normal medium 13px/16px Inter",
               letterSpacing: "0px",
               color: "#959595",
               opacity: "1",
+              whiteSpace: "normal", // Allow text to wrap
+              display: "inline-block", // Ensure block-level display for proper wrapping
+              marginRight: "10px",
             }}
           >
             {form?.program_name}
@@ -185,13 +187,15 @@ export default function Apply() {
             style={{
               top: "226px",
               left: "895px",
-              width: "179px",
               height: "20px",
               textAlign: "left",
               font: "normal normal 600 16px/20px Inter",
               letterSpacing: "0px",
               color: "#484848",
               opacity: "1",
+              whiteSpace: "normal", // Allow text to wrap
+              display: "inline-block", // Ensure block-level display for proper wrapping
+              marginRight: "10px",
             }}
           >
             {form?.program_name}

@@ -84,7 +84,7 @@ export default function Pagination({
             }
           }}
           className={clsx(
-            "w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 text-gray-600 ",
+            "w-10 h-7 flex items-center justify-center rounded-full bg-gray-200 text-gray-600 ",
             {
               " rounded-lg bg-blue-500 text-white": pageNumber === currentPage,
               "opacity-50 cursor-not-allowed": typeof pageNumber === "string", // Disable click for ellipses
