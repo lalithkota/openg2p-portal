@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import {useTranslations} from "next-intl";
+import {useLocale, useTranslations} from "next-intl";
 import {SyntheticEvent, useEffect, useState} from "react";
 import {Avatar, Button} from "@mui/material";
 import {prefixBaseApiPath, prefixBasePath} from "@/utils/path";
@@ -9,11 +9,12 @@ type LoginProvider = {
   id: number;
   name: string;
   type: string;
-  displayName: string;
+  displayName: string | any;
   displayIconUrl: string;
 };
 
 export default function LoginBox() {
+  const locale = useLocale();
   const t = useTranslations();
 
   function handleLoginSubmit(e: SyntheticEvent) {
@@ -26,12 +27,22 @@ export default function LoginBox() {
   function getLoginProviders() {
     fetch(prefixBaseApiPath(`/auth/getLoginProviders`)).then((res) => {
       res.json().then((resJson: {loginProviders: LoginProvider[]}) => {
+        resJson.loginProviders.map((x) => {
+          if (typeof x.displayName !== "string") {
+            const displayNameLocale = Object.keys(x.displayName).find((y) => y.startsWith(locale));
+            if (displayNameLocale && displayNameLocale in x.displayName) {
+              x.displayName = x.displayName[displayNameLocale];
+            } else {
+              x.displayName = "";
+            }
+          }
+        });
         setLoginProviders(resJson.loginProviders);
       });
     });
   }
 
-  useEffect(getLoginProviders, []);
+  useEffect(getLoginProviders, [locale]);
 
   return (
     <div
