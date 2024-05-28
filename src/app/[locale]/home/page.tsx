@@ -367,12 +367,20 @@ export default function Page({
                 </table>
               </div>
             </Suspense>
-            {paginatedPrograms.length === 0 && (
-              <p className="text-center text-gray-600">{t("No results found")}</p>
+            {paginatedPrograms.length === 0 && programs.length > 0 && (
+              <p className="text-center text-gray-600" style={{marginBottom: "20px"}}>
+                {t("No results found")}
+              </p>
             )}
-            <div className="p-2 snoElement">
-              <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
-            </div>
+            {paginatedPrograms.length > 0 && (
+              <div className="p-2 snoElement">
+                <Pagination
+                  currentPage={currentPage}
+                  totalPages={totalPages}
+                  onPageChange={handlePageChange}
+                />
+              </div>
+            )}
           </div>
         </div>
       )}

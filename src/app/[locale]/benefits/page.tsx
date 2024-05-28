@@ -427,12 +427,20 @@ export default function BenefPage({
                 </table>
               </div>
             </Suspense>
-            {paginatedBenefits.length === 0 && (
-              <p className="text-center text-gray-600">{t("No results found")}</p>
+            {paginatedBenefits.length === 0 && benefits.length > 0 && (
+              <p className="text-center text-gray-600" style={{marginBottom: "20px"}}>
+                {t("No results found")}
+              </p>
             )}
-            <div className="p-2 snoElement">
-              <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
-            </div>
+            {paginatedBenefits.length > 0 && (
+              <div className="p-2 snoElement">
+                <Pagination
+                  currentPage={currentPage}
+                  totalPages={totalPages}
+                  onPageChange={handlePageChange}
+                />
+              </div>
+            )}
           </div>
         </div>
       )}
