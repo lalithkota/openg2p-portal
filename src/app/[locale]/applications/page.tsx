@@ -442,12 +442,20 @@ export default function ApplcnPage({
                 </table>
               </div>
             </Suspense>
-            {paginatedApplications.length === 0 && (
-              <p className="text-center text-gray-600">{t("No results found")}</p>
+            {paginatedApplications.length === 0 && applications.length > 0 && (
+              <p className="text-center text-gray-600" style={{marginBottom: "20px"}}>
+                {t("No results found")}
+              </p>
             )}
-            <div className="p-2 snoElement">
-              <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
-            </div>
+            {paginatedApplications.length > 0 && (
+              <div className="p-2 snoElement">
+                <Pagination
+                  currentPage={currentPage}
+                  totalPages={totalPages}
+                  onPageChange={handlePageChange}
+                />
+              </div>
+            )}
           </div>
         </div>
       )}
