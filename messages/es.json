@@ -32,7 +32,7 @@
   "Tap to know more": "Toque para saber más",
   "Entitlements": "Derechos",
   "Applications": "Solicitudes",
-  "Application Form": "Formulario de solicitud",
+  "Application form": "Formulario de solicitud",
   "Tap to view your Applications": "Toque para ver sus solicitudes",
   "Benefits": "Beneficios",
   "Tap to view your Benefits": "Toque para ver sus beneficios",
@@ -118,5 +118,8 @@
   "No results found": "No se encontraron resultados.",
   "Search by program name": "Buscar por nombre de programa...",
   "Your Application is still in Progress": "Su solicitud todavía está en progreso",
-  "Proceed to Application": "Ir a la solicitud"
+  "Proceed to Application": "Ir a la solicitud",
+
+  "Discard application": "¿Descartar solicitud?",
+  "The entered data will not be saved Are you sure you want to discard the form": "Los datos ingresados no se guardarán. ¿Está seguro de que desea descartar el formulario?"
 }

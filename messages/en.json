@@ -95,7 +95,7 @@
   "Log out": "Log out",
   "Apply": "Apply",
   "Reapply": "Reapply",
-  "Canel": "Cancel",
+  "Cancel": "Cancel",
   "Discard": "Discard",
   "Search": "Search",
   "Search Programs": "Search Programs",
@@ -118,5 +118,8 @@
   "No results found": "No results found.",
   "Search by program name": "Search by program name...",
   "Your Application is still in Progress": "Your Application is still in Progress",
-  "Proceed to Application": "Proceed to Application"
+  "Proceed to Application": "Proceed to Application",
+
+  "Discard application": "Discard Application?",
+  "The entered data will not be saved Are you sure you want to discard the form": "The entered data will not be saved. Are you sure you want to discard the form?"
 }
