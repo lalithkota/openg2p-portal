@@ -251,7 +251,7 @@ export default function ProgrmPage({
               </td>
             </>
           );
-        case "Not Eligible":
+        case "not_eligible":
           return (
             <>
               <td>

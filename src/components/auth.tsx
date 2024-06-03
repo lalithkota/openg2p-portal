@@ -48,7 +48,7 @@ export function AuthUtil(params: {successRedirectUrl?: string; failedRedirectUrl
       });
     // TODO: Fix this
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  });
 
   return <></>;
 }
