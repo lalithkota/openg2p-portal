@@ -510,23 +510,29 @@ export default function ProgrmPage({
                                 ? "enrolledButton"
                                 : program.state === "Not Applied"
                                   ? "notAppliedButton"
-                                  : program.state === "draft"
+                                  : program.state === "draft" && canReapply(program.name)
                                     ? "submittedButton"
-                                    : program.state === "applied"
-                                      ? "appliedButton"
-                                      : program.state === "not_eligible" // Added condition here
-                                        ? "noteligibleButton"
-                                        : ""
+                                    : program.state === "draft" && !canReapply(program.name)
+                                      ? "notAppliedButton"
+                                      : program.state === "applied"
+                                        ? "appliedButton"
+                                        : program.state === "not_eligible" // Added condition here
+                                          ? "noteligibleButton"
+                                          : ""
                             }
                           `}
                               disabled={true}
                             >
                               {
-                                program.state === "draft"
+                                program.state === "draft" && canReapply(program.name)
                                   ? "Applied"
-                                  : program.state === "not_eligible" // Check if state is "not_eligible"
-                                    ? "Not Eligible" // Display "Not Eligible" if true
-                                    : program.state // Otherwise, display the program state
+                                  : program.state === "draft" && !canReapply(program.name)
+                                    ? "Not Applied"
+                                    : program.state === "not_eligible" // Check if state is "not_eligible"
+                                      ? "Not Eligible" // Display "Not Eligible" if true
+                                      : program.state === "enrolled"
+                                        ? "Enrolled"
+                                        : program.state // Otherwise, display the program state
                               }
                             </button>
                           </td>
@@ -559,7 +565,7 @@ export default function ProgrmPage({
       ) : (
         <div className="mt-16 flex justify-center items-center flex-col gap-2">
           <h2 className="text-black text-xl font-bold">Oops no results.. Sign in Again!</h2>
-          <p>{t("Message")}</p>
+          {/* <p>{t("Message")}</p> */}
         </div>
       )}
       {/* <div className="pt-0" style={{marginTop: "0px", marginBottom: "24px"}}>
