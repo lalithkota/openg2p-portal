@@ -111,8 +111,18 @@ export default function ProgrmPage({
     const sortedPrograms = [...programs].sort((a, b) => {
       if (column === "name") {
         return order === "asc" ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name);
-      } else if (column === "program_status")
+      } else if (column === "program_status") {
         return order === "asc" ? a.state.localeCompare(b.state) : b.state.localeCompare(a.state);
+      } else if (column === "actions") {
+        // Get the button labels for comparison
+        const buttonLabelA = getActionButtonLabel(a);
+        const buttonLabelB = getActionButtonLabel(b);
+
+        // Compare button labels alphabetically
+        return order === "asc"
+          ? buttonLabelA.localeCompare(buttonLabelB)
+          : buttonLabelB.localeCompare(buttonLabelA);
+      }
       return 0;
     });
 
@@ -165,6 +175,31 @@ export default function ProgrmPage({
     //  && app.application_status !== 'completed');
   };
 
+  const getActionButtonLabel = (program: Program) => {
+    const showReapplyButton = canReapply(program.name);
+    if (program.has_applied) {
+      switch (program.state) {
+        case "Applied":
+          return program.is_multiple_form_submission && showReapplyButton ? t("Reapply") : t("View");
+
+        case "draft":
+        case "enrolled":
+          return program.is_multiple_form_submission
+            ? showReapplyButton
+              ? t("Reapply")
+              : t("View")
+            : t("View");
+
+        case "not_eligible":
+        case "Not Applied":
+        default:
+          return showReapplyButton ? t("View") : " "; // Return a space for empty states
+      }
+    } else {
+      return program.is_portal_form_mapped ? t("Apply") : " "; // Space for no button
+    }
+  };
+
   const renderActionButton = (program: Program) => {
     const showReapplyButton = canReapply(program.name);
     if (program.has_applied) {
@@ -182,7 +217,16 @@ export default function ProgrmPage({
                       >
                         {t("Reapply")}
                       </button>
-                    ) : null
+                    ) : (
+                      showReapplyButton && (
+                        <button
+                          className="viewButton buttonElement w-24 h-8 bg-blue-700 rounded-md text-blue text-xs font-normal flex items-center justify-center"
+                          onClick={() => handleViewClick(program)}
+                        >
+                          {t("View")}
+                        </button>
+                      )
+                    )
                   ) : (
                     <button
                       className="viewButton buttonElement w-24 h-8 bg-blue-700 rounded-md text-blue text-xs font-normal flex items-center justify-center"
@@ -208,12 +252,14 @@ export default function ProgrmPage({
                         {t("Reapply")}
                       </button>
                     ) : (
-                      <button
-                        className="applyButton w-24 h-8 bg-blue-700 rounded-md text-white text-xs font-normal flex items-center justify-center"
-                        onClick={() => handleApplyClick(program)}
-                      >
-                        {t("Apply")}
-                      </button>
+                      showReapplyButton && (
+                        <button
+                          className="viewButton buttonElement w-24 h-8 bg-blue-700 rounded-md text-blue text-xs font-normal flex items-center justify-center"
+                          onClick={() => handleViewClick(program)}
+                        >
+                          {t("View")}
+                        </button>
+                      )
                     )
                   ) : (
                     <button
@@ -239,7 +285,16 @@ export default function ProgrmPage({
                       >
                         {t("Reapply")}
                       </button>
-                    ) : null
+                    ) : (
+                      showReapplyButton && (
+                        <button
+                          className="viewButton w-24 h-8 bg-blue-700 rounded-md text-blue text-xs font-normal flex items-center justify-center"
+                          onClick={() => handleViewClick(program)}
+                        >
+                          {t("View")}
+                        </button>
+                      )
+                    )
                   ) : (
                     <button
                       className="viewButton w-24 h-8 bg-blue-700 rounded-md text-blue text-xs font-normal flex items-center justify-center"
@@ -262,6 +317,21 @@ export default function ProgrmPage({
                   {t("View")}
                 </button>
               </td>
+            </>
+          );
+        case "Not Applied":
+          return (
+            <>
+              {showReapplyButton ? (
+                <td>
+                  <button
+                    className="viewButton w-24 h-8 bg-blue-700 rounded-md text-blue text-xs font-normal flex items-center justify-center"
+                    onClick={() => handleViewClick(program)}
+                  >
+                    {t("View")}
+                  </button>
+                </td>
+              ) : null}
             </>
           );
         default:
@@ -457,7 +527,10 @@ export default function ProgrmPage({
                         </div>
                       </th>
                       <th scope="col" className="columnTitle px-6 py-3">
-                        <div className="flex items-center">
+                        <div
+                          className="flex items-center cursor-pointer"
+                          onClick={() => sortPrograms("actions")}
+                        >
                           {t("Actions")}
                           <Link href="#">
                             <svg
