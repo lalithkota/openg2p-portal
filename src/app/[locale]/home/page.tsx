@@ -312,14 +312,20 @@ export default function Page({
                             >
                               {program.program_name}
                             </td>
-                            <td className="px-6 py-4">
-                              <button
-                                type="button"
-                                className={`${program.enrollment_status === "enrolled" ? "enrolledButton" : "submittedButton"} buttonElement top-14 text-xs  w-24 h-8 rounded-md text-center tracking-[0px] opacity-100 border-collapse border-[none] left-[811px] ${program.enrollment_status ? "bg-gray-300 text-gray-600" : "bg-[#c7ebd1] text-[#075e45]"}`}
-                                disabled={true}
-                              >
-                                {program.enrollment_status === "enrolled" ? "Enrolled" : "Applied"}
-                              </button>
+                            <td className="px-6 py-4" style={{fontSize: "14px"}}>
+                              {program.enrollment_status === "not_eligible" ? (
+                                <button className="noteligibleButton buttonElement top-14 text-xs  w-24 h-8 rounded-md text-center tracking-[0px] opacity-100 border-collapse border-[none] left-[811px] bg-gray-300 text-gray-600">
+                                  {t("Not Eligible")}
+                                </button>
+                              ) : program.enrollment_status === "enrolled" ? (
+                                <button className="enrolledButton buttonElement top-14 text-xs  w-24 h-8 rounded-md text-center tracking-[0px] opacity-100 border-collapse border-[none] left-[811px] bg-gray-300 text-gray-600">
+                                  {t("Enrolled")}
+                                </button>
+                              ) : (
+                                <button className="submittedButton buttonElement top-14 text-xs  w-24 h-8 rounded-md text-center tracking-[0px] opacity-100 border-collapse border-[none] left-[811px] bg-gray-300 text-gray-600">
+                                  {t("Applied")}
+                                </button>
+                              )}
                             </td>
                             <td className="px-6 py-4">{Number(program.total_funds_awaited).toFixed(2)}</td>
                             <td className="px-6 py-4">{Number(program.total_funds_received).toFixed(2)}</td>

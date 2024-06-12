@@ -1,13 +1,14 @@
 "use client";
-import Link from "next/link";
 import {useLocale, useTranslations} from "next-intl";
 import {Fragment, useState} from "react";
 import {Dialog, Transition} from "@headlessui/react";
+import {useRouter} from "next/navigation";
 
 export default function Modal() {
   const lang = useLocale();
   const t = useTranslations();
   const [isOpen, setIsOpen] = useState(false);
+  const router = useRouter();
   const openModal = () => {
     if (typeof window !== "undefined") {
       setIsOpen(true);
@@ -18,6 +19,11 @@ export default function Modal() {
     if (typeof window !== "undefined") {
       setIsOpen(false);
     }
+  };
+
+  const handleCancel = () => {
+    closeModal();
+    router.push(`/${lang}/home`);
   };
 
   return (
@@ -59,7 +65,7 @@ export default function Modal() {
               >
                 <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                   <Dialog.Title as="h3" className="text-lg font-medium leading-6 text-gray-900">
-                    Discard applicaton?
+                    {t("Discard application")}
                   </Dialog.Title>
                   <div className="mt-2">
                     <p className="text-sm text-gray-500">
@@ -71,19 +77,19 @@ export default function Modal() {
                     <button
                       type="button"
                       className="inline-flex justify-center rounded-md border border-transparent bg-blue-700 px-4 py-2 text-sm text-white font-medium focus:outline-none "
-                      onClick={closeModal}
+                      onClick={handleCancel}
                     >
                       {t("Discard")}
                     </button>
-                    <Link href={`/${lang}/home`}>
-                      <button
-                        type="button"
-                        className="inline-flex justify-center rounded-md   bg-white border border-blue-700 px-4 py-2 text-sm font-medium text-blue-900 focus:outline-none"
-                        onClick={closeModal}
-                      >
-                        {t("Cancel")}
-                      </button>
-                    </Link>
+                    {/* <Link href={`/${lang}/home`}> */}
+                    <button
+                      type="button"
+                      className="inline-flex justify-center rounded-md   bg-white border border-blue-700 px-4 py-2 text-sm font-medium text-blue-900 focus:outline-none"
+                      onClick={closeModal}
+                    >
+                      {t("Cancel")}
+                    </button>
+                    {/* </Link> */}
                   </div>
                 </Dialog.Panel>
               </Transition.Child>

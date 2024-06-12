@@ -4,7 +4,6 @@ import {useRouter, useSearchParams} from "next/navigation";
 import {useLocale, useTranslations} from "next-intl";
 import {useEffect, useState} from "react";
 import {AuthUtil} from "@/components/auth";
-import Modal from "@/components/Modal";
 import {ProgramForm} from "@/types";
 import {SubmitForm, fetchProgramForm} from "@/utils";
 
@@ -57,6 +56,10 @@ export default function Apply() {
 
     fetchData();
   }, [programid, lang, router]);
+
+  const handleCancel = () => {
+    router.back();
+  };
 
   return (
     <div className=" rounded-lg border-gray-200 m-6 p-4 " style={{marginLeft: "28px", marginTop: "10px"}}>
@@ -158,7 +161,7 @@ export default function Apply() {
               whiteSpace: "nowrap",
             }}
           >
-            {t("Application form")}
+            {t("Application Form")}
           </p>
           <h1
             className="shift-right mt-0"
@@ -220,7 +223,12 @@ export default function Apply() {
             >
               {t("Submit")}
             </button>
-            <Modal />
+            <button
+              onClick={handleCancel}
+              className="viewButton w-full p-6 h-8 bg-white-400 rounded-md text-sm font-normal flex items-center justify-center"
+            >
+              {t("Cancel")}
+            </button>
           </div>
         </div>
       </div>

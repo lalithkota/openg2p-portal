@@ -32,7 +32,7 @@
   "Tap to know more": "Pindutin para malaman pa",
   "Entitlements": "Karapatan",
   "Applications": "Mga Aplikasyon",
-  "Application Form": "Porma ng Aplikasyon",
+  "Application form": "Porma ng Aplikasyon",
   "Tap to view your Applications": "Pindutin para tingnan ang iyong mga aplikasyon",
   "Benefits": "Mga Benepisyo",
   "Tap to view your Benefits": "Pindutin para tingnan ang iyong mga benepisyo",
@@ -118,5 +118,8 @@
   "No results found": "Walang natagpuang resulta.",
   "Search by program name": "Maghanap ayon sa pangalan ng programa...",
   "Your Application is still in Progress": "Ang iyong aplikasyon ay patuloy pa ring inaasikaso",
-  "Proceed to Application": "Magpatuloy sa Aplikasyon"
+  "Proceed to Application": "Magpatuloy sa Aplikasyon",
+
+  "Discard application": "Itapon ang Aplikasyon?",
+  "The entered data will not be saved Are you sure you want to discard the form": "Ang mga naipasok na datos ay hindi maiimbak. Sigurado ka bang nais mong itapon ang form?"
 }

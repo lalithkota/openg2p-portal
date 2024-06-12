@@ -118,5 +118,8 @@
   "No results found": "Aucun résultat trouvé.",
   "Search by program name": "Rechercher par nom de programme...",
   "Your Application is still in Progress": "Votre demande est toujours en cours",
-  "Proceed to Application": "Passer à la demande"
+  "Proceed to Application": "Passer à la demande",
+
+  "Discard application": "Annuler la demande?",
+  "The entered data will not be saved Are you sure you want to discard the form": "Les données saisies ne seront pas enregistrées. Êtes-vous sûr de vouloir annuler le formulaire?"
 }
