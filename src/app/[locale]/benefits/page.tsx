@@ -128,9 +128,15 @@ export default function BenefPage({
       } else if (column === "funds_received") {
         return order === "asc" ? a.funds_received - b.funds_received : b.funds_received - a.funds_received;
       } else if (column === "date_approved") {
-        const dateA = new Date(a.date_approved).getDate();
-        const dateB = new Date(b.date_approved).getDate();
-        return order === "asc" ? dateA - dateB : dateB - dateA;
+        const dateA = new Date(a.date_approved);
+        const dateB = new Date(b.date_approved);
+        if (dateA.getTime() === dateB.getTime()) {
+          // If dates are the same, use program name as a secondary criterion
+          return order === "asc"
+            ? a.program_name.localeCompare(b.program_name)
+            : b.program_name.localeCompare(a.program_name);
+        }
+        return order === "asc" ? dateA.getTime() - dateB.getTime() : dateB.getTime() - dateA.getTime();
       }
       return 0;
     });
