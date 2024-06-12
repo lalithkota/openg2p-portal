@@ -69,6 +69,12 @@ export default function ApplcnPage({
   const [sortedColumn, setSortedColumn] = useState<string | null>(null);
 
   useEffect(() => {
+    if (searchQuery) {
+      router.push(`/${lang}/applications?query=${searchQuery}`);
+    }
+  }, [searchQuery, lang, router]);
+
+  useEffect(() => {
     const fetchData = async () => {
       try {
         setIsLoading(true);

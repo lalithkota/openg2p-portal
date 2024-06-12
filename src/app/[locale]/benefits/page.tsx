@@ -68,6 +68,12 @@ export default function BenefPage({
   const [sortedColumn, setSortedColumn] = useState<string | null>(null);
 
   useEffect(() => {
+    if (searchQuery) {
+      router.push(`/${lang}/benefits?query=${searchQuery}`);
+    }
+  }, [searchQuery, lang, router]);
+
+  useEffect(() => {
     const fetchData = async () => {
       try {
         setIsLoading(true);

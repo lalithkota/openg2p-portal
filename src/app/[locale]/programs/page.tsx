@@ -71,6 +71,12 @@ export default function ProgrmPage({
   const [sortedColumn, setSortedColumn] = useState<string | null>(null);
 
   useEffect(() => {
+    if (searchQuery) {
+      router.push(`/${lang}/programs?query=${searchQuery}`);
+    }
+  }, [searchQuery, lang, router]);
+
+  useEffect(() => {
     const fetchData = async () => {
       try {
         setIsLoading(true);
