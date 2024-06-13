@@ -48,6 +48,10 @@
   "Entitlement Reference Number": "Numero ng Karapatan",
   "Date Applied": "Petsa ng Pag-apply",
   "Submitted On": "Nai-pasa noong",
+  "Enrolled": "Nakapag-enroll",
+  "Applied": "Nakapag-apply",
+  "Not Eligible": "Hindi Karapat-dapat",
+  "Not Applied": "Hindi Nag-apply",
 
   "My Profile": "Aking Profile",
   "My Application": "Aking Aplikasyon",
@@ -121,5 +125,10 @@
   "Proceed to Application": "Magpatuloy sa Aplikasyon",
 
   "Discard application": "Itapon ang Aplikasyon?",
-  "The entered data will not be saved Are you sure you want to discard the form": "Ang mga naipasok na datos ay hindi maiimbak. Sigurado ka bang nais mong itapon ang form?"
+  "The entered data will not be saved Are you sure you want to discard the form": "Ang mga naipasok na datos ay hindi maiimbak. Sigurado ka bang nais mong itapon ang form?",
+  "About us content": "Ang OpenG2P ERP, na binuo sa mahusay na Odoo open source ERP, ay isang open source web-based enterprise resource planning (ERP) na solusyon para sa pamamahala ng maraming aspeto ng malakihang relief program. Maaari itong maging isang standalone na solusyon at bilang administrative interface sa natitirang bahagi ng OpenG2P stack. Sinimulan ng DSTI at ng Gobyerno ng Sierra Leone, The Mifos Initiative at Fynarfin, ang “OpenG2P” na naglalayong magbigay ng mga solusyon upang epektibong idigitalize ang pamahalaan sa tao, at malakihang mga social protection transfer. Ito ay isang set ng mga digital na bloke na tumutulong sa mga SP na idigitalize ang mga pangunahing bahagi at tugunan ang mga puwang sa delivery chain ng target at enrollment, pamamahala ng listahan, digitalisasyon ng pagbabayad, at mga reklamo. Ang OpenG2P ay binubuo ng ilang mga proyekto (mga bloke), bawat isa ay tinutugunan ang isang pangunahing punto ng sakit sa delivery chain. Ang mga ito ay maaaring gamitin nang independiyente sa iba pang mga bloke depende sa mga puwang ng isang programa o bilang isang pakete na seamless na isinama upang magbigay ng isang end-to-end na solusyon na kit. Ang OpenG2P ay nasa aktibong pag-unlad. Kung kailangan mo ng tulong, nais na mag-ambag, o nais lamang pag-usapan ang proyekto sa mga taong may parehong kaisipan, mayroon kaming ilang mga bukas na channel para sa komunikasyon.",
+  "Contact us": "Makipag-ugnayan sa amin",
+  "Contact": "Kontak",
+  "Contact Link": "Link ng Dokumentasyon ng OpenG2P: https://docs.openg2p.org/",
+  "Others Content": "Pahina sa ilalim ng konstruksyon! Ang aming mga eksperto ay nagsusumikap upang maging available ang pahinang ito. Samantala, hinihiling namin na bumalik ka pagkatapos ng ilang sandali."
 }

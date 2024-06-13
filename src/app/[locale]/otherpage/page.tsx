@@ -6,9 +6,12 @@ export default function Others() {
   const t = useTranslations();
   return (
     <div className="rounded-lg border-gray-200 p-4 mx-4 lg:px-4 m-0 mt-2">
-      <div className="mx-auto max-w-screen-xl">
+      <div className="mx-auto max-w-screen-xl" style={{marginLeft: "50px", marginRight: "50px"}}>
         <div className="text-gray-700 text-xl ">{t("Others")}</div>
-        <div className="flex flex-wrap gap-2 mt-6 items-center mx-auto max-w-screen-xl">
+        <div
+          className="flex flex-wrap gap-2 mt-6 items-center mx-auto max-w-screen-xl"
+          style={{marginBottom: "20px"}}
+        >
           <Link href={`/${lang}/programs`} className="flex items-center text-blue-900">
             {" " + t("Home") + " "}
           </Link>
@@ -17,12 +20,13 @@ export default function Others() {
           </svg>
           <p className="m-0">{t("Others")}</p>
           <div>
-            <div>
-              <div id="formio" className="m-4"></div>
-              <button id="custom-submit-button" className=" bg-red-700">
+            {/* <div id="formio" className="m-4"></div> */}
+            {/* <button id="custom-submit-button" className=" bg-red-700">
                 Submitttttttttt
-              </button>
-            </div>
+              </button> */}
+          </div>
+          <div className="container" style={{marginTop: "50px", marginBottom: "250px"}}>
+            <h2>{t("Others Content")}</h2>
           </div>
         </div>
       </div>

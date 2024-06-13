@@ -48,6 +48,10 @@
   "Entitlement Reference Number": "Numéro de référence des droits",
   "Date Applied": "Date de la demande",
   "Submitted On": "Soumis le",
+  "Enrolled": "Inscrit",
+  "Applied": "Appliqué",
+  "Not Eligible": "Non éligible",
+  "Not Applied": "Non Appliqué",
 
   "My Profile": "Mon profil",
   "My Application": "Ma demande",
@@ -121,5 +125,10 @@
   "Proceed to Application": "Passer à la demande",
 
   "Discard application": "Annuler la demande?",
-  "The entered data will not be saved Are you sure you want to discard the form": "Les données saisies ne seront pas enregistrées. Êtes-vous sûr de vouloir annuler le formulaire?"
+  "The entered data will not be saved Are you sure you want to discard the form": "Les données saisies ne seront pas enregistrées. Êtes-vous sûr de vouloir annuler le formulaire?",
+  "About us content": "L'OpenG2P ERP, construit sur l'excellent ERP open source Odoo, est une solution ERP open source basée sur le web pour gérer de nombreux aspects des programmes d'aide à grande échelle. Il peut à la fois être une solution autonome et l'interface administrative du reste de la pile OpenG2P. Lancé par DSTI et le gouvernement de la Sierra Leone, The Mifos Initiative et Fynarfin, “OpenG2P” vise à fournir une confluence et des solutions pour numériser efficacement les transferts de gouvernement à personne et les transferts de protection sociale à grande échelle. C'est un ensemble de blocs de construction numériques qui aident les SP à numériser les rouages clés et à combler les lacunes dans la chaîne de livraison du ciblage et de l'inscription, de la gestion des listes, de la numérisation des paiements et des recours. OpenG2P comprend plusieurs projets (blocs), chacun abordant un point de douleur clé dans la chaîne de livraison. Ceux-ci peuvent être utilisés indépendamment des autres blocs, en fonction des lacunes d'un programme, ou comme un ensemble parfaitement intégré pour fournir un kit de solution de bout en bout. OpenG2P est en développement actif. Si vous avez besoin d'aide, souhaitez contribuer ou simplement discuter du projet avec des personnes partageant les mêmes idées, nous avons plusieurs canaux ouverts pour la communication.",
+  "Contact us": "Contactez-nous",
+  "Contact": "Contactez",
+  "Contact Link": "Lien vers la documentation OpenG2P : https://docs.openg2p.org/",
+  "Others Content": "Page en construction ! Nos experts travaillent dur pour rendre cette page disponible. En attendant, nous vous demandons de bien vouloir revenir plus tard."
 }
