@@ -1,6 +1,6 @@
 "use client";
 
-import {ReactNode, createContext, useContext, useState} from "react";
+import {ReactNode, createContext, useContext, useEffect, useState} from "react";
 import {Profile} from "@/types";
 
 interface GlobalContextType {
@@ -35,6 +35,26 @@ export const useAuth = () => {
 export const GlobalContextProvider = ({children}: {children: ReactNode}) => {
   const [formState, setFormState] = useState(false);
   const [profile, setProfile] = useState<GlobalContextType["profile"]>(undefined);
+
+  useEffect(() => {
+    const handleStorageChange = () => {
+      const storedProfile = localStorage.getItem("profile");
+      if (storedProfile === null) {
+        // User logged out in another tab
+        setProfile(null);
+      }
+    };
+    window.addEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener("storage", handleStorageChange);
+  }, []);
+
+  useEffect(() => {
+    if (profile === null) {
+      localStorage.removeItem("profile");
+    } else if (profile) {
+      localStorage.setItem("profile", JSON.stringify(profile));
+    }
+  }, [profile]);
 
   return (
     <GlobalContext.Provider value={{formState, profile, setFormState, setProfile}}>
