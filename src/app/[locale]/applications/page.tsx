@@ -425,7 +425,7 @@ export default function ApplcnPage({
                               className="text-black-100 text-xl flex-col gap-2 mb-4
                           style={{ top: '339px', left: '621px', width: '124px', height: '17px', textAlign: 'center', font: 'normal normal 600 14px/17px Inter', letterSpacing: '0px', color: '#494DAF', opacity: 1 }"
                             >
-                              {t("No applications yet please tap on the below link to view all programs")}
+                              {t("No Applications No Benefits")}
                             </h2>
                             <Link href={`/${lang}/programs`}>
                               <p

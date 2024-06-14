@@ -4,8 +4,8 @@ import {useTranslations, useLocale} from "next-intl";
 import {useState, useEffect, Suspense} from "react";
 import {Pagination} from "@/components";
 import {AuthUtil} from "@/components/auth";
-import {BenefitDetails} from "@/types";
-import {fetchBenefitDetails} from "@/utils";
+import {ApplicationDetails, BenefitDetails} from "@/types";
+import {fetchApplicationDetails, fetchBenefitDetails} from "@/utils";
 import Loading from "../loading";
 import Link from "next/link";
 
@@ -66,6 +66,7 @@ export default function BenefPage({
 
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
   const [sortedColumn, setSortedColumn] = useState<string | null>(null);
+  const [hasApplications, setHasApplications] = useState(false); // Track if there are applications
 
   useEffect(() => {
     if (searchQuery) {
@@ -88,6 +89,15 @@ export default function BenefPage({
     };
 
     fetchData();
+    const fetchApplicationData = async () => {
+      try {
+        const applications: ApplicationDetails[] = await fetchApplicationDetails();
+        setHasApplications(applications.length > 0); // Set hasApplications based on fetched applications
+      } catch (error) {
+        console.error("Error fetching application details:", error);
+      }
+    };
+    fetchApplicationData();
   }, []);
 
   useEffect(() => {
@@ -416,9 +426,12 @@ export default function BenefPage({
                               className="text-black-100 text-xl flex-col gap-2 mb-4
                           style={{ top: '339px', left: '621px', width: '124px', height: '17px', textAlign: 'center', font: 'normal normal 600 14px/17px Inter', letterSpacing: '0px', color: '#494DAF', opacity: 1 }"
                             >
-                              {t("No benefits yet please tap on the below link to view all programs")}
+                              {/* {t("No Applications No Benefits")} */}
+                              {hasApplications
+                                ? t("Applications but No Benefits")
+                                : t("No Applications No Benefits")}
                             </h2>
-                            <Link href={`/${lang}/programs`}>
+                            <Link href={hasApplications ? `/${lang}/applications` : `/${lang}/programs`}>
                               <p
                                 className="text-blue-500 hover:underline mb-20"
                                 style={{
@@ -433,7 +446,7 @@ export default function BenefPage({
                                   opacity: 1,
                                 }}
                               >
-                                {t("View All Program")}
+                                {hasApplications ? t("View My Applications") : t("View All Program")}
                               </p>
                             </Link>
                           </div>
