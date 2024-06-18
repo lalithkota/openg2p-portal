@@ -12,6 +12,7 @@ export function AuthUtil(params: {successRedirectUrl?: string; failedRedirectUrl
   const auth = useAuth();
   const {push} = useRouter();
   const [isCheckingAuth, setIsCheckingAuth] = useState(false);
+  const [hasCheckedAuth, setHasCheckedAuth] = useState(false);
   const checkAuth = async () => {
     setIsCheckingAuth(true);
     try {
@@ -26,6 +27,7 @@ export function AuthUtil(params: {successRedirectUrl?: string; failedRedirectUrl
       console.error("Error checking authentication:", err);
     } finally {
       setIsCheckingAuth(false);
+      setHasCheckedAuth(true); // Set the flag after the first check
     }
   };
 
@@ -43,14 +45,21 @@ export function AuthUtil(params: {successRedirectUrl?: string; failedRedirectUrl
 
   // Redirect based on authentication status
   useEffect(() => {
-    if (isCheckingAuth) return; // Don't redirect while checking
+    if (isCheckingAuth || !hasCheckedAuth) return; // Redirect only after initial check
 
     if (params.successRedirectUrl && auth.profile) {
       push(params.successRedirectUrl);
     } else if (params.failedRedirectUrl && !auth.profile) {
       push(params.failedRedirectUrl);
     }
-  }, [auth.profile, isCheckingAuth, params.failedRedirectUrl, params.successRedirectUrl, push]);
+  }, [
+    auth.profile,
+    isCheckingAuth,
+    hasCheckedAuth,
+    params.failedRedirectUrl,
+    params.successRedirectUrl,
+    push,
+  ]);
 
   return <></>;
 }
