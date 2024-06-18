@@ -19,9 +19,11 @@ export default function Card() {
           imagePath1={prefixBasePath("/img/medical_services_FILL0_wght400_GRAD0_opsz48@2x.png")}
           link1={`/${lang}/programs`}
           heading2={t("Education")}
+          heading3={t("View all")}
           description2={t("@Healthcare_description")}
           imagePath2={prefixBasePath("/img/school_FILL0_wght400_GRAD0_opsz48@2x.png")}
           link2={`/${lang}/programs`}
+          disableHeadingLinks={true}
         />
         <CardItem
           title={t("Other Services")}
@@ -30,9 +32,11 @@ export default function Card() {
           imagePath1={prefixBasePath("/img/person_filled_FILL0_wght400_GRAD0_opsz48@2x.png")}
           link1="#"
           heading2={t("Housing")}
+          heading3={t("KYC")}
           description2={t("Tap here for assistance")}
           imagePath2={prefixBasePath("/img/real_estate_agent_FILL0_wght400_GRAD0_opsz48@2x.png")}
           link2="#"
+          disableLinks={true}
         />
         <CardItem
           title={t("Entitlements")}
@@ -41,9 +45,11 @@ export default function Card() {
           imagePath1={prefixBasePath("/img/applications.png")}
           link1={`/${lang}/applications`}
           heading2={t("Benefits")}
+          heading3={t("Entitlements")}
           description2={t("Tap to view your Benefits")}
           imagePath2={prefixBasePath("/img/benefits.png")}
           link2={`/${lang}/benefits`}
+          disableHeading3Link={true}
         />
       </div>
     </>
@@ -57,9 +63,13 @@ export function CardItem({
   imagePath1,
   link1,
   heading2,
+  heading3,
   description2,
   imagePath2,
   link2,
+  disableLinks = false,
+  disableHeading3Link = false,
+  disableHeadingLinks = false,
 }: {
   title: string;
   heading1: string;
@@ -67,9 +77,13 @@ export function CardItem({
   imagePath1: string;
   link1: string;
   heading2: string;
+  heading3: string;
   description2: string;
   imagePath2: string;
   link2: string;
+  disableLinks?: boolean;
+  disableHeading3Link?: boolean;
+  disableHeadingLinks?: boolean;
 }) {
   return (
     <div className="flex flex-col w-full bg-brand border border-gray-200 square-lg shadow dark:bg-brand rounded-lg">
@@ -119,12 +133,24 @@ export function CardItem({
                 </div>
               </div>
               <div className="flex-1 min-w-0 mt-2 ml-3 ">
-                <Link href={link1} className="text-sm font-medium text-gray-100 truncate columnElement">
-                  {heading1}
-                </Link>
-                <p className="text-sm text-gray-600 truncate dark:text-gray-400 columnElement">
-                  {description1}
-                </p>
+                {disableLinks || disableHeadingLinks ? (
+                  <span className="text-sm font-medium text-gray-100 truncate columnElement">{heading1}</span>
+                ) : (
+                  <Link href={link1} className="text-sm font-medium text-gray-100 truncate columnElement">
+                    {heading1}
+                  </Link>
+                )}
+                {disableHeading3Link ? (
+                  <p className="text-sm text-gray-600 truncate dark:text-gray-400 columnElement">
+                    <Link href={link1} className=" hover:underline">
+                      {description1}
+                    </Link>
+                  </p>
+                ) : (
+                  <p className="text-sm text-gray-600 truncate dark:text-gray-400 columnElement">
+                    {description1}
+                  </p>
+                )}
               </div>
             </div>
           </li>
@@ -159,27 +185,50 @@ export function CardItem({
                 </div>
               </div>
               <div className="flex-1 min-w-0 mt-2 ml-3">
-                <Link href={link2} className="text-sm font-medium text-gray-100 truncate columnElement">
-                  {heading2}
-                </Link>
-                <p className="text-sm text-gray-600 truncate dark:text-gray-400 columnElement">
-                  {description2}
-                </p>
+                {disableLinks || disableHeadingLinks ? (
+                  <span className="text-sm font-medium text-gray-100 truncate columnElement">{heading2}</span>
+                ) : (
+                  <Link href={link2} className="text-sm font-medium text-gray-100 truncate columnElement">
+                    {heading2}
+                  </Link>
+                )}
+                {disableHeading3Link ? (
+                  <p className="text-sm text-gray-600 truncate dark:text-gray-400 columnElement">
+                    <Link href={link2} className=" hover:underline">
+                      {description2}
+                    </Link>
+                  </p>
+                ) : (
+                  <p className="text-sm text-gray-600 truncate dark:text-gray-400 columnElement">
+                    {description2}
+                  </p>
+                )}
               </div>
             </div>
           </li>
         </ul>
       </div>
       <div className="mx-auto mb-3" style={{marginBottom: "10px"}}>
-        <Link
-          href={link2}
-          className="text-sm font-medium text-blue-600 dark:text-blue-500 no-underline hover:underline "
-          style={{
-            font: "normal normal 600 14px/20px Inter",
-          }}
-        >
-          {title}
-        </Link>
+        {disableHeading3Link || disableLinks ? (
+          <span
+            className="text-sm font-medium text-blue-600 dark:text-blue-500 no-underline"
+            style={{
+              font: "normal normal 600 14px/20px Inter",
+            }}
+          >
+            {heading3}
+          </span>
+        ) : (
+          <Link
+            href={link2}
+            className="text-sm font-medium text-blue-600 dark:text-blue-500 no-underline hover:underline"
+            style={{
+              font: "normal normal 600 14px/20px Inter",
+            }}
+          >
+            {heading3}
+          </Link>
+        )}
       </div>
     </div>
   );
