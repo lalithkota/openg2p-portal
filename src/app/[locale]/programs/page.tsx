@@ -648,7 +648,7 @@ export default function ProgrmPage({
         </div>
       ) : (
         <div className="mt-16 flex justify-center items-center flex-col gap-2">
-          <h2 className="text-black text-xl font-bold">Oops no results.. Sign in Again!</h2>
+          <h2 className="text-black text-xl font-bold"></h2>
           {/* <p>{t("Message")}</p> */}
         </div>
       )}
