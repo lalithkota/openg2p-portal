@@ -70,6 +70,12 @@ export default function Page({
   const t = useTranslations();
 
   useEffect(() => {
+    if (searchQuery) {
+      router.push(`/${lang}/home?query=${searchQuery}`);
+    }
+  }, [searchQuery, lang, router]);
+
+  useEffect(() => {
     const fetchData = async () => {
       try {
         setIsLoading(true);

@@ -383,7 +383,7 @@ export default function ApplcnPage() {
         </div>
       ) : (
         <div className="mt-16 flex justify-center items-center flex-col gap-2 ">
-          <h2 className="tetx-black text-xl font-bold">Oops no results..</h2>
+          <h2 className="tetx-black text-xl font-bold"></h2>
         </div>
       )}
     </div>

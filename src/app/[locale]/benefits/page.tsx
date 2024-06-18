@@ -4,8 +4,8 @@ import {useTranslations, useLocale} from "next-intl";
 import {useState, useEffect, Suspense} from "react";
 import {Pagination} from "@/components";
 import {AuthUtil} from "@/components/auth";
-import {BenefitDetails} from "@/types";
-import {fetchBenefitDetails} from "@/utils";
+import {ApplicationDetails, BenefitDetails} from "@/types";
+import {fetchApplicationDetails, fetchBenefitDetails} from "@/utils";
 import Loading from "../loading";
 import Link from "next/link";
 
@@ -66,6 +66,13 @@ export default function BenefPage({
 
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
   const [sortedColumn, setSortedColumn] = useState<string | null>(null);
+  const [hasApplications, setHasApplications] = useState(false); // Track if there are applications
+
+  useEffect(() => {
+    if (searchQuery) {
+      router.push(`/${lang}/benefits?query=${searchQuery}`);
+    }
+  }, [searchQuery, lang, router]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -82,6 +89,15 @@ export default function BenefPage({
     };
 
     fetchData();
+    const fetchApplicationData = async () => {
+      try {
+        const applications: ApplicationDetails[] = await fetchApplicationDetails();
+        setHasApplications(applications.length > 0); // Set hasApplications based on fetched applications
+      } catch (error) {
+        console.error("Error fetching application details:", error);
+      }
+    };
+    fetchApplicationData();
   }, []);
 
   useEffect(() => {
@@ -128,9 +144,15 @@ export default function BenefPage({
       } else if (column === "funds_received") {
         return order === "asc" ? a.funds_received - b.funds_received : b.funds_received - a.funds_received;
       } else if (column === "date_approved") {
-        const dateA = new Date(a.date_approved).getDate();
-        const dateB = new Date(b.date_approved).getDate();
-        return order === "asc" ? dateA - dateB : dateB - dateA;
+        const dateA = new Date(a.date_approved);
+        const dateB = new Date(b.date_approved);
+        if (dateA.getTime() === dateB.getTime()) {
+          // If dates are the same, use program name as a secondary criterion
+          return order === "asc"
+            ? a.program_name.localeCompare(b.program_name)
+            : b.program_name.localeCompare(a.program_name);
+        }
+        return order === "asc" ? dateA.getTime() - dateB.getTime() : dateB.getTime() - dateA.getTime();
       }
       return 0;
     });
@@ -166,7 +188,12 @@ export default function BenefPage({
           >
             {" " + t("Home") + " "}
           </Link>
-          <svg xmlns="http://www.w3.org/2000/svg" height="0.8em" viewBox="0 0 320 512">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="0.8em"
+            viewBox="0 0 320 512"
+            style={{transform: "rotate(180deg)"}}
+          >
             <path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z" />
           </svg>
           <p
@@ -399,9 +426,12 @@ export default function BenefPage({
                               className="text-black-100 text-xl flex-col gap-2 mb-4
                           style={{ top: '339px', left: '621px', width: '124px', height: '17px', textAlign: 'center', font: 'normal normal 600 14px/17px Inter', letterSpacing: '0px', color: '#494DAF', opacity: 1 }"
                             >
-                              {t("No benefits yet please tap on the below link to view all programs")}
+                              {/* {t("No Applications No Benefits")} */}
+                              {hasApplications
+                                ? t("Applications but No Benefits")
+                                : t("No Applications No Benefits")}
                             </h2>
-                            <Link href={`/${lang}/programs`}>
+                            <Link href={hasApplications ? `/${lang}/applications` : `/${lang}/programs`}>
                               <p
                                 className="text-blue-500 hover:underline mb-20"
                                 style={{
@@ -416,7 +446,7 @@ export default function BenefPage({
                                   opacity: 1,
                                 }}
                               >
-                                {t("View All Program")}
+                                {hasApplications ? t("View My Applications") : t("View All Program")}
                               </p>
                             </Link>
                           </div>
