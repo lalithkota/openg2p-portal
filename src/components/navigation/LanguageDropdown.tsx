@@ -50,7 +50,10 @@ export default function LanguageDropDown() {
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
-        <Menu.Items className="absolute flex-col right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white ring-1 ring-gray-400  focus:outline-none">
+        <Menu.Items
+          className="absolute flex-col right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white ring-1 ring-gray-400  focus:outline-none"
+          style={{zIndex: 1000}}
+        >
           <div className="py-1 flex-col items-center">
             {supportedLocales.map((locale) => (
               <Menu.Item key={`locale-${locale}`}>
