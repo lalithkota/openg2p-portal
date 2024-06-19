@@ -11,6 +11,7 @@ export interface Program {
   is_portal_form_mapped: string;
   is_multiple_form_submission: number;
   last_application_status: number;
+  create_date: string;
 }
 export interface ProgramDetails {
   program_name: string;

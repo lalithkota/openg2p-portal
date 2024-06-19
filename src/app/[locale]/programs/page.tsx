@@ -361,6 +361,15 @@ export default function ProgrmPage({
     }
   };
 
+  // Function to check if a program is new (created within the last 21 days)
+  const isNewProgram = (createDate: string): boolean => {
+    const today = new Date();
+    const twentyOneDaysAgo = new Date();
+    twentyOneDaysAgo.setDate(today.getDate() - 21);
+    const programCreateDate = new Date(createDate);
+    return programCreateDate > twentyOneDaysAgo;
+  };
+
   return (
     <div className=" rounded-lg border-gray-200 p-4 mx-4 lg:px-4 m-0">
       <div
@@ -582,6 +591,14 @@ export default function ProgrmPage({
                             onMouseEnter={(e) => showTooltip(e, program.name)}
                             onMouseLeave={() => hideTooltip()} // Hide tooltip on mouse leave
                           >
+                            {isNewProgram(program.create_date) && (
+                              <span
+                                className="bg-blue-500 text-white px-2 py-1 rounded-md text-xs font-semibold animate-pulse mr-2"
+                                style={{fontSize: "9px"}}
+                              >
+                                {t("NEW")}
+                              </span>
+                            )}
                             {program.name}
                           </td>
 
