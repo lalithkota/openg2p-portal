@@ -64,6 +64,16 @@ export default function Submitted() {
   const hideToastSuccessMsg = () => {
     setIsToastVisible(false);
   };
+  // Function to format the date as DD-MM-YYYY
+  const formatDate = (dateString: string) => {
+    if (!dateString) return "";
+    const date = new Date(dateString);
+    const month = ("0" + (date.getMonth() + 1)).slice(-2);
+    const day = ("0" + date.getDate()).slice(-2);
+    const year = date.getFullYear();
+    return `${day}-${month}-${year}`; // Format as DD-MM-YYYY
+  };
+
   return (
     <div className=" rounded-lg border-gray-200 m-6 p-4 " style={{marginLeft: "28px", marginTop: "10px"}}>
       <div className="print:hidden">
@@ -203,7 +213,9 @@ export default function Submitted() {
                 <h3>{t("Application ID")}</h3>
                 <h1 className="text-black font-bold mb-4">{applicationDetails.application_id}</h1>
                 <h3>{t("Submitted On")}</h3>
-                <h1 className="text-black font-bold mb-4">{applicationDetails.date_applied?.slice(0, 10)}</h1>
+                <h1 className="text-black font-bold mb-4">
+                  {formatDate(applicationDetails.date_applied?.slice(0, 10))}
+                </h1>
               </div>
               <hr className="border-t mx-0 border-gray-400 " />
               <div className="flex flex-col  gap-2 items-center m-4">
