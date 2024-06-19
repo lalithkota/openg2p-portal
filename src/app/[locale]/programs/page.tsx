@@ -432,8 +432,9 @@ export default function ProgrmPage({
         </div>
       </div>
       {isLoading ? (
-        <div className="mt-0 flex justify-center items-center flex-col gap-2"></div>
-      ) : !isDataEmpty ? (
+        <Loading />
+      ) : // <div className="mt-0 flex justify-center items-center flex-col gap-2"></div>
+      !isDataEmpty ? (
         <div className=" m-6 p-4 md:space-x-8 mx-auto max-w-screen-xl flex justify-center items-center">
           <div className=" bg-brand container w-1180 shadow-md rounded-lg top-24">
             <div className="flex flex-wrap justify-between items-center" style={{height: "42px"}}>

@@ -201,8 +201,9 @@ export default function ApplcnPage() {
   return (
     <div>
       {isLoading ? (
-        <div className="mt-16 flex justify-center items-center flex-col gap-2" />
-      ) : !isDataEmpty ? (
+        <Loading />
+      ) : // <div className="mt-16 flex justify-center items-center flex-col gap-2" />
+      !isDataEmpty ? (
         <div
           className=" m-6 p-6 md:space-x-4 mx-auto max-w-screen-xl flex justify-center items-center"
           style={{marginTop: "24px", marginBottom: "0px"}}
