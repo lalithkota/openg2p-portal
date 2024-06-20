@@ -689,14 +689,19 @@ export default function ProgrmPage({
           className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50"
           onClick={closeProgramDetails}
         >
-          <div className="bg-white p-4 rounded-md relative" onClick={(e) => e.stopPropagation()}>
-            <h3 className="rowElement font-bold">{selectedProgram.name}</h3>
+          <div
+            className="bg-white p-4 rounded-md relative w-[400px] h-[200px]" // Fixed width and height
+            onClick={(e) => e.stopPropagation()}
+            style={{overflowY: "auto"}} // Add vertical scroll if content overflows
+          >
+            <h3 className="rowElement font-bold text-center flex justify-center">{selectedProgram.name}</h3>
+            <hr className="my-2 border-gray-300" /> {/* Horizontal line */}
             <p className="snoElement mt-2">{selectedProgram.description}</p>
             <button
               className="absolute top-1 right-1 text-red-600 hover:text-gray-800"
               onClick={closeProgramDetails}
             >
-              &times;
+              ×
             </button>
           </div>
         </div>
