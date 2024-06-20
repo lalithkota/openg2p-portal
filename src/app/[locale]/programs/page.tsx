@@ -69,6 +69,7 @@ export default function ProgrmPage({
 
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
   const [sortedColumn, setSortedColumn] = useState<string | null>(null);
+  const [selectedProgram, setSelectedProgram] = useState<Program | null>(null);
 
   useEffect(() => {
     if (searchQuery) {
@@ -370,6 +371,14 @@ export default function ProgrmPage({
     return programCreateDate > twentyOneDaysAgo;
   };
 
+  const openProgramDetails = (program: Program) => {
+    setSelectedProgram(program);
+  };
+
+  const closeProgramDetails = () => {
+    setSelectedProgram(null);
+  };
+
   return (
     <div className=" rounded-lg border-gray-200 p-4 mx-4 lg:px-4 m-0">
       <div
@@ -586,7 +595,9 @@ export default function ProgrmPage({
                               overflow: "hidden",
                               textOverflow: "ellipsis",
                               whiteSpace: "nowrap",
+                              cursor: "pointer",
                             }}
+                            onClick={() => openProgramDetails(program)} // Open details on click
                             data-tooltip={program.name} // Add data-tooltip attribute
                             onMouseEnter={(e) => showTooltip(e, program.name)}
                             onMouseLeave={() => hideTooltip()} // Hide tooltip on mouse leave
@@ -673,6 +684,23 @@ export default function ProgrmPage({
       {/* <div className="pt-0" style={{marginTop: "0px", marginBottom: "24px"}}>
         <Card />
       </div> */}
+      {selectedProgram && (
+        <div
+          className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50"
+          onClick={closeProgramDetails}
+        >
+          <div className="bg-white p-4 rounded-md relative" onClick={(e) => e.stopPropagation()}>
+            <h3 className="rowElement font-bold">{selectedProgram.name}</h3>
+            <p className="snoElement mt-2">{selectedProgram.description}</p>
+            <button
+              className="absolute top-1 right-1 text-red-600 hover:text-gray-800"
+              onClick={closeProgramDetails}
+            >
+              &times;
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
