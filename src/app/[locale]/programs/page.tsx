@@ -258,15 +258,20 @@ export default function ProgrmPage({
                       >
                         {t("Reapply")}
                       </button>
+                    ) : showReapplyButton ? (
+                      <button
+                        className="viewButton buttonElement w-24 h-8 bg-blue-700 rounded-md text-blue text-xs font-normal flex items-center justify-center"
+                        onClick={() => handleViewClick(program)}
+                      >
+                        {t("View")}
+                      </button>
                     ) : (
-                      showReapplyButton && (
-                        <button
-                          className="viewButton buttonElement w-24 h-8 bg-blue-700 rounded-md text-blue text-xs font-normal flex items-center justify-center"
-                          onClick={() => handleViewClick(program)}
-                        >
-                          {t("View")}
-                        </button>
-                      )
+                      <button
+                        className="applyButton w-24 h-8 bg-blue-700 rounded-md text-white text-xs font-normal flex items-center justify-center"
+                        onClick={() => handleApplyClick(program)}
+                      >
+                        {t("Apply")}
+                      </button>
                     )
                   ) : (
                     <button

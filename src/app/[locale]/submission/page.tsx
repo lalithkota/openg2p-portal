@@ -164,43 +164,41 @@ export default function Submitted() {
 
           <div className="flex flex-row gap-6 justify-center mt-4 ">
             <div className=" border border-gray-300 bg-brand container rounded-lg shadow-md">
-              <div className="flex-col  flex-wrap justify-between items-center">
-                <div className="m-5 ">
-                  <p className="text-gray-900 mb-4">
-                    Dear {profile?.given_name} {profile?.family_name},
-                  </p>
-                  <div className="text-gray-700 mb-4">
-                    Thank you for submitting your form for the program {applicationDetails.program_name}. Your
-                    application number is {applicationDetails.application_id}.
-                  </div>
-                  <div className="text-gray-700 mb-4"></div>
-                  <div className="text-gray-700 mb-4">
-                    We appreciate your interest in and we are committed to providing you with the support you
-                    need to achieve your goals. Our team will now review your application and assess your
-                    eligibility for the scheme. This process may take some time, and we appreciate your
-                    patience while we work to provide you with the best possible service.
-                  </div>
-                  <div className="text-gray-700 mb-4">
-                    Please note that if additional information is required to process your application, we
-                    will contact you using the email or phone number provided in your application. Therefore,
-                    it is important that you check your email and phone regularly to avoid any delays. Once
-                    your application has been reviewed, we will notify you of the outcome via email or phone.
-                    If your application is approved, we will provide you with the necessary instructions to
-                    access the benefits of the scheme.
-                  </div>
+              <div className="m-5 ">
+                <p className="text-gray-900 mb-4">
+                  Dear {profile?.given_name} {profile?.family_name},
+                </p>
+                <div className="text-gray-700 mb-4">
+                  Thank you for submitting your form for the program {applicationDetails.program_name}. Your
+                  application number is {applicationDetails.application_id}.
+                </div>
+                <div className="text-gray-700 mb-4"></div>
+                <div className="text-gray-700 mb-4">
+                  We appreciate your interest in and we are committed to providing you with the support you
+                  need to achieve your goals. Our team will now review your application and assess your
+                  eligibility for the scheme. This process may take some time, and we appreciate your patience
+                  while we work to provide you with the best possible service.
+                </div>
+                <div className="text-gray-700 mb-4">
+                  Please note that if additional information is required to process your application, we will
+                  contact you using the email or phone number provided in your application. Therefore, it is
+                  important that you check your email and phone regularly to avoid any delays. Once your
+                  application has been reviewed, we will notify you of the outcome via email or phone. If your
+                  application is approved, we will provide you with the necessary instructions to access the
+                  benefits of the scheme.
+                </div>
 
-                  <div className="text-gray-700 mb-4">
-                    Thank you once again for your application, and we wish you the best of luck in your future
-                    endeavors.
-                  </div>
-                  <div className="text-gray-700 mb-4">
-                    Best regards,
-                    <p>Program Management Team</p>
-                  </div>
+                <div className="text-gray-700 mb-4">
+                  Thank you once again for your application, and we wish you the best of luck in your future
+                  endeavors.
+                </div>
+                <div className="text-gray-700 mb-4">
+                  Best regards,
+                  <p>Program Management Team</p>
                 </div>
               </div>
             </div>
-            <div className="basis-1/2 print:hidden mb-80 flex-col flex-wrap justify-between items-center border border-gray-300 bg-brand container pb-10 rounded-lg top-24 shadow-md ">
+            <div className="basis-1/2 flex-col border border-gray-300 bg-brand container pb-10 rounded-lg top-24 shadow-md ">
               <p className=" text-gray-700 pt-4 pl-4 pb-0  ">{applicationDetails.program_name}</p>
               <button className=" ml-4 mb-4 w-24 h-8 bg-blue-700 rounded-md text-white text-sm font-normal flex items-center justify-center ">
                 {applicationDetails.application_status === "active" ||
