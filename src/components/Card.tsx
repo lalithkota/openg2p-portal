@@ -32,7 +32,7 @@ export default function Card() {
           imagePath1={prefixBasePath("/img/person_filled_FILL0_wght400_GRAD0_opsz48@2x.png")}
           link1="#"
           heading2={t("Housing")}
-          heading3={t("KYC")}
+          heading3={t("View all")}
           description2={t("Tap here for assistance")}
           imagePath2={prefixBasePath("/img/real_estate_agent_FILL0_wght400_GRAD0_opsz48@2x.png")}
           link2="#"
