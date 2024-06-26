@@ -275,10 +275,10 @@ export default function ProgrmPage({
                     )
                   ) : (
                     <button
-                      className="viewButton w-24 h-8 bg-blue-700 rounded-md text-blue text-xs font-normal flex items-center justify-center"
-                      onClick={() => handleViewClick(program)}
+                      className="applyButton w-24 h-8 bg-blue-700 rounded-md text-blue text-xs font-normal flex items-center justify-center"
+                      onClick={() => handleApplyClick(program)}
                     >
-                      {t("View")}
+                      {t("Apply")}
                     </button>
                   ))}
               </td>
