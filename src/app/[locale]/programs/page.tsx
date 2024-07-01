@@ -69,6 +69,7 @@ export default function ProgrmPage({
 
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
   const [sortedColumn, setSortedColumn] = useState<string | null>(null);
+  const [selectedProgram, setSelectedProgram] = useState<Program | null>(null);
 
   useEffect(() => {
     if (searchQuery) {
@@ -257,22 +258,27 @@ export default function ProgrmPage({
                       >
                         {t("Reapply")}
                       </button>
+                    ) : showReapplyButton ? (
+                      <button
+                        className="viewButton buttonElement w-24 h-8 bg-blue-700 rounded-md text-blue text-xs font-normal flex items-center justify-center"
+                        onClick={() => handleViewClick(program)}
+                      >
+                        {t("View")}
+                      </button>
                     ) : (
-                      showReapplyButton && (
-                        <button
-                          className="viewButton buttonElement w-24 h-8 bg-blue-700 rounded-md text-blue text-xs font-normal flex items-center justify-center"
-                          onClick={() => handleViewClick(program)}
-                        >
-                          {t("View")}
-                        </button>
-                      )
+                      <button
+                        className="applyButton w-24 h-8 bg-blue-700 rounded-md text-white text-xs font-normal flex items-center justify-center"
+                        onClick={() => handleApplyClick(program)}
+                      >
+                        {t("Apply")}
+                      </button>
                     )
                   ) : (
                     <button
-                      className="viewButton w-24 h-8 bg-blue-700 rounded-md text-blue text-xs font-normal flex items-center justify-center"
-                      onClick={() => handleViewClick(program)}
+                      className="applyButton w-24 h-8 bg-blue-700 rounded-md text-blue text-xs font-normal flex items-center justify-center"
+                      onClick={() => handleApplyClick(program)}
                     >
-                      {t("View")}
+                      {t("Apply")}
                     </button>
                   ))}
               </td>
@@ -359,6 +365,23 @@ export default function ProgrmPage({
         </>
       );
     }
+  };
+
+  // Function to check if a program is new (created within the last 21 days)
+  const isNewProgram = (createDate: string): boolean => {
+    const today = new Date();
+    const twentyOneDaysAgo = new Date();
+    twentyOneDaysAgo.setDate(today.getDate() - 21);
+    const programCreateDate = new Date(createDate);
+    return programCreateDate > twentyOneDaysAgo;
+  };
+
+  const openProgramDetails = (program: Program) => {
+    setSelectedProgram(program);
+  };
+
+  const closeProgramDetails = () => {
+    setSelectedProgram(null);
   };
 
   return (
@@ -577,11 +600,21 @@ export default function ProgrmPage({
                               overflow: "hidden",
                               textOverflow: "ellipsis",
                               whiteSpace: "nowrap",
+                              cursor: "pointer",
                             }}
+                            onClick={() => openProgramDetails(program)} // Open details on click
                             data-tooltip={program.name} // Add data-tooltip attribute
                             onMouseEnter={(e) => showTooltip(e, program.name)}
                             onMouseLeave={() => hideTooltip()} // Hide tooltip on mouse leave
                           >
+                            {isNewProgram(program.create_date) && (
+                              <span
+                                className="bg-blue-500 text-white px-2 py-1 rounded-md text-xs font-semibold animate-pulse mr-2"
+                                style={{fontSize: "9px"}}
+                              >
+                                {t("NEW")}
+                              </span>
+                            )}
                             {program.name}
                           </td>
 
@@ -656,6 +689,28 @@ export default function ProgrmPage({
       {/* <div className="pt-0" style={{marginTop: "0px", marginBottom: "24px"}}>
         <Card />
       </div> */}
+      {selectedProgram && (
+        <div
+          className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50"
+          onClick={closeProgramDetails}
+        >
+          <div
+            className="bg-white p-4 rounded-md relative w-[400px] h-[200px]" // Fixed width and height
+            onClick={(e) => e.stopPropagation()}
+            style={{overflowY: "auto"}} // Add vertical scroll if content overflows
+          >
+            <h3 className="rowElement font-bold text-center flex justify-center">{selectedProgram.name}</h3>
+            <hr className="my-2 border-gray-300" /> {/* Horizontal line */}
+            <p className="snoElement mt-2">{selectedProgram.description}</p>
+            <button
+              className="absolute top-1 right-1 text-red-600 hover:text-gray-800"
+              onClick={closeProgramDetails}
+            >
+              ×
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
