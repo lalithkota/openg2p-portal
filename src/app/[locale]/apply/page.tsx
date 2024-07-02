@@ -194,7 +194,7 @@ export default function Apply() {
           <hr className="border-t mx-0 border-gray-300 mt-3" />
           <div id="formio" className="m-4"></div>
         </div>
-        <div className="basis-1/2 mb-80 flex-col flex-wrap justify-between items-center border border-gray-300 bg-brand container pb-10 rounded-lg top-24 shadow-md ">
+        <div className="basis-1/2 flex-col items-center border border-gray-300 bg-brand container rounded-lg top-24 shadow-md ">
           <p
             className=" text-gray-700 pt-4 pl-4 pb-0 font-fontcustom  "
             style={{
