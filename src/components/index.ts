@@ -8,6 +8,7 @@ import SearchBar from "./SearchBar";
 import SearchProgram from "./SearchProgram";
 import Search from "./Search";
 import Toast from "./Toast";
+import ChatIcon from "./ChatIcon";
 
 export {
   Card,
@@ -20,4 +21,5 @@ export {
   Search,
   Toast,
   Pagination,
+  ChatIcon,
 };
