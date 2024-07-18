@@ -121,6 +121,33 @@ body {
   z-index: 9999;
 }
 
+.chat-icon-container {
+  position: relative;
+  right: 0px;
+  left: 1300px;
+  z-index: 1;
+  margin-top: 0px;
+}
+
+.chat-icon-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.chat-popup {
+  position: absolute;
+  bottom: 6px;
+  left: 1px;
+  width: 300px;
+  transform: translateX(-100%);
+  background: white;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+}
+
 /* @media (min-width: 1024px) {
   footer {
     position: fixed;

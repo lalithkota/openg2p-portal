@@ -17,6 +17,8 @@ export default function Apply() {
   const programid = searchParams.get("programid");
   const t = useTranslations();
 
+  const [showConfirmation, setShowConfirmation] = useState(false);
+
   useEffect(() => {
     const {Formio, Templates} = require("@tsed/react-formio");
     const tailwind = require("@tsed/tailwind-formio");
@@ -58,6 +60,14 @@ export default function Apply() {
   }, [programid, lang, router]);
 
   const handleCancel = () => {
+    // router.back();
+    setShowConfirmation(true);
+  };
+
+  const handleDiscard = () => {
+    // Hide the confirmation popup
+    setShowConfirmation(false);
+    // Navigate back
     router.back();
   };
 
@@ -194,7 +204,7 @@ export default function Apply() {
           <hr className="border-t mx-0 border-gray-300 mt-3" />
           <div id="formio" className="m-4"></div>
         </div>
-        <div className="basis-1/2 mb-80 flex-col flex-wrap justify-between items-center border border-gray-300 bg-brand container pb-10 rounded-lg top-24 shadow-md ">
+        <div className="basis-1/2 flex-col items-center border border-gray-300 bg-brand container rounded-lg top-24 shadow-md ">
           <p
             className=" text-gray-700 pt-4 pl-4 pb-0 font-fontcustom  "
             style={{
@@ -242,6 +252,24 @@ export default function Apply() {
           </div>
         </div>
       </div>
+      {showConfirmation && (
+        <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
+          <div className="bg-white p-8 rounded-lg shadow-lg">
+            <h2 className="text-lg font-bold mb-4">{t("Discard application")}</h2>
+            <p className="mb-4">
+              {t("The entered data will not be saved_ Are you sure you want to discard the form?")}
+            </p>
+            <div className="flex justify-end">
+              <button onClick={handleDiscard} className="px-4 py-2 bg-red-500 text-white rounded-md mr-2">
+                {t("Discard")}
+              </button>
+              <button onClick={() => setShowConfirmation(false)} className="px-4 py-2 bg-gray-300 rounded-md">
+                {t("Cancel")}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
