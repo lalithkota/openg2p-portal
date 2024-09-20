@@ -9,7 +9,7 @@ export default function Footer() {
   return (
     <footer className="mt-auto relative">
       <div className=" w-full font-fontcustom bg-no-repeat shadow-md opacity-100  bg-brand border-gray-200 p-1 lg:px-4 print:hidden ">
-        <div className="flex flex-wrap justify-between items-center  mx-auto  max-w-screen-xl ">
+        <div className="flex flex-wrap justify-between items-center  mx-auto  max-w-screen-xl">
           <Link href={`/${lang}/home`} className="m-3 flex items-center">
             <Image
               src={prefixBasePath("/img/logo@2x.png")}

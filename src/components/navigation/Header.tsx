@@ -15,16 +15,16 @@ export default function Header() {
         style={{height: "90px"}}
       >
         <div
-          className="flex justify-between items-center mx-auto max-w-screen-xl"
-          style={{marginLeft: "40px", marginRight: "30px", marginTop: "5px"}}
+          className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl"
         >
-          <Link href={`/${lang}/home`} className=" ml-1 m-1 flex items-center">
+          <Link href={`/${lang}/home`} className="m-3 flex items-center">
             <Image
               src={prefixBasePath("/img/logo@2x.png")}
               priority={true}
               alt="Logo"
               width={300}
               height={300}
+              style={{marginBottom: "10px", marginLeft: "30px"}}
             />
           </Link>
 
