@@ -99,7 +99,7 @@ export default function LoginBox() {
                 {t("Password")}
               </label>
               <div className="" style={{color: "#6569C7", fontWeight: "500", letterSpacing: "0px"}}>
-                <a href="/selfservice/en/login">{t("Reset Password")}</a>
+                <a href={prefixBasePath("/en/login")}>{t("Reset Password")}</a>
               </div>
             </div>
             <input
