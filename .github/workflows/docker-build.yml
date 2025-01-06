@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       NAMESPACE: ${{ secrets.docker_hub_organisation }}
-      SELFSERVICE_SERVICE_NAME: "openg2p-selfservice-ui"
+      SERVICE_NAME: "openg2p-beneficiary-portal-ui"
     steps:
       - uses: actions/checkout@v3
       - name: Setup branch and env
@@ -25,22 +25,17 @@ jobs:
           echo "VERSION=$VERSION" >> $GITHUB_ENV
       - name: Build docker
         run: |
-          SELFSERVICE_IMAGE_ID=$NAMESPACE/$SELFSERVICE_SERVICE_NAME
+          IMAGE_ID=$NAMESPACE/$SERVICE_NAME
 
           # Change all uppercase to lowercase
-          SELFSERVICE_IMAGE_ID=$(echo $SELFSERVICE_IMAGE_ID | tr '[A-Z]' '[a-z]')
+          IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
 
-          echo SELFSERVICE_IMAGE_ID=$SELFSERVICE_IMAGE_ID
+          echo IMAGE_ID=$IMAGE_ID
           echo VERSION=$VERSION
 
-          echo "SELFSERVICE_IMAGE_ID=$SELFSERVICE_IMAGE_ID" >> $GITHUB_ENV
+          echo "IMAGE_ID=$IMAGE_ID" >> $GITHUB_ENV
 
-          docker build . \
-            --file Dockerfile \
-            --tag $SELFSERVICE_IMAGE_ID:$VERSION
-          docker build . \
-            --file Dockerfile.no-runtime-build \
-            --tag $SELFSERVICE_IMAGE_ID:$VERSION-no-runtime-build
+          docker build . --file Dockerfile --tag $IMAGE_ID:$VERSION
       - name: Docker login
         run: |
           echo "${{ secrets.docker_hub_token }}" | docker login -u ${{ secrets.docker_hub_actor }} --password-stdin
@@ -50,5 +45,4 @@ jobs:
           fi
       - name: Docker Push images
         run: |
-          docker push $SELFSERVICE_IMAGE_ID:$VERSION
-          docker push $SELFSERVICE_IMAGE_ID:$VERSION-no-runtime-build
+          docker push $IMAGE_ID:$VERSION
